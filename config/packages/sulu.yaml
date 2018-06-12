@@ -1,0 +1,46 @@
+sulu_document_manager:
+    sessions:
+        default:
+            backend:
+                type: "doctrinedbal"
+            workspace: "default"
+            username: "admin"
+            password: "admin"
+        live:
+            backend:
+                type: "doctrinedbal"
+            workspace: "default_live"
+            username: "admin"
+            password: "admin"
+
+sulu_core:
+    webspace:
+        config_dir: "%kernel.project_dir%/config/sulu/webspaces"
+    content:
+        structure:
+            default_type:
+                snippet: "default"
+            paths:
+                homepage:
+                    path: "%kernel.project_dir%/config/sulu/templates/pages"
+                    type: "home"
+                page:
+                    path: "%kernel.project_dir%/config/sulu/templates/pages"
+                    type: "page"
+                snippet:
+                    path: "%kernel.project_dir%/config/sulu/templates/snippets"
+                    type: "snippet"
+
+sulu_website:
+    sitemap:
+        dump_dir: "%kernel.project_dir%/var/sitemaps"
+
+sulu_http_cache:
+    proxy_client:
+        symfony:
+            enabled: true
+
+sulu_media:
+    storage:
+        local:
+            path: "%kernel.project_dir%/var/uploads/media"

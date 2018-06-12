@@ -1,0 +1,5 @@
+framework:
+    assets:
+        packages:
+            sulu_admin:
+                json_manifest_path: '%kernel.public_dir%/admin/build/manifest.json'

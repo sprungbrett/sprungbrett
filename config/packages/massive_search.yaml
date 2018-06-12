@@ -1,0 +1,4 @@
+massive_search:
+    adapters:
+        zend_lucene:
+            basepath: "%kernel.project_dir%/var/indexes"

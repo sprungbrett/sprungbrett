@@ -1,0 +1,32 @@
+*.iml
+/.idea
+.DS_STORE
+
+bin/*
+!bin/adminconsole
+!bin/websiteconsole
+!bin/console
+
+/public/admin/translations
+
+node_modules
+
+###> symfony/framework-bundle ###
+/.env
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+###< phpunit/phpunit ###
+
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###
