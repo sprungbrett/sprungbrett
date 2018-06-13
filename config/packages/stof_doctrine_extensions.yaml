@@ -2,3 +2,14 @@
 # See the official DoctrineExtensions documentation for more details: https://github.com/Atlantic18/DoctrineExtensions/tree/master/doc/
 stof_doctrine_extensions:
     default_locale: en_US
+
+doctrine:
+    orm:
+        mappings:
+            gedmo_tree:
+                dir: '%kernel.project_dir%/vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity'
+                type: 'xml'
+                prefix: 'Gedmo\Tree\Entity'
+                alias: 'GedmoTree'
+                is_bundle: false
+                mapping: true

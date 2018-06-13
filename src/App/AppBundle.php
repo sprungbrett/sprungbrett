@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Sprungbrett\App;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

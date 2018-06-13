@@ -1,6 +1,6 @@
 <?php
 
-class WebsiteKernel extends \App\Kernel
+class WebsiteKernel extends \Sprungbrett\App\Kernel
 {
     protected function detectContext(): string
     {

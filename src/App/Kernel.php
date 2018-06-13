@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Sprungbrett\App;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -99,7 +99,7 @@ class Kernel extends BaseKernel
 
     public function getProjectDir()
     {
-        return dirname(__DIR__);
+        return dirname(dirname(__DIR__));
     }
 
     protected function getKernelParameters()
@@ -110,6 +110,7 @@ class Kernel extends BaseKernel
                 'sulu.context' => $this->context,
                 'sulu.cache_dir' => $this->getCacheDir() . '/sulu',
                 'kernel.public_dir' => $this->getProjectDir() . '/public',
+                'kernel.project_dir' => $this->getProjectDir(),
             ]
         );
     }

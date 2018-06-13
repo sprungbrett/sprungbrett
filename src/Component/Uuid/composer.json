@@ -1,0 +1,44 @@
+{
+    "name": "sprungbrett/uuid",
+    "type": "library",
+    "description": "Uuid handling.",
+    "keywords": [
+        "uuid"
+    ],
+    "homepage": "http://sprungbrett.io",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Johannes Wachter",
+            "homepage": "http://asapo.at"
+        },
+        {
+            "name": "Sprungbrett project",
+            "homepage": "http://sprungbrett.io"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/sprungbrett/sprungbrett/contributors"
+        }
+    ],
+    "require": {
+        "php": "^7.1.3",
+
+        "ramsey/uuid": "^3.7"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sprungbrett\\Component\\Uuid\\": ""
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
