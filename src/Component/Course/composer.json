@@ -40,6 +40,11 @@
             "Sprungbrett\\Component\\Course\\": ""
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Sprungbrett\\Component\\Course\\Tests\\": ""
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "extra": {

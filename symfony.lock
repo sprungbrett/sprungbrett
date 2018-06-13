@@ -329,9 +329,6 @@
             "ref": "c276fa48d4713de91eb410289b3b1834acb7e403"
         }
     },
-    "phpunit/phpunit-mock-objects": {
-        "version": "5.0.6"
-    },
     "piwik/device-detector": {
         "version": "3.10.2"
     },
@@ -508,6 +505,9 @@
             "version": "1.0",
             "ref": "cc1afd81841db36fbef982fe56b48ade6716fac4"
         }
+    },
+    "symfony/force-lowest": {
+        "version": "v3.4.0"
     },
     "symfony/form": {
         "version": "v3.4.9"
