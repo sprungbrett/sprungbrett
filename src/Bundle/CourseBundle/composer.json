@@ -24,7 +24,7 @@
     "require": {
         "php": "^7.1.3",
 
-        "sprungbrett/course": "^1.3",
+        "sprungbrett/course": "^1.0@dev",
         "symfony/framework-bundle": "^3.4"
     },
     "require-dev": {
