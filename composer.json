@@ -33,8 +33,11 @@
         "zendframework/zendsearch": "@dev"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.12",
+        "jangregor/phpstan-prophecy": "^0.1.1",
         "phpcr/phpcr-shell": "^1.0",
-        "phpunit/phpunit": "^6.5",
+        "phpstan/phpstan": "^0.9.2",
+        "phpunit/phpunit": "^7.2",
         "symfony/dotenv": "^3.4",
         "symfony/phpunit-bridge": "^3.4",
         "symfony/stopwatch": "^3.4",

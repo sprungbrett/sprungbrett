@@ -1,6 +1,6 @@
 <?php
 
-namespace Sprungbrett\Component\Course\Model;
+namespace Sprungbrett\Component\Uuid\Model;
 
 use Ramsey\Uuid\Uuid as RamseyUuid;
 

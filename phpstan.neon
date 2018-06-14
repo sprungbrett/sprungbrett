@@ -1,0 +1,11 @@
+parameters:
+    level: 7
+    paths:
+        - src
+        - tests
+    excludes_analyse:
+        - %currentWorkingDirectory%/src/*/vendor/*.php
+        - %currentWorkingDirectory%/src/*/bin/*.php
+
+includes:
+	- vendor/jangregor/phpstan-prophecy/src/extension.neon
