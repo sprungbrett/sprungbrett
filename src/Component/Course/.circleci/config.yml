@@ -25,6 +25,6 @@ jobs:
             - ~/.composer
           key: v1-dependencies-{{ checksum "composer.json" }}
 
-      - run: bin/phpunit
-      - run: bin/phpstan analyze -c ./phpstan.neon src tests -l max
-      - run: bin/php-cs-fixer fix --verbose --diff --dry-run
+      - run: vendor/bin/phpunit
+      - run: vendor/bin/phpstan analyze -c ./phpstan.neon . -l max
+      - run: vendor/bin/php-cs-fixer fix --verbose --diff --dry-run
