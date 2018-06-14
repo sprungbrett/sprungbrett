@@ -1,9 +1,9 @@
 {
-    "name": "sprungbrett/uuid",
-    "type": "library",
-    "description": "Uuid handling.",
+    "name": "sprungbrett/course-bundle",
+    "type": "symfony-bundle",
+    "description": "Course catalog for your Symfony applications.",
     "keywords": [
-        "uuid"
+        "course"
     ],
     "homepage": "http://sprungbrett.io",
     "license": "MIT",
@@ -24,7 +24,8 @@
     "require": {
         "php": "^7.1.3",
 
-        "ramsey/uuid": "^3.7"
+        "sprungbrett/course": "^1.3",
+        "symfony/framework-bundle": "^3.4"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.12",
@@ -37,7 +38,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Sprungbrett\\Component\\Uuid\\": ""
+            "Sprungbrett\\Bundle\\CourseBundle\\": ""
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sprungbrett\\Bundle\\CourseBundle\\Tests\\": ""
         }
     },
     "minimum-stability": "dev",
