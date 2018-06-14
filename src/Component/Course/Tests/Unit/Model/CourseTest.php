@@ -1,6 +1,6 @@
 <?php
 
-namespace Sprungbrett\Component\Course\Tests\Unit;
+namespace Sprungbrett\Component\Course\Tests\Unit\Model;
 
 use PHPUnit\Framework\TestCase;
 use Sprungbrett\Component\Course\Model\Course;
@@ -11,14 +11,14 @@ class CourseTest extends TestCase
     public function testGetUuid()
     {
         $uuid = $this->prophesize(Uuid::class);
-        $course = new Course('', $uuid->reveal());
+        $course = new Course($uuid->reveal());
 
         $this->assertEquals($uuid->reveal(), $course->getUuid());
     }
 
     public function testGetUuidGeneration()
     {
-        $course = new Course('');
+        $course = new Course();
 
         $this->assertInstanceOf(Uuid::class, $course->getUuid());
     }
@@ -27,28 +27,21 @@ class CourseTest extends TestCase
     {
         $uuid = $this->prophesize(Uuid::class);
         $uuid->getId()->willReturn('123-123-123');
-        $course = new Course('', $uuid->reveal());
+        $course = new Course($uuid->reveal());
 
         $this->assertEquals('123-123-123', $course->getId());
     }
 
     public function testGetIdGeneration()
     {
-        $course = new Course('');
+        $course = new Course();
 
         $this->assertTrue(is_string($course->getId()));
     }
 
     public function testGetTitle()
     {
-        $course = new Course('Sprungbrett is awesome');
-
-        $this->assertEquals('Sprungbrett is awesome', $course->getTitle());
-    }
-
-    public function testSetTitle()
-    {
-        $course = new Course('Sprungbrett is great');
+        $course = new Course();
         $course->setTitle('Sprungbrett is awesome');
 
         $this->assertEquals('Sprungbrett is awesome', $course->getTitle());

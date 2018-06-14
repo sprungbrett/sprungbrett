@@ -24,7 +24,8 @@
     "require": {
         "php": "^7.1",
 
-        "sprungbrett/uuid": "^1.0@dev"
+        "sprungbrett/uuid": "^1.0@dev",
+        "sprungbrett/payload": "^1.0@dev"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.12",

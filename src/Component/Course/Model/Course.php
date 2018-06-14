@@ -14,11 +14,9 @@ class Course
      */
     private $title;
 
-    public function __construct(string $title, ?Uuid $uuid = null)
+    public function __construct(?Uuid $uuid = null)
     {
         $this->initializeUuid($uuid);
-
-        $this->title = $title;
     }
 
     public function getTitle(): string
