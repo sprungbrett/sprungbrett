@@ -3,6 +3,7 @@
 namespace Sprungbrett\Component\Course\Model\Handler;
 
 use Sprungbrett\Component\Course\Model\Command\ModifyCourseCommand;
+use Sprungbrett\Component\Course\Model\CourseInterface;
 use Sprungbrett\Component\Course\Model\CourseRepositoryInterface;
 
 class ModifyCourseHandler
@@ -17,7 +18,7 @@ class ModifyCourseHandler
         $this->courseRepository = $courseRepository;
     }
 
-    public function handle(ModifyCourseCommand $command)
+    public function handle(ModifyCourseCommand $command): CourseInterface
     {
         $course = $this->courseRepository->findByUuid($command->getUuid());
         $course->setTitle($command->getTitle());
