@@ -44,7 +44,9 @@ return [
     Sulu\Bundle\CollaborationBundle\SuluCollaborationBundle::class => ['all' => true],
     Sulu\Bundle\PreviewBundle\SuluPreviewBundle::class => ['all' => true],
     DTL\Bundle\PhpcrMigrations\PhpcrMigrationsBundle::class => ['all' => true],
-    Sprungbrett\App\AppBundle::class => ['all' => true],
     Symfony\Bundle\WebProfilerBundle\WebProfilerBundle::class => ['dev' => true, 'test' => true],
     Symfony\Bundle\WebServerBundle\WebServerBundle::class => ['dev' => true],
+    League\Tactician\Bundle\TacticianBundle::class => ['all' => true],
+    Sprungbrett\App\AppBundle::class => ['all' => true],
+    Sprungbrett\Bundle\InfrastructureBundle\SprungbrettInfrastructureBundle::class => ['all' => true],
 ];

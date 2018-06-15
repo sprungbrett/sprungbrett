@@ -191,6 +191,12 @@
     "massive/search-bundle": {
         "version": "0.16.2"
     },
+    "matthiasnoback/symfony-config-test": {
+        "version": "4.0.0"
+    },
+    "matthiasnoback/symfony-dependency-injection-test": {
+        "version": "v3.0.0"
+    },
     "mtdowling/cron-expression": {
         "version": "v1.2.1"
     },
