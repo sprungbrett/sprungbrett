@@ -1,0 +1,63 @@
+<?php
+
+namespace Sprungbrett\Bundle\InfrastructureBundle\DependencyInjection;
+
+use League\Tactician\Doctrine\ORM\TransactionMiddleware;
+use League\Tactician\Logger\LoggerMiddleware;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+
+class SprungbrettInfrastructureExtension extends Extension implements PrependExtensionInterface
+{
+    public function load(array $configs, ContainerBuilder $container)
+    {
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('services.xml');
+    }
+
+    public function prepend(ContainerBuilder $container)
+    {
+        if (!$container->hasExtension('tactician')) {
+            throw new \RuntimeException('Missing TacticianBundle.');
+        }
+
+        $container->prependExtensionConfig(
+            'tactician',
+            [
+                'commandbus' => [
+                    'default' => [
+                        'middleware' => [
+                            LoggerMiddleware::class,
+                            TransactionMiddleware::class,
+                            'tactician.middleware.command_handler',
+                        ],
+                    ],
+                ],
+            ]
+        );
+
+        if (!$container->hasExtension('doctrine')) {
+            throw new \RuntimeException('Missing DoctrineBundle.');
+        }
+
+        $container->prependExtensionConfig(
+            'doctrine',
+            [
+                'orm' => [
+                    'mappings' => [
+                        'Uuid' => [
+                            'type' => 'xml',
+                            'alias' => 'Uuid',
+                            'prefix' => 'Sprungbrett\\Component\\Uuid\\Model',
+                            'dir' => __DIR__ . '/../Resources/uuid/doctrine',
+                            'is_bundle' => false,
+                        ],
+                    ],
+                ],
+            ]
+        );
+    }
+}

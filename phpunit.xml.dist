@@ -21,8 +21,11 @@
         <testsuite name="Project Test Suite">
             <directory>tests/</directory>
         </testsuite>
-        <testsuite name="Course Test Suite">
-            <directory>src/Component/Course/Tests/</directory>
+        <testsuite name="Component Test Suite">
+            <directory>src/Component/*/Tests/</directory>
+        </testsuite>
+        <testsuite name="Bundle Test Suite">
+            <directory>src/Bundle/*/Tests/</directory>
         </testsuite>
     </testsuites>
 
