@@ -40,7 +40,6 @@ return [
     Sulu\Bundle\TestBundle\SuluTestBundle::class => ['all' => true],
     Massive\Bundle\SearchBundle\MassiveSearchBundle::class => ['all' => true],
     Massive\Bundle\BuildBundle\MassiveBuildBundle::class => ['all' => true],
-    Sulu\Bundle\AdminBundle\SuluAdminBundle::class => ['all' => true],
     Sulu\Bundle\CollaborationBundle\SuluCollaborationBundle::class => ['all' => true],
     Sulu\Bundle\PreviewBundle\SuluPreviewBundle::class => ['all' => true],
     DTL\Bundle\PhpcrMigrations\PhpcrMigrationsBundle::class => ['all' => true],
@@ -49,4 +48,7 @@ return [
     League\Tactician\Bundle\TacticianBundle::class => ['all' => true],
     Sprungbrett\App\AppBundle::class => ['all' => true],
     Sprungbrett\Bundle\InfrastructureBundle\SprungbrettInfrastructureBundle::class => ['all' => true],
+
+    // important because the model parameter only exists if the bundle is registered before admin-bundle
+    Sulu\Bundle\AdminBundle\SuluAdminBundle::class => ['all' => true],
 ];
