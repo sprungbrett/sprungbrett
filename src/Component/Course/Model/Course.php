@@ -5,7 +5,7 @@ namespace Sprungbrett\Component\Course\Model;
 use Sprungbrett\Component\Uuid\Model\Uuid;
 use Sprungbrett\Component\Uuid\UuidTrait;
 
-class Course
+class Course implements CourseInterface
 {
     use UuidTrait;
 
@@ -24,7 +24,7 @@ class Course
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(string $title): CourseInterface
     {
         $this->title = $title;
 

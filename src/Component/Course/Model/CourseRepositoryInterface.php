@@ -7,12 +7,12 @@ use Sprungbrett\Component\Uuid\Model\Uuid;
 
 interface CourseRepositoryInterface
 {
-    public function create(?Uuid $uuid = null): Course;
+    public function create(?Uuid $uuid = null): CourseInterface;
 
     /**
      * @throws CourseNotFoundException
      */
-    public function findByUuid(Uuid $uuid): Course;
+    public function findByUuid(Uuid $uuid): CourseInterface;
 
-    public function remove(Course $course): void;
+    public function remove(CourseInterface $course): void;
 }

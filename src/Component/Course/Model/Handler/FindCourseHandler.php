@@ -2,11 +2,11 @@
 
 namespace Sprungbrett\Component\Course\Model\Handler;
 
-use Sprungbrett\Component\Course\Model\Command\CreateCourseCommand;
 use Sprungbrett\Component\Course\Model\CourseInterface;
 use Sprungbrett\Component\Course\Model\CourseRepositoryInterface;
+use Sprungbrett\Component\Course\Model\Query\FindCourseQuery;
 
-class CreateCourseHandler
+class FindCourseHandler
 {
     /**
      * @var CourseRepositoryInterface
@@ -18,11 +18,8 @@ class CreateCourseHandler
         $this->courseRepository = $courseRepository;
     }
 
-    public function handle(CreateCourseCommand $command): CourseInterface
+    public function handle(FindCourseQuery $command): CourseInterface
     {
-        $course = $this->courseRepository->create();
-        $course->setTitle($command->getTitle());
-
-        return $course;
+        return $this->courseRepository->findByUuid($command->getUuid());
     }
 }
