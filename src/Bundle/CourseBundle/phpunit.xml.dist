@@ -17,4 +17,8 @@
             <directory>./</directory>
         </whitelist>
     </filter>
+
+    <php>
+        <server name="KERNEL_DIR" value="Tests/app"/>
+    </php>
 </phpunit>

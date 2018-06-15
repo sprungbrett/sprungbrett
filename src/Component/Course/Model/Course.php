@@ -12,7 +12,7 @@ class Course implements CourseInterface
     /**
      * @var string
      */
-    private $title;
+    protected $title;
 
     public function __construct(?Uuid $uuid = null)
     {

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <!-- FIXME should be mapped-super-class but sulu cannot handle embedded-class -->
+    <entity name="Sprungbrett\Bundle\CourseBundle\Entity\Course" table="sp_courses">
+        <embedded name="uuid" class="Sprungbrett\Component\Uuid\Model\Uuid" use-column-prefix="false"/>
+
+        <field name="title" type="string"/>
+    </entity>
+</doctrine-mapping>

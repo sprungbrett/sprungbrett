@@ -185,6 +185,27 @@
     "layershifter/tld-support": {
         "version": "1.1.1"
     },
+    "league/tactician": {
+        "version": "v1.0.3"
+    },
+    "league/tactician-bundle": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "222c3d39d38378bc6a9790a0b5baf841ba6679b9"
+        }
+    },
+    "league/tactician-container": {
+        "version": "2.0.0"
+    },
+    "league/tactician-doctrine": {
+        "version": "v1.1.1"
+    },
+    "league/tactician-logger": {
+        "version": "v0.10.0"
+    },
     "massive/build-bundle": {
         "version": "0.3.1"
     },
@@ -196,6 +217,9 @@
     },
     "matthiasnoback/symfony-dependency-injection-test": {
         "version": "v3.0.0"
+    },
+    "monolog/monolog": {
+        "version": "1.23.0"
     },
     "mtdowling/cron-expression": {
         "version": "v1.2.1"
@@ -461,6 +485,9 @@
     "symfony/asset": {
         "version": "v3.4.9"
     },
+    "symfony/browser-kit": {
+        "version": "v3.4.11"
+    },
     "symfony/cache": {
         "version": "v4.0.9"
     },
@@ -487,6 +514,9 @@
     },
     "symfony/doctrine-bridge": {
         "version": "v3.4.9"
+    },
+    "symfony/dom-crawler": {
+        "version": "v3.4.11"
     },
     "symfony/dotenv": {
         "version": "v4.0.9"
@@ -541,6 +571,18 @@
     },
     "symfony/lts": {
         "version": "4-dev"
+    },
+    "symfony/monolog-bridge": {
+        "version": "v3.4.11"
+    },
+    "symfony/monolog-bundle": {
+        "version": "3.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.1",
+            "ref": "371d1a2b69984710646b09a1182ef1d4308c904f"
+        }
     },
     "symfony/options-resolver": {
         "version": "v3.4.9"

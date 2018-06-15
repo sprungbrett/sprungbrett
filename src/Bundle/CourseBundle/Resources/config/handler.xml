@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="Sprungbrett\Component\Course\Model\CourseRepositoryInterface"
+                 alias="sulu.repository.course"
+                 class="Sprungbrett\Component\Course\Model\CourseRepositoryInterface"/>
+
+        <service id="Sprungbrett\Component\Course\Model\Handler\CreateCourseHandler">
+            <argument type="service" id="Sprungbrett\Component\Course\Model\CourseRepositoryInterface"/>
+
+            <tag name="tactician.handler" typehints="true"/>
+        </service>
+
+        <service id="Sprungbrett\Component\Course\Model\Handler\ModifyCourseHandler">
+            <argument type="service" id="Sprungbrett\Component\Course\Model\CourseRepositoryInterface"/>
+
+            <tag name="tactician.handler" typehints="true"/>
+        </service>
+
+        <service id="Sprungbrett\Component\Course\Model\Handler\RemoveCourseHandler">
+            <argument type="service" id="Sprungbrett\Component\Course\Model\CourseRepositoryInterface"/>
+
+            <tag name="tactician.handler" typehints="true"/>
+        </service>
+
+        <service id="Sprungbrett\Component\Course\Model\Handler\FindCourseHandler">
+            <argument type="service" id="Sprungbrett\Component\Course\Model\CourseRepositoryInterface"/>
+
+            <tag name="tactician.handler" typehints="true"/>
+        </service>
+
+        <service id="Sprungbrett\Bundle\CourseBundle\Model\Handler\ListCourseQueryHandler">
+            <argument type="service" id="sulu_core.doctrine_list_builder_factory"/>
+            <argument type="service" id="sulu_core.doctrine_rest_helper"/>
+            <argument type="service" id="sulu_core.list_builder.field_descriptor_factory"/>
+
+            <tag name="tactician.handler" typehints="true"/>
+        </service>
+    </services>
+</container>

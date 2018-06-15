@@ -7,11 +7,19 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.1-node-browsers
+      - image: circleci/mysql:5.7
+        environment:
+          - MYSQL_USER=root
+          - MYSQL_PASSWORD=
+          - MYSQL_ALLOW_EMPTY_PASSWORD=true
+          - MYSQL_DATABASE=sp_course_tests
 
     working_directory: ~/repo
 
     steps:
       - checkout
+
+      - run: echo -e "memory_limit=2G" | sudo tee /usr/local/etc/php/php.ini > /dev/null
 
       - run:
             name: Install OS dependencies (mysql, gd)
@@ -31,6 +39,9 @@ jobs:
           paths:
             - ~/.composer
           key: v1-dependencies-{{ checksum "composer.json" }}
+
+      - run: tests/app/console doctrine:schema:update --force
+      - run: tests/app/console sulu:document:initialize
 
       - run: vendor/bin/phpunit
       - run: vendor/bin/phpstan analyze -c ./phpstan.neon src tests -l max

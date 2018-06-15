@@ -1,0 +1,77 @@
+<class xmlns="http://schemas.sulu.io/class/general"
+       xmlns:orm="http://schemas.sulu.io/class/doctrine"
+       xmlns:list="http://schemas.sulu.io/class/list">
+    <orm:joins name="changer">
+        <orm:join>
+            <orm:entity-name>%sulu.model.user.class%_changer</orm:entity-name>
+            <orm:field-name>%sulu.model.course.class%.changer</orm:field-name>
+        </orm:join>
+        <orm:join>
+            <orm:entity-name>%sulu.model.contact.class%_changer</orm:entity-name>
+            <orm:field-name>%sulu.model.user.class%_changer.contact</orm:field-name>
+        </orm:join>
+    </orm:joins>
+
+    <orm:joins name="creator">
+        <orm:join>
+            <orm:entity-name>%sulu.model.user.class%_creator</orm:entity-name>
+            <orm:field-name>%sulu.model.course.class%.creator</orm:field-name>
+        </orm:join>
+        <orm:join>
+            <orm:entity-name>%sulu.model.contact.class%_creator</orm:entity-name>
+            <orm:field-name>%sulu.model.user.class%_creator.contact</orm:field-name>
+        </orm:join>
+    </orm:joins>
+
+    <properties>
+        <property name="id" list:translation="sprungbrett.id">
+            <orm:field-name>uuid.id</orm:field-name>
+            <orm:entity-name>%sulu.model.course.class%</orm:entity-name>
+        </property>
+
+        <property name="title" visibility="always" list:translation="sprungbrett.title" searchability="yes">
+            <orm:field-name>title</orm:field-name>
+            <orm:entity-name>%sulu.model.course.class%</orm:entity-name>
+        </property>
+
+        <property name="created" list:translation="sprungbrett.created" list:type="datetime" visibility="yes">
+            <orm:field-name>created</orm:field-name>
+            <orm:entity-name>%sulu.model.course.class%</orm:entity-name>
+        </property>
+
+        <concatenation-property name="creator" list:translation="sprungbrett.creator" visibility="yes" searchability="yes">
+            <orm:field>
+                <orm:field-name>firstName</orm:field-name>
+                <orm:entity-name>%sulu.model.contact.class%_creator</orm:entity-name>
+
+                <orm:joins ref="creator"/>
+            </orm:field>
+            <orm:field>
+                <orm:field-name>lastName</orm:field-name>
+                <orm:entity-name>%sulu.model.contact.class%_creator</orm:entity-name>
+
+                <orm:joins ref="creator"/>
+            </orm:field>
+        </concatenation-property>
+
+        <property name="changed" list:translation="sprungbrett.changed" list:type="datetime" visibility="yes">
+            <orm:field-name>changed</orm:field-name>
+            <orm:entity-name>%sulu.model.course.class%</orm:entity-name>
+        </property>
+
+        <concatenation-property name="changer" list:translation="sprungbrett.changer" visibility="yes" searchability="yes">
+            <orm:field>
+                <orm:field-name>firstName</orm:field-name>
+                <orm:entity-name>%sulu.model.contact.class%_changer</orm:entity-name>
+
+                <orm:joins ref="changer"/>
+            </orm:field>
+            <orm:field>
+                <orm:field-name>lastName</orm:field-name>
+                <orm:entity-name>%sulu.model.contact.class%_changer</orm:entity-name>
+
+                <orm:joins ref="changer"/>
+            </orm:field>
+        </concatenation-property>
+    </properties>
+</class>
