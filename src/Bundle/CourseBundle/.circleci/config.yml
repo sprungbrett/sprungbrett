@@ -7,6 +7,12 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.1-node-browsers
+      - image: circleci/mysql:5.7
+        environment:
+          - MYSQL_USER=root
+          - MYSQL_PASSWORD=
+          - MYSQL_ALLOW_EMPTY_PASSWORD=true
+          - MYSQL_DATABASE=sp_course_tests
 
     working_directory: ~/repo
 
@@ -24,6 +30,9 @@ jobs:
           paths:
             - ~/.composer
           key: v1-dependencies-{{ checksum "composer.json" }}
+
+      - run: Tests/app/console doctrine:schema:update --force
+      - run: Tests/app/console sulu:document:initialize
 
       - run: vendor/bin/phpunit
       - run: vendor/bin/phpstan analyze -c ./phpstan.neon . -l max

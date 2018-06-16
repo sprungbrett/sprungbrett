@@ -1,0 +1,3 @@
+sprungbrett_course:
+    resource: "@SprungbrettCourseBundle/Resources/config/routing_api.xml"
+    prefix:   /admin/api

@@ -7,16 +7,6 @@
          colors="true"
          bootstrap="vendor/autoload.php"
 >
-    <php>
-        <ini name="error_reporting" value="-1" />
-        <env name="KERNEL_CLASS" value="Sprungbrett\App\Kernel" />
-        <env name="APP_ENV" value="test" />
-        <env name="APP_DEBUG" value="1" />
-        <env name="APP_SECRET" value="s$cretf0rt3st" />
-        <env name="SHELL_VERBOSITY" value="-1" />
-        <!-- define your env variables for the test env here -->
-    </php>
-
     <testsuites>
         <testsuite name="Project Test Suite">
             <directory>tests/</directory>
@@ -38,4 +28,9 @@
     <listeners>
         <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
     </listeners>
+
+    <php>
+        <env name="KERNEL_DIR" value="tests/app"/>
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak"/>
+    </php>
 </phpunit>

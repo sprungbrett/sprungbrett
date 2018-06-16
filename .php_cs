@@ -18,5 +18,7 @@ return PhpCsFixer\Config::create()
             ->exclude('var')
             ->exclude('vendor')
             ->exclude('public')
+            ->exclude('vendor')
+            ->exclude('cache')
             ->in(__DIR__)
     );
