@@ -1,9 +1,11 @@
 {
-    "name": "sprungbrett/course",
+    "name": "sprungbrett/tactician-event-middleware",
     "type": "library",
-    "description": "Course catalog system.",
+    "description": "Middleware to handle events for commands/handler.",
     "keywords": [
-        "course"
+        "tactician",
+        "event",
+        "command-bus"
     ],
     "homepage": "http://sprungbrett.io",
     "license": "MIT",
@@ -24,10 +26,8 @@
     "require": {
         "php": "^7.1",
 
-        "sprungbrett/event-collector": "^1.0@dev",
-        "sprungbrett/uuid": "^1.0@dev",
-        "sprungbrett/payload": "^1.0@dev",
-        "sprungbrett/translation": "^1.0@dev",
+        "league/tactician": "^1.0",
+        "sprungbrett/event-collector": "^1.0",
         "symfony/event-dispatcher": "^3.4"
     },
     "require-dev": {
@@ -41,12 +41,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Sprungbrett\\Component\\Course\\": ""
+            "Sprungbrett\\Component\\TacticianEvents\\": ""
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Sprungbrett\\Component\\Course\\Tests\\": ""
+            "Sprungbrett\\Component\\TacticianEvents\\Tests\\": ""
         }
     },
     "minimum-stability": "dev",
