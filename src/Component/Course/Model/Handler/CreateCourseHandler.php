@@ -6,7 +6,7 @@ use Sprungbrett\Component\Course\Model\Command\CreateCourseCommand;
 use Sprungbrett\Component\Course\Model\CourseInterface;
 use Sprungbrett\Component\Course\Model\CourseRepositoryInterface;
 
-class CreateCourseHandler
+class CreateCourseHandler extends MappingCourseHandler
 {
     /**
      * @var CourseRepositoryInterface
@@ -21,8 +21,7 @@ class CreateCourseHandler
     public function handle(CreateCourseCommand $command): CourseInterface
     {
         $course = $this->courseRepository->create($command->getLocalization());
-
-        $course->setTitle($command->getTitle());
+        $this->map($course, $command);
 
         return $course;
     }

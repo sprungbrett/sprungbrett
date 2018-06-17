@@ -17,6 +17,11 @@ class CourseTranslation implements CourseTranslationInterface
      */
     protected $title;
 
+    /**
+     * @var string
+     */
+    protected $description;
+
     public function __construct(Localization $localization, ?Uuid $uuid = null)
     {
         $this->initializeTranslation($localization);
@@ -31,6 +36,18 @@ class CourseTranslation implements CourseTranslationInterface
     public function setTitle(string $title): CourseTranslation
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): CourseTranslation
+    {
+        $this->description = $description;
 
         return $this;
     }

@@ -6,7 +6,7 @@ use Sprungbrett\Component\Course\Model\Command\ModifyCourseCommand;
 use Sprungbrett\Component\Course\Model\CourseInterface;
 use Sprungbrett\Component\Course\Model\CourseRepositoryInterface;
 
-class ModifyCourseHandler
+class ModifyCourseHandler extends MappingCourseHandler
 {
     /**
      * @var CourseRepositoryInterface
@@ -21,7 +21,7 @@ class ModifyCourseHandler
     public function handle(ModifyCourseCommand $command): CourseInterface
     {
         $course = $this->courseRepository->findByUuid($command->getUuid(), $command->getLocalization());
-        $course->setTitle($command->getTitle());
+        $this->map($course, $command);
 
         return $course;
     }

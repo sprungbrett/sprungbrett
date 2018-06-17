@@ -22,12 +22,14 @@ class ModifyCourseHandlerTest extends TestCase
 
         $course = $this->prophesize(Course::class);
         $repository->findByUuid($uuid->reveal(), $localization->reveal())->willReturn($course->reveal());
-        $course->setTitle('Sprungbrett is awesome')->shouldBeCalled();
+        $course->setTitle('Sprungbrett')->shouldBeCalled();
+        $course->setDescription('Sprungbrett is awesome')->shouldBeCalled();
 
         $command = $this->prophesize(ModifyCourseCommand::class);
         $command->getUuid()->willReturn($uuid->reveal());
         $command->getLocalization()->willReturn($localization->reveal());
-        $command->getTitle()->willReturn('Sprungbrett is awesome');
+        $command->getTitle()->willReturn('Sprungbrett');
+        $command->getDescription()->willReturn('Sprungbrett is awesome');
 
         $result = $handler->handle($command->reveal());
         $this->assertEquals($course->reveal(), $result);

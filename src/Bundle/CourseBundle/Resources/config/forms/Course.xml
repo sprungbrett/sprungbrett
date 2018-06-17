@@ -8,4 +8,10 @@
             <title lang="en">Title</title>
         </meta>
     </property>
+    <property name="description" type="text_area">
+        <meta>
+            <title lang="de">Beschreibung</title>
+            <title lang="en">Description</title>
+        </meta>
+    </property>
 </properties>
