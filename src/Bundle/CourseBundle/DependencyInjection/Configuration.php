@@ -3,7 +3,9 @@
 namespace Sprungbrett\Bundle\CourseBundle\DependencyInjection;
 
 use Sprungbrett\Bundle\CourseBundle\Entity\Course;
+use Sprungbrett\Bundle\CourseBundle\Entity\CourseTranslation;
 use Sprungbrett\Bundle\CourseBundle\Repository\CourseRepository;
+use Sprungbrett\Bundle\CourseBundle\Repository\CourseTranslationRepository;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -35,6 +37,13 @@ class Configuration implements ConfigurationInterface
                             ->children()
                                 ->scalarNode('model')->defaultValue(Course::class)->end()
                                 ->scalarNode('repository')->defaultValue(CourseRepository::class)->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('course-translation')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('model')->defaultValue(CourseTranslation::class)->end()
+                                ->scalarNode('repository')->defaultValue(CourseTranslationRepository::class)->end()
                             ->end()
                         ->end()
                     ->end()

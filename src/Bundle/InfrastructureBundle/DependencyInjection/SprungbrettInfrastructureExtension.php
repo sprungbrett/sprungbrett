@@ -55,6 +55,13 @@ class SprungbrettInfrastructureExtension extends Extension implements PrependExt
                             'dir' => __DIR__ . '/../Resources/uuid/doctrine',
                             'is_bundle' => false,
                         ],
+                        'Translation' => [
+                            'type' => 'xml',
+                            'alias' => 'Translation',
+                            'prefix' => 'Sprungbrett\\Component\\Translation\\Model',
+                            'dir' => __DIR__ . '/../Resources/translation/doctrine',
+                            'is_bundle' => false,
+                        ],
                     ],
                 ],
             ]

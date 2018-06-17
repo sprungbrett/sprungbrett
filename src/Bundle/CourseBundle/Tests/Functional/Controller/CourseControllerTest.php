@@ -23,7 +23,7 @@ class CourseControllerTest extends SuluTestCase
         $client = $this->createAuthenticatedClient();
         $client->request(
             'GET',
-            '/api/courses'
+            '/api/courses?locale=en'
         );
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -43,7 +43,7 @@ class CourseControllerTest extends SuluTestCase
         $client = $this->createAuthenticatedClient();
         $client->request(
             'GET',
-            '/api/courses/' . $course->getId()
+            '/api/courses/' . $course->getId() . '?locale=en'
         );
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -59,7 +59,7 @@ class CourseControllerTest extends SuluTestCase
         $client = $this->createAuthenticatedClient();
         $client->request(
             'POST',
-            '/api/courses',
+            '/api/courses?locale=en',
             [
                 'title' => 'Sulu is awesome',
             ]
@@ -80,7 +80,7 @@ class CourseControllerTest extends SuluTestCase
         $client = $this->createAuthenticatedClient();
         $client->request(
             'PUT',
-            '/api/courses/' . $course->getId(),
+            '/api/courses/' . $course->getId() . '?locale=en',
             [
                 'title' => 'Sulu is awesome',
             ]
@@ -101,7 +101,7 @@ class CourseControllerTest extends SuluTestCase
         $client = $this->createAuthenticatedClient();
         $client->request(
             'DELETE',
-            '/api/courses/' . $course->getId()
+            '/api/courses/' . $course->getId() . '?locale=en'
         );
 
         $this->assertEquals(204, $client->getResponse()->getStatusCode());

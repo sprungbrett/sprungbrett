@@ -1,6 +1,6 @@
 <?php
 
-namespace Sprungbrett\Component\Payload;
+namespace Sprungbrett\Component\Payload\Model\Command;
 
 use Webmozart\Assert\Assert;
 

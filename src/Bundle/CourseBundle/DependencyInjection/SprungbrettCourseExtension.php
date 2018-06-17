@@ -40,7 +40,7 @@ class SprungbrettCourseExtension extends Extension implements PrependExtensionIn
                         [
                             'name' => 'SprungbrettCourseBundle',
                             'path' => __DIR__ . '/../Resources/config/serializer',
-                            'namespace_prefix' => 'Sprungbrett\\Bundle\\CourseBundle\\Entity',
+                            'namespace_prefix' => 'Sprungbrett\\Component\\Course\\Model',
                         ],
                     ],
                 ],

@@ -2,22 +2,17 @@
 
 namespace Sprungbrett\Component\Course\Model\Query;
 
-use Sprungbrett\Component\Uuid\Model\Uuid;
+use Sprungbrett\Component\Translation\Model\Command\LocaleTrait;
+use Sprungbrett\Component\Uuid\Model\Command\IdTrait;
 
 class FindCourseQuery
 {
-    /**
-     * @var string
-     */
-    private $id;
+    use IdTrait;
+    use LocaleTrait;
 
-    public function __construct(string $id)
+    public function __construct(string $id, string $locale)
     {
-        $this->id = $id;
-    }
-
-    public function getUuid(): Uuid
-    {
-        return new Uuid($this->id);
+        $this->initializeId($id);
+        $this->initializeLocale($locale);
     }
 }

@@ -13,9 +13,13 @@ use Sprungbrett\Component\Course\Model\Command\CreateCourseCommand;
 use Sprungbrett\Component\Course\Model\Command\ModifyCourseCommand;
 use Sprungbrett\Component\Course\Model\Command\RemoveCourseCommand;
 use Sprungbrett\Component\Course\Model\Query\FindCourseQuery;
+use Sulu\Component\Rest\RequestParametersTrait;
+use Sulu\Component\Security\Authentication\UserInterface;
 use Sulu\Component\Security\SecuredControllerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * @NamePrefix("sprungbrett.")
@@ -23,6 +27,8 @@ use Symfony\Component\HttpFoundation\Response;
 class CourseController implements SecuredControllerInterface, ClassResourceInterface
 {
     const RESOURCE_KEY = 'courses';
+
+    use RequestParametersTrait;
 
     /**
      * @var string
@@ -39,11 +45,28 @@ class CourseController implements SecuredControllerInterface, ClassResourceInter
      */
     private $viewHandler;
 
-    public function __construct(string $entityClass, CommandBus $commandBus, ViewHandlerInterface $viewHandler)
-    {
+    /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
+
+    /**
+     * @var string
+     */
+    private $defaultLocale;
+
+    public function __construct(
+        string $entityClass,
+        CommandBus $commandBus,
+        ViewHandlerInterface $viewHandler,
+        TokenStorageInterface $tokenStorage,
+        string $defaultLocale
+    ) {
         $this->entityClass = $entityClass;
         $this->commandBus = $commandBus;
         $this->viewHandler = $viewHandler;
+        $this->tokenStorage = $tokenStorage;
+        $this->defaultLocale = $defaultLocale;
     }
 
     public function cgetAction(Request $request): Response
@@ -59,23 +82,23 @@ class CourseController implements SecuredControllerInterface, ClassResourceInter
         return $this->handleView(View::create($this->commandBus->handle($command)));
     }
 
-    public function getAction(string $id): Response
+    public function getAction(Request $request, string $id): Response
     {
-        $command = new FindCourseQuery($id);
+        $command = new FindCourseQuery($id, $this->getLocale($request));
 
         return $this->handleView(View::create($this->commandBus->handle($command)));
     }
 
     public function postAction(Request $request): Response
     {
-        $command = new CreateCourseCommand($request->request->all());
+        $command = new CreateCourseCommand($this->getLocale($request), $request->request->all());
 
         return $this->handleView(View::create($this->commandBus->handle($command)));
     }
 
     public function putAction(Request $request, string $id): Response
     {
-        $command = new ModifyCourseCommand($id, $request->request->all());
+        $command = new ModifyCourseCommand($id, $this->getLocale($request), $request->request->all());
 
         return $this->handleView(View::create($this->commandBus->handle($command)));
     }
@@ -93,13 +116,37 @@ class CourseController implements SecuredControllerInterface, ClassResourceInter
         return SprungbrettCourseAdmin::SECURITY_CONTEXT;
     }
 
-    public function getLocale(Request $request): ?string
+    public function getLocale(Request $request): string
     {
-        return null;
+        $locale = $this->getRequestParameter($request, 'locale', false);
+        if ($locale) {
+            return $locale;
+        }
+
+        if (!$this->tokenStorage) {
+            return $this->defaultLocale;
+        }
+
+        return $this->getUser()->getLocale();
     }
 
     protected function handleView(View $view): Response
     {
         return $this->viewHandler->handle($view);
+    }
+
+    protected function getUser(): UserInterface
+    {
+        $token = $this->tokenStorage->getToken();
+        if (!$token) {
+            throw new AccessDeniedHttpException();
+        }
+
+        $user = $token->getUser();
+        if (!$user instanceof UserInterface) {
+            throw new AccessDeniedHttpException();
+        }
+
+        return $user;
     }
 }
