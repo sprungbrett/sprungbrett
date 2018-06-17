@@ -3,6 +3,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="Sprungbrett\Bundle\CourseBundle\Admin\SprungbrettCourseAdmin">
+            <argument type="service" id="sulu_core.webspace.webspace_manager"/>
             <argument type="service" id="sulu_security.security_checker"/>
             <argument>%sulu_admin.name%</argument>
 
@@ -14,6 +15,8 @@
             <argument type="string">%sulu.model.course.class%</argument>
             <argument type="service" id="tactician.commandbus.default"/>
             <argument type="service" id="fos_rest.view_handler.default"/>
+            <argument type="service" id="security.token_storage" on-invalid="null"/>
+            <argument type="string">%kernel.default_locale%</argument>
         </service>
     </services>
 </container>

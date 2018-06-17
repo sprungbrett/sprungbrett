@@ -20,7 +20,7 @@ class ModifyCourseHandler
 
     public function handle(ModifyCourseCommand $command): CourseInterface
     {
-        $course = $this->courseRepository->findByUuid($command->getUuid());
+        $course = $this->courseRepository->findByUuid($command->getUuid(), $command->getLocalization());
         $course->setTitle($command->getTitle());
 
         return $course;

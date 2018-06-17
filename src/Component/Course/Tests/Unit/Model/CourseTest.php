@@ -2,8 +2,11 @@
 
 namespace Sprungbrett\Component\Course\Tests\Unit\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;
 use Sprungbrett\Component\Course\Model\Course;
+use Sprungbrett\Component\Course\Model\CourseTranslation;
+use Sprungbrett\Component\Translation\Model\Localization;
 use Sprungbrett\Component\Uuid\Model\Uuid;
 
 class CourseTest extends TestCase
@@ -11,7 +14,7 @@ class CourseTest extends TestCase
     public function testGetUuid()
     {
         $uuid = $this->prophesize(Uuid::class);
-        $course = new Course($uuid->reveal());
+        $course = new Course(null, $uuid->reveal());
 
         $this->assertEquals($uuid->reveal(), $course->getUuid());
     }
@@ -27,7 +30,7 @@ class CourseTest extends TestCase
     {
         $uuid = $this->prophesize(Uuid::class);
         $uuid->getId()->willReturn('123-123-123');
-        $course = new Course($uuid->reveal());
+        $course = new Course(null, $uuid->reveal());
 
         $this->assertEquals('123-123-123', $course->getId());
     }
@@ -41,9 +44,67 @@ class CourseTest extends TestCase
 
     public function testGetTitle()
     {
-        $course = new Course();
-        $course->setTitle('Sprungbrett is awesome');
+        $localization = $this->prophesize(Localization::class);
+        $translationLocalization = $this->prophesize(Localization::class);
+
+        $translation = $this->prophesize(CourseTranslation::class);
+        $translation->getLocalization()->willReturn($translationLocalization->reveal());
+        $translation->getTitle()->willReturn('Sprungbrett is awesome');
+
+        $localization->equals($translationLocalization->reveal())->willReturn(true);
+
+        $course = new Course(new ArrayCollection([$translation->reveal()]));
+        $course->setCurrentLocalization($localization->reveal());
 
         $this->assertEquals('Sprungbrett is awesome', $course->getTitle());
+    }
+
+    public function testGetTitleWithLocalization()
+    {
+        $localization = $this->prophesize(Localization::class);
+        $translationLocalization = $this->prophesize(Localization::class);
+
+        $translation = $this->prophesize(CourseTranslation::class);
+        $translation->getLocalization()->willReturn($translationLocalization->reveal());
+        $translation->getTitle()->willReturn('Sprungbrett is awesome');
+
+        $localization->equals($translationLocalization->reveal())->willReturn(true);
+
+        $course = new Course(new ArrayCollection([$translation->reveal()]));
+
+        $this->assertEquals('Sprungbrett is awesome', $course->getTitle($localization->reveal()));
+    }
+
+    public function testSetTitle()
+    {
+        $localization = $this->prophesize(Localization::class);
+        $translationLocalization = $this->prophesize(Localization::class);
+
+        $translation = $this->prophesize(CourseTranslation::class);
+        $translation->getLocalization()->willReturn($translationLocalization->reveal());
+        $translation->setTitle('Sprungbrett is awesome')->shouldBeCalled();
+
+        $localization->equals($translationLocalization->reveal())->willReturn(true);
+
+        $course = new Course(new ArrayCollection([$translation->reveal()]));
+        $course->setCurrentLocalization($localization->reveal());
+
+        $this->assertEquals($course, $course->setTitle('Sprungbrett is awesome'));
+    }
+
+    public function testSetTitleWithLocalization()
+    {
+        $localization = $this->prophesize(Localization::class);
+        $translationLocalization = $this->prophesize(Localization::class);
+
+        $translation = $this->prophesize(CourseTranslation::class);
+        $translation->getLocalization()->willReturn($translationLocalization->reveal());
+        $translation->setTitle('Sprungbrett is awesome')->shouldBeCalled();
+
+        $localization->equals($translationLocalization->reveal())->willReturn(true);
+
+        $course = new Course(new ArrayCollection([$translation->reveal()]));
+
+        $this->assertEquals($course, $course->setTitle('Sprungbrett is awesome', $localization->reveal()));
     }
 }

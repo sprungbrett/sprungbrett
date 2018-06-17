@@ -1,6 +1,15 @@
 <class xmlns="http://schemas.sulu.io/class/general"
        xmlns:orm="http://schemas.sulu.io/class/doctrine"
        xmlns:list="http://schemas.sulu.io/class/list">
+    <orm:joins name="translation">
+        <orm:join>
+            <orm:entity-name>%sulu.model.course-translation.class%</orm:entity-name>
+            <orm:field-name>%sulu.model.course.class%.translations</orm:field-name>
+            <orm:method>LEFT</orm:method>
+            <orm:condition>%sulu.model.course-translation.class%.localization.locale = ':locale'</orm:condition>
+        </orm:join>
+    </orm:joins>
+
     <orm:joins name="changer">
         <orm:join>
             <orm:entity-name>%sulu.model.user.class%_changer</orm:entity-name>
@@ -31,7 +40,9 @@
 
         <property name="title" visibility="always" list:translation="sprungbrett.title" searchability="yes">
             <orm:field-name>title</orm:field-name>
-            <orm:entity-name>%sulu.model.course.class%</orm:entity-name>
+            <orm:entity-name>%sulu.model.course-translation.class%</orm:entity-name>
+
+            <orm:joins ref="translation"/>
         </property>
 
         <property name="created" list:translation="sprungbrett.created" list:type="datetime" visibility="yes">

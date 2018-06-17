@@ -2,27 +2,21 @@
 
 namespace Sprungbrett\Component\Course\Model\Command;
 
-use Sprungbrett\Component\Payload\PayloadTrait;
-use Sprungbrett\Component\Uuid\Model\Uuid;
+use Sprungbrett\Component\Payload\Model\Command\PayloadTrait;
+use Sprungbrett\Component\Translation\Model\Command\LocaleTrait;
+use Sprungbrett\Component\Uuid\Model\Command\IdTrait;
 
 class ModifyCourseCommand
 {
+    use IdTrait;
+    use LocaleTrait;
     use PayloadTrait;
 
-    /**
-     * @var string
-     */
-    private $id;
-
-    public function __construct(string $id, array $payload)
+    public function __construct(string $id, string $locale, array $payload)
     {
+        $this->initializeId($id);
+        $this->initializeLocale($locale);
         $this->initializePayload($payload);
-        $this->id = $id;
-    }
-
-    public function getUuid(): Uuid
-    {
-        return new Uuid($this->id);
     }
 
     public function getTitle(): string

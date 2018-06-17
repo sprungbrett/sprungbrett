@@ -20,7 +20,8 @@ class CreateCourseHandler
 
     public function handle(CreateCourseCommand $command): CourseInterface
     {
-        $course = $this->courseRepository->create();
+        $course = $this->courseRepository->create($command->getLocalization());
+
         $course->setTitle($command->getTitle());
 
         return $course;

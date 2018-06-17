@@ -2,11 +2,12 @@
 
 namespace Sprungbrett\Component\Course\Model;
 
-use Sprungbrett\Component\Uuid\IdentifiableInterface;
+use Sprungbrett\Component\Translation\Model\TranslatableInterface;
+use Sprungbrett\Component\Uuid\Model\IdentifiableInterface;
 
-interface CourseInterface extends IdentifiableInterface
+interface CourseInterface extends IdentifiableInterface, TranslatableInterface
 {
-    public function getTitle(): string;
+    public function getTitle(): ?string;
 
     public function setTitle(string $title): self;
 }

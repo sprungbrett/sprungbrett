@@ -1,8 +1,6 @@
 <?php
 
-namespace Sprungbrett\Component\Uuid;
-
-use Sprungbrett\Component\Uuid\Model\Uuid;
+namespace Sprungbrett\Component\Uuid\Model;
 
 interface IdentifiableInterface
 {
