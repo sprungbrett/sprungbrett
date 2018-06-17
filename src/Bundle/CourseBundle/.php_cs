@@ -16,5 +16,6 @@ return PhpCsFixer\Config::create()
     ->setFinder(
         PhpCsFixer\Finder::create()
             ->exclude('vendor')
+            ->exclude('cache')
             ->in(__DIR__)
     );
