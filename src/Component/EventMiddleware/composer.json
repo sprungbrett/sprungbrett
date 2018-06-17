@@ -41,12 +41,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Sprungbrett\\Component\\TacticianEvents\\": ""
+            "Sprungbrett\\Component\\EventMiddleware\\": ""
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Sprungbrett\\Component\\TacticianEvents\\Tests\\": ""
+            "Sprungbrett\\Component\\EventMiddleware\\Tests\\": ""
         }
     },
     "minimum-stability": "dev",
