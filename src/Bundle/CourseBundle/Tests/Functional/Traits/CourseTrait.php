@@ -8,11 +8,15 @@ use Sprungbrett\Component\Translation\Model\Localization;
 
 trait CourseTrait
 {
-    public function createCourse(string $title = 'Sulu is awesome', string $locale = 'en'): Course
-    {
+    public function createCourse(
+        string $title = 'Sprungbrett',
+        string $description = 'Sprungbrett is awesome',
+        string $locale = 'en'
+    ): Course {
         $course = new Course();
         $course->setCurrentLocalization(new Localization($locale));
         $course->setTitle($title);
+        $course->setDescription($description);
 
         $this->getEntityManager()->persist($course);
         $this->getEntityManager()->flush();

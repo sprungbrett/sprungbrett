@@ -33,6 +33,18 @@ class Course implements CourseInterface
         return $this;
     }
 
+    public function getDescription(?Localization $localization = null): ?string
+    {
+        return $this->getTranslation($localization)->getDescription();
+    }
+
+    public function setDescription(string $description, ?Localization $localization = null): CourseInterface
+    {
+        $this->getTranslation($localization)->setDescription($description);
+
+        return $this;
+    }
+
     /**
      * @throws MissingLocalizationException
      */

@@ -16,6 +16,7 @@
         />
 
         <field name="title" type="string"/>
+        <field name="description" type="text"/>
 
         <many-to-one
                 field="course"

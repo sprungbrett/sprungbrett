@@ -33,7 +33,7 @@ class CourseControllerTest extends SuluTestCase
         $this->assertEquals(1, $result['total']);
         $this->assertCount(1, $result['_embedded']['courses']);
         $this->assertEquals($course->getId(), $result['_embedded']['courses'][0]['id']);
-        $this->assertEquals('Sulu is awesome', $result['_embedded']['courses'][0]['title']);
+        $this->assertEquals('Sprungbrett', $result['_embedded']['courses'][0]['title']);
     }
 
     public function testGet()
@@ -51,7 +51,8 @@ class CourseControllerTest extends SuluTestCase
         $result = json_decode($client->getResponse()->getContent(), true);
 
         $this->assertEquals($course->getId(), $result['id']);
-        $this->assertEquals('Sulu is awesome', $result['title']);
+        $this->assertEquals('Sprungbrett', $result['title']);
+        $this->assertEquals('Sprungbrett is awesome', $result['description']);
     }
 
     public function testPost()
@@ -61,7 +62,8 @@ class CourseControllerTest extends SuluTestCase
             'POST',
             '/api/courses?locale=en',
             [
-                'title' => 'Sulu is awesome',
+                'title' => 'Sprungbrett',
+                'description' => 'Sprungbrett is awesome',
             ]
         );
 
@@ -70,19 +72,21 @@ class CourseControllerTest extends SuluTestCase
         $result = json_decode($client->getResponse()->getContent(), true);
 
         $this->assertArrayHasKey('id', $result);
-        $this->assertEquals('Sulu is awesome', $result['title']);
+        $this->assertEquals('Sprungbrett', $result['title']);
+        $this->assertEquals('Sprungbrett is awesome', $result['description']);
     }
 
     public function testPut()
     {
-        $course = $this->createCourse('Sulu is great');
+        $course = $this->createCourse('Sulu', 'Sprungbrett is great');
 
         $client = $this->createAuthenticatedClient();
         $client->request(
             'PUT',
             '/api/courses/' . $course->getId() . '?locale=en',
             [
-                'title' => 'Sulu is awesome',
+                'title' => 'Sprungbrett',
+                'description' => 'Sprungbrett is awesome',
             ]
         );
 
@@ -91,12 +95,13 @@ class CourseControllerTest extends SuluTestCase
         $result = json_decode($client->getResponse()->getContent(), true);
 
         $this->assertEquals($course->getId(), $result['id']);
-        $this->assertEquals('Sulu is awesome', $result['title']);
+        $this->assertEquals('Sprungbrett', $result['title']);
+        $this->assertEquals('Sprungbrett is awesome', $result['description']);
     }
 
     public function testDelete()
     {
-        $course = $this->createCourse('Sulu is great');
+        $course = $this->createCourse();
 
         $client = $this->createAuthenticatedClient();
         $client->request(
