@@ -27,6 +27,7 @@
         "league/tactician-bundle": "^1.1",
         "league/tactician-doctrine": "^1.1",
         "league/tactician-logger": "^0.10",
+        "sprungbrett/tactician-event-middleware": "^1.0@dev",
         "symfony/framework-bundle": "^3.4"
     },
     "require-dev": {

@@ -4,6 +4,7 @@ namespace Sprungbrett\Bundle\InfrastructureBundle\DependencyInjection;
 
 use League\Tactician\Doctrine\ORM\TransactionMiddleware;
 use League\Tactician\Logger\LoggerMiddleware;
+use Sprungbrett\Component\EventMiddleware\EventMiddleware;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -31,6 +32,7 @@ class SprungbrettInfrastructureExtension extends Extension implements PrependExt
                     'default' => [
                         'middleware' => [
                             LoggerMiddleware::class,
+                            EventMiddleware::class,
                             TransactionMiddleware::class,
                             'tactician.middleware.command_handler',
                         ],
