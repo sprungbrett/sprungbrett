@@ -17,6 +17,7 @@
 
         <field name="title" type="string"/>
         <field name="description" type="text"/>
+        <field name="workflowStage" type="string"/>
 
         <many-to-one
                 field="course"

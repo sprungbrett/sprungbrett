@@ -14,6 +14,7 @@ use Sprungbrett\Component\Course\Model\Handler\ModifyCourseHandler;
 use Sprungbrett\Component\Course\Model\Handler\RemoveCourseHandler;
 use Sulu\Bundle\AdminBundle\DependencyInjection\SuluAdminExtension;
 use Sulu\Component\HttpKernel\SuluKernel;
+use Symfony\Bundle\FrameworkBundle\DependencyInjection\FrameworkExtension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 
 class SprungbrettCourseExtensionTest extends AbstractExtensionTestCase
@@ -34,11 +35,15 @@ class SprungbrettCourseExtensionTest extends AbstractExtensionTestCase
         $this->container->setParameter('kernel.debug', false);
         $this->container->setParameter('kernel.bundles', []);
         $this->container->setParameter('kernel.cache_dir', __DIR__);
+        $this->container->setParameter('kernel.project_dir', __DIR__);
+        $this->container->setParameter('kernel.root_dir', __DIR__);
+        $this->container->setParameter('kernel.bundles_metadata', []);
     }
 
     protected function getContainerExtensions()
     {
         return [
+            new FrameworkExtension(),
             new SuluAdminExtension(),
             new JMSSerializerExtension(),
             new SprungbrettCourseExtension(),

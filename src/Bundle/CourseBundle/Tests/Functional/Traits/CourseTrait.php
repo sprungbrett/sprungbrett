@@ -4,6 +4,7 @@ namespace Sprungbrett\Bundle\CourseBundle\Tests\Functional\Traits;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Sprungbrett\Bundle\CourseBundle\Entity\Course;
+use Sprungbrett\Component\Course\Model\CourseInterface;
 use Sprungbrett\Component\Translation\Model\Localization;
 
 trait CourseTrait
@@ -17,6 +18,7 @@ trait CourseTrait
         $course->setCurrentLocalization(new Localization($locale));
         $course->setTitle($title);
         $course->setDescription($description);
+        $course->setWorkflowStage(CourseInterface::WORKFLOW_STAGE_TEST);
 
         $this->getEntityManager()->persist($course);
         $this->getEntityManager()->flush();

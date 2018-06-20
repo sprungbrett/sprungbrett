@@ -8,6 +8,7 @@
 
         <service id="Sprungbrett\Component\Course\Model\Handler\CreateCourseHandler">
             <argument type="service" id="Sprungbrett\Component\Course\Model\CourseRepositoryInterface"/>
+            <argument type="service" id="workflow.course"/>
             <argument type="service" id="Sprungbrett\Component\EventCollector\EventCollector"/>
 
             <tag name="tactician.handler" typehints="true"/>
@@ -15,6 +16,22 @@
 
         <service id="Sprungbrett\Component\Course\Model\Handler\ModifyCourseHandler">
             <argument type="service" id="Sprungbrett\Component\Course\Model\CourseRepositoryInterface"/>
+            <argument type="service" id="Sprungbrett\Component\EventCollector\EventCollector"/>
+
+            <tag name="tactician.handler" typehints="true"/>
+        </service>
+
+        <service id="Sprungbrett\Component\Course\Model\Handler\PublishCourseHandler">
+            <argument type="service" id="Sprungbrett\Component\Course\Model\CourseRepositoryInterface"/>
+            <argument type="service" id="workflow.course"/>
+            <argument type="service" id="Sprungbrett\Component\EventCollector\EventCollector"/>
+
+            <tag name="tactician.handler" typehints="true"/>
+        </service>
+
+        <service id="Sprungbrett\Component\Course\Model\Handler\UnpublishCourseHandler">
+            <argument type="service" id="Sprungbrett\Component\Course\Model\CourseRepositoryInterface"/>
+            <argument type="service" id="workflow.course"/>
             <argument type="service" id="Sprungbrett\Component\EventCollector\EventCollector"/>
 
             <tag name="tactician.handler" typehints="true"/>

@@ -49,6 +49,49 @@ class SprungbrettCourseExtension extends Extension implements PrependExtensionIn
             ]
         );
 
+        if (!$container->hasExtension('framework')) {
+            throw new \RuntimeException('Missing FrameworkBundle.');
+        }
+
+        $container->prependExtensionConfig(
+            'framework',
+            [
+                'workflows' => [
+                    'course' => [
+                        'type' => 'workflow',
+                        'marking_store' => [
+                            'type' => 'single_state',
+                            'arguments' => [
+                                'workflowStage',
+                            ],
+                        ],
+                        'supports' => [
+                            Course::class,
+                        ],
+                        'places' => [
+                            CourseInterface::WORKFLOW_STAGE_NEW,
+                            CourseInterface::WORKFLOW_STAGE_TEST,
+                            CourseInterface::WORKFLOW_STAGE_PUBLISHED,
+                        ],
+                        'transitions' => [
+                            CourseInterface::TRANSITION_CREATE => [
+                                'from' => CourseInterface::WORKFLOW_STAGE_NEW,
+                                'to' => CourseInterface::WORKFLOW_STAGE_TEST,
+                            ],
+                            CourseInterface::TRANSITION_PUBLISH => [
+                                'from' => CourseInterface::WORKFLOW_STAGE_TEST,
+                                'to' => CourseInterface::WORKFLOW_STAGE_PUBLISHED,
+                            ],
+                            CourseInterface::TRANSITION_UNPUBLISH => [
+                                'from' => CourseInterface::WORKFLOW_STAGE_PUBLISHED,
+                                'to' => CourseInterface::WORKFLOW_STAGE_TEST,
+                            ],
+                        ],
+                    ],
+                ],
+            ]
+        );
+
         $this->prependAdmin($container);
     }
 

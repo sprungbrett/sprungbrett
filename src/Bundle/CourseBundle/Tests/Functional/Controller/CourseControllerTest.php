@@ -2,7 +2,9 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\Tests\Functional\Controller;
 
+use Sprungbrett\Bundle\CourseBundle\Entity\Course;
 use Sprungbrett\Bundle\CourseBundle\Tests\Functional\Traits\CourseTrait;
+use Sprungbrett\Component\Course\Model\CourseInterface;
 use Sulu\Bundle\TestBundle\Testing\SuluTestCase;
 
 class CourseControllerTest extends SuluTestCase
@@ -74,6 +76,29 @@ class CourseControllerTest extends SuluTestCase
         $this->assertArrayHasKey('id', $result);
         $this->assertEquals('Sprungbrett', $result['title']);
         $this->assertEquals('Sprungbrett is awesome', $result['description']);
+        $this->assertEquals(CourseInterface::WORKFLOW_STAGE_TEST, $result['workflowStage']);
+    }
+
+    public function testPostPublish()
+    {
+        $client = $this->createAuthenticatedClient();
+        $client->request(
+            'POST',
+            '/api/courses?locale=en&action=publish',
+            [
+                'title' => 'Sprungbrett',
+                'description' => 'Sprungbrett is awesome',
+            ]
+        );
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $result = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertArrayHasKey('id', $result);
+        $this->assertEquals('Sprungbrett', $result['title']);
+        $this->assertEquals('Sprungbrett is awesome', $result['description']);
+        $this->assertEquals(CourseInterface::WORKFLOW_STAGE_PUBLISHED, $result['workflowStage']);
     }
 
     public function testPut()
@@ -97,6 +122,57 @@ class CourseControllerTest extends SuluTestCase
         $this->assertEquals($course->getId(), $result['id']);
         $this->assertEquals('Sprungbrett', $result['title']);
         $this->assertEquals('Sprungbrett is awesome', $result['description']);
+        $this->assertEquals(CourseInterface::WORKFLOW_STAGE_TEST, $result['workflowStage']);
+    }
+
+    public function testPutPublish()
+    {
+        $course = $this->createCourse('Sulu', 'Sprungbrett is great');
+
+        $client = $this->createAuthenticatedClient();
+        $client->request(
+            'PUT',
+            '/api/courses/' . $course->getId() . '?locale=en&action=publish',
+            [
+                'title' => 'Sprungbrett',
+                'description' => 'Sprungbrett is awesome',
+            ]
+        );
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $result = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertEquals($course->getId(), $result['id']);
+        $this->assertEquals('Sprungbrett', $result['title']);
+        $this->assertEquals('Sprungbrett is awesome', $result['description']);
+        $this->assertEquals(CourseInterface::WORKFLOW_STAGE_PUBLISHED, $result['workflowStage']);
+    }
+
+    public function testPutUnpublish()
+    {
+        $course = $this->createCourse('Sulu', 'Sprungbrett is great');
+        $course->setWorkflowStage(CourseInterface::WORKFLOW_STAGE_PUBLISHED);
+        $this->getEntityManager()->flush();
+
+        $client = $this->createAuthenticatedClient();
+        $client->request(
+            'PUT',
+            '/api/courses/' . $course->getId() . '?locale=en&action=unpublish',
+            [
+                'title' => 'Sprungbrett',
+                'description' => 'Sprungbrett is awesome',
+            ]
+        );
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $result = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertEquals($course->getId(), $result['id']);
+        $this->assertEquals('Sprungbrett', $result['title']);
+        $this->assertEquals('Sprungbrett is awesome', $result['description']);
+        $this->assertEquals(CourseInterface::WORKFLOW_STAGE_TEST, $result['workflowStage']);
     }
 
     public function testDelete()

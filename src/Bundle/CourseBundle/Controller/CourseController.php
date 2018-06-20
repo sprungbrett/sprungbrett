@@ -11,7 +11,10 @@ use Sprungbrett\Bundle\CourseBundle\Admin\SprungbrettCourseAdmin;
 use Sprungbrett\Bundle\CourseBundle\Model\Query\ListCourseQuery;
 use Sprungbrett\Component\Course\Model\Command\CreateCourseCommand;
 use Sprungbrett\Component\Course\Model\Command\ModifyCourseCommand;
+use Sprungbrett\Component\Course\Model\Command\PublishCourseCommand;
 use Sprungbrett\Component\Course\Model\Command\RemoveCourseCommand;
+use Sprungbrett\Component\Course\Model\Command\UnpublishCourseCommand;
+use Sprungbrett\Component\Course\Model\CourseInterface;
 use Sprungbrett\Component\Course\Model\Query\FindCourseQuery;
 use Sulu\Component\Rest\RequestParametersTrait;
 use Sulu\Component\Security\Authentication\UserInterface;
@@ -91,16 +94,32 @@ class CourseController implements SecuredControllerInterface, ClassResourceInter
 
     public function postAction(Request $request): Response
     {
-        $command = new CreateCourseCommand($this->getLocale($request), $request->request->all());
+        $locale = $this->getLocale($request);
+        $action = $request->query->get('action');
 
-        return $this->handleView(View::create($this->commandBus->handle($command)));
+        /** @var CourseInterface $course */
+        $course = $this->commandBus->handle(new CreateCourseCommand($locale, $request->request->all()));
+
+        if ($action) {
+            $this->handleActionParameter($action, $course->getId(), $this->getLocale($request));
+        }
+
+        return $this->handleView(View::create($course));
     }
 
     public function putAction(Request $request, string $id): Response
     {
-        $command = new ModifyCourseCommand($id, $this->getLocale($request), $request->request->all());
+        $locale = $this->getLocale($request);
+        $action = $request->query->get('action');
 
-        return $this->handleView(View::create($this->commandBus->handle($command)));
+        /** @var CourseInterface $course */
+        $course = $this->commandBus->handle(new ModifyCourseCommand($id, $locale, $request->request->all()));
+
+        if ($action) {
+            $this->handleActionParameter($action, $id, $this->getLocale($request));
+        }
+
+        return $this->handleView(View::create($course));
     }
 
     public function deleteAction(string $id): Response
@@ -109,6 +128,15 @@ class CourseController implements SecuredControllerInterface, ClassResourceInter
         $this->commandBus->handle($command);
 
         return $this->handleView(View::create(null));
+    }
+
+    protected function handleActionParameter(string $action, string $id, string $locale): void
+    {
+        if (CourseInterface::TRANSITION_PUBLISH === $action) {
+            $this->commandBus->handle(new PublishCourseCommand($id, $locale));
+        } elseif (CourseInterface::TRANSITION_UNPUBLISH === $action) {
+            $this->commandBus->handle(new UnpublishCourseCommand($id, $locale));
+        }
     }
 
     public function getSecurityContext()
