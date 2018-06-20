@@ -24,11 +24,13 @@
     "require": {
         "php": "^7.1",
 
+        "doctrine/common": "^2.6",
         "sprungbrett/event-collector": "^1.0@dev",
-        "sprungbrett/uuid": "^1.0@dev",
         "sprungbrett/payload": "^1.0@dev",
         "sprungbrett/translation": "^1.0@dev",
-        "symfony/event-dispatcher": "^3.4"
+        "sprungbrett/uuid": "^1.0@dev",
+        "symfony/event-dispatcher": "^3.4",
+        "symfony/workflow": "^3.4"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.12",

@@ -2,16 +2,15 @@
 
 namespace Sprungbrett\Component\Course\Model\Handler;
 
-use Sprungbrett\Component\Course\Model\Command\CreateCourseCommand;
+use Sprungbrett\Component\Course\Model\Command\UnpublishCourseCommand;
 use Sprungbrett\Component\Course\Model\CourseInterface;
 use Sprungbrett\Component\Course\Model\CourseRepositoryInterface;
-use Sprungbrett\Component\Course\Model\Event\CourseCreatedEvent;
+use Sprungbrett\Component\Course\Model\Event\CourseUnpublishedEvent;
 use Sprungbrett\Component\EventCollector\EventCollector;
 use Symfony\Component\Workflow\Workflow;
 
-class CreateCourseHandler
+class UnpublishCourseHandler
 {
-    use CourseMappingTrait;
     use CourseTransitTrait;
 
     /**
@@ -29,12 +28,11 @@ class CreateCourseHandler
         $this->courseRepository = $courseRepository;
     }
 
-    public function handle(CreateCourseCommand $command): CourseInterface
+    public function handle(UnpublishCourseCommand $command): CourseInterface
     {
-        $course = $this->courseRepository->create($command->getLocalization());
-        $this->transition(CourseInterface::TRANSITION_CREATE, new CourseCreatedEvent($course), $course);
+        $course = $this->courseRepository->findByUuid($command->getUuid(), $command->getLocalization());
 
-        $this->map($course, $command);
+        $this->transition(CourseInterface::TRANSITION_UNPUBLISH, new CourseUnpublishedEvent($course), $course);
 
         return $course;
     }

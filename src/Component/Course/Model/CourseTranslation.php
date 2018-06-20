@@ -22,10 +22,27 @@ class CourseTranslation implements CourseTranslationInterface
      */
     protected $description;
 
+    /**
+     * @var string
+     */
+    protected $workflowStage = CourseInterface::WORKFLOW_STAGE_NEW;
+
     public function __construct(Localization $localization, ?Uuid $uuid = null)
     {
         $this->initializeTranslation($localization);
         $this->initializeUuid($uuid);
+    }
+
+    public function getWorkflowStage(): string
+    {
+        return $this->workflowStage;
+    }
+
+    public function setWorkflowStage(string $workflowStage): CourseTranslationInterface
+    {
+        $this->workflowStage = $workflowStage;
+
+        return $this;
     }
 
     public function getTitle(): ?string
@@ -33,7 +50,7 @@ class CourseTranslation implements CourseTranslationInterface
         return $this->title;
     }
 
-    public function setTitle(string $title): CourseTranslation
+    public function setTitle(string $title): CourseTranslationInterface
     {
         $this->title = $title;
 
@@ -45,7 +62,7 @@ class CourseTranslation implements CourseTranslationInterface
         return $this->description;
     }
 
-    public function setDescription(string $description): CourseTranslation
+    public function setDescription(string $description): CourseTranslationInterface
     {
         $this->description = $description;
 

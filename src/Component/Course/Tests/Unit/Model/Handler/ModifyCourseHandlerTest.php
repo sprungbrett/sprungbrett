@@ -36,8 +36,8 @@ class ModifyCourseHandlerTest extends TestCase
         $command->getDescription()->willReturn('Sprungbrett is awesome');
 
         $eventCollector->push(
-            'course',
-            'modified',
+            CourseModifiedEvent::COMPONENT_NAME,
+            CourseModifiedEvent::NAME,
             Argument::that(
                 function (CourseModifiedEvent $event) use ($course) {
                     return $course->reveal() === $event->getCourse();

@@ -30,6 +30,7 @@
         "jms/serializer-bundle": "^2.4",
         "league/tactician-bundle": "^1.1",
         "sprungbrett/course": "^1.0@dev",
+        "sprungbrett/event-collector": "^1.0@dev",
         "sprungbrett/infrastructure-bundle": "^1.0@dev",
         "sulu/sulu": "^2.0@dev",
         "symfony/config": "^3.4",

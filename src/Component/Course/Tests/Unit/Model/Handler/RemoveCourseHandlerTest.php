@@ -11,6 +11,7 @@ use Sprungbrett\Component\Course\Model\Event\CourseRemovedEvent;
 use Sprungbrett\Component\Course\Model\Handler\RemoveCourseHandler;
 use Sprungbrett\Component\EventCollector\EventCollector;
 use Sprungbrett\Component\Uuid\Model\Uuid;
+use Symfony\Component\Workflow\Workflow;
 
 class RemoveCourseHandlerTest extends TestCase
 {
@@ -30,8 +31,8 @@ class RemoveCourseHandlerTest extends TestCase
         $command->getUuid()->willReturn($uuid->reveal());
 
         $eventCollector->push(
-            'course',
-            'removed',
+            CourseRemovedEvent::COMPONENT_NAME,
+            CourseRemovedEvent::NAME,
             Argument::that(
                 function (CourseRemovedEvent $event) use ($course) {
                     return $course->reveal() === $event->getCourse();

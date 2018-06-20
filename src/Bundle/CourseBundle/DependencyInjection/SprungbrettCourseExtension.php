@@ -2,6 +2,8 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\DependencyInjection;
 
+use Sprungbrett\Bundle\CourseBundle\Entity\Course;
+use Sprungbrett\Component\Course\Model\CourseInterface;
 use Sulu\Bundle\PersistenceBundle\DependencyInjection\PersistenceExtensionTrait;
 use Sulu\Component\HttpKernel\SuluKernel;
 use Symfony\Component\Config\FileLocator;
