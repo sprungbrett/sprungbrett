@@ -2,6 +2,8 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\DependencyInjection;
 
+use Sprungbrett\Bundle\CourseBundle\Entity\Course;
+use Sprungbrett\Component\Course\Model\CourseInterface;
 use Sulu\Bundle\PersistenceBundle\DependencyInjection\PersistenceExtensionTrait;
 use Sulu\Component\HttpKernel\SuluKernel;
 use Symfony\Component\Config\FileLocator;
@@ -41,6 +43,49 @@ class SprungbrettCourseExtension extends Extension implements PrependExtensionIn
                             'name' => 'SprungbrettCourseBundle',
                             'path' => __DIR__ . '/../Resources/config/serializer',
                             'namespace_prefix' => 'Sprungbrett\\Component\\Course\\Model',
+                        ],
+                    ],
+                ],
+            ]
+        );
+
+        if (!$container->hasExtension('framework')) {
+            throw new \RuntimeException('Missing FrameworkBundle.');
+        }
+
+        $container->prependExtensionConfig(
+            'framework',
+            [
+                'workflows' => [
+                    'course' => [
+                        'type' => 'workflow',
+                        'marking_store' => [
+                            'type' => 'single_state',
+                            'arguments' => [
+                                'workflowStage',
+                            ],
+                        ],
+                        'supports' => [
+                            Course::class,
+                        ],
+                        'places' => [
+                            CourseInterface::WORKFLOW_STAGE_NEW,
+                            CourseInterface::WORKFLOW_STAGE_TEST,
+                            CourseInterface::WORKFLOW_STAGE_PUBLISHED,
+                        ],
+                        'transitions' => [
+                            CourseInterface::TRANSITION_CREATE => [
+                                'from' => CourseInterface::WORKFLOW_STAGE_NEW,
+                                'to' => CourseInterface::WORKFLOW_STAGE_TEST,
+                            ],
+                            CourseInterface::TRANSITION_PUBLISH => [
+                                'from' => CourseInterface::WORKFLOW_STAGE_TEST,
+                                'to' => CourseInterface::WORKFLOW_STAGE_PUBLISHED,
+                            ],
+                            CourseInterface::TRANSITION_UNPUBLISH => [
+                                'from' => CourseInterface::WORKFLOW_STAGE_PUBLISHED,
+                                'to' => CourseInterface::WORKFLOW_STAGE_TEST,
+                            ],
                         ],
                     ],
                 ],

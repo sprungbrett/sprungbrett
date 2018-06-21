@@ -5,9 +5,10 @@ namespace Sprungbrett\Component\Course\Model\Event;
 use Sprungbrett\Component\Course\Model\CourseInterface;
 use Symfony\Component\EventDispatcher\Event;
 
-class CourseEvent extends Event
+abstract class CourseEvent extends Event
 {
     const COMPONENT_NAME = 'course';
+    const NAME = self::NAME;
 
     /**
      * @var CourseInterface

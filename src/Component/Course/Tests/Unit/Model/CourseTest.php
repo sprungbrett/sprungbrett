@@ -42,6 +42,72 @@ class CourseTest extends TestCase
         $this->assertTrue(is_string($course->getId()));
     }
 
+    public function getWorkflowStage()
+    {
+        $localization = $this->prophesize(Localization::class);
+        $translationLocalization = $this->prophesize(Localization::class);
+
+        $translation = $this->prophesize(CourseTranslation::class);
+        $translation->getLocalization()->willReturn($translationLocalization->reveal());
+        $translation->getWorkflowStage()->willReturn('published');
+
+        $localization->equals($translationLocalization->reveal())->willReturn(true);
+
+        $course = new Course(new ArrayCollection([$translation->reveal()]));
+        $course->setCurrentLocalization($localization->reveal());
+
+        $this->assertEquals('published', $course->getWorkflowStage());
+    }
+
+    public function getWorkflowStageWithLocalization()
+    {
+        $localization = $this->prophesize(Localization::class);
+        $translationLocalization = $this->prophesize(Localization::class);
+
+        $translation = $this->prophesize(CourseTranslation::class);
+        $translation->getLocalization()->willReturn($translationLocalization->reveal());
+        $translation->getWorkflowStage()->willReturn('published');
+
+        $localization->equals($translationLocalization->reveal())->willReturn(true);
+
+        $course = new Course(new ArrayCollection([$translation->reveal()]));
+
+        $this->assertEquals('published', $course->getWorkflowStage($localization->reveal()));
+    }
+
+    public function testSetWorkflowStage()
+    {
+        $localization = $this->prophesize(Localization::class);
+        $translationLocalization = $this->prophesize(Localization::class);
+
+        $translation = $this->prophesize(CourseTranslation::class);
+        $translation->getLocalization()->willReturn($translationLocalization->reveal());
+        $translation->setWorkflowStage('published')->shouldBeCalled();
+
+        $localization->equals($translationLocalization->reveal())->willReturn(true);
+
+        $course = new Course(new ArrayCollection([$translation->reveal()]));
+        $course->setCurrentLocalization($localization->reveal());
+
+        $this->assertEquals($course, $course->setWorkflowStage('published'));
+    }
+
+    public function testSetWorkflowStageWithLocalization()
+    {
+        $localization = $this->prophesize(Localization::class);
+        $translationLocalization = $this->prophesize(Localization::class);
+
+        $translation = $this->prophesize(CourseTranslation::class);
+        $translation->getLocalization()->willReturn($translationLocalization->reveal());
+        $translation->setWorkflowStage('published')->shouldBeCalled();
+
+        $localization->equals($translationLocalization->reveal())->willReturn(true);
+
+        $course = new Course(new ArrayCollection([$translation->reveal()]));
+
+        $this->assertEquals($course, $course->setWorkflowStage('published', $localization->reveal()));
+    }
+
     public function testGetTitle()
     {
         $localization = $this->prophesize(Localization::class);

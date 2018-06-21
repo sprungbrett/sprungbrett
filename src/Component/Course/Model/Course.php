@@ -21,6 +21,18 @@ class Course implements CourseInterface
         $this->initializeTranslations($translations);
     }
 
+    public function getWorkflowStage(?Localization $localization = null): string
+    {
+        return $this->getTranslation($localization)->getWorkflowStage();
+    }
+
+    public function setWorkflowStage(string $workflowStage, ?Localization $localization = null): CourseInterface
+    {
+        $this->getTranslation($localization)->setWorkflowStage($workflowStage);
+
+        return $this;
+    }
+
     public function getTitle(?Localization $localization = null): ?string
     {
         return $this->getTranslation($localization)->getTitle();

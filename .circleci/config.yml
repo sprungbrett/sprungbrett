@@ -46,3 +46,8 @@ jobs:
       - run: vendor/bin/phpunit
       - run: vendor/bin/phpstan analyze -c ./phpstan.neon src tests -l max
       - run: vendor/bin/php-cs-fixer fix --verbose --diff --dry-run
+
+      - run: npm install
+      - run: npm run lint:js
+      - run: npm run lint:scss
+      - run: npm run flow

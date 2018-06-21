@@ -30,8 +30,8 @@ class RemoveCourseHandlerTest extends TestCase
         $command->getUuid()->willReturn($uuid->reveal());
 
         $eventCollector->push(
-            'course',
-            'removed',
+            CourseRemovedEvent::COMPONENT_NAME,
+            CourseRemovedEvent::NAME,
             Argument::that(
                 function (CourseRemovedEvent $event) use ($course) {
                     return $course->reveal() === $event->getCourse();

@@ -3,6 +3,7 @@
 namespace Sprungbrett\Component\Course\Tests\Unit\Model;
 
 use PHPUnit\Framework\TestCase;
+use Sprungbrett\Component\Course\Model\CourseInterface;
 use Sprungbrett\Component\Course\Model\CourseTranslation;
 use Sprungbrett\Component\Translation\Model\Localization;
 use Sprungbrett\Component\Uuid\Model\Uuid;
@@ -53,6 +54,25 @@ class CourseTranslationTest extends TestCase
         $translation = new CourseTranslation($localization->reveal());
 
         $this->assertEquals($localization->reveal(), $translation->getLocalization());
+    }
+
+    public function testGetWorkflowStage()
+    {
+        $localization = $this->prophesize(Localization::class);
+
+        $translation = new CourseTranslation($localization->reveal());
+
+        $this->assertEquals(CourseInterface::WORKFLOW_STAGE_NEW, $translation->getWorkflowStage());
+    }
+
+    public function testSetWorkflowStage()
+    {
+        $localization = $this->prophesize(Localization::class);
+
+        $translation = new CourseTranslation($localization->reveal());
+
+        $translation->setWorkflowStage(CourseInterface::WORKFLOW_STAGE_PUBLISHED);
+        $this->assertEquals(CourseInterface::WORKFLOW_STAGE_PUBLISHED, $translation->getWorkflowStage());
     }
 
     public function testGetLocale()

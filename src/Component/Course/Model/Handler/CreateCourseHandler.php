@@ -7,34 +7,34 @@ use Sprungbrett\Component\Course\Model\CourseInterface;
 use Sprungbrett\Component\Course\Model\CourseRepositoryInterface;
 use Sprungbrett\Component\Course\Model\Event\CourseCreatedEvent;
 use Sprungbrett\Component\EventCollector\EventCollector;
+use Symfony\Component\Workflow\Workflow;
 
-class CreateCourseHandler extends MappingCourseHandler
+class CreateCourseHandler
 {
-    const COMPONENT_NAME = CourseCreatedEvent::COMPONENT_NAME;
-    const EVENT_NAME = CourseCreatedEvent::NAME;
+    use CourseMappingTrait;
+    use CourseTransitTrait;
 
     /**
      * @var CourseRepositoryInterface
      */
     private $courseRepository;
 
-    /**
-     * @var EventCollector
-     */
-    private $eventCollector;
+    public function __construct(
+        CourseRepositoryInterface $courseRepository,
+        Workflow $workflow,
+        EventCollector $eventCollector
+    ) {
+        $this->initializeTransit($workflow, $eventCollector);
 
-    public function __construct(CourseRepositoryInterface $courseRepository, EventCollector $eventCollector)
-    {
         $this->courseRepository = $courseRepository;
-        $this->eventCollector = $eventCollector;
     }
 
     public function handle(CreateCourseCommand $command): CourseInterface
     {
         $course = $this->courseRepository->create($command->getLocalization());
-        $this->map($course, $command);
+        $this->transition(CourseInterface::TRANSITION_CREATE, new CourseCreatedEvent($course), $course);
 
-        $this->eventCollector->push(self::COMPONENT_NAME, self::EVENT_NAME, new CourseCreatedEvent($course));
+        $this->map($course, $command);
 
         return $course;
     }

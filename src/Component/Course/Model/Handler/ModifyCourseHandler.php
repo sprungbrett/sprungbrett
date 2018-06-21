@@ -8,10 +8,9 @@ use Sprungbrett\Component\Course\Model\CourseRepositoryInterface;
 use Sprungbrett\Component\Course\Model\Event\CourseModifiedEvent;
 use Sprungbrett\Component\EventCollector\EventCollector;
 
-class ModifyCourseHandler extends MappingCourseHandler
+class ModifyCourseHandler
 {
-    const COMPONENT_NAME = CourseModifiedEvent::COMPONENT_NAME;
-    const EVENT_NAME = CourseModifiedEvent::NAME;
+    use CourseMappingTrait;
 
     /**
      * @var CourseRepositoryInterface
@@ -34,7 +33,11 @@ class ModifyCourseHandler extends MappingCourseHandler
         $course = $this->courseRepository->findByUuid($command->getUuid(), $command->getLocalization());
         $this->map($course, $command);
 
-        $this->eventCollector->push(self::COMPONENT_NAME, self::EVENT_NAME, new CourseModifiedEvent($course));
+        $this->eventCollector->push(
+            CourseModifiedEvent::COMPONENT_NAME,
+            CourseModifiedEvent::NAME,
+            new CourseModifiedEvent($course)
+        );
 
         return $course;
     }
