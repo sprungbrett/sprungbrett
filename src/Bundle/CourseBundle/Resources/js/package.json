@@ -1,0 +1,21 @@
+{
+    "name": "sprungbrett-course-bundle",
+    "description": "Adds support for course handling to Sulu",
+    "license": "MIT",
+    "repository": "https://github.com/sprungbrett/sprungbrett.git",
+    "dependencies": {
+        "classnames": "^2.2.5",
+        "fast-deep-equal": "^1.0.0",
+        "mobx-react": "^5.0.0",
+        "react": "^16.2.0",
+        "sulu-admin-bundle": "file:../../../../../vendor/sulu/sulu/src/Sulu/Bundle/AdminBundle/Resources/js",
+        "url-search-params-polyfill": "^2.0.0"
+    },
+    "devDependencies": {
+        "enzyme": "^3.3.0",
+        "pretty": "^2.0.0"
+    },
+    "peerDependencies": {
+        "mobx": "^4.0.0"
+    }
+}

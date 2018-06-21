@@ -107,7 +107,7 @@ class SprungbrettCourseAdmin extends Admin
             (new Route(sprintf('sprungbrett.course.%s_add_form', $resourceKey), $route . '/:locale/add', 'sulu_admin.resource_tabs'))
                 ->addOption('resourceKey', $resourceKey)
                 ->addOption('locales', $locales),
-            (new Route(sprintf('sprungbrett.course.%s_add_form.detail', $resourceKey), '/details', 'sulu_admin.form'))
+            (new Route(sprintf('sprungbrett.course.%s_add_form.detail', $resourceKey), '/details', 'sprungbrett.course_form'))
                 ->addOption('tabTitle', 'sprungbrett.details')
                 ->addOption('backRoute', sprintf('sprungbrett.course.%s_datagrid', $resourceKey))
                 ->addOption('editRoute', sprintf('sprungbrett.course.%s_edit_form.detail', $resourceKey))
@@ -116,7 +116,7 @@ class SprungbrettCourseAdmin extends Admin
             (new Route(sprintf('sprungbrett.course.%s_edit_form', $resourceKey), $route . '/:locale/:id', 'sulu_admin.resource_tabs'))
                 ->addOption('resourceKey', $resourceKey)
                 ->addOption('locales', $locales),
-            (new Route(sprintf('sprungbrett.course.%s_edit_form.detail', $resourceKey), '/details', 'sulu_admin.form'))
+            (new Route(sprintf('sprungbrett.course.%s_edit_form.detail', $resourceKey), '/details', 'sprungbrett.course_form'))
                 ->addOption('tabTitle', 'sprungbrett.details')
                 ->addOption('backRoute', sprintf('sprungbrett.course.%s_datagrid', $resourceKey))
                 ->addOption('locales', $locales)

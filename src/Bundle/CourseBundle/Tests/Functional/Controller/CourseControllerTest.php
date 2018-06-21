@@ -2,7 +2,6 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\Tests\Functional\Controller;
 
-use Sprungbrett\Bundle\CourseBundle\Entity\Course;
 use Sprungbrett\Bundle\CourseBundle\Tests\Functional\Traits\CourseTrait;
 use Sprungbrett\Component\Course\Model\CourseInterface;
 use Sulu\Bundle\TestBundle\Testing\SuluTestCase;

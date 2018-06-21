@@ -3,13 +3,11 @@
 namespace Sprungbrett\Component\Course\Tests\Unit\Model\Handler;
 
 use PHPUnit\Framework\TestCase;
-use Sprungbrett\Component\Course\Model\Command\PublishCourseCommand;
 use Sprungbrett\Component\Course\Model\Command\UnpublishCourseCommand;
 use Sprungbrett\Component\Course\Model\Course;
 use Sprungbrett\Component\Course\Model\CourseInterface;
 use Sprungbrett\Component\Course\Model\CourseRepositoryInterface;
 use Sprungbrett\Component\Course\Model\Exception\CourseTransitionNotAvailableException;
-use Sprungbrett\Component\Course\Model\Handler\PublishCourseHandler;
 use Sprungbrett\Component\Course\Model\Handler\UnpublishCourseHandler;
 use Sprungbrett\Component\EventCollector\EventCollector;
 use Sprungbrett\Component\Translation\Model\Localization;

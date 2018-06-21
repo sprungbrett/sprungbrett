@@ -11,7 +11,6 @@ use Sprungbrett\Component\Course\Model\Event\CourseRemovedEvent;
 use Sprungbrett\Component\Course\Model\Handler\RemoveCourseHandler;
 use Sprungbrett\Component\EventCollector\EventCollector;
 use Sprungbrett\Component\Uuid\Model\Uuid;
-use Symfony\Component\Workflow\Workflow;
 
 class RemoveCourseHandlerTest extends TestCase
 {
