@@ -5,6 +5,7 @@ namespace Sprungbrett\Bundle\CourseBundle\Tests\Functional\Controller;
 use Sprungbrett\Bundle\CourseBundle\Tests\Functional\Traits\CourseTrait;
 use Sprungbrett\Component\Course\Model\CourseInterface;
 use Sulu\Bundle\TestBundle\Testing\SuluTestCase;
+use Symfony\Component\Workflow\Workflow;
 
 class CourseControllerTest extends SuluTestCase
 {
@@ -76,6 +77,7 @@ class CourseControllerTest extends SuluTestCase
         $this->assertEquals('Sprungbrett', $result['title']);
         $this->assertEquals('Sprungbrett is awesome', $result['description']);
         $this->assertEquals(CourseInterface::WORKFLOW_STAGE_TEST, $result['workflowStage']);
+        $this->assertArrayNotHasKey('route', $result);
     }
 
     public function testPostPublish()
@@ -97,6 +99,7 @@ class CourseControllerTest extends SuluTestCase
         $this->assertArrayHasKey('id', $result);
         $this->assertEquals('Sprungbrett', $result['title']);
         $this->assertEquals('Sprungbrett is awesome', $result['description']);
+        $this->assertEquals('/sprungbrett', $result['route']);
         $this->assertEquals(CourseInterface::WORKFLOW_STAGE_PUBLISHED, $result['workflowStage']);
     }
 
@@ -122,6 +125,7 @@ class CourseControllerTest extends SuluTestCase
         $this->assertEquals('Sprungbrett', $result['title']);
         $this->assertEquals('Sprungbrett is awesome', $result['description']);
         $this->assertEquals(CourseInterface::WORKFLOW_STAGE_TEST, $result['workflowStage']);
+        $this->assertArrayNotHasKey('route', $result);
     }
 
     public function testPutPublish()
@@ -145,14 +149,14 @@ class CourseControllerTest extends SuluTestCase
         $this->assertEquals($course->getId(), $result['id']);
         $this->assertEquals('Sprungbrett', $result['title']);
         $this->assertEquals('Sprungbrett is awesome', $result['description']);
+        $this->assertEquals('/sprungbrett', $result['route']);
         $this->assertEquals(CourseInterface::WORKFLOW_STAGE_PUBLISHED, $result['workflowStage']);
     }
 
     public function testPutUnpublish()
     {
         $course = $this->createCourse('Sulu', 'Sprungbrett is great');
-        $course->setWorkflowStage(CourseInterface::WORKFLOW_STAGE_PUBLISHED);
-        $this->getEntityManager()->flush();
+        $this->publish($course);
 
         $client = $this->createAuthenticatedClient();
         $client->request(
@@ -172,6 +176,7 @@ class CourseControllerTest extends SuluTestCase
         $this->assertEquals('Sprungbrett', $result['title']);
         $this->assertEquals('Sprungbrett is awesome', $result['description']);
         $this->assertEquals(CourseInterface::WORKFLOW_STAGE_TEST, $result['workflowStage']);
+        $this->assertArrayNotHasKey('route', $result);
     }
 
     public function testDelete()
@@ -185,5 +190,10 @@ class CourseControllerTest extends SuluTestCase
         );
 
         $this->assertEquals(204, $client->getResponse()->getStatusCode());
+    }
+
+    public function getWorkflow(): Workflow
+    {
+        return $this->getContainer()->get('workflow.course');
     }
 }

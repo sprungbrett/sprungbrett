@@ -5,5 +5,6 @@
         <virtual-property method="getTitle" serialized-name="title" expose="true"/>
         <virtual-property method="getDescription" serialized-name="description" expose="true"/>
         <virtual-property method="getWorkflowStage" serialized-name="workflowStage" expose="true"/>
+        <virtual-property method="getRoutePath" serialized-name="route" expose="true"/>
     </class>
 </serializer>

@@ -13,6 +13,7 @@ use Sprungbrett\Component\Course\Model\Handler\FindCourseHandler;
 use Sprungbrett\Component\Course\Model\Handler\ModifyCourseHandler;
 use Sprungbrett\Component\Course\Model\Handler\RemoveCourseHandler;
 use Sulu\Bundle\AdminBundle\DependencyInjection\SuluAdminExtension;
+use Sulu\Bundle\RouteBundle\DependencyInjection\SuluRouteExtension;
 use Sulu\Component\HttpKernel\SuluKernel;
 use Symfony\Bundle\FrameworkBundle\DependencyInjection\FrameworkExtension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -45,6 +46,7 @@ class SprungbrettCourseExtensionTest extends AbstractExtensionTestCase
         return [
             new FrameworkExtension(),
             new SuluAdminExtension(),
+            new SuluRouteExtension(),
             new JMSSerializerExtension(),
             new SprungbrettCourseExtension(),
         ];
@@ -60,6 +62,10 @@ class SprungbrettCourseExtensionTest extends AbstractExtensionTestCase
         $config = $this->container->getExtensionConfig('sulu_admin');
         $this->assertCount(2, $config);
         $this->assertArrayHasKey('resources', $config[0]);
+
+        $config = $this->container->getExtensionConfig('sulu_route');
+        $this->assertCount(1, $config);
+        $this->assertArrayHasKey('mappings', $config[0]);
     }
 
     public function testPrependedConfigWebsite()
