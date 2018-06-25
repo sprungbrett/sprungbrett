@@ -92,6 +92,24 @@ class SprungbrettCourseExtension extends Extension implements PrependExtensionIn
             ]
         );
 
+        if (!$container->hasExtension('sulu_route')) {
+            throw new \RuntimeException('Missing SuluRouteBundle.');
+        }
+
+        $container->prependExtensionConfig(
+            'sulu_route',
+            [
+                'mappings' => [
+                    Course::class => [
+                        'generator' => 'schema',
+                        'options' => [
+                            'route_schema' => '/{object.getTitle()}',
+                        ],
+                    ],
+                ],
+            ]
+        );
+
         $this->prependAdmin($container);
     }
 

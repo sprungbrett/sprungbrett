@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sprungbrett\Bundle\CourseBundle\Entity\Course;
 use Sprungbrett\Component\Course\Model\CourseInterface;
 use Sprungbrett\Component\Translation\Model\Localization;
+use Symfony\Component\Workflow\Workflow;
 
 trait CourseTrait
 {
@@ -18,7 +19,8 @@ trait CourseTrait
         $course->setCurrentLocalization(new Localization($locale));
         $course->setTitle($title);
         $course->setDescription($description);
-        $course->setWorkflowStage(CourseInterface::WORKFLOW_STAGE_TEST);
+
+        $this->getWorkflow()->apply($course, CourseInterface::TRANSITION_CREATE);
 
         $this->getEntityManager()->persist($course);
         $this->getEntityManager()->flush();
@@ -26,8 +28,16 @@ trait CourseTrait
         return $course;
     }
 
+    public function publish(CourseInterface $course): void
+    {
+        $this->getWorkflow()->apply($course, CourseInterface::TRANSITION_PUBLISH);
+        $this->getEntityManager()->flush();
+    }
+
     /**
      * @return EntityManagerInterface
      */
     abstract public function getEntityManager();
+
+    abstract public function getWorkflow(): Workflow;
 }

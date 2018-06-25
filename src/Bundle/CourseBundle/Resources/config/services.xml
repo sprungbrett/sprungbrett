@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sulu_http_cache.cache.max_age">240</parameter>
+        <parameter key="sulu_http_cache.cache.shared_max_age">240</parameter>
+    </parameters>
+
     <services>
         <service id="Sprungbrett\Bundle\CourseBundle\Admin\SprungbrettCourseAdmin">
             <argument type="service" id="sulu_core.webspace.webspace_manager"/>
@@ -24,6 +29,26 @@
 
             <tag name="jms_serializer.event_subscriber"/>
             <tag name="sulu.context" context="admin"/>
+        </service>
+
+        <service id="Sprungbrett\Bundle\CourseBundle\EventSubscriber\CourseWorkflowSubscriber">
+            <argument type="service" id="sulu_route.manager.route_manager"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+
+            <tag name="kernel.event_subscriber"/>
+            <tag name="sulu.context" context="admin"/>
+        </service>
+
+        <service id="Sprungbrett\Bundle\CourseBundle\Controller\WebsiteCourseController">
+            <argument type="service" id="templating"/>
+            <argument>%sulu_http_cache.cache.max_age%</argument>
+            <argument>%sulu_http_cache.cache.shared_max_age%</argument>
+        </service>
+
+        <service id="Sprungbrett\Bundle\CourseBundle\Routing\CourseRouteDefaultProvider">
+            <argument type="service" id="tactician.commandbus.default"/>
+
+            <tag name="sulu_route.defaults_provider"/>
         </service>
     </services>
 </container>
