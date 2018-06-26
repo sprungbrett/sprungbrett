@@ -20,9 +20,9 @@ class CourseTranslation extends ComponentCourseTranslation implements AuditableI
      */
     private $course;
 
-    public function __construct(Localization $localization, Course $course)
+    public function __construct(string $id, Localization $localization, Course $course)
     {
-        parent::__construct($localization);
+        parent::__construct($id, $localization);
 
         $this->course = $course;
     }

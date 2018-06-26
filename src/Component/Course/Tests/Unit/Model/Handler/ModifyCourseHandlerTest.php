@@ -11,7 +11,6 @@ use Sprungbrett\Component\Course\Model\Event\CourseModifiedEvent;
 use Sprungbrett\Component\Course\Model\Handler\ModifyCourseHandler;
 use Sprungbrett\Component\EventCollector\EventCollector;
 use Sprungbrett\Component\Translation\Model\Localization;
-use Sprungbrett\Component\Uuid\Model\Uuid;
 
 class ModifyCourseHandlerTest extends TestCase
 {
@@ -21,16 +20,15 @@ class ModifyCourseHandlerTest extends TestCase
         $eventCollector = $this->prophesize(EventCollector::class);
         $handler = new ModifyCourseHandler($repository->reveal(), $eventCollector->reveal());
 
-        $uuid = $this->prophesize(Uuid::class);
         $localization = $this->prophesize(Localization::class);
 
         $course = $this->prophesize(Course::class);
-        $repository->findByUuid($uuid->reveal(), $localization->reveal())->willReturn($course->reveal());
+        $repository->findById('123-123-123', $localization->reveal())->willReturn($course->reveal());
         $course->setTitle('Sprungbrett')->shouldBeCalled();
         $course->setDescription('Sprungbrett is awesome')->shouldBeCalled();
 
         $command = $this->prophesize(ModifyCourseCommand::class);
-        $command->getUuid()->willReturn($uuid->reveal());
+        $command->getId()->willReturn('123-123-123');
         $command->getLocalization()->willReturn($localization->reveal());
         $command->getTitle()->willReturn('Sprungbrett');
         $command->getDescription()->willReturn('Sprungbrett is awesome');

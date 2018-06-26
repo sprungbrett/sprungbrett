@@ -3,6 +3,7 @@
 namespace Sprungbrett\Bundle\CourseBundle\Tests\Functional\Traits;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Ramsey\Uuid\Uuid;
 use Sprungbrett\Bundle\CourseBundle\Entity\Course;
 use Sprungbrett\Component\Course\Model\CourseInterface;
 use Sprungbrett\Component\Translation\Model\Localization;
@@ -15,7 +16,7 @@ trait CourseTrait
         string $description = 'Sprungbrett is awesome',
         string $locale = 'en'
     ): Course {
-        $course = new Course();
+        $course = new Course(Uuid::uuid4()->toString());
         $course->setCurrentLocalization(new Localization($locale));
         $course->setTitle($title);
         $course->setDescription($description);

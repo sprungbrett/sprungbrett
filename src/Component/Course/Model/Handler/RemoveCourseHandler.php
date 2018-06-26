@@ -28,7 +28,7 @@ class RemoveCourseHandler
 
     public function handle(RemoveCourseCommand $command): CourseInterface
     {
-        $course = $this->courseRepository->findByUuid($command->getUuid());
+        $course = $this->courseRepository->findById($command->getId());
         $this->courseRepository->remove($course);
 
         $this->eventCollector->push(CourseRemovedEvent::COMPONENT_NAME, CourseRemovedEvent::NAME, new CourseRemovedEvent($course));

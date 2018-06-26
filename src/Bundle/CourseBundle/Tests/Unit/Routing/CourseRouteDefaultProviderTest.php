@@ -23,7 +23,7 @@ class CourseRouteDefaultProviderTest extends TestCase
         $commandBus->handle(
             Argument::that(
                 function (FindCourseQuery $query) {
-                    return '123-123-123' === $query->getUuid()->getId()
+                    return '123-123-123' === $query->getId()
                         && 'de' === $query->getLocalization()->getLocale();
                 }
             )
@@ -63,7 +63,7 @@ class CourseRouteDefaultProviderTest extends TestCase
         $commandBus->handle(
             Argument::that(
                 function (FindCourseQuery $query) {
-                    return '123-123-123' === $query->getUuid()->getId()
+                    return '123-123-123' === $query->getId()
                         && 'de' === $query->getLocalization()->getLocale();
                 }
             )
@@ -82,7 +82,7 @@ class CourseRouteDefaultProviderTest extends TestCase
         $commandBus->handle(
             Argument::that(
                 function (FindCourseQuery $query) {
-                    return '123-123-123' === $query->getUuid()->getId()
+                    return '123-123-123' === $query->getId()
                         && 'de' === $query->getLocalization()->getLocale();
                 }
             )

@@ -34,7 +34,7 @@
 
     <properties>
         <property name="id" list:translation="sprungbrett.id">
-            <orm:field-name>uuid.id</orm:field-name>
+            <orm:field-name>id</orm:field-name>
             <orm:entity-name>%sulu.model.course.class%</orm:entity-name>
         </property>
 

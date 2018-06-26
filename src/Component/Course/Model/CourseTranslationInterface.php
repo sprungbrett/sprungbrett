@@ -6,6 +6,8 @@ use Sprungbrett\Component\Translation\Model\TranslationInterface;
 
 interface CourseTranslationInterface extends TranslationInterface
 {
+    public function getId(): string;
+
     public function getWorkflowStage(): string;
 
     public function setWorkflowStage(string $workflowStage): self;

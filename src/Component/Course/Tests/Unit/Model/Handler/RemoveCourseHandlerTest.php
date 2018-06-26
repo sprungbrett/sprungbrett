@@ -10,7 +10,6 @@ use Sprungbrett\Component\Course\Model\CourseRepositoryInterface;
 use Sprungbrett\Component\Course\Model\Event\CourseRemovedEvent;
 use Sprungbrett\Component\Course\Model\Handler\RemoveCourseHandler;
 use Sprungbrett\Component\EventCollector\EventCollector;
-use Sprungbrett\Component\Uuid\Model\Uuid;
 
 class RemoveCourseHandlerTest extends TestCase
 {
@@ -20,14 +19,12 @@ class RemoveCourseHandlerTest extends TestCase
         $eventCollector = $this->prophesize(EventCollector::class);
         $handler = new RemoveCourseHandler($repository->reveal(), $eventCollector->reveal());
 
-        $uuid = $this->prophesize(Uuid::class);
-
         $course = $this->prophesize(Course::class);
-        $repository->findByUuid($uuid->reveal())->willReturn($course->reveal());
+        $repository->findById('123-123-123')->willReturn($course->reveal());
         $repository->remove($course->reveal())->shouldBeCalled();
 
         $command = $this->prophesize(RemoveCourseCommand::class);
-        $command->getUuid()->willReturn($uuid->reveal());
+        $command->getId()->willReturn('123-123-123');
 
         $eventCollector->push(
             CourseRemovedEvent::COMPONENT_NAME,

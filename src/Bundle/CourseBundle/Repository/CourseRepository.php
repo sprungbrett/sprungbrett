@@ -3,20 +3,20 @@
 namespace Sprungbrett\Bundle\CourseBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Ramsey\Uuid\Uuid;
 use Sprungbrett\Component\Course\Model\CourseInterface;
 use Sprungbrett\Component\Course\Model\CourseRepositoryInterface;
 use Sprungbrett\Component\Course\Model\Exception\CourseNotFoundException;
 use Sprungbrett\Component\Translation\Model\Localization;
-use Sprungbrett\Component\Uuid\Model\Uuid;
 
 class CourseRepository extends EntityRepository implements CourseRepositoryInterface
 {
-    public function create(?Localization $localization = null, ?Uuid $uuid = null): CourseInterface
+    public function create(?Localization $localization = null, ?string $id = null): CourseInterface
     {
         $className = $this->getClassName();
 
         /** @var CourseInterface $course */
-        $course = new $className($uuid);
+        $course = new $className($id ?: Uuid::uuid4()->toString());
         if ($localization) {
             $course->setCurrentLocalization($localization);
         }
@@ -26,12 +26,12 @@ class CourseRepository extends EntityRepository implements CourseRepositoryInter
         return $course;
     }
 
-    public function findByUuid(Uuid $uuid, ?Localization $localization = null): CourseInterface
+    public function findById(string $id, ?Localization $localization = null): CourseInterface
     {
         /** @var CourseInterface $course */
-        $course = $this->find($uuid->getId());
+        $course = $this->find($id);
         if (!$course) {
-            throw new CourseNotFoundException($uuid);
+            throw new CourseNotFoundException($id);
         }
 
         if ($localization) {

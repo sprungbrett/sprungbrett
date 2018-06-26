@@ -30,7 +30,7 @@ class UnpublishCourseHandler
 
     public function handle(UnpublishCourseCommand $command): CourseInterface
     {
-        $course = $this->courseRepository->findByUuid($command->getUuid(), $command->getLocalization());
+        $course = $this->courseRepository->findById($command->getId(), $command->getLocalization());
 
         $this->transition(CourseInterface::TRANSITION_UNPUBLISH, new CourseUnpublishedEvent($course), $course);
 

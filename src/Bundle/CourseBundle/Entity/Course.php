@@ -53,6 +53,6 @@ class Course extends ComponentCourse implements AuditableInterface, RoutableInte
 
     protected function createTranslation(Localization $localization): TranslationInterface
     {
-        return new CourseTranslation($localization, $this);
+        return new CourseTranslation($this->getId(), $localization, $this);
     }
 }
