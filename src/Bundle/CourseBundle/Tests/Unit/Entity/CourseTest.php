@@ -10,7 +10,7 @@ class CourseTest extends TestCase
 {
     public function testGetRouteNull()
     {
-        $course = new Course();
+        $course = new Course('123-123-123');
 
         $this->assertNull($course->getRoute());
     }
@@ -19,7 +19,7 @@ class CourseTest extends TestCase
     {
         $route = $this->prophesize(RouteInterface::class);
 
-        $course = new Course();
+        $course = new Course('123-123-123');
         $course->setRoute($route->reveal());
 
         $this->assertEquals($route->reveal(), $course->getRoute());
@@ -29,7 +29,7 @@ class CourseTest extends TestCase
     {
         $route = $this->prophesize(RouteInterface::class);
 
-        $course = new Course();
+        $course = new Course('123-123-123');
         $course->setRoute($route->reveal());
 
         $this->assertEquals($route->reveal(), $course->getRoute());
@@ -40,7 +40,7 @@ class CourseTest extends TestCase
 
     public function testGetRoutePathNull()
     {
-        $course = new Course();
+        $course = new Course('123-123-123');
 
         $this->assertNull($course->getRoutePath());
     }
@@ -50,7 +50,7 @@ class CourseTest extends TestCase
         $route = $this->prophesize(RouteInterface::class);
         $route->getPath()->willReturn('/sprungbrett-is-awesome');
 
-        $course = new Course();
+        $course = new Course('123-123-123');
         $course->setRoute($route->reveal());
 
         $this->assertEquals('/sprungbrett-is-awesome', $course->getRoutePath());

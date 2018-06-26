@@ -50,13 +50,6 @@ class SprungbrettInfrastructureExtension extends Extension implements PrependExt
             [
                 'orm' => [
                     'mappings' => [
-                        'Uuid' => [
-                            'type' => 'xml',
-                            'alias' => 'Uuid',
-                            'prefix' => 'Sprungbrett\\Component\\Uuid\\Model',
-                            'dir' => __DIR__ . '/../Resources/uuid/doctrine',
-                            'is_bundle' => false,
-                        ],
                         'Translation' => [
                             'type' => 'xml',
                             'alias' => 'Translation',

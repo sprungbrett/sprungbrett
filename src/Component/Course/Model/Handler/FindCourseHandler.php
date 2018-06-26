@@ -20,6 +20,6 @@ class FindCourseHandler
 
     public function handle(FindCourseQuery $command): CourseInterface
     {
-        return $this->courseRepository->findByUuid($command->getUuid(), $command->getLocalization());
+        return $this->courseRepository->findById($command->getId(), $command->getLocalization());
     }
 }

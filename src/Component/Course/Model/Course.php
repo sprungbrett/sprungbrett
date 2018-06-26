@@ -7,18 +7,26 @@ use Sprungbrett\Component\Translation\Model\Exception\MissingLocalizationExcepti
 use Sprungbrett\Component\Translation\Model\Localization;
 use Sprungbrett\Component\Translation\Model\TranslatableTrait;
 use Sprungbrett\Component\Translation\Model\TranslationInterface;
-use Sprungbrett\Component\Uuid\Model\Uuid;
-use Sprungbrett\Component\Uuid\Model\UuidTrait;
 
 class Course implements CourseInterface
 {
-    use UuidTrait;
     use TranslatableTrait;
 
-    public function __construct(?Collection $translations = null, ?Uuid $uuid = null)
+    /**
+     * @var string
+     */
+    protected $id;
+
+    public function __construct(string $id, ?Collection $translations = null)
     {
-        $this->initializeUuid($uuid);
         $this->initializeTranslations($translations);
+
+        $this->id = $id;
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
     }
 
     public function getWorkflowStage(?Localization $localization = null): string
@@ -70,6 +78,6 @@ class Course implements CourseInterface
 
     protected function createTranslation(Localization $localization): TranslationInterface
     {
-        return new CourseTranslation($localization);
+        return new CourseTranslation($this->id, $localization);
     }
 }

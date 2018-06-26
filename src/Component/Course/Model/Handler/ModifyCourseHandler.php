@@ -30,7 +30,7 @@ class ModifyCourseHandler
 
     public function handle(ModifyCourseCommand $command): CourseInterface
     {
-        $course = $this->courseRepository->findByUuid($command->getUuid(), $command->getLocalization());
+        $course = $this->courseRepository->findById($command->getId(), $command->getLocalization());
         $this->map($course, $command);
 
         $this->eventCollector->push(

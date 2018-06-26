@@ -2,14 +2,20 @@
 
 namespace Sprungbrett\Component\Course\Model\Command;
 
-use Sprungbrett\Component\Uuid\Model\Command\IdTrait;
-
 class RemoveCourseCommand
 {
-    use IdTrait;
+    /**
+     * @var string
+     */
+    private $id;
 
     public function __construct(string $id)
     {
-        $this->initializeId($id);
+        $this->id = $id;
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
     }
 }

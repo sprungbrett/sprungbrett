@@ -30,7 +30,7 @@ class PublishCourseHandler
 
     public function handle(PublishCourseCommand $command): CourseInterface
     {
-        $course = $this->courseRepository->findByUuid($command->getUuid(), $command->getLocalization());
+        $course = $this->courseRepository->findById($command->getId(), $command->getLocalization());
 
         $this->transition(CourseInterface::TRANSITION_PUBLISH, new CoursePublishedEvent($course), $course);
 

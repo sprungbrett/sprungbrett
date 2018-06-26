@@ -28,7 +28,6 @@
         "sprungbrett/event-collector": "^1.0@dev",
         "sprungbrett/payload": "^1.0@dev",
         "sprungbrett/translation": "^1.0@dev",
-        "sprungbrett/uuid": "^1.0@dev",
         "symfony/event-dispatcher": "^3.4",
         "symfony/workflow": "^3.4"
     },

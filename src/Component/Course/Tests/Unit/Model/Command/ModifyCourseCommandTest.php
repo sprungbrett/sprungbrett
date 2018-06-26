@@ -5,16 +5,14 @@ namespace Sprungbrett\Component\Course\Tests\Unit\Model\Command;
 use PHPUnit\Framework\TestCase;
 use Sprungbrett\Component\Course\Model\Command\ModifyCourseCommand;
 use Sprungbrett\Component\Translation\Model\Localization;
-use Sprungbrett\Component\Uuid\Model\Uuid;
 
 class ModifyCourseCommandTest extends TestCase
 {
-    public function testGetUuid()
+    public function testGetId()
     {
         $command = new ModifyCourseCommand('123-123-123', 'de', ['title' => 'Sprungbrett is awesome']);
 
-        $this->assertInstanceOf(Uuid::class, $command->getUuid());
-        $this->assertEquals('123-123-123', $command->getUuid()->getId());
+        $this->assertEquals('123-123-123', $command->getId());
     }
 
     public function testGetLocalization()

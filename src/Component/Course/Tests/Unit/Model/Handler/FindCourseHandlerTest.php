@@ -8,7 +8,6 @@ use Sprungbrett\Component\Course\Model\CourseRepositoryInterface;
 use Sprungbrett\Component\Course\Model\Handler\FindCourseHandler;
 use Sprungbrett\Component\Course\Model\Query\FindCourseQuery;
 use Sprungbrett\Component\Translation\Model\Localization;
-use Sprungbrett\Component\Uuid\Model\Uuid;
 
 class FindCourseHandlerTest extends TestCase
 {
@@ -17,14 +16,13 @@ class FindCourseHandlerTest extends TestCase
         $repository = $this->prophesize(CourseRepositoryInterface::class);
         $handler = new FindCourseHandler($repository->reveal());
 
-        $uuid = $this->prophesize(Uuid::class);
         $localization = $this->prophesize(Localization::class);
 
         $course = $this->prophesize(Course::class);
-        $repository->findByUuid($uuid->reveal(), $localization->reveal())->willReturn($course->reveal());
+        $repository->findById('123-123-123', $localization->reveal())->willReturn($course->reveal());
 
         $command = $this->prophesize(FindCourseQuery::class);
-        $command->getUuid()->willReturn($uuid->reveal());
+        $command->getId()->willReturn('123-123-123');
         $command->getLocalization()->willReturn($localization->reveal());
 
         $result = $handler->handle($command->reveal());

@@ -4,13 +4,15 @@ namespace Sprungbrett\Component\Course\Model;
 
 use Sprungbrett\Component\Translation\Model\Localization;
 use Sprungbrett\Component\Translation\Model\TranslationTrait;
-use Sprungbrett\Component\Uuid\Model\Uuid;
-use Sprungbrett\Component\Uuid\Model\UuidTrait;
 
 class CourseTranslation implements CourseTranslationInterface
 {
     use TranslationTrait;
-    use UuidTrait;
+
+    /**
+     * @var string
+     */
+    protected $id;
 
     /**
      * @var string
@@ -27,10 +29,16 @@ class CourseTranslation implements CourseTranslationInterface
      */
     protected $workflowStage = CourseInterface::WORKFLOW_STAGE_NEW;
 
-    public function __construct(Localization $localization, ?Uuid $uuid = null)
+    public function __construct(string $id, Localization $localization)
     {
         $this->initializeTranslation($localization);
-        $this->initializeUuid($uuid);
+
+        $this->id = $id;
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
     }
 
     public function getWorkflowStage(): string

@@ -7,39 +7,14 @@ use PHPUnit\Framework\TestCase;
 use Sprungbrett\Component\Course\Model\Course;
 use Sprungbrett\Component\Course\Model\CourseTranslation;
 use Sprungbrett\Component\Translation\Model\Localization;
-use Sprungbrett\Component\Uuid\Model\Uuid;
 
 class CourseTest extends TestCase
 {
-    public function testGetUuid()
-    {
-        $uuid = $this->prophesize(Uuid::class);
-        $course = new Course(null, $uuid->reveal());
-
-        $this->assertEquals($uuid->reveal(), $course->getUuid());
-    }
-
-    public function testGetUuidGeneration()
-    {
-        $course = new Course();
-
-        $this->assertInstanceOf(Uuid::class, $course->getUuid());
-    }
-
     public function testGetId()
     {
-        $uuid = $this->prophesize(Uuid::class);
-        $uuid->getId()->willReturn('123-123-123');
-        $course = new Course(null, $uuid->reveal());
+        $course = new Course('123-123-123');
 
         $this->assertEquals('123-123-123', $course->getId());
-    }
-
-    public function testGetIdGeneration()
-    {
-        $course = new Course();
-
-        $this->assertTrue(is_string($course->getId()));
     }
 
     public function getWorkflowStage()
@@ -53,7 +28,7 @@ class CourseTest extends TestCase
 
         $localization->equals($translationLocalization->reveal())->willReturn(true);
 
-        $course = new Course(new ArrayCollection([$translation->reveal()]));
+        $course = new Course('123-123-123', new ArrayCollection([$translation->reveal()]));
         $course->setCurrentLocalization($localization->reveal());
 
         $this->assertEquals('published', $course->getWorkflowStage());
@@ -70,7 +45,7 @@ class CourseTest extends TestCase
 
         $localization->equals($translationLocalization->reveal())->willReturn(true);
 
-        $course = new Course(new ArrayCollection([$translation->reveal()]));
+        $course = new Course('123-123-123', new ArrayCollection([$translation->reveal()]));
 
         $this->assertEquals('published', $course->getWorkflowStage($localization->reveal()));
     }
@@ -86,7 +61,7 @@ class CourseTest extends TestCase
 
         $localization->equals($translationLocalization->reveal())->willReturn(true);
 
-        $course = new Course(new ArrayCollection([$translation->reveal()]));
+        $course = new Course('123-123-123', new ArrayCollection([$translation->reveal()]));
         $course->setCurrentLocalization($localization->reveal());
 
         $this->assertEquals($course, $course->setWorkflowStage('published'));
@@ -103,7 +78,7 @@ class CourseTest extends TestCase
 
         $localization->equals($translationLocalization->reveal())->willReturn(true);
 
-        $course = new Course(new ArrayCollection([$translation->reveal()]));
+        $course = new Course('123-123-123', new ArrayCollection([$translation->reveal()]));
 
         $this->assertEquals($course, $course->setWorkflowStage('published', $localization->reveal()));
     }
@@ -119,7 +94,7 @@ class CourseTest extends TestCase
 
         $localization->equals($translationLocalization->reveal())->willReturn(true);
 
-        $course = new Course(new ArrayCollection([$translation->reveal()]));
+        $course = new Course('123-123-123', new ArrayCollection([$translation->reveal()]));
         $course->setCurrentLocalization($localization->reveal());
 
         $this->assertEquals('Sprungbrett is awesome', $course->getTitle());
@@ -136,7 +111,7 @@ class CourseTest extends TestCase
 
         $localization->equals($translationLocalization->reveal())->willReturn(true);
 
-        $course = new Course(new ArrayCollection([$translation->reveal()]));
+        $course = new Course('123-123-123', new ArrayCollection([$translation->reveal()]));
 
         $this->assertEquals('Sprungbrett is awesome', $course->getTitle($localization->reveal()));
     }
@@ -152,7 +127,7 @@ class CourseTest extends TestCase
 
         $localization->equals($translationLocalization->reveal())->willReturn(true);
 
-        $course = new Course(new ArrayCollection([$translation->reveal()]));
+        $course = new Course('123-123-123', new ArrayCollection([$translation->reveal()]));
         $course->setCurrentLocalization($localization->reveal());
 
         $this->assertEquals($course, $course->setTitle('Sprungbrett is awesome'));
@@ -169,7 +144,7 @@ class CourseTest extends TestCase
 
         $localization->equals($translationLocalization->reveal())->willReturn(true);
 
-        $course = new Course(new ArrayCollection([$translation->reveal()]));
+        $course = new Course('123-123-123', new ArrayCollection([$translation->reveal()]));
 
         $this->assertEquals($course, $course->setTitle('Sprungbrett is awesome', $localization->reveal()));
     }

@@ -7,6 +7,8 @@
             <index columns="locale"/>
         </indexes>
 
-        <field name="locale" type="string" length="5"/>
+        <id name="locale" type="string" length="5">
+            <generator strategy="NONE"/>
+        </id>
     </embeddable>
 </doctrine-mapping>
