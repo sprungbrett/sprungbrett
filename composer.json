@@ -84,13 +84,11 @@
         },
         "post-install-cmd": [
             "@auto-scripts",
-            "Sulu\\Bundle\\TranslateBundle\\Composer\\TranslateScriptHandler::installTranslations",
             "Sulu\\Bundle\\MediaBundle\\Composer\\MediaScriptHandler::initBundle",
             "Massive\\Bundle\\SearchBundle\\Composer\\SearchScriptHandler::initBundle"
         ],
         "post-update-cmd": [
             "@auto-scripts",
-            "Sulu\\Bundle\\TranslateBundle\\Composer\\TranslateScriptHandler::installTranslations",
             "Sulu\\Bundle\\MediaBundle\\Composer\\MediaScriptHandler::initBundle",
             "Massive\\Bundle\\SearchBundle\\Composer\\SearchScriptHandler::initBundle"
         ]

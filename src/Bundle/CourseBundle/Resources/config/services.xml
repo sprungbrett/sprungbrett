@@ -10,7 +10,6 @@
         <service id="Sprungbrett\Bundle\CourseBundle\Admin\SprungbrettCourseAdmin">
             <argument type="service" id="sulu_core.webspace.webspace_manager"/>
             <argument type="service" id="sulu_security.security_checker"/>
-            <argument>%sulu_admin.name%</argument>
 
             <tag name="sulu.admin"/>
             <tag name="sulu.context" context="admin"/>

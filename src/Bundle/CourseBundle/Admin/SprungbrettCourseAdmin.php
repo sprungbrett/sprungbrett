@@ -25,18 +25,13 @@ class SprungbrettCourseAdmin extends Admin
      */
     private $securityChecker;
 
-    public function __construct(
-        WebspaceManagerInterface $webspaceManager,
-        SecurityCheckerInterface $securityChecker,
-        string $title
-    ) {
+    public function __construct(WebspaceManagerInterface $webspaceManager, SecurityCheckerInterface $securityChecker)
+    {
         $this->webspaceManager = $webspaceManager;
         $this->securityChecker = $securityChecker;
-
-        $this->setNavigation(new Navigation(new NavigationItem($title)));
     }
 
-    public function getNavigationV2(): Navigation
+    public function getNavigation(): Navigation
     {
         $rootNavigationItem = $this->getNavigationItemRoot();
 
