@@ -2,8 +2,8 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\DependencyInjection;
 
-use Sprungbrett\Bundle\CourseBundle\Entity\Course;
-use Sprungbrett\Bundle\CourseBundle\Entity\CourseTranslation;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Course;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseTranslation;
 use Sprungbrett\Bundle\CourseBundle\Repository\CourseRepository;
 use Sprungbrett\Bundle\CourseBundle\Repository\CourseTranslationRepository;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;

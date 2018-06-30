@@ -2,16 +2,17 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\Tests\Unit\DependencyInjection;
 
+use Doctrine\Bundle\DoctrineBundle\DependencyInjection\DoctrineExtension;
 use JMS\SerializerBundle\DependencyInjection\JMSSerializerExtension;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sprungbrett\Bundle\CourseBundle\Admin\SprungbrettCourseAdmin;
 use Sprungbrett\Bundle\CourseBundle\Controller\CourseController;
 use Sprungbrett\Bundle\CourseBundle\DependencyInjection\SprungbrettCourseExtension;
-use Sprungbrett\Bundle\CourseBundle\Model\Handler\ListCourseQueryHandler;
-use Sprungbrett\Component\Course\Model\Handler\CreateCourseHandler;
-use Sprungbrett\Component\Course\Model\Handler\FindCourseHandler;
-use Sprungbrett\Component\Course\Model\Handler\ModifyCourseHandler;
-use Sprungbrett\Component\Course\Model\Handler\RemoveCourseHandler;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Handler\CreateCourseHandler;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Handler\FindCourseHandler;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Handler\ListCourseQueryHandler;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Handler\ModifyCourseHandler;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Handler\RemoveCourseHandler;
 use Sulu\Bundle\AdminBundle\DependencyInjection\SuluAdminExtension;
 use Sulu\Bundle\CoreBundle\DependencyInjection\SuluCoreExtension;
 use Sulu\Bundle\RouteBundle\DependencyInjection\SuluRouteExtension;
@@ -69,6 +70,7 @@ class SprungbrettCourseExtensionTest extends AbstractExtensionTestCase
     {
         return [
             new FrameworkExtension(),
+            new DoctrineExtension(),
             new JMSSerializerExtension(),
             new SuluCoreExtension(),
             new SuluAdminExtension(),

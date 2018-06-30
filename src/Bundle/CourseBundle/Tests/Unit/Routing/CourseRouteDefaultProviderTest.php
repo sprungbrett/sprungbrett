@@ -6,11 +6,10 @@ use League\Tactician\CommandBus;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Sprungbrett\Bundle\CourseBundle\Controller\WebsiteCourseController;
-use Sprungbrett\Bundle\CourseBundle\Entity\Course;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Course;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Query\FindCourseQuery;
 use Sprungbrett\Bundle\CourseBundle\Routing\CourseRouteDefaultProvider;
-use Sprungbrett\Component\Course\Model\Course as ComponentCourse;
-use Sprungbrett\Component\Course\Model\CourseInterface;
-use Sprungbrett\Component\Course\Model\Query\FindCourseQuery;
 
 class CourseRouteDefaultProviderTest extends TestCase
 {
@@ -29,7 +28,7 @@ class CourseRouteDefaultProviderTest extends TestCase
             )
         )->willReturn($course->reveal());
 
-        $defaults = $provider->getByEntity(Course::class, '123-123-123', 'de');
+        $defaults = $provider->getByEntity(CourseInterface::class, '123-123-123', 'de');
 
         $this->assertEquals($course->reveal(), $defaults['object']);
         $this->assertEquals('@SprungbrettCourse/Course/index', $defaults['view']);
@@ -45,7 +44,7 @@ class CourseRouteDefaultProviderTest extends TestCase
         $course = $this->prophesize(CourseInterface::class);
         $commandBus->handle(Argument::any())->shouldNotBeCalled();
 
-        $defaults = $provider->getByEntity(Course::class, '123-123-123', 'de', $course->reveal());
+        $defaults = $provider->getByEntity(CourseInterface::class, '123-123-123', 'de', $course->reveal());
 
         $this->assertEquals($course->reveal(), $defaults['object']);
         $this->assertEquals('@SprungbrettCourse/Course/index', $defaults['view']);
@@ -69,7 +68,7 @@ class CourseRouteDefaultProviderTest extends TestCase
             )
         )->willReturn($course->reveal());
 
-        $this->assertTrue($provider->isPublished(Course::class, '123-123-123', 'de'));
+        $this->assertTrue($provider->isPublished(CourseInterface::class, '123-123-123', 'de'));
     }
 
     public function testIsNotPublished()
@@ -88,7 +87,7 @@ class CourseRouteDefaultProviderTest extends TestCase
             )
         )->willReturn($course->reveal());
 
-        $this->assertFalse($provider->isPublished(Course::class, '123-123-123', 'de'));
+        $this->assertFalse($provider->isPublished(CourseInterface::class, '123-123-123', 'de'));
     }
 
     public function testSupports()
@@ -99,7 +98,6 @@ class CourseRouteDefaultProviderTest extends TestCase
         $commandBus->handle(Argument::any())->shouldNotBeCalled();
 
         $this->assertTrue($provider->supports(Course::class));
-        $this->assertTrue($provider->supports(ComponentCourse::class));
     }
 
     public function testSupportsNot()

@@ -4,7 +4,7 @@ namespace Sprungbrett\Bundle\CourseBundle\Tests\Unit\Controller;
 
 use PHPUnit\Framework\TestCase;
 use Sprungbrett\Bundle\CourseBundle\Controller\WebsiteCourseController;
-use Sprungbrett\Component\Course\Model\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 use Sulu\Bundle\HttpCacheBundle\Cache\AbstractHttpCache;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

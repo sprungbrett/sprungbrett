@@ -4,8 +4,8 @@ namespace Sprungbrett\Bundle\CourseBundle\Routing;
 
 use League\Tactician\CommandBus;
 use Sprungbrett\Bundle\CourseBundle\Controller\WebsiteCourseController;
-use Sprungbrett\Component\Course\Model\CourseInterface;
-use Sprungbrett\Component\Course\Model\Query\FindCourseQuery;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Query\FindCourseQuery;
 use Sulu\Bundle\RouteBundle\Routing\Defaults\RouteDefaultsProviderInterface;
 
 class CourseRouteDefaultProvider implements RouteDefaultsProviderInterface

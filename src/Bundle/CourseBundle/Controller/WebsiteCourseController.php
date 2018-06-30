@@ -2,7 +2,7 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\Controller;
 
-use Sprungbrett\Component\Course\Model\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 use Sulu\Bundle\HttpCacheBundle\Cache\AbstractHttpCache;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

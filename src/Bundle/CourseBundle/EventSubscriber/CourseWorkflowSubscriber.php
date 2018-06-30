@@ -2,8 +2,7 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\EventSubscriber;
 
-use Sprungbrett\Bundle\CourseBundle\Entity\Course;
-use Sprungbrett\Component\Course\Model\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 use Sulu\Bundle\RouteBundle\Manager\RouteManagerInterface;
 use Sulu\Bundle\RouteBundle\Model\RoutableInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -59,7 +58,7 @@ class CourseWorkflowSubscriber implements EventSubscriberInterface
         $transition = $event->getTransition();
 
         if (!$subject instanceof RoutableInterface
-            || !$subject instanceof Course
+            || !$subject instanceof CourseInterface
             || !in_array(CourseInterface::WORKFLOW_STAGE_TEST, $transition->getTos())
             || !$subject->getRoute()
         ) {

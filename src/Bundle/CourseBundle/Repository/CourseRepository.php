@@ -4,9 +4,9 @@ namespace Sprungbrett\Bundle\CourseBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Ramsey\Uuid\Uuid;
-use Sprungbrett\Component\Course\Model\CourseInterface;
-use Sprungbrett\Component\Course\Model\CourseRepositoryInterface;
-use Sprungbrett\Component\Course\Model\Exception\CourseNotFoundException;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Exception\CourseNotFoundException;
 use Sprungbrett\Component\Translation\Model\Localization;
 
 class CourseRepository extends EntityRepository implements CourseRepositoryInterface

@@ -4,8 +4,8 @@ namespace Sprungbrett\Bundle\CourseBundle\Tests\Functional\Traits;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
-use Sprungbrett\Bundle\CourseBundle\Entity\Course;
-use Sprungbrett\Component\Course\Model\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Course;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 use Sprungbrett\Component\Translation\Model\Localization;
 use Symfony\Component\Workflow\Workflow;
 

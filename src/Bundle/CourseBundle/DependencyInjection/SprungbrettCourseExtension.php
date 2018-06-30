@@ -2,8 +2,8 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\DependencyInjection;
 
-use Sprungbrett\Bundle\CourseBundle\Entity\Course;
-use Sprungbrett\Component\Course\Model\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Course;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 use Sulu\Bundle\PersistenceBundle\DependencyInjection\PersistenceExtensionTrait;
 use Sulu\Component\HttpKernel\SuluKernel;
 use Symfony\Component\Config\FileLocator;
@@ -42,7 +42,7 @@ class SprungbrettCourseExtension extends Extension implements PrependExtensionIn
                         [
                             'name' => 'SprungbrettCourseBundle',
                             'path' => __DIR__ . '/../Resources/config/serializer',
-                            'namespace_prefix' => 'Sprungbrett\\Component\\Course\\Model',
+                            'namespace_prefix' => 'Sprungbrett\\Bundle\\CourseBundle\\Model',
                         ],
                     ],
                 ],
@@ -66,7 +66,7 @@ class SprungbrettCourseExtension extends Extension implements PrependExtensionIn
                             ],
                         ],
                         'supports' => [
-                            Course::class,
+                            CourseInterface::class,
                         ],
                         'places' => [
                             CourseInterface::WORKFLOW_STAGE_NEW,
@@ -85,6 +85,32 @@ class SprungbrettCourseExtension extends Extension implements PrependExtensionIn
                             CourseInterface::TRANSITION_UNPUBLISH => [
                                 'from' => CourseInterface::WORKFLOW_STAGE_PUBLISHED,
                                 'to' => CourseInterface::WORKFLOW_STAGE_TEST,
+                            ],
+                        ],
+                    ],
+                ],
+            ]
+        );
+
+        if (!$container->hasExtension('doctrine')) {
+            throw new \RuntimeException('Missing DoctrineBundle.');
+        }
+
+        $container->prependExtensionConfig(
+            'doctrine',
+            [
+                'orm' => [
+                    'entity_managers' => [
+                        'default' => [
+                            'mappings' => [
+                                'SprungbrettCourseBundle' => [
+                                    'type' => 'xml',
+                                    'prefix' => 'Sprungbrett\\Bundle\\CourseBundle\\Model',
+                                    'dir' => 'Resources/config/doctrine',
+                                    'alias' => 'SprungbrettCourseBundle',
+                                    'is_bundle' => true,
+                                    'mapping' => true,
+                                ],
                             ],
                         ],
                     ],

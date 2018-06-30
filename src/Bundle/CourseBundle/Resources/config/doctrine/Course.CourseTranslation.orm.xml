@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <!-- FIXME should be mapped-super-class but sulu cannot handle embedded-class -->
+    <entity name="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseTranslation" table="sp_course_translations">
+        <indexes>
+            <index columns="id"/>
+        </indexes>
+
+        <id name="id" type="guid">
+            <generator strategy="NONE"/>
+        </id>
+
+        <embedded
+                name="localization"
+                class="Sprungbrett\Component\Translation\Model\Localization"
+                use-column-prefix="false"
+        />
+
+        <field name="title" type="string"/>
+        <field name="description" type="text"/>
+        <field name="workflowStage" type="string"/>
+
+        <embedded
+                name="content"
+                class="Sprungbrett\Component\Content\Model\Content"
+                use-column-prefix="false"
+        />
+
+        <many-to-one
+                field="course"
+                target-entity="Sprungbrett\Bundle\CourseBundle\Model\Course\Course"
+                inversed-by="translations"
+        />
+    </entity>
+</doctrine-mapping>

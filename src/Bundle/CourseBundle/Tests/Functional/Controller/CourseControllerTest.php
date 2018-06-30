@@ -2,8 +2,8 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\Tests\Functional\Controller;
 
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 use Sprungbrett\Bundle\CourseBundle\Tests\Functional\Traits\CourseTrait;
-use Sprungbrett\Component\Course\Model\CourseInterface;
 use Sulu\Bundle\TestBundle\Testing\SuluTestCase;
 use Symfony\Component\Workflow\Workflow;
 
@@ -55,6 +55,28 @@ class CourseControllerTest extends SuluTestCase
         $this->assertEquals($course->getId(), $result['id']);
         $this->assertEquals('Sprungbrett', $result['title']);
         $this->assertEquals('Sprungbrett is awesome', $result['description']);
+        $this->assertEquals('publish', $result['transitions'][0]['name']);
+    }
+
+    public function testGetPublished()
+    {
+        $course = $this->createCourse();
+        $this->publish($course);
+
+        $client = $this->createAuthenticatedClient();
+        $client->request(
+            'GET',
+            '/api/courses/' . $course->getId() . '?locale=en'
+        );
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $result = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertEquals($course->getId(), $result['id']);
+        $this->assertEquals('Sprungbrett', $result['title']);
+        $this->assertEquals('Sprungbrett is awesome', $result['description']);
+        $this->assertEquals('unpublish', $result['transitions'][0]['name']);
     }
 
     public function testPost()
