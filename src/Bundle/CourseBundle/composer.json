@@ -24,20 +24,25 @@
     "require": {
         "php": "^7.1.3",
 
+        "doctrine/common": "^2.6",
         "doctrine/orm": "^2.6",
         "friendsofsymfony/rest-bundle": "^2.3",
         "jackalope/jackalope-doctrine-dbal": "^1.2.5",
         "jms/serializer-bundle": "^2.4",
         "league/tactician-bundle": "^1.1",
-        "sprungbrett/course": "^1.0@dev",
+        "sprungbrett/content": "^1.0@dev",
         "sprungbrett/event-collector": "^1.0@dev",
         "sprungbrett/infrastructure-bundle": "^1.0@dev",
+        "sprungbrett/payload": "^1.0@dev",
+        "sprungbrett/translation": "^1.0@dev",
         "sulu/sulu": "^2.0@dev",
         "symfony/config": "^3.4",
         "symfony/dependency-injection": "^3.4",
+        "symfony/event-dispatcher": "^3.4",
         "symfony/framework-bundle": "^3.4",
         "symfony/http-foundation": "^3.4",
-        "symfony/http-kernel": "^3.4"
+        "symfony/http-kernel": "^3.4",
+        "symfony/workflow": "^3.4"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.12",

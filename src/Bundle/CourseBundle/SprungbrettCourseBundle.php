@@ -3,8 +3,8 @@
 namespace Sprungbrett\Bundle\CourseBundle;
 
 use Sprungbrett\Bundle\CourseBundle\DependencyInjection\CompilerPass\SetDefaultTypeCompilerPass;
-use Sprungbrett\Component\Course\Model\CourseInterface;
-use Sprungbrett\Component\Course\Model\CourseTranslationInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseTranslationInterface;
 use Sulu\Bundle\PersistenceBundle\PersistenceBundleTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;

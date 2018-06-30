@@ -6,7 +6,8 @@ use JMS\Serializer\EventDispatcher\Events;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\JsonSerializationVisitor;
-use Sprungbrett\Bundle\CourseBundle\Entity\Course;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Course;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 use Symfony\Component\Workflow\Workflow;
 
 class CourseSerializeSubscriber implements EventSubscriberInterface
@@ -36,7 +37,7 @@ class CourseSerializeSubscriber implements EventSubscriberInterface
     public function onSerialize(ObjectEvent $event): void
     {
         $subject = $event->getObject();
-        if (!$subject instanceof Course) {
+        if (!$subject instanceof CourseInterface) {
             return;
         }
 
