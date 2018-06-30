@@ -100,10 +100,31 @@ class SprungbrettCourseExtension extends Extension implements PrependExtensionIn
             'sulu_route',
             [
                 'mappings' => [
-                    Course::class => [
+                    Course::class => [ // TODO extensible class?
                         'generator' => 'schema',
                         'options' => [
                             'route_schema' => '/{object.getTitle()}',
+                        ],
+                    ],
+                ],
+            ]
+        );
+
+        if (!$container->hasExtension('sulu_core')) {
+            throw new \RuntimeException('Missing SuluCoreBundle.');
+        }
+
+        $container->prependExtensionConfig(
+            'sulu_core',
+            [
+                'content' => [
+                    'structure' => [
+                        'resources' => [
+                            'course_contents' => [ // FIXME in sulu
+                                'datagrid' => Course::class, // TODO extensible class?
+                                'types' => ['course'],
+                                'endpoint' => 'sprungbrett.get_courses',
+                            ],
                         ],
                     ],
                 ],

@@ -3,6 +3,7 @@
 namespace Sprungbrett\Bundle\CourseBundle\Entity;
 
 use JMS\Serializer\Annotation as Serializer;
+use Sprungbrett\Component\Content\Model\ContentInterface;
 use Sprungbrett\Component\Course\Model\CourseTranslation as ComponentCourseTranslation;
 use Sprungbrett\Component\Translation\Model\Localization;
 use Sulu\Component\Persistence\Model\AuditableInterface;
@@ -20,9 +21,9 @@ class CourseTranslation extends ComponentCourseTranslation implements AuditableI
      */
     private $course;
 
-    public function __construct(string $id, Localization $localization, Course $course)
+    public function __construct(string $id, Localization $localization, ContentInterface $content, Course $course)
     {
-        parent::__construct($id, $localization);
+        parent::__construct($id, $localization, $content);
 
         $this->course = $course;
     }

@@ -32,6 +32,8 @@ class ModifyCourseHandler
     {
         $course = $this->courseRepository->findById($command->getId(), $command->getLocalization());
         $this->map($course, $command);
+        $course->setStructureType($command->getStructureType());
+        $course->setContentData($command->getContentData());
 
         $this->eventCollector->push(
             CourseModifiedEvent::COMPONENT_NAME,

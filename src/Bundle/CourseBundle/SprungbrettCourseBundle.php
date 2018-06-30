@@ -2,6 +2,7 @@
 
 namespace Sprungbrett\Bundle\CourseBundle;
 
+use Sprungbrett\Bundle\CourseBundle\DependencyInjection\CompilerPass\SetDefaultTypeCompilerPass;
 use Sprungbrett\Component\Course\Model\CourseInterface;
 use Sprungbrett\Component\Course\Model\CourseTranslationInterface;
 use Sulu\Bundle\PersistenceBundle\PersistenceBundleTrait;
@@ -14,6 +15,8 @@ class SprungbrettCourseBundle extends Bundle
 
     public function build(ContainerBuilder $container)
     {
+        $container->addCompilerPass(new SetDefaultTypeCompilerPass());
+
         $this->buildPersistence(
             [
                 CourseInterface::class => 'sulu.model.course.class',

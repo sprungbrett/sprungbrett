@@ -10,6 +10,7 @@
             <argument type="service" id="Sprungbrett\Component\Course\Model\CourseRepositoryInterface"/>
             <argument type="service" id="workflow.course"/>
             <argument type="service" id="Sprungbrett\Component\EventCollector\EventCollector"/>
+            <argument type="string">%sprungbrett_course.default_type%</argument>
 
             <tag name="tactician.handler" typehints="true"/>
         </service>

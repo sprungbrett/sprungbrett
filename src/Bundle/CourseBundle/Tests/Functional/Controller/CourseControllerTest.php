@@ -114,6 +114,10 @@ class CourseControllerTest extends SuluTestCase
             [
                 'title' => 'Sprungbrett',
                 'description' => 'Sprungbrett is awesome',
+                'template' => 'default',
+                'content' => [
+                    'title' => 'Sprungbrett is awesome',
+                ],
             ]
         );
 
@@ -124,6 +128,8 @@ class CourseControllerTest extends SuluTestCase
         $this->assertEquals($course->getId(), $result['id']);
         $this->assertEquals('Sprungbrett', $result['title']);
         $this->assertEquals('Sprungbrett is awesome', $result['description']);
+        $this->assertEquals('default', $result['template']);
+        $this->assertEquals(['title' => 'Sprungbrett is awesome'], $result['content']);
         $this->assertEquals(CourseInterface::WORKFLOW_STAGE_TEST, $result['workflowStage']);
         $this->assertArrayNotHasKey('route', $result);
     }
@@ -139,6 +145,10 @@ class CourseControllerTest extends SuluTestCase
             [
                 'title' => 'Sprungbrett',
                 'description' => 'Sprungbrett is awesome',
+                'template' => 'default',
+                'content' => [
+                    'title' => 'Sprungbrett is awesome',
+                ],
             ]
         );
 
@@ -150,6 +160,8 @@ class CourseControllerTest extends SuluTestCase
         $this->assertEquals('Sprungbrett', $result['title']);
         $this->assertEquals('Sprungbrett is awesome', $result['description']);
         $this->assertEquals('/sprungbrett', $result['route']);
+        $this->assertEquals('default', $result['template']);
+        $this->assertEquals(['title' => 'Sprungbrett is awesome'], $result['content']);
         $this->assertEquals(CourseInterface::WORKFLOW_STAGE_PUBLISHED, $result['workflowStage']);
     }
 
@@ -165,6 +177,10 @@ class CourseControllerTest extends SuluTestCase
             [
                 'title' => 'Sprungbrett',
                 'description' => 'Sprungbrett is awesome',
+                'template' => 'default',
+                'content' => [
+                    'title' => 'Sprungbrett is awesome',
+                ],
             ]
         );
 
@@ -175,6 +191,8 @@ class CourseControllerTest extends SuluTestCase
         $this->assertEquals($course->getId(), $result['id']);
         $this->assertEquals('Sprungbrett', $result['title']);
         $this->assertEquals('Sprungbrett is awesome', $result['description']);
+        $this->assertEquals('default', $result['template']);
+        $this->assertEquals(['title' => 'Sprungbrett is awesome'], $result['content']);
         $this->assertEquals(CourseInterface::WORKFLOW_STAGE_TEST, $result['workflowStage']);
         $this->assertArrayNotHasKey('route', $result);
     }

@@ -13,6 +13,7 @@ use Sprungbrett\Component\Course\Model\Handler\FindCourseHandler;
 use Sprungbrett\Component\Course\Model\Handler\ModifyCourseHandler;
 use Sprungbrett\Component\Course\Model\Handler\RemoveCourseHandler;
 use Sulu\Bundle\AdminBundle\DependencyInjection\SuluAdminExtension;
+use Sulu\Bundle\CoreBundle\DependencyInjection\SuluCoreExtension;
 use Sulu\Bundle\RouteBundle\DependencyInjection\SuluRouteExtension;
 use Sulu\Component\HttpKernel\SuluKernel;
 use Symfony\Bundle\FrameworkBundle\DependencyInjection\FrameworkExtension;
@@ -32,6 +33,29 @@ class SprungbrettCourseExtensionTest extends AbstractExtensionTestCase
             ]
         );
 
+        $this->container->prependExtensionConfig(
+            'sulu_core',
+            [
+                'content' => [
+                    'structure' => [
+                        'default_type' => [
+                            'snippet' => 'default',
+                        ],
+                        'paths' => [],
+                    ],
+                ],
+            ]
+        );
+
+        $this->container->prependExtensionConfig(
+            'jms_serializer',
+            [
+                'metadata' => [
+                    'debug' => false,
+                ],
+            ]
+        );
+
         $this->container->setParameter('sulu.context', SuluKernel::CONTEXT_ADMIN);
         $this->container->setParameter('kernel.debug', false);
         $this->container->setParameter('kernel.bundles', []);
@@ -45,9 +69,10 @@ class SprungbrettCourseExtensionTest extends AbstractExtensionTestCase
     {
         return [
             new FrameworkExtension(),
+            new JMSSerializerExtension(),
+            new SuluCoreExtension(),
             new SuluAdminExtension(),
             new SuluRouteExtension(),
-            new JMSSerializerExtension(),
             new SprungbrettCourseExtension(),
         ];
     }
@@ -66,6 +91,10 @@ class SprungbrettCourseExtensionTest extends AbstractExtensionTestCase
         $config = $this->container->getExtensionConfig('sulu_route');
         $this->assertCount(1, $config);
         $this->assertArrayHasKey('mappings', $config[0]);
+
+        $config = $this->container->getExtensionConfig('sulu_core');
+        $this->assertCount(3, $config);
+        $this->assertArrayHasKey('content', $config[0]);
     }
 
     public function testPrependedConfigWebsite()

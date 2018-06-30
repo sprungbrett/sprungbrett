@@ -56,7 +56,28 @@ class SprungbrettCourseAdmin extends Admin
 
     public function getRoutes(): array
     {
-        return $this->createBasicRoutes('courses', '/courses');
+        // FIXME remove as soon as https://github.com/sulu/sulu/issues/3922 is fixed
+        $locales = array_values(
+            array_map(
+                function (Localization $localization) {
+                    return $localization->getLocale();
+                },
+                $this->webspaceManager->getAllLocalizations()
+            )
+        );
+
+        return array_merge(
+            $this->createBasicRoutes($locales, 'courses', '/courses'),
+            [
+                (new Route('sprungbrett.course.courses_edit_form.content', '/content', 'sprungbrett.course_form'))
+                    ->addOption('tabTitle', 'sprungbrett.content')
+                    ->addOption('backRoute', 'sprungbrett.course.courses_datagrid')
+                    ->addOption('resourceKey', 'course_contents')
+                    ->addOption('content', true)
+                    ->addOption('locales', $locales)
+                    ->setParent('sprungbrett.course.courses_edit_form'),
+            ]
+        );
     }
 
     public function getSecurityContexts()
@@ -78,18 +99,8 @@ class SprungbrettCourseAdmin extends Admin
     /**
      * @return Route[]
      */
-    private function createBasicRoutes(string $resourceKey, string $route): array
+    private function createBasicRoutes(array $locales, string $resourceKey, string $route): array
     {
-        // FIXME remove as soon as https://github.com/sulu/sulu/issues/3922 is fixed
-        $locales = array_values(
-            array_map(
-                function (Localization $localization) {
-                    return $localization->getLocale();
-                },
-                $this->webspaceManager->getAllLocalizations()
-            )
-        );
-
         return [
             (new Route(sprintf('sprungbrett.course.%s_datagrid', $resourceKey), $route . '/:locale', 'sulu_admin.datagrid'))
                 ->addOption('title', sprintf('sprungbrett.%s', $resourceKey))

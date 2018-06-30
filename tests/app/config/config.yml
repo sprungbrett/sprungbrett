@@ -11,3 +11,13 @@ doctrine:
                 dir: '%kernel.root_dir%/../../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity'
                 alias: GedmoTree
                 is_bundle: false
+
+sulu_core:
+    content:
+        structure:
+            default_type:
+                course: "default"
+            paths:
+                course:
+                    path: "%kernel.root_dir%/app/Resources/courses"
+                    type: "course"

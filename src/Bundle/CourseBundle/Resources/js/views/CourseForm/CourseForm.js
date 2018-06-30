@@ -1,46 +1,99 @@
 // @flow
 import React from 'react';
-import {action, observable} from 'mobx';
-import {observer} from 'mobx-react';
-import {Form, FormStore, withToolbar} from 'sulu-admin-bundle/containers';
+import {action, computed, isObservableArray, observable} from 'mobx';
+import {Form as FormContainer, FormStore, withToolbar} from 'sulu-admin-bundle/containers';
 import type {ViewProps} from 'sulu-admin-bundle/containers';
 import {translate} from 'sulu-admin-bundle/utils';
 import {ResourceStore} from 'sulu-admin-bundle/stores';
+import ContentStore from './stores/ContentStore';
 import courseFormStyles from './courseForm.scss';
 
 type Props = ViewProps & {
     resourceStore: ResourceStore,
 };
 
-@observer
-class CourseForm extends React.Component<Props> {
+class CourseForm extends React.PureComponent<Props> {
     resourceStore: ResourceStore;
     formStore: FormStore;
-    form: ?Form;
+    form: ?FormContainer;
     @observable errors = [];
     showSuccess = observable.box(false);
+
+    @computed get hasOwnResourceStore() {
+        const {
+            resourceStore,
+            route: {
+                options: {
+                    resourceKey,
+                },
+            },
+        } = this.props;
+
+        return resourceKey && resourceStore.resourceKey !== resourceKey;
+    }
 
     constructor(props: Props) {
         super(props);
 
         const {resourceStore, router} = this.props;
+        const {
+            attributes: {
+                id,
+            },
+            route: {
+                options: {
+                    idQueryParameter,
+                    resourceKey,
+                    locales,
+                    content,
+                },
+            },
+        } = router;
 
         if (!resourceStore) {
             throw new Error(
-                'The view "Form" needs a resourceStore to work properly.'
+                'The view "CourseForm" needs a resourceStore to work properly.'
                 + 'Did you maybe forget to make this view a child of a "ResourceTabs" view?'
             );
         }
 
-        this.formStore = new FormStore(resourceStore);
+        if (this.hasOwnResourceStore) {
+            let locale = resourceStore.locale;
+            if ((typeof locales === 'boolean' && locales === true)) {
+                locale = observable.box();
+            }
 
-        if (resourceStore.locale) {
-            router.bind('locale', resourceStore.locale);
+            if ((Array.isArray(locales) || isObservableArray(locales)) && locales.length > 0) {
+                const parentLocale = resourceStore.locale ? resourceStore.locale.get() : undefined;
+                if (locales.includes(parentLocale)) {
+                    locale = observable.box(parentLocale);
+                } else {
+                    locale = observable.box();
+                }
+            }
+
+            this.resourceStore = idQueryParameter
+                ? new ResourceStore(resourceKey, id, {locale: locale}, {}, idQueryParameter)
+                : new ResourceStore(resourceKey, id, {locale: locale});
+        } else {
+            this.resourceStore = resourceStore;
+        }
+
+        const formResourceStore = content ? new ContentStore(this.resourceStore) : this.resourceStore;
+        // $FlowFixMe
+        this.formStore = new FormStore(formResourceStore);
+
+        if (this.resourceStore.locale) {
+            router.bind('locale', this.resourceStore.locale);
         }
     }
 
     componentWillUnmount() {
         this.formStore.destroy();
+
+        if (this.hasOwnResourceStore) {
+            this.resourceStore.destroy();
+        }
     }
 
     @action showSuccessSnackbar = () => {
@@ -51,6 +104,9 @@ class CourseForm extends React.Component<Props> {
         const {resourceStore, router} = this.props;
 
         const {
+            attributes: {
+                parentId,
+            },
             route: {
                 options: {
                     editRoute,
@@ -62,7 +118,7 @@ class CourseForm extends React.Component<Props> {
             resourceStore.destroy();
         }
 
-        return this.formStore.save({action: actionParameter})
+        return this.formStore.save({parentid: parentId, action: actionParameter})
             .then((response) => {
                 this.showSuccessSnackbar();
                 if (editRoute) {
@@ -85,7 +141,7 @@ class CourseForm extends React.Component<Props> {
     render() {
         return (
             <div className={courseFormStyles.form}>
-                <Form
+                <FormContainer
                     ref={this.setFormRef}
                     store={this.formStore}
                     onSubmit={this.handleSubmit}
@@ -96,9 +152,10 @@ class CourseForm extends React.Component<Props> {
 }
 
 export default withToolbar(CourseForm, function() {
-    const {resourceStore, router} = this.props;
+    const {router} = this.props;
     const {backRoute, locales} = router.route.options;
-    const {errors, formStore, showSuccess} = this;
+    const formTypes = this.formStore.types;
+    const {errors, resourceStore, formStore, showSuccess} = this;
 
     const backButton = backRoute
         ? {
@@ -138,7 +195,7 @@ export default withToolbar(CourseForm, function() {
                         this.form.submit('draft');
                     },
                 },
-                ...(formStore.data.transitions || []).map((transition) => {
+                ...(resourceStore.data.transitions || []).map((transition) => {
                     return {
                         label: translate('sprungbrett.save_' + transition.name),
                         onClick: () => {
@@ -151,10 +208,10 @@ export default withToolbar(CourseForm, function() {
     ];
 
     const icons = [
-        formStore.data.workflowStage === 'published' ? 'fa-circle' : 'fa-circle-o',
+        resourceStore.data.workflowStage === 'published' ? 'fa-circle' : 'fa-circle-o',
     ];
 
-    if (formStore.typesLoading || Object.keys(formStore.types).length > 0) {
+    if (formStore.typesLoading || Object.keys(formTypes).length > 0) {
         items.push({
             type: 'select',
             icon: 'fa-paint-brush',
@@ -163,9 +220,9 @@ export default withToolbar(CourseForm, function() {
             },
             loading: formStore.typesLoading,
             value: formStore.type,
-            options: Object.keys(formStore.types).map((key) => ({
-                value: formStore.types[key].key,
-                label: formStore.types[key].title,
+            options: Object.keys(formTypes).map((key) => ({
+                value: formTypes[key].key,
+                label: formTypes[key].title,
             })),
         });
     }

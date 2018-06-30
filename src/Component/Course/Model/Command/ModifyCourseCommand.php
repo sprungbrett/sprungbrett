@@ -20,4 +20,14 @@ class ModifyCourseCommand extends MappingCourseCommand
     {
         return $this->id;
     }
+
+    public function getStructureType(): string
+    {
+        return $this->getStringValue('template');
+    }
+
+    public function getContentData(): array
+    {
+        return $this->getArrayValueWithDefault('content');
+    }
 }

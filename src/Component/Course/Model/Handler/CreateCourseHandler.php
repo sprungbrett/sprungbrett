@@ -19,14 +19,21 @@ class CreateCourseHandler
      */
     private $courseRepository;
 
+    /**
+     * @var string
+     */
+    private $defaultStructureType;
+
     public function __construct(
         CourseRepositoryInterface $courseRepository,
         Workflow $workflow,
-        EventCollector $eventCollector
+        EventCollector $eventCollector,
+        string $defaultStructureType
     ) {
         $this->initializeTransit($workflow, $eventCollector);
 
         $this->courseRepository = $courseRepository;
+        $this->defaultStructureType = $defaultStructureType;
     }
 
     public function handle(CreateCourseCommand $command): CourseInterface
@@ -35,6 +42,7 @@ class CreateCourseHandler
         $this->transition(CourseInterface::TRANSITION_CREATE, new CourseCreatedEvent($course), $course);
 
         $this->map($course, $command);
+        $course->setStructureType($this->defaultStructureType);
 
         return $course;
     }
