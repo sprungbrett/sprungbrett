@@ -25,6 +25,7 @@
         "php": "^7.1",
 
         "doctrine/common": "^2.6",
+        "sprungbrett/content": "^1.0@dev",
         "sprungbrett/event-collector": "^1.0@dev",
         "sprungbrett/payload": "^1.0@dev",
         "sprungbrett/translation": "^1.0@dev",
