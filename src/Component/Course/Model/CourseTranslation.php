@@ -2,12 +2,15 @@
 
 namespace Sprungbrett\Component\Course\Model;
 
+use Sprungbrett\Component\Content\Model\ContentableTrait;
+use Sprungbrett\Component\Content\Model\ContentInterface;
 use Sprungbrett\Component\Translation\Model\Localization;
 use Sprungbrett\Component\Translation\Model\TranslationTrait;
 
 class CourseTranslation implements CourseTranslationInterface
 {
     use TranslationTrait;
+    use ContentableTrait;
 
     /**
      * @var string
@@ -29,9 +32,10 @@ class CourseTranslation implements CourseTranslationInterface
      */
     protected $workflowStage = CourseInterface::WORKFLOW_STAGE_NEW;
 
-    public function __construct(string $id, Localization $localization)
+    public function __construct(string $id, Localization $localization, ContentInterface $content)
     {
         $this->initializeTranslation($localization);
+        $this->initializeContent($content);
 
         $this->id = $id;
     }

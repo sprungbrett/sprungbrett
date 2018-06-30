@@ -14,12 +14,14 @@ trait CourseTrait
     public function createCourse(
         string $title = 'Sprungbrett',
         string $description = 'Sprungbrett is awesome',
-        string $locale = 'en'
+        string $locale = 'en',
+        string $structureType = 'default'
     ): Course {
         $course = new Course(Uuid::uuid4()->toString());
         $course->setCurrentLocalization(new Localization($locale));
         $course->setTitle($title);
         $course->setDescription($description);
+        $course->setStructureType($structureType);
 
         $this->getWorkflow()->apply($course, CourseInterface::TRANSITION_CREATE);
 

@@ -50,6 +50,13 @@ class SprungbrettInfrastructureExtension extends Extension implements PrependExt
             [
                 'orm' => [
                     'mappings' => [
+                        'Content' => [
+                            'type' => 'xml',
+                            'alias' => 'Content',
+                            'prefix' => 'Sprungbrett\\Component\\Content\\Model',
+                            'dir' => __DIR__ . '/../Resources/content/doctrine',
+                            'is_bundle' => false,
+                        ],
                         'Translation' => [
                             'type' => 'xml',
                             'alias' => 'Translation',

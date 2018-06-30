@@ -3,6 +3,7 @@
 namespace Sprungbrett\Bundle\CourseBundle\Entity;
 
 use JMS\Serializer\Annotation as Serializer;
+use Sprungbrett\Component\Content\Model\Content;
 use Sprungbrett\Component\Course\Model\Course as ComponentCourse;
 use Sprungbrett\Component\Translation\Model\Localization;
 use Sprungbrett\Component\Translation\Model\TranslationInterface;
@@ -53,6 +54,6 @@ class Course extends ComponentCourse implements AuditableInterface, RoutableInte
 
     protected function createTranslation(Localization $localization): TranslationInterface
     {
-        return new CourseTranslation($this->getId(), $localization, $this);
+        return new CourseTranslation($this->getId(), $localization, new Content(), $this);
     }
 }

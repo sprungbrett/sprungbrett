@@ -3,6 +3,7 @@
 namespace Sprungbrett\Component\Course\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sprungbrett\Component\Content\Model\Content;
 use Sprungbrett\Component\Translation\Model\Exception\MissingLocalizationException;
 use Sprungbrett\Component\Translation\Model\Localization;
 use Sprungbrett\Component\Translation\Model\TranslatableTrait;
@@ -65,6 +66,30 @@ class Course implements CourseInterface
         return $this;
     }
 
+    public function getStructureType(?Localization $localization = null): string
+    {
+        return $this->getTranslation($localization)->getStructureType();
+    }
+
+    public function setStructureType(string $structureType, ?Localization $localization = null): CourseInterface
+    {
+        $this->getTranslation($localization)->setStructureType($structureType);
+
+        return $this;
+    }
+
+    public function getContentData(?Localization $localization = null): array
+    {
+        return $this->getTranslation($localization)->getContentData();
+    }
+
+    public function setContentData(array $contentData, ?Localization $localization = null): CourseInterface
+    {
+        $this->getTranslation($localization)->setContentData($contentData);
+
+        return $this;
+    }
+
     /**
      * @throws MissingLocalizationException
      */
@@ -78,6 +103,6 @@ class Course implements CourseInterface
 
     protected function createTranslation(Localization $localization): TranslationInterface
     {
-        return new CourseTranslation($this->id, $localization);
+        return new CourseTranslation($this->id, $localization, new Content());
     }
 }

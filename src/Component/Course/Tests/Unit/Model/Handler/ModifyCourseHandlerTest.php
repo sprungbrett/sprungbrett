@@ -26,12 +26,16 @@ class ModifyCourseHandlerTest extends TestCase
         $repository->findById('123-123-123', $localization->reveal())->willReturn($course->reveal());
         $course->setTitle('Sprungbrett')->shouldBeCalled();
         $course->setDescription('Sprungbrett is awesome')->shouldBeCalled();
+        $course->setStructureType('default')->shouldBeCalled();
+        $course->setContentData(['title' => 'Sprungbrett is awesome'])->shouldBeCalled();
 
         $command = $this->prophesize(ModifyCourseCommand::class);
         $command->getId()->willReturn('123-123-123');
         $command->getLocalization()->willReturn($localization->reveal());
         $command->getTitle()->willReturn('Sprungbrett');
         $command->getDescription()->willReturn('Sprungbrett is awesome');
+        $command->getStructureType()->willReturn('default');
+        $command->getContentData()->willReturn(['title' => 'Sprungbrett is awesome']);
 
         $eventCollector->push(
             CourseModifiedEvent::COMPONENT_NAME,

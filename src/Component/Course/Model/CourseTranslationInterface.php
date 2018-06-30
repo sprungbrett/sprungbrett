@@ -2,9 +2,10 @@
 
 namespace Sprungbrett\Component\Course\Model;
 
+use Sprungbrett\Component\Content\Model\ContentableInterface;
 use Sprungbrett\Component\Translation\Model\TranslationInterface;
 
-interface CourseTranslationInterface extends TranslationInterface
+interface CourseTranslationInterface extends TranslationInterface, ContentableInterface
 {
     public function getId(): string;
 

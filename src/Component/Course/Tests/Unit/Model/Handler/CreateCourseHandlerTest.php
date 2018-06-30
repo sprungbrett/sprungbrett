@@ -22,7 +22,12 @@ class CreateCourseHandlerTest extends TestCase
         $repository = $this->prophesize(CourseRepositoryInterface::class);
         $workflow = $this->prophesize(Workflow::class);
         $eventCollector = $this->prophesize(EventCollector::class);
-        $handler = new CreateCourseHandler($repository->reveal(), $workflow->reveal(), $eventCollector->reveal());
+        $handler = new CreateCourseHandler(
+            $repository->reveal(),
+            $workflow->reveal(),
+            $eventCollector->reveal(),
+            'default'
+        );
 
         $localization = $this->prophesize(Localization::class);
 
@@ -30,6 +35,7 @@ class CreateCourseHandlerTest extends TestCase
         $repository->create($localization->reveal())->willReturn($course->reveal());
         $course->setTitle('Sprungbrett')->shouldBeCalled();
         $course->setDescription('Sprungbrett is awesome')->shouldBeCalled();
+        $course->setStructureType('default')->shouldBeCalled();
 
         $command = $this->prophesize(CreateCourseCommand::class);
         $command->getLocalization()->willReturn($localization->reveal());

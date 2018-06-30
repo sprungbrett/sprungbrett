@@ -30,4 +30,12 @@ interface CourseInterface extends TranslatableInterface
     public function getDescription(): ?string;
 
     public function setDescription(string $description): self;
+
+    public function getStructureType(): string;
+
+    public function setStructureType(string $structureType): self;
+
+    public function getContentData(): array;
+
+    public function setContentData(array $contentData): self;
 }

@@ -20,7 +20,11 @@ sulu_core:
         structure:
             default_type:
                 snippet: "default"
+                course: "default"
             paths:
+                course:
+                    path: "%kernel.project_dir%/config/sulu/templates/courses"
+                    type: "course"
                 homepage:
                     path: "%kernel.project_dir%/config/sulu/templates/pages"
                     type: "home"
