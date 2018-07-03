@@ -179,6 +179,10 @@ class SprungbrettCourseExtension extends Extension implements PrependExtensionIn
                         'datagrid' => '%sulu.model.course.class%',
                         'endpoint' => 'sprungbrett.get_courses',
                     ],
+                    'trainers' => [
+                        'form' => ['@SprungbrettCourseBundle/Resources/config/forms/Trainer.xml'],
+                        'endpoint' => 'sprungbrett.get_trainers',
+                    ],
                 ],
             ]
         );

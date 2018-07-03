@@ -141,6 +141,6 @@ class Course implements CourseInterface, AuditableInterface, RoutableInterface
 
     protected function createTranslation(Localization $localization): TranslationInterface
     {
-        return new CourseTranslation($this->id, $localization, new Content(), $this);
+        return new CourseTranslation($this, $localization, new Content());
     }
 }

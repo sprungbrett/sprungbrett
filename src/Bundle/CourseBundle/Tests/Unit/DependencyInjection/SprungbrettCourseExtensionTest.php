@@ -9,7 +9,7 @@ use Sprungbrett\Bundle\CourseBundle\Admin\SprungbrettCourseAdmin;
 use Sprungbrett\Bundle\CourseBundle\Controller\CourseController;
 use Sprungbrett\Bundle\CourseBundle\DependencyInjection\SprungbrettCourseExtension;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\Handler\CreateCourseHandler;
-use Sprungbrett\Bundle\CourseBundle\Model\Course\Handler\FindCourseHandler;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Handler\FindCourseQueryHandler;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\Handler\ListCourseQueryHandler;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\Handler\ModifyCourseHandler;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\Handler\RemoveCourseHandler;
@@ -118,7 +118,7 @@ class SprungbrettCourseExtensionTest extends AbstractExtensionTestCase
         $this->assertTrue($this->container->has(CreateCourseHandler::class));
         $this->assertTrue($this->container->has(ModifyCourseHandler::class));
         $this->assertTrue($this->container->has(RemoveCourseHandler::class));
-        $this->assertTrue($this->container->has(FindCourseHandler::class));
+        $this->assertTrue($this->container->has(FindCourseQueryHandler::class));
         $this->assertTrue($this->container->has(ListCourseQueryHandler::class));
 
         $this->assertTrue($this->container->has(SprungbrettCourseAdmin::class));

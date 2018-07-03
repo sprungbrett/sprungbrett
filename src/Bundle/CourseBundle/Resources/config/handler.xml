@@ -6,6 +6,10 @@
                  alias="sulu.repository.course"
                  class="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface"/>
 
+        <service id="Sprungbrett\Bundle\CourseBundle\Model\Trainer\TrainerRepositoryInterface"
+                 alias="sulu.repository.trainer"
+                 class="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface"/>
+
         <service id="Sprungbrett\Bundle\CourseBundle\Model\Course\Handler\CreateCourseHandler">
             <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface"/>
             <argument type="service" id="workflow.course"/>
@@ -45,7 +49,7 @@
             <tag name="tactician.handler" typehints="true"/>
         </service>
 
-        <service id="Sprungbrett\Bundle\CourseBundle\Model\Course\Handler\FindCourseHandler">
+        <service id="Sprungbrett\Bundle\CourseBundle\Model\Course\Handler\FindCourseQueryHandler">
             <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface"/>
 
             <tag name="tactician.handler" typehints="true"/>
@@ -55,6 +59,19 @@
             <argument type="service" id="sulu_core.doctrine_list_builder_factory"/>
             <argument type="service" id="sulu_core.doctrine_rest_helper"/>
             <argument type="service" id="sulu_core.list_builder.field_descriptor_factory"/>
+
+            <tag name="tactician.handler" typehints="true"/>
+        </service>
+
+        <service id="Sprungbrett\Bundle\CourseBundle\Model\Trainer\Handler\ModifyTrainerHandler">
+            <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Trainer\TrainerRepositoryInterface"/>
+            <argument type="service" id="Sprungbrett\Component\EventCollector\EventCollector"/>
+
+            <tag name="tactician.handler" typehints="true"/>
+        </service>
+
+        <service id="Sprungbrett\Bundle\CourseBundle\Model\Trainer\Handler\FindTrainerQueryHandler">
+            <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Trainer\TrainerRepositoryInterface"/>
 
             <tag name="tactician.handler" typehints="true"/>
         </service>
