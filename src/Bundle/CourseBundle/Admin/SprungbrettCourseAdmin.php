@@ -13,7 +13,8 @@ use Sulu\Component\Webspace\Manager\WebspaceManagerInterface;
 
 class SprungbrettCourseAdmin extends Admin
 {
-    const SECURITY_CONTEXT = 'sprungbrett.course.course';
+    const COURSE_SECURITY_CONTEXT = 'sprungbrett.course.course';
+    const TRAINER_SECURITY_CONTEXT = 'sulu.contact.people';
 
     /**
      * @var WebspaceManagerInterface
@@ -39,7 +40,7 @@ class SprungbrettCourseAdmin extends Admin
         $module->setPosition(40);
         $module->setIcon('fa-graduation-cap');
 
-        if ($this->securityChecker->hasPermission(self::SECURITY_CONTEXT, PermissionTypes::VIEW)) {
+        if ($this->securityChecker->hasPermission(self::COURSE_SECURITY_CONTEXT, PermissionTypes::VIEW)) {
             $events = new NavigationItem('spruntbrett.course');
             $events->setPosition(10);
             $events->setMainRoute('sprungbrett.course.courses_datagrid');
@@ -76,6 +77,13 @@ class SprungbrettCourseAdmin extends Admin
                     ->addOption('content', true)
                     ->addOption('locales', $locales)
                     ->setParent('sprungbrett.course.courses_edit_form'),
+                (new Route('sprungbrett.course.contact_edit_form.content', '/trainer', 'sulu_admin.form'))
+                    ->addOption('tabTitle', 'sprungbrett.trainer')
+                    ->addOption('backRoute', 'sulu_contact.contacts_datagrid')
+                    ->addOption('resourceKey', 'trainers')
+                    ->addOption('locales', $locales)
+                    ->addAttributeDefault('locale', $locales ? $locales[0] : '')
+                    ->setParent('sulu_contact.contact_edit_form'),
             ]
         );
     }
@@ -85,7 +93,7 @@ class SprungbrettCourseAdmin extends Admin
         return [
             'Sulu' => [
                 'Sprungbrett' => [
-                    self::SECURITY_CONTEXT => [
+                    self::COURSE_SECURITY_CONTEXT => [
                         PermissionTypes::VIEW,
                         PermissionTypes::ADD,
                         PermissionTypes::EDIT,

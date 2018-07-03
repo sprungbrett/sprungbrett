@@ -10,34 +10,13 @@ use Sprungbrett\Component\Translation\Model\Localization;
 
 class CourseTranslationTest extends TestCase
 {
-    public function testGetId()
-    {
-        $localization = $this->prophesize(Localization::class);
-        $content = $this->prophesize(ContentInterface::class);
-        $course = $this->prophesize(CourseInterface::class);
-
-        $translation = new CourseTranslation(
-            '123-123-123',
-            $localization->reveal(),
-            $content->reveal(),
-            $course->reveal()
-        );
-
-        $this->assertEquals('123-123-123', $translation->getId());
-    }
-
     public function testGetLocalization()
     {
         $localization = $this->prophesize(Localization::class);
         $content = $this->prophesize(ContentInterface::class);
         $course = $this->prophesize(CourseInterface::class);
 
-        $translation = new CourseTranslation(
-            '123-123-123',
-            $localization->reveal(),
-            $content->reveal(),
-            $course->reveal()
-        );
+        $translation = new CourseTranslation($course->reveal(), $localization->reveal(), $content->reveal());
 
         $this->assertEquals($localization->reveal(), $translation->getLocalization());
     }
@@ -48,12 +27,7 @@ class CourseTranslationTest extends TestCase
         $content = $this->prophesize(ContentInterface::class);
         $course = $this->prophesize(CourseInterface::class);
 
-        $translation = new CourseTranslation(
-            '123-123-123',
-            $localization->reveal(),
-            $content->reveal(),
-            $course->reveal()
-        );
+        $translation = new CourseTranslation($course->reveal(), $localization->reveal(), $content->reveal());
 
         $this->assertEquals(CourseInterface::WORKFLOW_STAGE_NEW, $translation->getWorkflowStage());
     }
@@ -64,12 +38,7 @@ class CourseTranslationTest extends TestCase
         $content = $this->prophesize(ContentInterface::class);
         $course = $this->prophesize(CourseInterface::class);
 
-        $translation = new CourseTranslation(
-            '123-123-123',
-            $localization->reveal(),
-            $content->reveal(),
-            $course->reveal()
-        );
+        $translation = new CourseTranslation($course->reveal(), $localization->reveal(), $content->reveal());
 
         $translation->setWorkflowStage(CourseInterface::WORKFLOW_STAGE_PUBLISHED);
         $this->assertEquals(CourseInterface::WORKFLOW_STAGE_PUBLISHED, $translation->getWorkflowStage());
@@ -82,12 +51,7 @@ class CourseTranslationTest extends TestCase
         $content = $this->prophesize(ContentInterface::class);
         $course = $this->prophesize(CourseInterface::class);
 
-        $translation = new CourseTranslation(
-            '123-123-123',
-            $localization->reveal(),
-            $content->reveal(),
-            $course->reveal()
-        );
+        $translation = new CourseTranslation($course->reveal(), $localization->reveal(), $content->reveal());
 
         $this->assertEquals('de_de', $translation->getLocale());
     }
@@ -98,12 +62,7 @@ class CourseTranslationTest extends TestCase
         $content = $this->prophesize(ContentInterface::class);
         $course = $this->prophesize(CourseInterface::class);
 
-        $translation = new CourseTranslation(
-            '123-123-123',
-            $localization->reveal(),
-            $content->reveal(),
-            $course->reveal()
-        );
+        $translation = new CourseTranslation($course->reveal(), $localization->reveal(), $content->reveal());
         $translation->setTitle('Sprungbrett is awesome');
 
         $this->assertEquals('Sprungbrett is awesome', $translation->getTitle());

@@ -141,7 +141,7 @@ class CourseController implements SecuredControllerInterface, ClassResourceInter
 
     public function getSecurityContext()
     {
-        return SprungbrettCourseAdmin::SECURITY_CONTEXT;
+        return SprungbrettCourseAdmin::COURSE_SECURITY_CONTEXT;
     }
 
     public function getLocale(Request $request): string

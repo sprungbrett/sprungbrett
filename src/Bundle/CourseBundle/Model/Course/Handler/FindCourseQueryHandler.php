@@ -6,7 +6,7 @@ use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\Query\FindCourseQuery;
 
-class FindCourseHandler
+class FindCourseQueryHandler
 {
     /**
      * @var CourseRepositoryInterface

@@ -3,15 +3,13 @@
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <!-- FIXME should be mapped-super-class but sulu cannot handle embedded-class -->
-    <entity name="Sprungbrett\Bundle\CourseBundle\Model\Course\Course" table="sp_courses">
-        <id name="id" type="guid">
-            <generator strategy="NONE"/>
-        </id>
+    <entity name="Sprungbrett\Bundle\CourseBundle\Model\Trainer\Trainer" table="sp_trainers">
+        <id name="contact" type="int" association-key="true"/>
 
         <one-to-many
                 field="translations"
-                target-entity="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseTranslation"
-                mapped-by="course"
+                target-entity="Sprungbrett\Bundle\CourseBundle\Model\Trainer\TrainerTranslation"
+                mapped-by="trainer"
         >
             <cascade>
                 <cascade-persist/>
@@ -19,12 +17,12 @@
             </cascade>
         </one-to-many>
 
-        <one-to-one field="route" target-entity="Sulu\Bundle\RouteBundle\Model\RouteInterface" orphan-removal="true">
+        <one-to-one field="contact" target-entity="Sulu\Bundle\ContactBundle\Entity\ContactInterface">
             <cascade>
                 <cascade-all/>
             </cascade>
 
-            <join-column on-delete="SET NULL"/>
+            <join-column on-delete="CASCADE"/>
         </one-to-one>
     </entity>
 </doctrine-mapping>

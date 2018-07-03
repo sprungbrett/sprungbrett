@@ -16,11 +16,6 @@ class CourseTranslation implements CourseTranslationInterface, AuditableInterfac
     use TranslationTrait;
 
     /**
-     * @var string
-     */
-    protected $id;
-
-    /**
      * @var CourseInterface
      */
     protected $course;
@@ -40,22 +35,12 @@ class CourseTranslation implements CourseTranslationInterface, AuditableInterfac
      */
     protected $workflowStage = CourseInterface::WORKFLOW_STAGE_NEW;
 
-    public function __construct(
-        string $id,
-        Localization $localization,
-        ContentInterface $content,
-        CourseInterface $course
-    ) {
+    public function __construct(CourseInterface $course, Localization $localization, ContentInterface $content)
+    {
         $this->initializeTranslation($localization);
         $this->initializeContent($content);
 
-        $this->id = $id;
         $this->course = $course;
-    }
-
-    public function getId(): string
-    {
-        return $this->id;
     }
 
     public function getCourse(): CourseInterface
