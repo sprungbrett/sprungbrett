@@ -18,9 +18,9 @@ class CreateCourseCommandTest extends TestCase
 
     public function testGetTitle()
     {
-        $command = new CreateCourseCommand('de', ['title' => 'Sprungbrett is awesome']);
+        $command = new CreateCourseCommand('de', ['title' => 'Sprungbrett']);
 
-        $this->assertEquals('Sprungbrett is awesome', $command->getTitle());
+        $this->assertEquals('Sprungbrett', $command->getTitle());
     }
 
     public function testGetTitleNotExists()
@@ -30,5 +30,35 @@ class CreateCourseCommandTest extends TestCase
         $command = new CreateCourseCommand('de', []);
 
         $command->getTitle();
+    }
+
+    public function testGetDescription()
+    {
+        $command = new CreateCourseCommand('de', ['description' => 'Sprungbrett is awesome']);
+
+        $this->assertEquals('Sprungbrett is awesome', $command->getDescription());
+    }
+
+    public function testGetDescriptionNotExists()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        $command = new CreateCourseCommand('de', []);
+
+        $command->getDescription();
+    }
+
+    public function testGetTrainer()
+    {
+        $command = new CreateCourseCommand('de', ['trainer' => ['id' => 42]]);
+
+        $this->assertEquals(['id' => 42], $command->getTrainer());
+    }
+
+    public function testGetTrainerNull()
+    {
+        $command = new CreateCourseCommand('de', ['trainer' => null]);
+
+        $this->assertNull($command->getTrainer());
     }
 }

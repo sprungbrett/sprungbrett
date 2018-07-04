@@ -4,12 +4,14 @@ namespace Sprungbrett\Bundle\CourseBundle\Tests\Functional\Controller;
 
 use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 use Sprungbrett\Bundle\CourseBundle\Tests\Functional\Traits\CourseTrait;
+use Sprungbrett\Bundle\CourseBundle\Tests\Functional\Traits\TrainerTrait;
 use Sulu\Bundle\TestBundle\Testing\SuluTestCase;
 use Symfony\Component\Workflow\Workflow;
 
 class CourseControllerTest extends SuluTestCase
 {
     use CourseTrait;
+    use TrainerTrait;
 
     public function setUp()
     {
@@ -100,6 +102,31 @@ class CourseControllerTest extends SuluTestCase
         $this->assertEquals('Sprungbrett is awesome', $result['description']);
         $this->assertEquals(CourseInterface::WORKFLOW_STAGE_TEST, $result['workflowStage']);
         $this->assertArrayNotHasKey('route', $result);
+        $this->assertArrayNotHasKey('trainer', $result);
+    }
+
+    public function testPostWithTrainer()
+    {
+        $trainer = $this->createTrainer();
+
+        $client = $this->createAuthenticatedClient();
+        $client->request(
+            'POST',
+            '/api/courses?locale=en',
+            [
+                'title' => 'Sprungbrett',
+                'description' => 'Sprungbrett is awesome',
+                'trainer' => [
+                    'id' => $trainer->getId(),
+                ],
+            ]
+        );
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $result = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertEquals($trainer->getId(), $result['trainer']['id']);
     }
 
     public function testPostPublish()
@@ -154,6 +181,37 @@ class CourseControllerTest extends SuluTestCase
         $this->assertEquals(['title' => 'Sprungbrett is awesome'], $result['content']);
         $this->assertEquals(CourseInterface::WORKFLOW_STAGE_TEST, $result['workflowStage']);
         $this->assertArrayNotHasKey('route', $result);
+        $this->assertArrayNotHasKey('trainer', $result);
+    }
+
+    public function testPutWithTrainer()
+    {
+        $course = $this->createCourse();
+        $course->setTrainerId($this->createTrainer()->getId());
+        $trainer = $this->createTrainer();
+
+        $client = $this->createAuthenticatedClient();
+        $client->request(
+            'PUT',
+            '/api/courses/' . $course->getId() . '?locale=en',
+            [
+                'title' => 'Sprungbrett',
+                'description' => 'Sprungbrett is awesome',
+                'template' => 'default',
+                'content' => [
+                    'title' => 'Sprungbrett is awesome',
+                ],
+                'trainer' => [
+                    'id' => $trainer->getId(),
+                ],
+            ]
+        );
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $result = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertEquals($trainer->getId(), $result['trainer']['id']);
     }
 
     public function testPutPublish()

@@ -28,6 +28,7 @@ class ModifyCourseHandlerTest extends TestCase
         $course->setDescription('Sprungbrett is awesome')->shouldBeCalled();
         $course->setStructureType('default')->shouldBeCalled();
         $course->setContentData(['title' => 'Sprungbrett is awesome'])->shouldBeCalled();
+        $course->setTrainerId(42)->shouldBeCalled();
 
         $command = $this->prophesize(ModifyCourseCommand::class);
         $command->getId()->willReturn('123-123-123');
@@ -36,6 +37,7 @@ class ModifyCourseHandlerTest extends TestCase
         $command->getDescription()->willReturn('Sprungbrett is awesome');
         $command->getStructureType()->willReturn('default');
         $command->getContentData()->willReturn(['title' => 'Sprungbrett is awesome']);
+        $command->getTrainer()->willReturn(['id' => 42]);
 
         $eventCollector->push(
             CourseModifiedEvent::COMPONENT_NAME,

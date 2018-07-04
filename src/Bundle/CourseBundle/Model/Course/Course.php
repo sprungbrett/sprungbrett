@@ -24,9 +24,14 @@ class Course implements CourseInterface, AuditableInterface, RoutableInterface
     protected $id;
 
     /**
+     * @var int|null
+     */
+    protected $trainerId;
+
+    /**
      * @var RouteInterface|null
      */
-    private $route;
+    protected $route;
 
     public function __construct(string $id, ?Collection $translations = null)
     {
@@ -38,6 +43,18 @@ class Course implements CourseInterface, AuditableInterface, RoutableInterface
     public function getId(): string
     {
         return $this->id;
+    }
+
+    public function getTrainerId(): ?int
+    {
+        return $this->trainerId;
+    }
+
+    public function setTrainerId(?int $trainerId): CourseInterface
+    {
+        $this->trainerId = $trainerId;
+
+        return $this;
     }
 
     public function getWorkflowStage(?Localization $localization = null): string
