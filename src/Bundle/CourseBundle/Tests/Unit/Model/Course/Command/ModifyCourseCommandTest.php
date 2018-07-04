@@ -25,9 +25,9 @@ class ModifyCourseCommandTest extends TestCase
 
     public function testGetTitle()
     {
-        $command = new ModifyCourseCommand('123-123-123', 'de', ['title' => 'Sprungbrett is awesome']);
+        $command = new ModifyCourseCommand('123-123-123', 'de', ['title' => 'Sprungbrett']);
 
-        $this->assertEquals('Sprungbrett is awesome', $command->getTitle());
+        $this->assertEquals('Sprungbrett', $command->getTitle());
     }
 
     public function testGetTitleNotExists()
@@ -37,5 +37,35 @@ class ModifyCourseCommandTest extends TestCase
         $command = new ModifyCourseCommand('123-123-123', 'de', []);
 
         $command->getTitle();
+    }
+
+    public function testGetDescription()
+    {
+        $command = new ModifyCourseCommand('123-123-123', 'de', ['description' => 'Sprungbrett is awesome']);
+
+        $this->assertEquals('Sprungbrett is awesome', $command->getDescription());
+    }
+
+    public function testGetDescriptionNotExists()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        $command = new ModifyCourseCommand('123-123-123', 'de', []);
+
+        $command->getDescription();
+    }
+
+    public function testGetTrainer()
+    {
+        $command = new ModifyCourseCommand('123-123-123', 'de', ['trainer' => ['id' => 42]]);
+
+        $this->assertEquals(['id' => 42], $command->getTrainer());
+    }
+
+    public function testGetTrainerNull()
+    {
+        $command = new ModifyCourseCommand('123-123-123', 'de', ['trainer' => null]);
+
+        $this->assertNull($command->getTrainer());
     }
 }

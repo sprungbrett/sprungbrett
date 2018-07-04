@@ -32,6 +32,7 @@
 
         <service id="Sprungbrett\Bundle\CourseBundle\EventSubscriber\CourseSerializeSubscriber">
             <argument type="service" id="workflow.course"/>
+            <argument type="service" id="tactician.commandbus.default"/>
 
             <tag name="jms_serializer.event_subscriber"/>
             <tag name="sulu.context" context="admin"/>

@@ -19,6 +19,10 @@ interface CourseInterface extends TranslatableInterface
 
     public function getId(): string;
 
+    public function getTrainerId(): ?int;
+
+    public function setTrainerId(?int $trainerId): self;
+
     public function getWorkflowStage(): string;
 
     public function setWorkflowStage(string $workflowStage): self;

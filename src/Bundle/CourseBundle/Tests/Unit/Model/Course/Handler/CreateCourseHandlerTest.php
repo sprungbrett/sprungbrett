@@ -35,11 +35,13 @@ class CreateCourseHandlerTest extends TestCase
         $course->setTitle('Sprungbrett')->shouldBeCalled();
         $course->setDescription('Sprungbrett is awesome')->shouldBeCalled();
         $course->setStructureType('default')->shouldBeCalled();
+        $course->setTrainerId(42)->shouldBeCalled();
 
         $command = $this->prophesize(CreateCourseCommand::class);
         $command->getLocalization()->willReturn($localization->reveal());
         $command->getTitle()->willReturn('Sprungbrett');
         $command->getDescription()->willReturn('Sprungbrett is awesome');
+        $command->getTrainer()->willReturn(['id' => 42]);
 
         $marking = $this->prophesize(Marking::class);
         $workflow->can($course->reveal(), CourseInterface::TRANSITION_CREATE)->willReturn(true);

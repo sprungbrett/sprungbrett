@@ -4,6 +4,7 @@ namespace Sprungbrett\Bundle\CourseBundle\Model\Course\Command;
 
 use Sprungbrett\Component\Payload\Model\Command\PayloadTrait;
 use Sprungbrett\Component\Translation\Model\Command\LocaleTrait;
+use Webmozart\Assert\Assert;
 
 abstract class MappingCourseCommand
 {
@@ -24,5 +25,18 @@ abstract class MappingCourseCommand
     public function getDescription(): string
     {
         return $this->getStringValue('description');
+    }
+
+    public function getTrainer(): ?array
+    {
+        $trainer = $this->getValueWithDefault('trainer', null);
+        if (!$trainer) {
+            return null;
+        }
+
+        Assert::isArray($trainer);
+        Assert::keyExists($trainer, 'id');
+
+        return $trainer;
     }
 }

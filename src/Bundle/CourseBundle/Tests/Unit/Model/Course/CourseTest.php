@@ -18,6 +18,22 @@ class CourseTest extends TestCase
         $this->assertEquals('123-123-123', $course->getId());
     }
 
+    public function testGetTrainerId()
+    {
+        $course = new Course('123-123-123');
+        $course->setTrainerId(42);
+
+        $this->assertEquals(42, $course->getTrainerId());
+    }
+
+    public function testGetTrainerIdNull()
+    {
+        $course = new Course('123-123-123');
+        $course->setTrainerId(null);
+
+        $this->assertNull($course->getTrainerId());
+    }
+
     public function getWorkflowStage()
     {
         $localization = $this->prophesize(Localization::class);

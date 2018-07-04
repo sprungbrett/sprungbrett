@@ -8,6 +8,16 @@
             <generator strategy="NONE"/>
         </id>
 
+        <field name="trainerId" type="integer" nullable="true">
+            <options>
+                <option name="references">
+                    <option name="entity">Sprungbrett\Bundle\CourseBundle\Model\Trainer\Trainer</option>
+                    <option name="field">contact_id</option>
+                    <option name="onDelete">SET NULL</option>
+                </option>
+            </options>
+        </field>
+
         <one-to-many
                 field="translations"
                 target-entity="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseTranslation"

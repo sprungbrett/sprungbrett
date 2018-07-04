@@ -11,5 +11,6 @@ trait CourseMappingTrait
     {
         $course->setTitle($command->getTitle());
         $course->setDescription($command->getDescription());
+        $course->setTrainerId($command->getTrainer()['id']);
     }
 }

@@ -173,6 +173,17 @@ class SprungbrettCourseExtension extends Extension implements PrependExtensionIn
         $container->prependExtensionConfig(
             'sulu_admin',
             [
+                'field_type_options' => [
+                    'single_selection' => [
+                        'single_trainer_selection' => [
+                            'auto_complete' => [
+                                'displayProperty' => 'fullName',
+                                'searchProperties' => ['mainEmail', 'firstName', 'lastName'],
+                                'resourceKey' => 'contacts',
+                            ],
+                        ],
+                    ],
+                ],
                 'resources' => [
                     'courses' => [
                         'form' => ['@SprungbrettCourseBundle/Resources/config/forms/Course.xml'],
