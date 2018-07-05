@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <!-- FIXME should be mapped-super-class but sulu cannot handle embedded-class -->
+    <entity name="Sprungbrett\Bundle\CourseBundle\Model\Attendee\Attendee" table="sp_attendees">
+        <id name="contact" type="int" association-key="true"/>
+
+        <one-to-many
+                field="translations"
+                target-entity="Sprungbrett\Bundle\CourseBundle\Model\Attendee\AttendeeTranslation"
+                mapped-by="attendee"
+        >
+            <cascade>
+                <cascade-persist/>
+                <cascade-remove/>
+            </cascade>
+        </one-to-many>
+
+        <one-to-one field="contact" target-entity="Sulu\Bundle\ContactBundle\Entity\ContactInterface">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+
+            <join-column on-delete="CASCADE"/>
+        </one-to-one>
+    </entity>
+</doctrine-mapping>

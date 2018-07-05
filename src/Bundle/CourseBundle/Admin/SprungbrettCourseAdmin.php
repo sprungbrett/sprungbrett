@@ -15,6 +15,7 @@ class SprungbrettCourseAdmin extends Admin
 {
     const COURSE_SECURITY_CONTEXT = 'sprungbrett.course.course';
     const TRAINER_SECURITY_CONTEXT = 'sulu.contact.people';
+    const ATTENDEE_SECURITY_CONTEXT = 'sulu.contact.people';
 
     /**
      * @var WebspaceManagerInterface
@@ -77,10 +78,17 @@ class SprungbrettCourseAdmin extends Admin
                     ->addOption('content', true)
                     ->addOption('locales', $locales)
                     ->setParent('sprungbrett.course.courses_edit_form'),
-                (new Route('sprungbrett.course.contact_edit_form.content', '/trainer', 'sulu_admin.form'))
+                (new Route('sprungbrett.course.contact_edit_form.trainer', '/trainer', 'sulu_admin.form'))
                     ->addOption('tabTitle', 'sprungbrett.trainer')
                     ->addOption('backRoute', 'sulu_contact.contacts_datagrid')
                     ->addOption('resourceKey', 'trainers')
+                    ->addOption('locales', $locales)
+                    ->addAttributeDefault('locale', $locales ? $locales[0] : '')
+                    ->setParent('sulu_contact.contact_edit_form'),
+                (new Route('sprungbrett.course.contact_edit_form.attendee', '/attendee', 'sulu_admin.form'))
+                    ->addOption('tabTitle', 'sprungbrett.attendee')
+                    ->addOption('backRoute', 'sulu_contact.contacts_datagrid')
+                    ->addOption('resourceKey', 'attendees')
                     ->addOption('locales', $locales)
                     ->addAttributeDefault('locale', $locales ? $locales[0] : '')
                     ->setParent('sulu_contact.contact_edit_form'),
