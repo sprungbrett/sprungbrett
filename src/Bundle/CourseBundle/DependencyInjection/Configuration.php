@@ -2,10 +2,14 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\DependencyInjection;
 
+use Sprungbrett\Bundle\CourseBundle\Model\Attendee\Attendee;
+use Sprungbrett\Bundle\CourseBundle\Model\Attendee\AttendeeTranslation;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\Course;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseTranslation;
 use Sprungbrett\Bundle\CourseBundle\Model\Trainer\Trainer;
 use Sprungbrett\Bundle\CourseBundle\Model\Trainer\TrainerTranslation;
+use Sprungbrett\Bundle\CourseBundle\Repository\AttendeeRepository;
+use Sprungbrett\Bundle\CourseBundle\Repository\AttendeeTranslationRepository;
 use Sprungbrett\Bundle\CourseBundle\Repository\CourseRepository;
 use Sprungbrett\Bundle\CourseBundle\Repository\CourseTranslationRepository;
 use Sprungbrett\Bundle\CourseBundle\Repository\TrainerRepository;
@@ -57,11 +61,25 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('repository')->defaultValue(TrainerRepository::class)->end()
                             ->end()
                         ->end()
-                        ->arrayNode('course-translation')
+                        ->arrayNode('trainer-translation')
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('model')->defaultValue(TrainerTranslation::class)->end()
                                 ->scalarNode('repository')->defaultValue(TrainerTranslationRepository::class)->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('attendee')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('model')->defaultValue(Attendee::class)->end()
+                                ->scalarNode('repository')->defaultValue(AttendeeRepository::class)->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('attendee-translation')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('model')->defaultValue(AttendeeTranslation::class)->end()
+                                ->scalarNode('repository')->defaultValue(AttendeeTranslationRepository::class)->end()
                             ->end()
                         ->end()
                     ->end()

@@ -3,6 +3,8 @@
 namespace Sprungbrett\Bundle\CourseBundle;
 
 use Sprungbrett\Bundle\CourseBundle\DependencyInjection\CompilerPass\SetDefaultTypeCompilerPass;
+use Sprungbrett\Bundle\CourseBundle\Model\Attendee\AttendeeInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Attendee\AttendeeTranslationInterfae;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseTranslationInterface;
 use Sprungbrett\Bundle\CourseBundle\Model\Trainer\TrainerInterface;
@@ -25,6 +27,8 @@ class SprungbrettCourseBundle extends Bundle
                 CourseTranslationInterface::class => 'sulu.model.course-translation.class',
                 TrainerInterface::class => 'sulu.model.course.class',
                 TrainerTranslationInterface::class => 'sulu.model.course-translation.class',
+                AttendeeInterface::class => 'sulu.model.attendee.class',
+                AttendeeTranslationInterfae::class => 'sulu.model.attendee-translation.class',
             ],
             $container
         );

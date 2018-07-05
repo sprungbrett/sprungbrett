@@ -10,6 +10,10 @@
                  alias="sulu.repository.trainer"
                  class="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface"/>
 
+        <service id="Sprungbrett\Bundle\CourseBundle\Model\Attendee\AttendeeRepositoryInterface"
+                 alias="sulu.repository.attendee"
+                 class="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface"/>
+
         <service id="Sprungbrett\Bundle\CourseBundle\Model\Course\Handler\CreateCourseHandler">
             <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface"/>
             <argument type="service" id="workflow.course"/>
@@ -72,6 +76,19 @@
 
         <service id="Sprungbrett\Bundle\CourseBundle\Model\Trainer\Handler\FindTrainerQueryHandler">
             <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Trainer\TrainerRepositoryInterface"/>
+
+            <tag name="tactician.handler" typehints="true"/>
+        </service>
+
+        <service id="Sprungbrett\Bundle\CourseBundle\Model\Attendee\Handler\ModifyAttendeeHandler">
+            <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Attendee\AttendeeRepositoryInterface"/>
+            <argument type="service" id="Sprungbrett\Component\EventCollector\EventCollector"/>
+
+            <tag name="tactician.handler" typehints="true"/>
+        </service>
+
+        <service id="Sprungbrett\Bundle\CourseBundle\Model\Attendee\Handler\FindAttendeeQueryHandler">
+            <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Attendee\AttendeeRepositoryInterface"/>
 
             <tag name="tactician.handler" typehints="true"/>
         </service>

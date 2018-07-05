@@ -194,6 +194,10 @@ class SprungbrettCourseExtension extends Extension implements PrependExtensionIn
                         'form' => ['@SprungbrettCourseBundle/Resources/config/forms/Trainer.xml'],
                         'endpoint' => 'sprungbrett.get_trainers',
                     ],
+                    'attendees' => [
+                        'form' => ['@SprungbrettCourseBundle/Resources/config/forms/Attendee.xml'],
+                        'endpoint' => 'sprungbrett.get_attendees',
+                    ],
                 ],
             ]
         );

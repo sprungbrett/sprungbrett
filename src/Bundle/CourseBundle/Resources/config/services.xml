@@ -30,6 +30,13 @@
             <argument type="string">%kernel.default_locale%</argument>
         </service>
 
+        <service id="Sprungbrett\Bundle\CourseBundle\Controller\AttendeeController">
+            <argument type="service" id="tactician.commandbus.default"/>
+            <argument type="service" id="fos_rest.view_handler.default"/>
+            <argument type="service" id="security.token_storage" on-invalid="null"/>
+            <argument type="string">%kernel.default_locale%</argument>
+        </service>
+
         <service id="Sprungbrett\Bundle\CourseBundle\EventSubscriber\CourseSerializeSubscriber">
             <argument type="service" id="workflow.course"/>
             <argument type="service" id="tactician.commandbus.default"/>
