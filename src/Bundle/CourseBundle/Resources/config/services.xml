@@ -54,6 +54,7 @@
         </service>
 
         <service id="Sprungbrett\Bundle\CourseBundle\Controller\WebsiteCourseController">
+            <argument type="service" id="jms_serializer"/>
             <argument type="service" id="templating"/>
             <argument>%sulu_http_cache.cache.max_age%</argument>
             <argument>%sulu_http_cache.cache.shared_max_age%</argument>

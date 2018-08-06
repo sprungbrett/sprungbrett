@@ -2,6 +2,8 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\Controller;
 
+use JMS\Serializer\SerializationContext;
+use JMS\Serializer\SerializerInterface;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 use Sulu\Bundle\HttpCacheBundle\Cache\AbstractHttpCache;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,6 +12,11 @@ use Symfony\Component\Templating\EngineInterface;
 
 class WebsiteCourseController
 {
+    /**
+     * @var SerializerInterface
+     */
+    private $serializer;
+
     /**
      * @var EngineInterface
      */
@@ -25,8 +32,13 @@ class WebsiteCourseController
      */
     private $sharedMaxAge;
 
-    public function __construct(EngineInterface $templating, int $maxAge, int $sharedMaxAge)
-    {
+    public function __construct(
+        SerializerInterface $serializer,
+        EngineInterface $templating,
+        int $maxAge,
+        int $sharedMaxAge
+    ) {
+        $this->serializer = $serializer;
         $this->templating = $templating;
         $this->maxAge = $maxAge;
         $this->sharedMaxAge = $sharedMaxAge;
@@ -34,19 +46,14 @@ class WebsiteCourseController
 
     public function indexAction(Request $request, CourseInterface $object, string $view): Response
     {
-        $requestFormat = $request->getRequestFormat();
-        $view = $view . '.' . $requestFormat . '.twig';
+        $parameters = $this->serializer->serialize(
+            $object,
+            'array',
+            SerializationContext::create()->setGroups(['website'])
+        );
 
-        return $this->render($view, ['course' => $object], $this->createResponse($request));
-    }
-
-    protected function render($view, array $parameters = [], Response $response = null)
-    {
-        if (null === $response) {
-            $response = new Response();
-        }
-
-        return $response->setContent($this->templating->render($view, $parameters));
+        return $this->createResponse($request)
+            ->setContent($this->templating->render($view . '.' . $request->getRequestFormat() . '.twig', $parameters));
     }
 
     protected function createResponse(Request $request): Response
