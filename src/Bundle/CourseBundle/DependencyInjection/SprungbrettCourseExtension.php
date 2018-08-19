@@ -127,10 +127,10 @@ class SprungbrettCourseExtension extends Extension implements PrependExtensionIn
             [
                 'mappings' => [
                     Course::class => [ // TODO extensible class?
-                        'generator' => 'schema',
-                        'options' => [
-                            'route_schema' => '/{object.getTitle()}',
-                        ],
+                                       'generator' => 'schema',
+                                       'options' => [
+                                           'route_schema' => '/{object.getTitle()}',
+                                       ],
                     ],
                 ],
             ]
@@ -147,9 +147,9 @@ class SprungbrettCourseExtension extends Extension implements PrependExtensionIn
                     'structure' => [
                         'resources' => [
                             'course_contents' => [ // FIXME in sulu
-                                'datagrid' => Course::class, // TODO extensible class?
-                                'types' => ['course'],
-                                'endpoint' => 'sprungbrett.get_courses',
+                                                   'datagrid' => Course::class, // TODO extensible class?
+                                                   'types' => ['course'],
+                                                   'endpoint' => 'sprungbrett.get_courses',
                             ],
                         ],
                     ],
@@ -176,10 +176,13 @@ class SprungbrettCourseExtension extends Extension implements PrependExtensionIn
                 'field_type_options' => [
                     'single_selection' => [
                         'single_trainer_selection' => [
-                            'auto_complete' => [
-                                'displayProperty' => 'fullName',
-                                'searchProperties' => ['mainEmail', 'firstName', 'lastName'],
-                                'resourceKey' => 'contacts',
+                            'default_type' => 'auto_complete',
+                            'resource_key' => 'contacts',
+                            'types' => [
+                                'auto_complete' => [
+                                    'display_property' => 'fullName',
+                                    'search_properties' => ['mainEmail', 'firstName', 'lastName'],
+                                ],
                             ],
                         ],
                     ],

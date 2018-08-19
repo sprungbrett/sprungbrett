@@ -5,6 +5,7 @@ namespace Sprungbrett\Bundle\CourseBundle\Tests\Unit\EventSubscriber;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Sprungbrett\Bundle\CourseBundle\EventSubscriber\CourseWorkflowSubscriber;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Course;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 use Sulu\Bundle\RouteBundle\Manager\RouteManagerInterface;
 use Sulu\Bundle\RouteBundle\Model\RoutableInterface;
@@ -21,7 +22,6 @@ class CourseWorkflowSubscriberTest extends TestCase
         $eventSubscriber = new CourseWorkflowSubscriber($routeManager->reveal());
 
         $course = $this->prophesize(RoutableInterface::class);
-        $course->willImplement(CourseInterface::class);
         $course->getRoute()->willReturn(null);
         $transition = $this->prophesize(Transition::class);
         $transition->getTos()->willReturn([CourseInterface::WORKFLOW_STAGE_PUBLISHED]);
@@ -43,7 +43,6 @@ class CourseWorkflowSubscriberTest extends TestCase
 
         $route = $this->prophesize(RouteInterface::class);
         $course = $this->prophesize(RoutableInterface::class);
-        $course->willImplement(CourseInterface::class);
         $course->getRoute()->willReturn($route->reveal());
         $transition = $this->prophesize(Transition::class);
         $transition->getTos()->willReturn([CourseInterface::WORKFLOW_STAGE_PUBLISHED]);
@@ -84,8 +83,7 @@ class CourseWorkflowSubscriberTest extends TestCase
         $eventSubscriber = new CourseWorkflowSubscriber($routeManager->reveal());
 
         $route = $this->prophesize(RouteInterface::class);
-        $course = $this->prophesize(RoutableInterface::class);
-        $course->willImplement(CourseInterface::class);
+        $course = $this->prophesize(Course::class);
         $course->getRoute()->willReturn($route->reveal());
         $transition = $this->prophesize(Transition::class);
         $transition->getTos()->willReturn([CourseInterface::WORKFLOW_STAGE_TEST]);
@@ -108,8 +106,7 @@ class CourseWorkflowSubscriberTest extends TestCase
 
         $eventSubscriber = new CourseWorkflowSubscriber($routeManager->reveal());
 
-        $course = $this->prophesize(RoutableInterface::class);
-        $course->willImplement(CourseInterface::class);
+        $course = $this->prophesize(Course::class);
         $transition = $this->prophesize(Transition::class);
         $transition->getTos()->willReturn([CourseInterface::WORKFLOW_STAGE_PUBLISHED]);
 
