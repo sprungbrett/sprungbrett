@@ -16,6 +16,7 @@
 
         <service id="Sprungbrett\Bundle\CourseBundle\Model\Course\Handler\CreateCourseHandler">
             <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface"/>
+            <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Trainer\TrainerRepositoryInterface"/>
             <argument type="service" id="workflow.course"/>
             <argument type="service" id="Sprungbrett\Component\EventCollector\EventCollector"/>
             <argument type="string">%sprungbrett_course.default_type%</argument>
@@ -25,6 +26,7 @@
 
         <service id="Sprungbrett\Bundle\CourseBundle\Model\Course\Handler\ModifyCourseHandler">
             <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface"/>
+            <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Trainer\TrainerRepositoryInterface"/>
             <argument type="service" id="Sprungbrett\Component\EventCollector\EventCollector"/>
 
             <tag name="tactician.handler" typehints="true"/>

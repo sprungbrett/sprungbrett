@@ -21,11 +21,17 @@ class Attendee implements AttendeeInterface, AuditableInterface
      */
     protected $contact;
 
+    /**
+     * @var int
+     */
+    protected $contactId;
+
     public function __construct(ContactInterface $contact, ?Collection $translations = null)
     {
         $this->initializeTranslations($translations);
 
         $this->contact = $contact;
+        $this->contactId = $contact->getId();
     }
 
     public function getContact(): ContactInterface
@@ -35,7 +41,7 @@ class Attendee implements AttendeeInterface, AuditableInterface
 
     public function getId(): int
     {
-        return $this->getContact()->getId();
+        return $this->contactId;
     }
 
     /**
