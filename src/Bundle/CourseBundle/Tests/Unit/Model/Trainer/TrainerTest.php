@@ -14,6 +14,7 @@ class TrainerTest extends TestCase
     public function testGetContact()
     {
         $contact = $this->prophesize(ContactInterface::class);
+        $contact->getId()->willReturn(42);
         $course = new Trainer($contact->reveal());
 
         $this->assertEquals($contact->reveal(), $course->getContact());
@@ -31,12 +32,25 @@ class TrainerTest extends TestCase
     public function testGetFullName()
     {
         $contact = $this->prophesize(ContactInterface::class);
+        $contact->getId()->willReturn(42);
         $contact->getFirstName()->willReturn('Max');
         $contact->getLastName()->willReturn('Mustermann');
         $contact->getMiddleName()->willReturn('"the power"');
         $course = new Trainer($contact->reveal());
 
         $this->assertEquals('Max "the power" Mustermann', $course->getFullName());
+    }
+
+    public function testGetLocalization()
+    {
+        $localization = $this->prophesize(Localization::class);
+
+        $contact = $this->prophesize(ContactInterface::class);
+        $contact->getId()->willReturn(42);
+        $course = new Trainer($contact->reveal());
+        $course->setCurrentLocalization($localization->reveal());
+
+        $this->assertEquals($localization->reveal(), $course->getLocalization());
     }
 
     public function testGetLocale()
@@ -51,6 +65,7 @@ class TrainerTest extends TestCase
         $localization->equals($translationLocalization->reveal())->willReturn(true);
 
         $contact = $this->prophesize(ContactInterface::class);
+        $contact->getId()->willReturn(42);
         $course = new Trainer($contact->reveal(), new ArrayCollection([$translation->reveal()]));
         $course->setCurrentLocalization($localization->reveal());
 
@@ -69,6 +84,7 @@ class TrainerTest extends TestCase
         $localization->equals($translationLocalization->reveal())->willReturn(true);
 
         $contact = $this->prophesize(ContactInterface::class);
+        $contact->getId()->willReturn(42);
         $course = new Trainer($contact->reveal(), new ArrayCollection([$translation->reveal()]));
 
         $this->assertEquals('de', $course->getLocale($localization->reveal()));
@@ -86,6 +102,7 @@ class TrainerTest extends TestCase
         $localization->equals($translationLocalization->reveal())->willReturn(true);
 
         $contact = $this->prophesize(ContactInterface::class);
+        $contact->getId()->willReturn(42);
         $course = new Trainer($contact->reveal(), new ArrayCollection([$translation->reveal()]));
         $course->setCurrentLocalization($localization->reveal());
 
@@ -104,6 +121,7 @@ class TrainerTest extends TestCase
         $localization->equals($translationLocalization->reveal())->willReturn(true);
 
         $contact = $this->prophesize(ContactInterface::class);
+        $contact->getId()->willReturn(42);
         $course = new Trainer($contact->reveal(), new ArrayCollection([$translation->reveal()]));
 
         $this->assertEquals('Sprungbrett is awesome', $course->getDescription($localization->reveal()));

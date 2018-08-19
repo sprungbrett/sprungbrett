@@ -34,6 +34,16 @@ class CourseTest extends TestCase
         $this->assertNull($course->getTrainerId());
     }
 
+    public function testGetLocalization()
+    {
+        $localization = $this->prophesize(Localization::class);
+
+        $course = new Course('123-123-123');
+        $course->setCurrentLocalization($localization->reveal());
+
+        $this->assertEquals($localization->reveal(), $course->getLocalization());
+    }
+
     public function getWorkflowStage()
     {
         $localization = $this->prophesize(Localization::class);

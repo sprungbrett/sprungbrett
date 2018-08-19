@@ -6,6 +6,7 @@ use Sprungbrett\Bundle\CourseBundle\Model\Course\Command\ModifyCourseCommand;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\Event\CourseModifiedEvent;
+use Sprungbrett\Bundle\CourseBundle\Model\Trainer\TrainerRepositoryInterface;
 use Sprungbrett\Component\EventCollector\EventCollector;
 
 class ModifyCourseHandler
@@ -22,8 +23,10 @@ class ModifyCourseHandler
      */
     private $eventCollector;
 
-    public function __construct(CourseRepositoryInterface $courseRepository, EventCollector $eventCollector)
+    public function __construct(CourseRepositoryInterface $courseRepository, TrainerRepositoryInterface $trainerRepository, EventCollector $eventCollector)
     {
+        $this->initializeCourseMapping($trainerRepository);
+
         $this->courseRepository = $courseRepository;
         $this->eventCollector = $eventCollector;
     }

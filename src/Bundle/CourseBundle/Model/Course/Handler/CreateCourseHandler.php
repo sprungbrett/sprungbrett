@@ -6,6 +6,7 @@ use Sprungbrett\Bundle\CourseBundle\Model\Course\Command\CreateCourseCommand;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\Event\CourseCreatedEvent;
+use Sprungbrett\Bundle\CourseBundle\Model\Trainer\TrainerRepositoryInterface;
 use Sprungbrett\Component\EventCollector\EventCollector;
 use Symfony\Component\Workflow\Workflow;
 
@@ -26,10 +27,12 @@ class CreateCourseHandler
 
     public function __construct(
         CourseRepositoryInterface $courseRepository,
+        TrainerRepositoryInterface $trainerRepository,
         Workflow $workflow,
         EventCollector $eventCollector,
         string $defaultStructureType
     ) {
+        $this->initializeCourseMapping($trainerRepository);
         $this->initializeTransit($workflow, $eventCollector);
 
         $this->courseRepository = $courseRepository;

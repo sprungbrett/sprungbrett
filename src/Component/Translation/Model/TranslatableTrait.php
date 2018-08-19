@@ -28,6 +28,11 @@ trait TranslatableTrait
         $this->currentLocalization = $currentLocalization;
     }
 
+    public function getLocalization(): ?Localization
+    {
+        return $this->currentLocalization;
+    }
+
     public function getLocale(?Localization $localization = null): string
     {
         return $this->doGetTranslation($localization)->getLocale();
