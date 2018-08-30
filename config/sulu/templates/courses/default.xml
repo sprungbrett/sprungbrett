@@ -5,9 +5,9 @@
 
     <key>default</key>
 
-    <view>@SprungbrettCourse/Course/index</view>
+    <view>courses/default</view>
     <controller>Sprungbrett\Bundle\CourseBundle\Controller\WebsiteCourseController:indexAction</controller>
-    <cacheLifetime>2400</cacheLifetime>
+    <cacheLifetime>3600</cacheLifetime>
 
     <meta>
         <title lang="en">Default</title>
@@ -20,11 +20,6 @@
                 <title lang="en">Title</title>
                 <title lang="de">Titel</title>
             </meta>
-            <params>
-                <param name="headline" value="true"/>
-            </params>
-
-            <tag name="sulu.rlp.part"/>
         </property>
 
         <property name="article" type="text_editor">
