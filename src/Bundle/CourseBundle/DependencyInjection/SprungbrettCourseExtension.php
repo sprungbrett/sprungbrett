@@ -4,6 +4,7 @@ namespace Sprungbrett\Bundle\CourseBundle\DependencyInjection;
 
 use Sprungbrett\Bundle\CourseBundle\Model\Course\Course;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Structure\CourseBridge;
 use Sulu\Bundle\PersistenceBundle\DependencyInjection\PersistenceExtensionTrait;
 use Sulu\Component\HttpKernel\SuluKernel;
 use Symfony\Component\Config\FileLocator;
@@ -145,11 +146,15 @@ class SprungbrettCourseExtension extends Extension implements PrependExtensionIn
             [
                 'content' => [
                     'structure' => [
+                        'type_map' => [
+                            'course' => CourseBridge::class,
+                        ],
                         'resources' => [
-                            'course_contents' => [ // FIXME in sulu
-                                                   'datagrid' => Course::class, // TODO extensible class?
-                                                   'types' => ['course'],
-                                                   'endpoint' => 'sprungbrett.get_courses',
+                            'course_contents' => [
+                                // FIXME in sulu
+                                'datagrid' => Course::class, // TODO extensible class?
+                                'types' => ['course'],
+                                'endpoint' => 'sprungbrett.get_courses',
                             ],
                         ],
                     ],

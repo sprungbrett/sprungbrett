@@ -4,6 +4,7 @@ namespace Sprungbrett\Bundle\CourseBundle\Model\Course;
 
 use Doctrine\Common\Collections\Collection;
 use Sprungbrett\Component\Content\Model\Content;
+use Sprungbrett\Component\Content\Model\ContentableInterface;
 use Sprungbrett\Component\Translation\Model\Exception\MissingLocalizationException;
 use Sprungbrett\Component\Translation\Model\Localization;
 use Sprungbrett\Component\Translation\Model\TranslatableTrait;
@@ -98,7 +99,7 @@ class Course implements CourseInterface, AuditableInterface, RoutableInterface
         return $this->getTranslation($localization)->getStructureType();
     }
 
-    public function setStructureType(string $structureType, ?Localization $localization = null): CourseInterface
+    public function setStructureType(string $structureType, ?Localization $localization = null): ContentableInterface
     {
         $this->getTranslation($localization)->setStructureType($structureType);
 
@@ -110,7 +111,7 @@ class Course implements CourseInterface, AuditableInterface, RoutableInterface
         return $this->getTranslation($localization)->getContentData();
     }
 
-    public function setContentData(array $contentData, ?Localization $localization = null): CourseInterface
+    public function setContentData(array $contentData, ?Localization $localization = null): ContentableInterface
     {
         $this->getTranslation($localization)->setContentData($contentData);
 
@@ -126,6 +127,14 @@ class Course implements CourseInterface, AuditableInterface, RoutableInterface
         $translation = $this->doGetTranslation($localization);
 
         return $translation;
+    }
+
+    /**
+     * @return Collection|CourseTranslationInterface[]
+     */
+    public function getTranslations(): Collection
+    {
+        return $this->translations;
     }
 
     public function getRoute(): ?RouteInterface

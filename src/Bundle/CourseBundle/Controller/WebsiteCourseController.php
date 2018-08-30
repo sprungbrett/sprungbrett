@@ -13,7 +13,7 @@ class WebsiteCourseController
     /**
      * @var EngineInterface
      */
-    private $templating;
+    private $engine;
 
     /**
      * @var int
@@ -25,9 +25,9 @@ class WebsiteCourseController
      */
     private $sharedMaxAge;
 
-    public function __construct(EngineInterface $templating, int $maxAge, int $sharedMaxAge)
+    public function __construct(EngineInterface $engine, int $maxAge, int $sharedMaxAge)
     {
-        $this->templating = $templating;
+        $this->engine = $engine;
         $this->maxAge = $maxAge;
         $this->sharedMaxAge = $sharedMaxAge;
     }
@@ -46,7 +46,7 @@ class WebsiteCourseController
             $response = new Response();
         }
 
-        return $response->setContent($this->templating->render($view, $parameters));
+        return $response->setContent($this->engine->render($view, $parameters));
     }
 
     protected function createResponse(Request $request): Response

@@ -3,9 +3,10 @@
 namespace Sprungbrett\Bundle\CourseBundle\Model\Course;
 
 use Doctrine\Common\Collections\Collection;
+use Sprungbrett\Component\Content\Model\ContentableInterface;
 use Sprungbrett\Component\Translation\Model\TranslatableInterface;
 
-interface CourseInterface extends TranslatableInterface
+interface CourseInterface extends TranslatableInterface, ContentableInterface
 {
     const WORKFLOW_STAGE_NEW = 'new';
     const WORKFLOW_STAGE_TEST = 'test';
@@ -35,16 +36,10 @@ interface CourseInterface extends TranslatableInterface
 
     public function setDescription(string $description): self;
 
-    public function getStructureType(): string;
-
-    public function setStructureType(string $structureType): self;
-
-    public function getContentData(): array;
-
-    public function setContentData(array $contentData): self;
-
     /**
      * FIXME remove from here (not domain logic).
      */
     public function removeRoute(): self;
+
+    public function getTranslations(): Collection;
 }
