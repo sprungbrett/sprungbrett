@@ -44,10 +44,10 @@
             "Sprungbrett\\Component\\EventMiddleware\\": ""
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Sprungbrett\\Component\\EventMiddleware\\Tests\\": ""
-        }
+    "scripts": {
+        "phpunit": "vendor/bin/phpunit",
+        "phpstan": "vendor/bin/phpstan analyze -c ./phpstan.neon src tests -l max",
+        "php-cs": "vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

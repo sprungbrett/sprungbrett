@@ -63,10 +63,14 @@
             "Sprungbrett\\Bundle\\CourseBundle\\": ""
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Sprungbrett\\Bundle\\CourseBundle\\Tests\\": ""
-        }
+    "scripts": {
+        "initialize" : [
+            "tests/app/console doctrine:schema:update --force",
+            "tests/app/console sulu:document:initialize"
+        ],
+        "phpunit": "vendor/bin/phpunit",
+        "phpstan": "vendor/bin/phpstan analyze -c ./phpstan.neon src tests -l max",
+        "php-cs": "vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

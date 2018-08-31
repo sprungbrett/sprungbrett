@@ -40,12 +40,11 @@ jobs:
             - ~/.composer
           key: v1-dependencies-{{ checksum "composer.json" }}
 
-      - run: tests/app/console doctrine:schema:update --force
-      - run: tests/app/console sulu:document:initialize
+      - run: composer initialize
 
-      - run: vendor/bin/phpunit
-      - run: vendor/bin/phpstan analyze -c ./phpstan.neon src tests -l max
-      - run: vendor/bin/php-cs-fixer fix --verbose --diff --dry-run
+      - run: composer phpunit
+      - run: composer phpstan
+      - run: composer php-cs
 
       - run: npm install
       - run: npm run lint:js
