@@ -14,5 +14,16 @@
             <argument type="service" id="tactician.logger.class_name_formatter"/>
             <argument type="service" id="logger"/>
         </service>
+        <service id="Sprungbrett\Component\Content\Resolver\ContentResolverInterface"
+                 alias="Sprungbrett\Component\Content\Resolver\ContentResolver"/>
+        <service id="Sprungbrett\Component\Content\Resolver\ContentResolver">
+            <argument type="service" id="Sprungbrett\Bundle\InfrastructureBundle\Content\Resolver\PropertyResolver"/>
+        </service>
+        <service id="Sprungbrett\Bundle\InfrastructureBundle\Content\Resolver\PropertyResolver">
+            <argument type="service" id="sulu_content.structure.factory"/>
+            <argument type="service" id="sulu.content.type_manager"/>
+            <argument type="service" id="sulu.content.structure_manager"/>
+            <argument type="service" id="request_stack"/>
+        </service>
     </services>
 </container>
