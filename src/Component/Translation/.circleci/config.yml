@@ -13,6 +13,8 @@ jobs:
     steps:
       - checkout
 
+      - run: echo -e "memory_limit=2G" | sudo tee /usr/local/etc/php/php.ini > /dev/null
+
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "composer.json" }}
