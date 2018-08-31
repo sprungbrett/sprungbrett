@@ -28,5 +28,32 @@
                 <title lang="de">Artikel</title>
             </meta>
         </property>
+
+        <block name="blocks" default-type="text_media">
+            <types>
+                <type name="text_media">
+                    <properties>
+                        <property name="title" type="text_line">
+                            <meta>
+                                <title lang="en">Title</title>
+                                <title lang="de">Titel</title>
+                            </meta>
+                        </property>
+                        <property name="article" type="text_editor">
+                            <meta>
+                                <title lang="en">Article</title>
+                                <title lang="de">Artikel</title>
+                            </meta>
+                        </property>
+                        <property name="media" type="media_selection">
+                            <meta>
+                                <title lang="en">Media</title>
+                                <title lang="de">Medien</title>
+                            </meta>
+                        </property>
+                    </properties>
+                </type>
+            </types>
+        </block>
     </properties>
 </template>

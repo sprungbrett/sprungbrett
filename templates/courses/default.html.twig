@@ -11,7 +11,18 @@
  {% endblock %}
 
  {% block content %}
-     <h1>{{ course.title }}</h1>
+     <h1>{{ course.name }}</h1>
+     <h1>{{ content.title }}</h1>
 
      <p>{{ course.description }}</p>
+
+     {% for block in content.blocks %}
+         <article>
+             <h3>{{ block.title }}</h3>
+             {{ block.article|raw }}
+             {% for media in block.media %}
+                 <img src="{{ media.thumbnails['sulu-120x120'] }}" alt="{{ media.title }}"/>
+             {% endfor %}
+         </article>
+     {% endfor %}
  {% endblock %}

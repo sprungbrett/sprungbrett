@@ -15,6 +15,11 @@ class CourseBridge extends StructureBridge
      */
     private $course;
 
+    /**
+     * @var string
+     */
+    private $webspaceKey;
+
     public function getCourse(): CourseInterface
     {
         return $this->course;
@@ -23,6 +28,18 @@ class CourseBridge extends StructureBridge
     public function setCourse(CourseInterface $course): self
     {
         $this->course = $course;
+
+        return $this;
+    }
+
+    public function getWebspaceKey(): string
+    {
+        return $this->webspaceKey;
+    }
+
+    public function setWebspaceKey($webspaceKey): self
+    {
+        $this->webspaceKey = $webspaceKey;
 
         return $this;
     }
