@@ -16,20 +16,20 @@ class CreateCourseCommandTest extends TestCase
         $this->assertEquals('de', $command->getLocalization()->getLocale());
     }
 
-    public function testGetTitle()
+    public function testGetName()
     {
-        $command = new CreateCourseCommand('de', ['title' => 'Sprungbrett']);
+        $command = new CreateCourseCommand('de', ['name' => 'Sprungbrett']);
 
-        $this->assertEquals('Sprungbrett', $command->getTitle());
+        $this->assertEquals('Sprungbrett', $command->getName());
     }
 
-    public function testGetTitleNotExists()
+    public function testGetNameNotExists()
     {
         $this->expectException(\InvalidArgumentException::class);
 
         $command = new CreateCourseCommand('de', []);
 
-        $command->getTitle();
+        $command->getName();
     }
 
     public function testGetDescription()

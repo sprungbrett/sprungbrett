@@ -110,37 +110,37 @@ class CourseTest extends TestCase
         $this->assertEquals($course, $course->setWorkflowStage('published', $localization->reveal()));
     }
 
-    public function testGetTitle()
+    public function testGetName()
     {
         $localization = $this->prophesize(Localization::class);
         $translationLocalization = $this->prophesize(Localization::class);
 
         $translation = $this->prophesize(CourseTranslation::class);
         $translation->getLocalization()->willReturn($translationLocalization->reveal());
-        $translation->getTitle()->willReturn('Sprungbrett is awesome');
+        $translation->getName()->willReturn('Sprungbrett is awesome');
 
         $localization->equals($translationLocalization->reveal())->willReturn(true);
 
         $course = new Course('123-123-123', new ArrayCollection([$translation->reveal()]));
         $course->setCurrentLocalization($localization->reveal());
 
-        $this->assertEquals('Sprungbrett is awesome', $course->getTitle());
+        $this->assertEquals('Sprungbrett is awesome', $course->getName());
     }
 
-    public function testGetTitleWithLocalization()
+    public function testGetNameWithLocalization()
     {
         $localization = $this->prophesize(Localization::class);
         $translationLocalization = $this->prophesize(Localization::class);
 
         $translation = $this->prophesize(CourseTranslation::class);
         $translation->getLocalization()->willReturn($translationLocalization->reveal());
-        $translation->getTitle()->willReturn('Sprungbrett is awesome');
+        $translation->getName()->willReturn('Sprungbrett is awesome');
 
         $localization->equals($translationLocalization->reveal())->willReturn(true);
 
         $course = new Course('123-123-123', new ArrayCollection([$translation->reveal()]));
 
-        $this->assertEquals('Sprungbrett is awesome', $course->getTitle($localization->reveal()));
+        $this->assertEquals('Sprungbrett is awesome', $course->getName($localization->reveal()));
     }
 
     public function testSetTitle()
@@ -150,14 +150,14 @@ class CourseTest extends TestCase
 
         $translation = $this->prophesize(CourseTranslation::class);
         $translation->getLocalization()->willReturn($translationLocalization->reveal());
-        $translation->setTitle('Sprungbrett is awesome')->shouldBeCalled();
+        $translation->setName('Sprungbrett is awesome')->shouldBeCalled();
 
         $localization->equals($translationLocalization->reveal())->willReturn(true);
 
         $course = new Course('123-123-123', new ArrayCollection([$translation->reveal()]));
         $course->setCurrentLocalization($localization->reveal());
 
-        $this->assertEquals($course, $course->setTitle('Sprungbrett is awesome'));
+        $this->assertEquals($course, $course->setName('Sprungbrett is awesome'));
     }
 
     public function testSetTitleWithLocalization()
@@ -167,13 +167,13 @@ class CourseTest extends TestCase
 
         $translation = $this->prophesize(CourseTranslation::class);
         $translation->getLocalization()->willReturn($translationLocalization->reveal());
-        $translation->setTitle('Sprungbrett is awesome')->shouldBeCalled();
+        $translation->setName('Sprungbrett is awesome')->shouldBeCalled();
 
         $localization->equals($translationLocalization->reveal())->willReturn(true);
 
         $course = new Course('123-123-123', new ArrayCollection([$translation->reveal()]));
 
-        $this->assertEquals($course, $course->setTitle('Sprungbrett is awesome', $localization->reveal()));
+        $this->assertEquals($course, $course->setName('Sprungbrett is awesome', $localization->reveal()));
     }
 
     public function testGetRouteNull()

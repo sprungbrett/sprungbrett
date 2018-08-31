@@ -37,7 +37,7 @@ class CourseControllerTest extends SuluTestCase
         $this->assertEquals(1, $result['total']);
         $this->assertCount(1, $result['_embedded']['courses']);
         $this->assertEquals($course->getId(), $result['_embedded']['courses'][0]['id']);
-        $this->assertEquals('Sprungbrett', $result['_embedded']['courses'][0]['title']);
+        $this->assertEquals('Sprungbrett', $result['_embedded']['courses'][0]['name']);
     }
 
     public function testGet()
@@ -55,7 +55,7 @@ class CourseControllerTest extends SuluTestCase
         $result = json_decode($client->getResponse()->getContent(), true);
 
         $this->assertEquals($course->getId(), $result['id']);
-        $this->assertEquals('Sprungbrett', $result['title']);
+        $this->assertEquals('Sprungbrett', $result['name']);
         $this->assertEquals('Sprungbrett is awesome', $result['description']);
         $this->assertEquals('publish', $result['transitions'][0]['name']);
     }
@@ -76,7 +76,7 @@ class CourseControllerTest extends SuluTestCase
         $result = json_decode($client->getResponse()->getContent(), true);
 
         $this->assertEquals($course->getId(), $result['id']);
-        $this->assertEquals('Sprungbrett', $result['title']);
+        $this->assertEquals('Sprungbrett', $result['name']);
         $this->assertEquals('Sprungbrett is awesome', $result['description']);
         $this->assertEquals('unpublish', $result['transitions'][0]['name']);
     }
@@ -88,7 +88,7 @@ class CourseControllerTest extends SuluTestCase
             'POST',
             '/api/courses?locale=en',
             [
-                'title' => 'Sprungbrett',
+                'name' => 'Sprungbrett',
                 'description' => 'Sprungbrett is awesome',
             ]
         );
@@ -98,7 +98,7 @@ class CourseControllerTest extends SuluTestCase
         $result = json_decode($client->getResponse()->getContent(), true);
 
         $this->assertArrayHasKey('id', $result);
-        $this->assertEquals('Sprungbrett', $result['title']);
+        $this->assertEquals('Sprungbrett', $result['name']);
         $this->assertEquals('Sprungbrett is awesome', $result['description']);
         $this->assertEquals(CourseInterface::WORKFLOW_STAGE_TEST, $result['workflowStage']);
         $this->assertArrayNotHasKey('route', $result);
@@ -114,7 +114,7 @@ class CourseControllerTest extends SuluTestCase
             'POST',
             '/api/courses?locale=en',
             [
-                'title' => 'Sprungbrett',
+                'name' => 'Sprungbrett',
                 'description' => 'Sprungbrett is awesome',
                 'trainer' => [
                     'id' => $trainer->getId(),
@@ -136,7 +136,7 @@ class CourseControllerTest extends SuluTestCase
             'POST',
             '/api/courses?locale=en&action=publish',
             [
-                'title' => 'Sprungbrett',
+                'name' => 'Sprungbrett',
                 'description' => 'Sprungbrett is awesome',
             ]
         );
@@ -146,7 +146,7 @@ class CourseControllerTest extends SuluTestCase
         $result = json_decode($client->getResponse()->getContent(), true);
 
         $this->assertArrayHasKey('id', $result);
-        $this->assertEquals('Sprungbrett', $result['title']);
+        $this->assertEquals('Sprungbrett', $result['name']);
         $this->assertEquals('Sprungbrett is awesome', $result['description']);
         $this->assertEquals('/sprungbrett', $result['route']);
         $this->assertEquals(CourseInterface::WORKFLOW_STAGE_PUBLISHED, $result['workflowStage']);
@@ -161,7 +161,7 @@ class CourseControllerTest extends SuluTestCase
             'PUT',
             '/api/courses/' . $course->getId() . '?locale=en',
             [
-                'title' => 'Sprungbrett',
+                'name' => 'Sprungbrett',
                 'description' => 'Sprungbrett is awesome',
                 'template' => 'default',
                 'content' => [
@@ -175,7 +175,7 @@ class CourseControllerTest extends SuluTestCase
         $result = json_decode($client->getResponse()->getContent(), true);
 
         $this->assertEquals($course->getId(), $result['id']);
-        $this->assertEquals('Sprungbrett', $result['title']);
+        $this->assertEquals('Sprungbrett', $result['name']);
         $this->assertEquals('Sprungbrett is awesome', $result['description']);
         $this->assertEquals('default', $result['template']);
         $this->assertEquals(['title' => 'Sprungbrett is awesome'], $result['content']);
@@ -195,7 +195,7 @@ class CourseControllerTest extends SuluTestCase
             'PUT',
             '/api/courses/' . $course->getId() . '?locale=en',
             [
-                'title' => 'Sprungbrett',
+                'name' => 'Sprungbrett',
                 'description' => 'Sprungbrett is awesome',
                 'template' => 'default',
                 'content' => [
@@ -223,7 +223,7 @@ class CourseControllerTest extends SuluTestCase
             'PUT',
             '/api/courses/' . $course->getId() . '?locale=en&action=publish',
             [
-                'title' => 'Sprungbrett',
+                'name' => 'Sprungbrett',
                 'description' => 'Sprungbrett is awesome',
                 'template' => 'default',
                 'content' => [
@@ -237,7 +237,7 @@ class CourseControllerTest extends SuluTestCase
         $result = json_decode($client->getResponse()->getContent(), true);
 
         $this->assertEquals($course->getId(), $result['id']);
-        $this->assertEquals('Sprungbrett', $result['title']);
+        $this->assertEquals('Sprungbrett', $result['name']);
         $this->assertEquals('Sprungbrett is awesome', $result['description']);
         $this->assertEquals('/sprungbrett', $result['route']);
         $this->assertEquals('default', $result['template']);
@@ -255,7 +255,7 @@ class CourseControllerTest extends SuluTestCase
             'PUT',
             '/api/courses/' . $course->getId() . '?locale=en&action=unpublish',
             [
-                'title' => 'Sprungbrett',
+                'name' => 'Sprungbrett',
                 'description' => 'Sprungbrett is awesome',
                 'template' => 'default',
                 'content' => [
@@ -269,7 +269,7 @@ class CourseControllerTest extends SuluTestCase
         $result = json_decode($client->getResponse()->getContent(), true);
 
         $this->assertEquals($course->getId(), $result['id']);
-        $this->assertEquals('Sprungbrett', $result['title']);
+        $this->assertEquals('Sprungbrett', $result['name']);
         $this->assertEquals('Sprungbrett is awesome', $result['description']);
         $this->assertEquals('default', $result['template']);
         $this->assertEquals(['title' => 'Sprungbrett is awesome'], $result['content']);

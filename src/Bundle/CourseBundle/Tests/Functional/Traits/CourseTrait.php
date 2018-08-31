@@ -19,7 +19,7 @@ trait CourseTrait
     ): Course {
         $course = new Course(Uuid::uuid4()->toString());
         $course->setCurrentLocalization(new Localization($locale));
-        $course->setTitle($title);
+        $course->setName($title);
         $course->setDescription($description);
         $course->setStructureType($structureType);
 

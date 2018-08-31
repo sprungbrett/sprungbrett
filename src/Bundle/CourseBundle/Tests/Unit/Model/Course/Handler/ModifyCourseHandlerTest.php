@@ -32,7 +32,7 @@ class ModifyCourseHandlerTest extends TestCase
         $course = $this->prophesize(CourseInterface::class);
         $course->getLocalization()->willReturn($localization->reveal());
         $repository->findById('123-123-123', $localization->reveal())->willReturn($course->reveal());
-        $course->setTitle('Sprungbrett')->shouldBeCalled();
+        $course->setName('Sprungbrett')->shouldBeCalled();
         $course->setDescription('Sprungbrett is awesome')->shouldBeCalled();
         $course->setStructureType('default')->shouldBeCalled();
         $course->setContentData(['title' => 'Sprungbrett is awesome'])->shouldBeCalled();
@@ -41,7 +41,7 @@ class ModifyCourseHandlerTest extends TestCase
         $command = $this->prophesize(ModifyCourseCommand::class);
         $command->getId()->willReturn('123-123-123');
         $command->getLocalization()->willReturn($localization->reveal());
-        $command->getTitle()->willReturn('Sprungbrett');
+        $command->getName()->willReturn('Sprungbrett');
         $command->getDescription()->willReturn('Sprungbrett is awesome');
         $command->getStructureType()->willReturn('default');
         $command->getContentData()->willReturn(['title' => 'Sprungbrett is awesome']);

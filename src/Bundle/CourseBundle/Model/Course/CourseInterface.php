@@ -28,9 +28,9 @@ interface CourseInterface extends TranslatableInterface, ContentableInterface
 
     public function setWorkflowStage(string $workflowStage): self;
 
-    public function getTitle(): ?string;
+    public function getName(): ?string;
 
-    public function setTitle(string $title): self;
+    public function setName(string $name): self;
 
     public function getDescription(): ?string;
 

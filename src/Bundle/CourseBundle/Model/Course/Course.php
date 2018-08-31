@@ -70,14 +70,14 @@ class Course implements CourseInterface, AuditableInterface, RoutableInterface
         return $this;
     }
 
-    public function getTitle(?Localization $localization = null): ?string
+    public function getName(?Localization $localization = null): ?string
     {
-        return $this->getTranslation($localization)->getTitle();
+        return $this->getTranslation($localization)->getName();
     }
 
-    public function setTitle(string $title, ?Localization $localization = null): CourseInterface
+    public function setName(string $name, ?Localization $localization = null): CourseInterface
     {
-        $this->getTranslation($localization)->setTitle($title);
+        $this->getTranslation($localization)->setName($name);
 
         return $this;
     }

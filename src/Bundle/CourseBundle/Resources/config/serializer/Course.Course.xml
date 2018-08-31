@@ -2,7 +2,7 @@
 <serializer>
     <class name="Sprungbrett\Bundle\CourseBundle\Model\Course\Course" exclusion-policy="ALL">
         <virtual-property method="getId" serialized-name="id" expose="true"/>
-        <virtual-property method="getTitle" serialized-name="title" expose="true"/>
+        <virtual-property method="getName" serialized-name="name" expose="true"/>
         <virtual-property method="getDescription" serialized-name="description" expose="true"/>
         <virtual-property method="getWorkflowStage" serialized-name="workflowStage" expose="true"/>
         <virtual-property method="getRoutePath" serialized-name="route" expose="true"/>
