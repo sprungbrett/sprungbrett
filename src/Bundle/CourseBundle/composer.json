@@ -69,7 +69,7 @@
             "tests/app/console sulu:document:initialize"
         ],
         "phpunit": "vendor/bin/phpunit",
-        "phpstan": "vendor/bin/phpstan analyze -c ./phpstan.neon src tests -l max",
+        "phpstan": "vendor/bin/phpstan analyze -c ./phpstan.neon . -l max",
         "php-cs": "vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
     },
     "minimum-stability": "dev",
