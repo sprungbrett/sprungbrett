@@ -2,9 +2,10 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\Model\Course\Command;
 
+use Sprungbrett\Component\Resource\Model\Command\ActionCommandInterface;
 use Sprungbrett\Component\Translation\Model\Command\LocaleTrait;
 
-class PublishCourseCommand
+class PublishCourseCommand implements ActionCommandInterface
 {
     use LocaleTrait;
 

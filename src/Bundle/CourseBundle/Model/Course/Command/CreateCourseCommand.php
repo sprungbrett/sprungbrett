@@ -2,6 +2,8 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\Model\Course\Command;
 
-class CreateCourseCommand extends MappingCourseCommand
+use Sprungbrett\Component\Resource\Model\Command\CreateCommandInterface;
+
+class CreateCourseCommand extends MappingCourseCommand implements CreateCommandInterface
 {
 }

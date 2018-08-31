@@ -2,9 +2,10 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\Model\Course\Query;
 
+use Sprungbrett\Component\Resource\Model\Command\FindQueryInterface;
 use Sprungbrett\Component\Translation\Model\Command\LocaleTrait;
 
-class FindCourseQuery
+class FindCourseQuery implements FindQueryInterface
 {
     use LocaleTrait;
 

@@ -2,7 +2,9 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\Model\Course\Command;
 
-class RemoveCourseCommand
+use Sprungbrett\Component\Resource\Model\Command\RemoveCommandInterface;
+
+class RemoveCourseCommand implements RemoveCommandInterface
 {
     /**
      * @var string

@@ -2,7 +2,9 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\Model\Course\Command;
 
-class ModifyCourseCommand extends MappingCourseCommand
+use Sprungbrett\Component\Resource\Model\Command\ModifyCommandInterface;
+
+class ModifyCourseCommand extends MappingCourseCommand implements ModifyCommandInterface
 {
     /**
      * @var string

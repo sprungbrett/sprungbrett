@@ -15,12 +15,16 @@
             <tag name="sulu.context" context="admin"/>
         </service>
 
+        <service id="Sprungbrett\Bundle\CourseBundle\Model\Course\Command\CourseCommandFactory"/>
         <service id="Sprungbrett\Bundle\CourseBundle\Controller\CourseController">
-            <argument type="string">%sulu.model.course.class%</argument>
+            <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Course\Command\CourseCommandFactory"/>
             <argument type="service" id="tactician.commandbus.default"/>
             <argument type="service" id="fos_rest.view_handler.default"/>
-            <argument type="service" id="security.token_storage" on-invalid="null"/>
+            <argument type="string">%sulu.model.course.class%</argument>
+            <argument type="string">courses</argument>
+            <argument type="constant">Sprungbrett\Bundle\CourseBundle\Admin\SprungbrettCourseAdmin::COURSE_SECURITY_CONTEXT</argument>
             <argument type="string">%kernel.default_locale%</argument>
+            <argument type="service" id="security.token_storage" on-invalid="null"/>
         </service>
 
         <service id="Sprungbrett\Bundle\CourseBundle\Controller\TrainerController">
