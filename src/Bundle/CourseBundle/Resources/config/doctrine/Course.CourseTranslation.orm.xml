@@ -12,7 +12,7 @@
                 use-column-prefix="false"
         />
 
-        <field name="title" type="string"/>
+        <field name="name" type="string"/>
         <field name="description" type="text"/>
         <field name="workflowStage" type="string"/>
 

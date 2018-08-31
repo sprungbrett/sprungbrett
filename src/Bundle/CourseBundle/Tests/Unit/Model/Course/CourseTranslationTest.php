@@ -56,15 +56,15 @@ class CourseTranslationTest extends TestCase
         $this->assertEquals('de_de', $translation->getLocale());
     }
 
-    public function testGetTitle()
+    public function testGetName()
     {
         $localization = $this->prophesize(Localization::class);
         $content = $this->prophesize(ContentInterface::class);
         $course = $this->prophesize(CourseInterface::class);
 
         $translation = new CourseTranslation($course->reveal(), $localization->reveal(), $content->reveal());
-        $translation->setTitle('Sprungbrett is awesome');
+        $translation->setName('Sprungbrett is awesome');
 
-        $this->assertEquals('Sprungbrett is awesome', $translation->getTitle());
+        $this->assertEquals('Sprungbrett is awesome', $translation->getName());
     }
 }

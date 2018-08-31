@@ -37,14 +37,14 @@ class CreateCourseHandlerTest extends TestCase
         $course = $this->prophesize(CourseInterface::class);
         $course->getLocalization()->willReturn($localization->reveal());
         $repository->create($localization->reveal())->willReturn($course->reveal());
-        $course->setTitle('Sprungbrett')->shouldBeCalled();
+        $course->setName('Sprungbrett')->shouldBeCalled();
         $course->setDescription('Sprungbrett is awesome')->shouldBeCalled();
         $course->setStructureType('default')->shouldBeCalled();
         $course->setTrainerId(42)->shouldBeCalled();
 
         $command = $this->prophesize(CreateCourseCommand::class);
         $command->getLocalization()->willReturn($localization->reveal());
-        $command->getTitle()->willReturn('Sprungbrett');
+        $command->getName()->willReturn('Sprungbrett');
         $command->getDescription()->willReturn('Sprungbrett is awesome');
         $command->getTrainer()->willReturn(['id' => 42]);
 

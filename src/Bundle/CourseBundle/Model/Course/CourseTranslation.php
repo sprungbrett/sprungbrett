@@ -23,7 +23,7 @@ class CourseTranslation implements CourseTranslationInterface, AuditableInterfac
     /**
      * @var string
      */
-    protected $title;
+    protected $name;
 
     /**
      * @var string
@@ -60,14 +60,14 @@ class CourseTranslation implements CourseTranslationInterface, AuditableInterfac
         return $this;
     }
 
-    public function getTitle(): ?string
+    public function getName(): ?string
     {
-        return $this->title;
+        return $this->name;
     }
 
-    public function setTitle(string $title): CourseTranslationInterface
+    public function setName(string $name): CourseTranslationInterface
     {
-        $this->title = $title;
+        $this->name = $name;
 
         return $this;
     }

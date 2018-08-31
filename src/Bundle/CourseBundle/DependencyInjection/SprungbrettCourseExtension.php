@@ -127,11 +127,12 @@ class SprungbrettCourseExtension extends Extension implements PrependExtensionIn
             'sulu_route',
             [
                 'mappings' => [
-                    Course::class => [ // TODO extensible class?
-                                       'generator' => 'schema',
-                                       'options' => [
-                                           'route_schema' => '/{object.getTitle()}',
-                                       ],
+                    Course::class => [
+                        // TODO extensible class?
+                        'generator' => 'schema',
+                        'options' => [
+                            'route_schema' => '/{object.getName()}',
+                        ],
                     ],
                 ],
             ]

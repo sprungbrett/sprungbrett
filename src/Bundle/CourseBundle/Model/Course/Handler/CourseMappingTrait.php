@@ -20,7 +20,7 @@ trait CourseMappingTrait
 
     protected function map(CourseInterface $course, MappingCourseCommand $command): void
     {
-        $course->setTitle($command->getTitle());
+        $course->setName($command->getName());
         $course->setDescription($command->getDescription());
 
         if ($command->getTrainer()) {

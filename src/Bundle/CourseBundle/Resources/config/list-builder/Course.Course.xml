@@ -38,8 +38,8 @@
             <orm:entity-name>%sulu.model.course.class%</orm:entity-name>
         </property>
 
-        <property name="title" visibility="always" list:translation="sprungbrett.title" searchability="yes">
-            <orm:field-name>title</orm:field-name>
+        <property name="name" visibility="always" list:translation="sprungbrett.name" searchability="yes">
+            <orm:field-name>name</orm:field-name>
             <orm:entity-name>%sulu.model.course-translation.class%</orm:entity-name>
 
             <orm:joins ref="translation"/>

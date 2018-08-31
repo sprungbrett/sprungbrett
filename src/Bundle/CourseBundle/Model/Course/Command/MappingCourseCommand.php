@@ -17,9 +17,9 @@ abstract class MappingCourseCommand
         $this->initializePayload($payload);
     }
 
-    public function getTitle(): string
+    public function getName(): string
     {
-        return $this->getStringValue('title');
+        return $this->getStringValue('name');
     }
 
     public function getDescription(): string

@@ -23,20 +23,20 @@ class ModifyCourseCommandTest extends TestCase
         $this->assertEquals('de', $command->getLocalization()->getLocale());
     }
 
-    public function testGetTitle()
+    public function testGetName()
     {
-        $command = new ModifyCourseCommand('123-123-123', 'de', ['title' => 'Sprungbrett']);
+        $command = new ModifyCourseCommand('123-123-123', 'de', ['name' => 'Sprungbrett']);
 
-        $this->assertEquals('Sprungbrett', $command->getTitle());
+        $this->assertEquals('Sprungbrett', $command->getName());
     }
 
-    public function testGetTitleNotExists()
+    public function testGetNameNotExists()
     {
         $this->expectException(\InvalidArgumentException::class);
 
         $command = new ModifyCourseCommand('123-123-123', 'de', []);
 
-        $command->getTitle();
+        $command->getName();
     }
 
     public function testGetDescription()
