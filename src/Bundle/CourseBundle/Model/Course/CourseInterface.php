@@ -2,7 +2,6 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\Model\Course;
 
-use Doctrine\Common\Collections\Collection;
 use Sprungbrett\Component\Content\Model\ContentableInterface;
 use Sprungbrett\Component\Translation\Model\TranslatableInterface;
 
@@ -16,7 +15,7 @@ interface CourseInterface extends TranslatableInterface, ContentableInterface
     const TRANSITION_PUBLISH = 'publish';
     const TRANSITION_UNPUBLISH = 'unpublish';
 
-    public function __construct(string $id, ?Collection $translations = null);
+    public function __construct(string $id, ?array $translations = null);
 
     public function getId(): string;
 
@@ -41,5 +40,5 @@ interface CourseInterface extends TranslatableInterface, ContentableInterface
      */
     public function removeRoute(): self;
 
-    public function getTranslations(): Collection;
+    public function getTranslations(): array;
 }
