@@ -2,7 +2,9 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\Model\Course\Query;
 
-class ListCourseQuery
+use Sprungbrett\Component\Resource\Model\Command\ListQueryInterface;
+
+class ListCourseQuery implements ListQueryInterface
 {
     /**
      * @var string
@@ -38,12 +40,12 @@ class ListCourseQuery
         $this->query = $query;
     }
 
-    public function getEntityClass()
+    public function getEntityClass(): string
     {
         return $this->entityClass;
     }
 
-    public function getResourceKey()
+    public function getResourceKey(): string
     {
         return $this->resourceKey;
     }
