@@ -187,7 +187,7 @@ class CourseBridge extends StructureBridge
             function (TranslationInterface $translation) {
                 return $translation->getLocale();
             },
-            $this->course->getTranslations()->toArray()
+            $this->course->getTranslations()
         );
     }
 

@@ -2,7 +2,6 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\Model\Trainer;
 
-use Doctrine\Common\Collections\Collection;
 use Sprungbrett\Component\Translation\Model\Exception\MissingLocalizationException;
 use Sprungbrett\Component\Translation\Model\Localization;
 use Sprungbrett\Component\Translation\Model\TranslatableTrait;
@@ -26,7 +25,7 @@ class Trainer implements TrainerInterface, AuditableInterface
      */
     protected $contactId;
 
-    public function __construct(ContactInterface $contact, ?Collection $translations = null)
+    public function __construct(ContactInterface $contact, ?array $translations = null)
     {
         $this->initializeTranslations($translations);
 

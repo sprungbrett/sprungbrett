@@ -18,9 +18,9 @@ trait TranslatableTrait
      */
     protected $currentLocalization;
 
-    protected function initializeTranslations(?Collection $translations = null)
+    protected function initializeTranslations(?array $translations = null)
     {
-        $this->translations = $translations ?: new ArrayCollection();
+        $this->translations = new ArrayCollection($translations ?: []);
     }
 
     public function setCurrentLocalization(Localization $currentLocalization): void

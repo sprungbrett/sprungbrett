@@ -2,7 +2,6 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\Model\Course;
 
-use Doctrine\Common\Collections\Collection;
 use Sprungbrett\Component\Content\Model\Content;
 use Sprungbrett\Component\Content\Model\ContentableInterface;
 use Sprungbrett\Component\Translation\Model\Exception\MissingLocalizationException;
@@ -34,7 +33,7 @@ class Course implements CourseInterface, AuditableInterface, RoutableInterface
      */
     protected $route;
 
-    public function __construct(string $id, ?Collection $translations = null)
+    public function __construct(string $id, ?array $translations = null)
     {
         $this->initializeTranslations($translations);
 
@@ -130,11 +129,11 @@ class Course implements CourseInterface, AuditableInterface, RoutableInterface
     }
 
     /**
-     * @return Collection|CourseTranslationInterface[]
+     * @return CourseTranslationInterface[]
      */
-    public function getTranslations(): Collection
+    public function getTranslations(): array
     {
-        return $this->translations;
+        return $this->translations->getValues();
     }
 
     public function getRoute(): ?RouteInterface

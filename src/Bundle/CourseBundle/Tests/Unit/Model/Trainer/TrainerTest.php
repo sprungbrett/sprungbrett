@@ -2,7 +2,6 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\Tests\Unit\Model\Trainer;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;
 use Sprungbrett\Bundle\CourseBundle\Model\Trainer\Trainer;
 use Sprungbrett\Bundle\CourseBundle\Model\Trainer\TrainerTranslationInterface;
@@ -66,7 +65,7 @@ class TrainerTest extends TestCase
 
         $contact = $this->prophesize(ContactInterface::class);
         $contact->getId()->willReturn(42);
-        $course = new Trainer($contact->reveal(), new ArrayCollection([$translation->reveal()]));
+        $course = new Trainer($contact->reveal(), [$translation->reveal()]);
         $course->setCurrentLocalization($localization->reveal());
 
         $this->assertEquals('de', $course->getLocale());
@@ -85,7 +84,7 @@ class TrainerTest extends TestCase
 
         $contact = $this->prophesize(ContactInterface::class);
         $contact->getId()->willReturn(42);
-        $course = new Trainer($contact->reveal(), new ArrayCollection([$translation->reveal()]));
+        $course = new Trainer($contact->reveal(), [$translation->reveal()]);
 
         $this->assertEquals('de', $course->getLocale($localization->reveal()));
     }
@@ -103,7 +102,7 @@ class TrainerTest extends TestCase
 
         $contact = $this->prophesize(ContactInterface::class);
         $contact->getId()->willReturn(42);
-        $course = new Trainer($contact->reveal(), new ArrayCollection([$translation->reveal()]));
+        $course = new Trainer($contact->reveal(), [$translation->reveal()]);
         $course->setCurrentLocalization($localization->reveal());
 
         $this->assertEquals('Sprungbrett is awesome', $course->getDescription());
@@ -122,7 +121,7 @@ class TrainerTest extends TestCase
 
         $contact = $this->prophesize(ContactInterface::class);
         $contact->getId()->willReturn(42);
-        $course = new Trainer($contact->reveal(), new ArrayCollection([$translation->reveal()]));
+        $course = new Trainer($contact->reveal(), [$translation->reveal()]);
 
         $this->assertEquals('Sprungbrett is awesome', $course->getDescription($localization->reveal()));
     }
