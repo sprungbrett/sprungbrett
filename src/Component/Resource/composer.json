@@ -28,6 +28,7 @@
         "friendsofsymfony/rest-bundle": "^2.3",
         "league/tactician": "^1.0",
         "jackalope/jackalope-doctrine-dbal": "^1.2.5",
+        "sprungbrett/translation": "^1.0@dev",
         "sulu/sulu": "^2.0@dev"
     },
     "require-dev": {
