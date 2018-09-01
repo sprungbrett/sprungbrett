@@ -49,6 +49,7 @@ return [
     Sprungbrett\Bundle\InfrastructureBundle\SprungbrettInfrastructureBundle::class => ['all' => true],
     Sprungbrett\Bundle\CourseBundle\SprungbrettCourseBundle::class => ['all' => true],
     Symfony\Bundle\MonologBundle\MonologBundle::class => ['all' => true],
+    Sulu\Bundle\CommunityBundle\SuluCommunityBundle::class => ['all' => true],
 
     // important because the model parameter only exists if the bundle is registered before admin-bundle
     Sulu\Bundle\AdminBundle\SuluAdminBundle::class => ['all' => true],

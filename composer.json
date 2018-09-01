@@ -26,6 +26,7 @@
         "league/tactician-logger": "^0.10",
         "massive/build-bundle": "^0.3.0",
         "ramsey/uuid": "^3.7",
+        "sulu/community-bundle": "^2.0@dev",
         "sulu/sulu": "dev-develop",
         "symfony/console": "^3.4",
         "symfony/flex": "^1.0",

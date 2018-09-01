@@ -2,6 +2,9 @@
     "aferrandini/urlizer": {
         "version": "1.0.0"
     },
+    "beberlei/doctrineextensions": {
+        "version": "v1.1.4"
+    },
     "behat/transliterator": {
         "version": "v1.2.0"
     },
@@ -458,6 +461,9 @@
             "ref": "6c1ceb662f8997085f739cd089bfbef67f245983"
         }
     },
+    "sulu/community-bundle": {
+        "version": "2.0-dev"
+    },
     "sulu/document-manager": {
         "version": "0.10.1"
     },
@@ -637,6 +643,9 @@
     },
     "symfony/security": {
         "version": "v3.4.9"
+    },
+    "symfony/security-acl": {
+        "version": "v3.0.1"
     },
     "symfony/security-bundle": {
         "version": "3.3",

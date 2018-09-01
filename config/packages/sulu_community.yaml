@@ -1,0 +1,6 @@
+sulu_community:
+    webspaces:
+        example:
+            from:
+                name: "Sprungbrett"
+                email: "webmaster@sprungbrett.io"
