@@ -83,3 +83,8 @@ sulu_route_api:
 sulu_search:
     resource: "@SuluSearchBundle/Resources/config/routing.yml"
     prefix: /admin/search
+
+sulu_community_api:
+    type: rest
+    resource: "@SuluCommunityBundle/Resources/config/routing_api.xml"
+    prefix: /admin/api

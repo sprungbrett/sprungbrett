@@ -15,3 +15,13 @@ services:
             MYSQL_ALLOW_EMPTY_PASSWORD: 1
             MYSQL_ROOT_HOST: "%"
             MYSQL_HOST: "%"
+    mailhog:
+        build: ./docker/mailhog
+        ports:
+            - 1025:1025
+            - 8025:8025
+        volumes:
+            - ./var/data/mailhog:/var/lib/mailhog
+        environment:
+            MH_MAILDIR_PATH: /var/lib/mailhog
+            MH_STORAGE: maildir
