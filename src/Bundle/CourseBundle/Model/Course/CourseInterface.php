@@ -35,10 +35,15 @@ interface CourseInterface extends TranslatableInterface, ContentableInterface
 
     public function setDescription(string $description): self;
 
+    public function getTranslations(): array;
+
     /**
      * FIXME remove from here (not domain logic).
      */
     public function removeRoute(): self;
 
-    public function getTranslations(): array;
+    /**
+     * FIXME remove from here (not domain logic).
+     */
+    public function getRoutePath(): ?string;
 }

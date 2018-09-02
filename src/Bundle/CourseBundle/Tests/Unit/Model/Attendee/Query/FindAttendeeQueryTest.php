@@ -8,7 +8,7 @@ use Sprungbrett\Component\Translation\Model\Localization;
 
 class FindAttendeeQueryTest extends TestCase
 {
-    public function getId()
+    public function testGetId()
     {
         $command = new FindAttendeeQuery(42, 'de');
 

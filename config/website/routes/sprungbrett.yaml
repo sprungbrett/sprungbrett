@@ -1,0 +1,3 @@
+sprungbrett_course:
+    type: portal
+    resource: "@SprungbrettCourseBundle/Resources/config/routing.xml"
