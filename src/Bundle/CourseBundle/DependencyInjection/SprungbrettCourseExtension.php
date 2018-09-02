@@ -2,6 +2,7 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\DependencyInjection;
 
+use Sprungbrett\Bundle\CourseBundle\Model\Attendee\CourseAttendeeInterface;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\Course;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 use Sprungbrett\Bundle\CourseBundle\Structure\CourseBridge;
@@ -86,6 +87,28 @@ class SprungbrettCourseExtension extends Extension implements PrependExtensionIn
                             CourseInterface::TRANSITION_UNPUBLISH => [
                                 'from' => CourseInterface::WORKFLOW_STAGE_PUBLISHED,
                                 'to' => CourseInterface::WORKFLOW_STAGE_TEST,
+                            ],
+                        ],
+                    ],
+                    'course_attendee' => [
+                        'type' => 'workflow',
+                        'marking_store' => [
+                            'type' => 'single_state',
+                            'arguments' => [
+                                'workflowStage',
+                            ],
+                        ],
+                        'supports' => [
+                            CourseAttendeeInterface::class,
+                        ],
+                        'places' => [
+                            CourseAttendeeInterface::WORKFLOW_STAGE_NEW,
+                            CourseAttendeeInterface::WORKFLOW_STAGE_INTERESTED,
+                        ],
+                        'transitions' => [
+                            CourseAttendeeInterface::TRANSITION_SHOW_INTEREST => [
+                                'from' => CourseAttendeeInterface::WORKFLOW_STAGE_NEW,
+                                'to' => CourseAttendeeInterface::WORKFLOW_STAGE_INTERESTED,
                             ],
                         ],
                     ],

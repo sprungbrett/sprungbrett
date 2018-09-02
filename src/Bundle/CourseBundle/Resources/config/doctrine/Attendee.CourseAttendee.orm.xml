@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Sprungbrett\Bundle\CourseBundle\Model\Attendee\CourseAttendee" table="sp_course_attendee"
+            repository-class="Sprungbrett\Bundle\CourseBundle\Repository\CourseAttendeeRepository">
+        <id name="course" type="guid" association-key="true"/>
+        <id name="attendee" type="int" association-key="true"/>
+
+        <field name="workflowStage" type="string"/>
+
+        <many-to-one
+                field="course"
+                target-entity="Sprungbrett\Bundle\CourseBundle\Model\Course\Course"
+        />
+        <many-to-one
+                field="attendee"
+                target-entity="Sprungbrett\Bundle\CourseBundle\Model\Attendee\Attendee"
+        >
+            <join-column referenced-column-name="contact_id"/>
+        </many-to-one>
+    </entity>
+</doctrine-mapping>

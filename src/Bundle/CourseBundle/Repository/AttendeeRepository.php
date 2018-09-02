@@ -10,7 +10,7 @@ use Sulu\Bundle\ContactBundle\Entity\ContactInterface;
 
 class AttendeeRepository extends EntityRepository implements AttendeeRepositoryInterface
 {
-    public function findOrCreateAttendeeById(int $id, Localization $localization): AttendeeInterface
+    public function findOrCreateAttendeeById(int $id, ?Localization $localization = null): AttendeeInterface
     {
         /** @var AttendeeInterface $attendee */
         $attendee = $this->find($id);
@@ -23,7 +23,9 @@ class AttendeeRepository extends EntityRepository implements AttendeeRepositoryI
             $this->getEntityManager()->persist($attendee);
         }
 
-        $attendee->setCurrentLocalization($localization);
+        if ($localization) {
+            $attendee->setCurrentLocalization($localization);
+        }
 
         return $attendee;
     }

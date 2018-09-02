@@ -6,5 +6,5 @@ use Sprungbrett\Component\Translation\Model\Localization;
 
 interface AttendeeRepositoryInterface
 {
-    public function findOrCreateAttendeeById(int $id, Localization $localization): AttendeeInterface;
+    public function findOrCreateAttendeeById(int $id, ?Localization $localization = null): AttendeeInterface;
 }
