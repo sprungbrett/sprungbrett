@@ -161,6 +161,26 @@ class SprungbrettCourseExtension extends Extension implements PrependExtensionIn
             ]
         );
 
+        if (!$container->hasExtension('sprungbrett_infrastructure')) {
+            throw new \RuntimeException('Missing SprungbrettInfrastructureBundle.');
+        }
+
+        $container->prependExtensionConfig(
+            'sprungbrett_infrastructure',
+            [
+                'resources' => [
+                    'courses' => [
+                        'workflow_stages' => [
+                            CourseInterface::WORKFLOW_STAGE_TEST => '@SprungbrettCourseBundle/Resources/config/forms/Course.test.xml',
+                            CourseInterface::WORKFLOW_STAGE_PUBLISHED => '@SprungbrettCourseBundle/Resources/config/forms/Course.published.xml',
+                        ],
+                        'datagrid' => '%sulu.model.course.class%',
+                        'endpoint' => 'sprungbrett.get_courses',
+                    ],
+                ],
+            ]
+        );
+
         if (!$container->hasExtension('sulu_core')) {
             throw new \RuntimeException('Missing SuluCoreBundle.');
         }
@@ -217,11 +237,6 @@ class SprungbrettCourseExtension extends Extension implements PrependExtensionIn
                     ],
                 ],
                 'resources' => [
-                    'courses' => [
-                        'form' => ['@SprungbrettCourseBundle/Resources/config/forms/Course.xml'],
-                        'datagrid' => '%sulu.model.course.class%',
-                        'endpoint' => 'sprungbrett.get_courses',
-                    ],
                     'trainers' => [
                         'form' => ['@SprungbrettCourseBundle/Resources/config/forms/Trainer.xml'],
                         'endpoint' => 'sprungbrett.get_trainers',

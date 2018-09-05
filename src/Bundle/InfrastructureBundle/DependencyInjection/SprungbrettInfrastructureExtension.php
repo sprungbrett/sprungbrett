@@ -15,6 +15,9 @@ class SprungbrettInfrastructureExtension extends Extension implements PrependExt
 {
     public function load(array $configs, ContainerBuilder $container)
     {
+        $config = $this->processConfiguration(new Configuration(), $configs);
+        $container->setParameter('sprungbrett_infrastructure.resources', $config['resources']);
+
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
     }

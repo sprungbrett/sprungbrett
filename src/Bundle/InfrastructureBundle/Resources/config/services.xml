@@ -25,5 +25,14 @@
             <argument type="service" id="sulu.content.structure_manager"/>
             <argument type="service" id="request_stack"/>
         </service>
+        <service id="Sprungbrett\Bundle\InfrastructureBundle\ResourceMetadata\ResourceMetadataProvider">
+            <argument>%sprungbrett_infrastructure.resources%</argument>
+            <argument type="service" id="sulu_admin.metadata.resource_metadata_mapper"/>
+            <argument type="service" id="file_locator"/>
+            <argument type="service" id="sulu_admin.form_metadata.form_xml_loader"/>
+
+            <tag name="sulu.resource_metadata_provider"/>
+            <tag name="sulu.context" context="admin"/>
+        </service>
     </services>
 </container>

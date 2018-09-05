@@ -1,11 +1,12 @@
 // @flow
 import React from 'react';
 import {action, computed, isObservableArray, observable} from 'mobx';
-import {Form as FormContainer, FormStore, withToolbar} from 'sulu-admin-bundle/containers';
 import type {ViewProps} from 'sulu-admin-bundle/containers';
+import {Form as FormContainer, withToolbar} from 'sulu-admin-bundle/containers';
 import {translate} from 'sulu-admin-bundle/utils';
 import {ResourceStore} from 'sulu-admin-bundle/stores';
 import ContentStore from './stores/ContentStore';
+import FormStore from './stores/FormStore';
 import courseFormStyles from './courseForm.scss';
 
 type Props = ViewProps & {
@@ -87,6 +88,12 @@ class CourseForm extends React.PureComponent<Props> {
             router.bind('locale', this.resourceStore.locale);
         }
     }
+
+    submit = (action) => {
+        this.form.submit(action).then((response) => {
+            this.formStore.changeType(response.workflowStage);
+        });
+    };
 
     componentWillUnmount() {
         this.formStore.destroy();
@@ -192,14 +199,14 @@ export default withToolbar(CourseForm, function() {
                     label: translate('sprungbrett.save'),
                     disabled: !resourceStore.dirty,
                     onClick: () => {
-                        this.form.submit('draft');
+                        this.submit('draft');
                     },
                 },
                 ...(resourceStore.data.transitions || []).map((transition) => {
                     return {
                         label: translate('sprungbrett.save_' + transition.name),
                         onClick: () => {
-                            this.form.submit(transition.name);
+                            this.submit(transition.name);
                         },
                     };
                 }),
@@ -210,22 +217,6 @@ export default withToolbar(CourseForm, function() {
     const icons = [
         resourceStore.data.workflowStage === 'published' ? 'fa-circle' : 'fa-circle-o',
     ];
-
-    if (formStore.typesLoading || Object.keys(formTypes).length > 0) {
-        items.push({
-            type: 'select',
-            icon: 'fa-paint-brush',
-            onChange: (value) => {
-                formStore.changeType(value);
-            },
-            loading: formStore.typesLoading,
-            value: formStore.type,
-            options: Object.keys(formTypes).map((key) => ({
-                value: formTypes[key].key,
-                label: formTypes[key].title,
-            })),
-        });
-    }
 
     return {
         backButton,
