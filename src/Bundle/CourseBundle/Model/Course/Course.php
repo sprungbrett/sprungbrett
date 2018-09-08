@@ -29,9 +29,9 @@ class Course implements CourseInterface, AuditableInterface, RoutableInterface
     protected $trainerId;
 
     /**
-     * @var RouteInterface|null
+     * @var string
      */
-    protected $route;
+    protected $workflowStage = CourseInterface::WORKFLOW_STAGE_NEW;
 
     public function __construct(string $id, ?array $translations = null)
     {
@@ -57,14 +57,14 @@ class Course implements CourseInterface, AuditableInterface, RoutableInterface
         return $this;
     }
 
-    public function getWorkflowStage(?Localization $localization = null): string
+    public function getWorkflowStage(): string
     {
-        return $this->getTranslation($localization)->getWorkflowStage();
+        return $this->workflowStage;
     }
 
-    public function setWorkflowStage(string $workflowStage, ?Localization $localization = null): CourseInterface
+    public function setWorkflowStage(string $workflowStage): CourseInterface
     {
-        $this->getTranslation($localization)->setWorkflowStage($workflowStage);
+        $this->workflowStage = $workflowStage;
 
         return $this;
     }
@@ -138,30 +138,36 @@ class Course implements CourseInterface, AuditableInterface, RoutableInterface
 
     public function getRoute(): ?RouteInterface
     {
-        return $this->route;
+        $translation = $this->getTranslation();
+        if (!$translation instanceof RoutableInterface) {
+            return null;
+        }
+
+        return $translation->getRoute();
     }
 
     public function setRoute(RouteInterface $route): self
     {
-        $this->route = $route;
+        $translation = $this->getTranslation();
+        if (!$translation instanceof RoutableInterface) {
+            return $this;
+        }
+
+        $translation->setRoute($route);
 
         return $this;
     }
 
     public function removeRoute(): CourseInterface
     {
-        $this->route = null;
+        $this->getTranslation()->removeRoute();
 
         return $this;
     }
 
     public function getRoutePath(): ?string
     {
-        if (!$this->route) {
-            return null;
-        }
-
-        return $this->route->getPath();
+        return $this->getTranslation()->getRoutePath();
     }
 
     protected function createTranslation(Localization $localization): TranslationInterface

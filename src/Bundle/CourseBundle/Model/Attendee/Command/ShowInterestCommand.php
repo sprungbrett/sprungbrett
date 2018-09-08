@@ -2,8 +2,12 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\Model\Attendee\Command;
 
+use Sprungbrett\Component\Translation\Model\Command\LocaleTrait;
+
 class ShowInterestCommand
 {
+    use LocaleTrait;
+
     /**
      * @var int
      */
@@ -14,8 +18,10 @@ class ShowInterestCommand
      */
     private $courseId;
 
-    public function __construct(int $attendeeId, string $courseId)
+    public function __construct(int $attendeeId, string $courseId, string $locale)
     {
+        $this->initializeLocale($locale);
+
         $this->attendeeId = $attendeeId;
         $this->courseId = $courseId;
     }

@@ -51,7 +51,7 @@
 
         <service id="Sprungbrett\Bundle\CourseBundle\EventSubscriber\CourseWorkflowSubscriber">
             <argument type="service" id="sulu_route.manager.route_manager"/>
-            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="sulu_core.webspace.webspace_manager"/>
 
             <tag name="kernel.event_subscriber"/>
             <tag name="sulu.context" context="admin"/>

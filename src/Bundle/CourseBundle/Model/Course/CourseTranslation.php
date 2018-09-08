@@ -6,10 +6,12 @@ use Sprungbrett\Component\Content\Model\ContentableTrait;
 use Sprungbrett\Component\Content\Model\ContentInterface;
 use Sprungbrett\Component\Translation\Model\Localization;
 use Sprungbrett\Component\Translation\Model\TranslationTrait;
+use Sulu\Bundle\RouteBundle\Model\RoutableInterface;
+use Sulu\Bundle\RouteBundle\Model\RouteInterface;
 use Sulu\Component\Persistence\Model\AuditableInterface;
 use Sulu\Component\Persistence\Model\AuditableTrait;
 
-class CourseTranslation implements CourseTranslationInterface, AuditableInterface
+class CourseTranslation implements CourseTranslationInterface, RoutableInterface, AuditableInterface
 {
     use AuditableTrait;
     use ContentableTrait;
@@ -23,17 +25,17 @@ class CourseTranslation implements CourseTranslationInterface, AuditableInterfac
     /**
      * @var string
      */
-    protected $name;
+    protected $name = '';
 
     /**
      * @var string
      */
-    protected $description;
+    protected $description = '';
 
     /**
-     * @var string
+     * @var RouteInterface|null
      */
-    protected $workflowStage = CourseInterface::WORKFLOW_STAGE_NEW;
+    protected $route;
 
     public function __construct(CourseInterface $course, Localization $localization, ContentInterface $content)
     {
@@ -46,18 +48,6 @@ class CourseTranslation implements CourseTranslationInterface, AuditableInterfac
     public function getCourse(): CourseInterface
     {
         return $this->course;
-    }
-
-    public function getWorkflowStage(): string
-    {
-        return $this->workflowStage;
-    }
-
-    public function setWorkflowStage(string $workflowStage): CourseTranslationInterface
-    {
-        $this->workflowStage = $workflowStage;
-
-        return $this;
     }
 
     public function getName(): ?string
@@ -82,5 +72,38 @@ class CourseTranslation implements CourseTranslationInterface, AuditableInterfac
         $this->description = $description;
 
         return $this;
+    }
+
+    public function getRoute(): ?RouteInterface
+    {
+        return $this->route;
+    }
+
+    public function setRoute(RouteInterface $route): self
+    {
+        $this->route = $route;
+
+        return $this;
+    }
+
+    public function removeRoute(): CourseTranslationInterface
+    {
+        $this->route = null;
+
+        return $this;
+    }
+
+    public function getRoutePath(): ?string
+    {
+        if (!$this->route) {
+            return null;
+        }
+
+        return $this->route->getPath();
+    }
+
+    public function getId()
+    {
+        return $this->course->getId();
     }
 }

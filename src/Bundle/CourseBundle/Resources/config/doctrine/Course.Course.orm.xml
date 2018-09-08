@@ -8,6 +8,8 @@
             <generator strategy="NONE"/>
         </id>
 
+        <field name="workflowStage"/>
+
         <field name="trainerId" type="integer" nullable="true">
             <options>
                 <option name="references">
@@ -28,13 +30,5 @@
                 <cascade-remove/>
             </cascade>
         </one-to-many>
-
-        <one-to-one field="route" target-entity="Sulu\Bundle\RouteBundle\Model\RouteInterface" orphan-removal="true">
-            <cascade>
-                <cascade-all/>
-            </cascade>
-
-            <join-column on-delete="SET NULL"/>
-        </one-to-one>
     </entity>
 </doctrine-mapping>

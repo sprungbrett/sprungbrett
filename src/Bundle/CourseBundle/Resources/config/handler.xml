@@ -32,6 +32,7 @@
             <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface"/>
             <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Trainer\TrainerRepositoryInterface"/>
             <argument type="service" id="Sprungbrett\Component\EventCollector\EventCollector"/>
+            <argument type="string">%sprungbrett_course.default_type%</argument>
 
             <tag name="tactician.handler" typehints="true"/>
         </service>

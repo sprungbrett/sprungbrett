@@ -11,6 +11,7 @@ use Sulu\Bundle\HttpCacheBundle\Cache\AbstractHttpCache;
 use Sulu\Bundle\SecurityBundle\Entity\User;
 use Sulu\Component\Security\Authentication\UserInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -40,13 +41,15 @@ class WebsiteInterestController
         $this->tokenStorage = $tokenStorage;
     }
 
-    public function createAction(string $courseId): Response
+    public function createAction(Request $request, string $courseId): Response
     {
         /** @var User $user */
         $user = $this->getUser();
 
         /** @var CourseAttendeeInterface $courseAttendee */
-        $courseAttendee = $this->commandBus->handle(new ShowInterestCommand($user->getContact()->getId(), $courseId));
+        $courseAttendee = $this->commandBus->handle(
+            new ShowInterestCommand($user->getContact()->getId(), $courseId, $request->getLocale())
+        );
 
         return $this->makePrivate(new RedirectResponse($courseAttendee->getCourse()->getRoutePath() . '?success=1'));
     }

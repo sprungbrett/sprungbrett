@@ -23,19 +23,29 @@ class ModifyCourseHandler
      */
     private $eventCollector;
 
-    public function __construct(CourseRepositoryInterface $courseRepository, TrainerRepositoryInterface $trainerRepository, EventCollector $eventCollector)
-    {
+    /**
+     * @var string
+     */
+    private $defaultStructureType;
+
+    public function __construct(
+        CourseRepositoryInterface $courseRepository,
+        TrainerRepositoryInterface $trainerRepository,
+        EventCollector $eventCollector,
+        string $defaultStructureType
+    ) {
         $this->initializeCourseMapping($trainerRepository);
 
         $this->courseRepository = $courseRepository;
         $this->eventCollector = $eventCollector;
+        $this->defaultStructureType = $defaultStructureType;
     }
 
     public function handle(ModifyCourseCommand $command): CourseInterface
     {
         $course = $this->courseRepository->findById($command->getId(), $command->getLocalization());
         $this->map($course, $command);
-        $course->setStructureType($command->getStructureType());
+        $course->setStructureType($command->getStructureType() ?: $this->defaultStructureType);
         $course->setContentData($command->getContentData());
 
         $this->eventCollector->push(

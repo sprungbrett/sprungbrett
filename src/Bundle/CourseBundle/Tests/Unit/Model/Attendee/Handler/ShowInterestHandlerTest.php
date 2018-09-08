@@ -12,6 +12,7 @@ use Sprungbrett\Bundle\CourseBundle\Model\Attendee\Event\AttendeeShowedInterestE
 use Sprungbrett\Bundle\CourseBundle\Model\Attendee\Handler\ShowInterestHandler;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 use Sprungbrett\Component\EventCollector\EventCollector;
+use Sprungbrett\Component\Translation\Model\Localization;
 use Symfony\Component\Workflow\Marking;
 use Symfony\Component\Workflow\Workflow;
 
@@ -29,14 +30,17 @@ class ShowInterestHandlerTest extends TestCase
             $eventCollector->reveal()
         );
 
+        $localization = $this->prophesize(Localization::class);
+
         $command = $this->prophesize(ShowInterestCommand::class);
         $command->getCourseId()->willReturn('123-123-123');
         $command->getAttendeeId()->willReturn(42);
+        $command->getLocalization()->willReturn($localization->reveal());
 
         $courseAttendee = $this->prophesize(CourseAttendeeInterface::class);
         $courseAttendee->getAttendee()->willReturn($this->prophesize(AttendeeInterface::class)->reveal());
         $courseAttendee->getCourse()->willReturn($this->prophesize(CourseInterface::class)->reveal());
-        $courseAttendeeRepository->findOrCreateCourseAttendeeById(42, '123-123-123')
+        $courseAttendeeRepository->findOrCreateCourseAttendeeById(42, '123-123-123', $localization->reveal())
             ->willReturn($courseAttendee->reveal());
 
         $workflow->can($courseAttendee->reveal(), CourseAttendeeInterface::TRANSITION_SHOW_INTEREST)->willReturn(true);
