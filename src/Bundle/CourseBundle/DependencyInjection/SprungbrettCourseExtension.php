@@ -90,6 +90,43 @@ class SprungbrettCourseExtension extends Extension implements PrependExtensionIn
                             ],
                         ],
                     ],
+                    'course_phase' => [
+                        'type' => 'workflow',
+                        'marking_store' => [
+                            'type' => 'single_state',
+                            'arguments' => [
+                                'phase',
+                            ],
+                        ],
+                        'supports' => [
+                            CourseInterface::class,
+                        ],
+                        'places' => [
+                            CourseInterface::PHASE_CREATION,
+                            CourseInterface::PHASE_REGISTRATION,
+                            CourseInterface::PHASE_RESERVATION,
+                            CourseInterface::PHASE_EVALUATION,
+                            CourseInterface::PHASE_CLOSED,
+                        ],
+                        'transitions' => [
+                            CourseInterface::PHASE_TRANSITION_START_REGISTRATION => [
+                                'from' => CourseInterface::PHASE_CREATION,
+                                'to' => CourseInterface::PHASE_REGISTRATION,
+                            ],
+                            CourseInterface::PHASE_TRANSITION_START_RESERVATION => [
+                                'from' => [CourseInterface::PHASE_CREATION, CourseInterface::PHASE_REGISTRATION],
+                                'to' => CourseInterface::PHASE_RESERVATION,
+                            ],
+                            CourseInterface::PHASE_TRANSITION_START_EVALUATION => [
+                                'from' => CourseInterface::PHASE_RESERVATION,
+                                'to' => CourseInterface::PHASE_EVALUATION,
+                            ],
+                            CourseInterface::PHASE_TRANSITION_CLOSE => [
+                                'from' => CourseInterface::PHASE_EVALUATION,
+                                'to' => CourseInterface::PHASE_CLOSED,
+                            ],
+                        ],
+                    ],
                     'course_attendee' => [
                         'type' => 'workflow',
                         'marking_store' => [

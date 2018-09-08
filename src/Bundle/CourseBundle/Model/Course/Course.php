@@ -33,6 +33,11 @@ class Course implements CourseInterface, AuditableInterface, RoutableInterface
      */
     protected $workflowStage = CourseInterface::WORKFLOW_STAGE_NEW;
 
+    /**
+     * @var string
+     */
+    protected $phase = self::PHASE_CREATION;
+
     public function __construct(string $id, ?array $translations = null)
     {
         $this->initializeTranslations($translations);
@@ -57,7 +62,7 @@ class Course implements CourseInterface, AuditableInterface, RoutableInterface
         return $this;
     }
 
-    public function getWorkflowStage(): string
+    public function getWorkflowStage(?Localization $localization = null): string
     {
         return $this->workflowStage;
     }
@@ -65,6 +70,18 @@ class Course implements CourseInterface, AuditableInterface, RoutableInterface
     public function setWorkflowStage(string $workflowStage): CourseInterface
     {
         $this->workflowStage = $workflowStage;
+
+        return $this;
+    }
+
+    public function getPhase(): string
+    {
+        return $this->phase;
+    }
+
+    public function setPhase(string $phase): CourseInterface
+    {
+        $this->phase = $phase;
 
         return $this;
     }

@@ -9,6 +9,7 @@
         </id>
 
         <field name="workflowStage"/>
+        <field name="phase"/>
 
         <field name="trainerId" type="integer" nullable="true">
             <options>
