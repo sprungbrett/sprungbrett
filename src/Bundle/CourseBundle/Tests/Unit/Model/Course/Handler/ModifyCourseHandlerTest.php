@@ -16,15 +16,26 @@ use Sprungbrett\Component\Translation\Model\Localization;
 
 class ModifyCourseHandlerTest extends TestCase
 {
-    public function testHandle()
+    public function provideHandleData(): array
+    {
+        return [
+            ['simple', 'simple'],
+            [null, 'default'],
+        ];
+    }
+
+    /**
+     * @dataProvider provideHandleData
+     */
+    public function testHandle(?string $structureType, string $expectedStructureType)
     {
         $repository = $this->prophesize(CourseRepositoryInterface::class);
         $trainerRepository = $this->prophesize(TrainerRepositoryInterface::class);
         $eventCollector = $this->prophesize(EventCollector::class);
         $handler = new ModifyCourseHandler(
             $repository->reveal(),
-            $trainerRepository->reveal(),
-            $eventCollector->reveal()
+            $trainerRepository->reveal(), $eventCollector->reveal(),
+            'default'
         );
 
         $localization = $this->prophesize(Localization::class);
@@ -34,7 +45,7 @@ class ModifyCourseHandlerTest extends TestCase
         $repository->findById('123-123-123', $localization->reveal())->willReturn($course->reveal());
         $course->setName('Sprungbrett')->shouldBeCalled();
         $course->setDescription('Sprungbrett is awesome')->shouldBeCalled();
-        $course->setStructureType('default')->shouldBeCalled();
+        $course->setStructureType($expectedStructureType)->shouldBeCalled();
         $course->setContentData(['title' => 'Sprungbrett is awesome'])->shouldBeCalled();
         $course->setTrainerId(42)->shouldBeCalled();
 
@@ -43,7 +54,7 @@ class ModifyCourseHandlerTest extends TestCase
         $command->getLocalization()->willReturn($localization->reveal());
         $command->getName()->willReturn('Sprungbrett');
         $command->getDescription()->willReturn('Sprungbrett is awesome');
-        $command->getStructureType()->willReturn('default');
+        $command->getStructureType()->willReturn($structureType);
         $command->getContentData()->willReturn(['title' => 'Sprungbrett is awesome']);
         $command->getTrainer()->willReturn(['id' => 42]);
 

@@ -67,6 +67,9 @@ trait PayloadTrait
     public function getStringValueWithDefault(string $name, string $default = ''): string
     {
         $value = $this->getValueWithDefault($name, $default);
+        if (null === $value) {
+            return $default;
+        }
 
         Assert::string($value);
 

@@ -1,23 +1,30 @@
 // @flow
 import React from 'react';
-import {action, computed, isObservableArray, observable} from 'mobx';
+import type {ElementRef} from 'react';
+import {action, computed, observable, isObservableArray} from 'mobx';
+import {observer} from 'mobx-react';
+import equals from 'fast-deep-equal';
+import {PublishIndicator} from 'sulu-admin-bundle/components';
 import {Form as FormContainer, FormStore, withToolbar} from 'sulu-admin-bundle/containers';
 import type {ViewProps} from 'sulu-admin-bundle/containers';
-import {translate} from 'sulu-admin-bundle/utils';
 import {ResourceStore} from 'sulu-admin-bundle/stores';
+import toolbarActionRegistry from 'sulu-admin-bundle/views/Form/registries/ToolbarActionRegistry';
 import ContentStore from './stores/ContentStore';
 import courseFormStyles from './courseForm.scss';
 
 type Props = ViewProps & {
+    locales: Array<string>,
     resourceStore: ResourceStore,
 };
 
-class CourseForm extends React.PureComponent<Props> {
+@observer
+class CourseForm extends React.Component<Props> {
     resourceStore: ResourceStore;
     formStore: FormStore;
-    form: ?FormContainer;
+    form: ?ElementRef<typeof FormContainer>;
     @observable errors = [];
     showSuccess = observable.box(false);
+    @observable toolbarActions = [];
 
     @computed get hasOwnResourceStore() {
         const {
@@ -32,23 +39,35 @@ class CourseForm extends React.PureComponent<Props> {
         return resourceKey && resourceStore.resourceKey !== resourceKey;
     }
 
+    @computed get locales() {
+        const {
+            locales: propsLocales,
+            route: {
+                options: {
+                    locales: routeLocales,
+                },
+            },
+        } = this.props;
+
+        return routeLocales ? routeLocales : propsLocales;
+    }
+
     constructor(props: Props) {
         super(props);
 
         const {resourceStore, router} = this.props;
         const {
-            attributes: {
-                id,
-            },
+            attributes,
             route: {
                 options: {
                     idQueryParameter,
                     resourceKey,
-                    locales,
+                    routerAttributesToFormStore,
                     content,
                 },
             },
         } = router;
+        const {id} = attributes;
 
         if (!resourceStore) {
             throw new Error(
@@ -57,34 +76,73 @@ class CourseForm extends React.PureComponent<Props> {
             );
         }
 
+        const formStoreOptions = routerAttributesToFormStore
+            ? routerAttributesToFormStore.reduce(
+                (options: Object, routerAttribute: string) => {
+                    options[routerAttribute] = attributes[routerAttribute];
+                    return options;
+                },
+                {}
+            )
+            : {};
+
         if (this.hasOwnResourceStore) {
             let locale = resourceStore.locale;
-            if ((typeof locales === 'boolean' && locales === true)) {
+            if (!locale && this.locales) {
                 locale = observable.box();
             }
 
-            if ((Array.isArray(locales) || isObservableArray(locales)) && locales.length > 0) {
-                const parentLocale = resourceStore.locale ? resourceStore.locale.get() : undefined;
-                if (locales.includes(parentLocale)) {
-                    locale = observable.box(parentLocale);
-                } else {
-                    locale = observable.box();
-                }
-            }
-
             this.resourceStore = idQueryParameter
-                ? new ResourceStore(resourceKey, id, {locale: locale}, {}, idQueryParameter)
-                : new ResourceStore(resourceKey, id, {locale: locale});
+                ? new ResourceStore(resourceKey, id, {locale}, formStoreOptions, idQueryParameter)
+                : new ResourceStore(resourceKey, id, {locale}, formStoreOptions);
         } else {
             this.resourceStore = resourceStore;
+
+            if (Object.keys(this.resourceStore.data).length > 0) {
+                // data should be reloaded if ResourceTabs ResourceStore is used and user comes back from another tab
+                // the above check assumes that loading the data from the backend takes longer than calling this method
+                // the very unlikely worst case scenario if this assumption is not met, is that the data is loaded twice
+                this.resourceStore.load();
+            }
         }
 
         const formResourceStore = content ? new ContentStore(this.resourceStore) : this.resourceStore;
         // $FlowFixMe
-        this.formStore = new FormStore(formResourceStore);
+        this.formStore = new FormStore(formResourceStore, formStoreOptions);
 
         if (this.resourceStore.locale) {
             router.bind('locale', this.resourceStore.locale);
+        }
+    }
+
+    @action componentDidMount() {
+        const {locales, router} = this.props;
+        const {
+            route: {
+                options: {
+                    toolbarActions,
+                },
+            },
+        } = router;
+
+        if (!Array.isArray(toolbarActions) && !isObservableArray(toolbarActions)) {
+            throw new Error('The view "Form" needs some defined toolbarActions to work properly!');
+        }
+
+        this.toolbarActions = toolbarActions.map((toolbarAction) => new (toolbarActionRegistry.get(toolbarAction))(
+            this.formStore,
+            // $FlowFixMe
+            this,
+            router,
+            locales
+        ));
+    }
+
+    componentDidUpdate(prevProps: Props) {
+        if (!equals(this.props.locales, prevProps.locales)) {
+            this.toolbarActions.forEach((toolbarAction) => {
+                toolbarAction.setLocales(this.locales);
+            });
         }
     }
 
@@ -100,16 +158,22 @@ class CourseForm extends React.PureComponent<Props> {
         this.showSuccess.set(true);
     };
 
+    @action submit = (action: ?string) => {
+        if (!this.form) {
+            throw new Error('The form ref has not been set! This should not happen and is likely a bug.');
+        }
+        this.form.submit(action);
+    };
+
     handleSubmit = (actionParameter) => {
         const {resourceStore, router} = this.props;
 
         const {
-            attributes: {
-                parentId,
-            },
+            attributes,
             route: {
                 options: {
                     editRoute,
+                    routerAttributesToEditRoute,
                 },
             },
         } = router;
@@ -118,11 +182,29 @@ class CourseForm extends React.PureComponent<Props> {
             resourceStore.destroy();
         }
 
-        return this.formStore.save({parentid: parentId, action: actionParameter})
+        const saveOptions = {
+            action: actionParameter,
+        };
+
+        const editRouteParameters = routerAttributesToEditRoute
+            ? routerAttributesToEditRoute.reduce(
+                (parameters: Object, routerAttribute: string) => {
+                    parameters[routerAttribute] = attributes[routerAttribute];
+                    return parameters;
+                },
+                {}
+            )
+            : {};
+
+        return this.formStore.save(saveOptions)
             .then((response) => {
                 this.showSuccessSnackbar();
+
                 if (editRoute) {
-                    router.navigate(editRoute, {id: resourceStore.id, locale: resourceStore.locale});
+                    router.navigate(
+                        editRoute,
+                        {id: resourceStore.id, locale: resourceStore.locale, ...editRouteParameters}
+                    );
                 }
 
                 return response;
@@ -146,6 +228,7 @@ class CourseForm extends React.PureComponent<Props> {
                     store={this.formStore}
                     onSubmit={this.handleSubmit}
                 />
+                {this.toolbarActions.map((toolbarAction) => toolbarAction.getNode())}
             </div>
         );
     }
@@ -153,9 +236,8 @@ class CourseForm extends React.PureComponent<Props> {
 
 export default withToolbar(CourseForm, function() {
     const {router} = this.props;
-    const {backRoute, locales} = router.route.options;
-    const formTypes = this.formStore.types;
-    const {errors, resourceStore, formStore, showSuccess} = this;
+    const {backRoute} = router.route.options;
+    const {errors, resourceStore, showSuccess} = this;
 
     const backButton = backRoute
         ? {
@@ -168,63 +250,35 @@ export default withToolbar(CourseForm, function() {
             },
         }
         : undefined;
-    const locale = locales
+    const locale = this.locales
         ? {
             value: resourceStore.locale.get(),
             onChange: (locale) => {
                 resourceStore.setLocale(locale);
             },
-            options: locales.map((locale) => ({
+            options: this.locales.map((locale) => ({
                 value: locale,
                 label: locale,
             })),
         }
         : undefined;
 
-    const items = [
-        {
-            type: 'dropdown',
-            label: translate('sprungbrett.save'),
-            icon: 'su-save',
-            loading: resourceStore.saving,
-            options: [
-                {
-                    label: translate('sprungbrett.save'),
-                    disabled: !resourceStore.dirty,
-                    onClick: () => {
-                        this.form.submit('draft');
-                    },
-                },
-                ...(resourceStore.data.transitions || []).map((transition) => {
-                    return {
-                        label: translate('sprungbrett.save_' + transition.name),
-                        onClick: () => {
-                            this.form.submit(transition.name);
-                        },
-                    };
-                }),
-            ],
-        },
-    ];
+    const items = this.toolbarActions
+        .map((toolbarAction) => toolbarAction.getToolbarItemConfig())
+        .filter((item) => item !== undefined);
 
-    const icons = [
-        resourceStore.data.workflowStage === 'published' ? 'fa-circle' : 'fa-circle-o',
-    ];
+    const icons = [];
+    const formData = this.resourceStore.data;
 
-    if (formStore.typesLoading || Object.keys(formTypes).length > 0) {
-        items.push({
-            type: 'select',
-            icon: 'fa-paint-brush',
-            onChange: (value) => {
-                formStore.changeType(value);
-            },
-            loading: formStore.typesLoading,
-            value: formStore.type,
-            options: Object.keys(formTypes).map((key) => ({
-                value: formTypes[key].key,
-                label: formTypes[key].title,
-            })),
-        });
+    if (formData.hasOwnProperty('workflowStage')) {
+        const {workflowStage} = formData;
+        icons.push(
+            <PublishIndicator
+                key={'publish'}
+                draft={workflowStage === 'test'}
+                published={workflowStage === 'published'}
+            />
+        );
     }
 
     return {

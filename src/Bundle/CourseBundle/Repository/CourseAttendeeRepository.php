@@ -4,14 +4,30 @@ namespace Sprungbrett\Bundle\CourseBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Sprungbrett\Bundle\CourseBundle\Model\Attendee\AttendeeInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Attendee\AttendeeRepositoryInterface;
 use Sprungbrett\Bundle\CourseBundle\Model\Attendee\CourseAttendeeInterface;
 use Sprungbrett\Bundle\CourseBundle\Model\Attendee\CourseAttendeeRepositoryInterface;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface;
+use Sprungbrett\Component\Translation\Model\Localization;
 
 class CourseAttendeeRepository extends EntityRepository implements CourseAttendeeRepositoryInterface
 {
-    public function findOrCreateCourseAttendeeById(int $attendeeId, string $courseId): CourseAttendeeInterface
-    {
+    public function findOrCreateCourseAttendeeById(
+        int $attendeeId,
+        string $courseId,
+        ?Localization $localization = null
+    ): CourseAttendeeInterface {
+        $entityManager = $this->getEntityManager();
+
+        /** @var CourseRepositoryInterface $courseRepository */
+        $courseRepository = $entityManager->getRepository(CourseInterface::class);
+        $course = $courseRepository->findById($courseId, $localization);
+
+        /** @var AttendeeRepositoryInterface $attendeeRepository */
+        $attendeeRepository = $entityManager->getRepository(AttendeeInterface::class);
+        $attendee = $attendeeRepository->findOrCreateAttendeeById($attendeeId, $localization);
+
         /** @var CourseAttendeeInterface $courseAttendee */
         $courseAttendee = $this->find(['attendee' => $attendeeId, 'course' => $courseId]);
         if ($courseAttendee) {
@@ -19,14 +35,6 @@ class CourseAttendeeRepository extends EntityRepository implements CourseAttende
         }
 
         $class = $this->getClassName();
-
-        $entityManager = $this->getEntityManager();
-
-        /** @var CourseInterface $course */
-        $course = $entityManager->getReference(CourseInterface::class, $courseId);
-
-        /** @var AttendeeInterface $attendee */
-        $attendee = $entityManager->getReference(AttendeeInterface::class, $courseId);
 
         $courseAttendee = new $class($attendee, $course);
         $this->getEntityManager()->persist($courseAttendee);

@@ -12,9 +12,8 @@
                 use-column-prefix="false"
         />
 
-        <field name="name" type="string"/>
+        <field name="name"/>
         <field name="description" type="text"/>
-        <field name="workflowStage" type="string"/>
 
         <embedded
                 name="content"
@@ -27,5 +26,13 @@
                 target-entity="Sprungbrett\Bundle\CourseBundle\Model\Course\Course"
                 inversed-by="translations"
         />
+
+        <one-to-one field="route" target-entity="Sulu\Bundle\RouteBundle\Model\RouteInterface" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+
+            <join-column on-delete="SET NULL"/>
+        </one-to-one>
     </entity>
 </doctrine-mapping>

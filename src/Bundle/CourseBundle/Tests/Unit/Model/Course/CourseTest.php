@@ -4,6 +4,7 @@ namespace Sprungbrett\Bundle\CourseBundle\Tests\Unit\Model\Course;
 
 use PHPUnit\Framework\TestCase;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\Course;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseTranslation;
 use Sprungbrett\Component\Translation\Model\Localization;
 use Sulu\Bundle\RouteBundle\Model\RouteInterface;
@@ -45,68 +46,17 @@ class CourseTest extends TestCase
 
     public function getWorkflowStage()
     {
-        $localization = $this->prophesize(Localization::class);
-        $translationLocalization = $this->prophesize(Localization::class);
+        $course = new Course('123-123-123');
 
-        $translation = $this->prophesize(CourseTranslation::class);
-        $translation->getLocalization()->willReturn($translationLocalization->reveal());
-        $translation->getWorkflowStage()->willReturn('published');
-
-        $localization->equals($translationLocalization->reveal())->willReturn(true);
-
-        $course = new Course('123-123-123', [$translation->reveal()]);
-        $course->setCurrentLocalization($localization->reveal());
-
-        $this->assertEquals('published', $course->getWorkflowStage());
-    }
-
-    public function getWorkflowStageWithLocalization()
-    {
-        $localization = $this->prophesize(Localization::class);
-        $translationLocalization = $this->prophesize(Localization::class);
-
-        $translation = $this->prophesize(CourseTranslation::class);
-        $translation->getLocalization()->willReturn($translationLocalization->reveal());
-        $translation->getWorkflowStage()->willReturn('published');
-
-        $localization->equals($translationLocalization->reveal())->willReturn(true);
-
-        $course = new Course('123-123-123', [$translation->reveal()]);
-
-        $this->assertEquals('published', $course->getWorkflowStage($localization->reveal()));
+        $this->assertEquals(CourseInterface::WORKFLOW_STAGE_NEW, $course->getWorkflowStage());
     }
 
     public function testSetWorkflowStage()
     {
-        $localization = $this->prophesize(Localization::class);
-        $translationLocalization = $this->prophesize(Localization::class);
+        $course = new Course('123-123-123');
 
-        $translation = $this->prophesize(CourseTranslation::class);
-        $translation->getLocalization()->willReturn($translationLocalization->reveal());
-        $translation->setWorkflowStage('published')->shouldBeCalled();
-
-        $localization->equals($translationLocalization->reveal())->willReturn(true);
-
-        $course = new Course('123-123-123', [$translation->reveal()]);
-        $course->setCurrentLocalization($localization->reveal());
-
-        $this->assertEquals($course, $course->setWorkflowStage('published'));
-    }
-
-    public function testSetWorkflowStageWithLocalization()
-    {
-        $localization = $this->prophesize(Localization::class);
-        $translationLocalization = $this->prophesize(Localization::class);
-
-        $translation = $this->prophesize(CourseTranslation::class);
-        $translation->getLocalization()->willReturn($translationLocalization->reveal());
-        $translation->setWorkflowStage('published')->shouldBeCalled();
-
-        $localization->equals($translationLocalization->reveal())->willReturn(true);
-
-        $course = new Course('123-123-123', [$translation->reveal()]);
-
-        $this->assertEquals($course, $course->setWorkflowStage('published', $localization->reveal()));
+        $this->assertEquals($course, $course->setWorkflowStage(CourseInterface::WORKFLOW_STAGE_PUBLISHED));
+        $this->assertEquals(CourseInterface::WORKFLOW_STAGE_PUBLISHED, $course->getWorkflowStage());
     }
 
     public function testGetName()
@@ -178,6 +128,7 @@ class CourseTest extends TestCase
     public function testGetRouteNull()
     {
         $course = new Course('123-123-123');
+        $course->setCurrentLocalization(new Localization('de'));
 
         $this->assertNull($course->getRoute());
     }
@@ -186,39 +137,68 @@ class CourseTest extends TestCase
     {
         $route = $this->prophesize(RouteInterface::class);
 
-        $course = new Course('123-123-123');
-        $course->setRoute($route->reveal());
+        $localization = $this->prophesize(Localization::class);
+        $translationLocalization = $this->prophesize(Localization::class);
+
+        $translation = $this->prophesize(CourseTranslation::class);
+        $translation->getLocalization()->willReturn($translationLocalization->reveal());
+        $translation->getRoute()->willReturn($route->reveal());
+
+        $localization->equals($translationLocalization->reveal())->willReturn(true);
+
+        $course = new Course('123-123-123', [$translation->reveal()]);
+        $course->setCurrentLocalization($localization->reveal());
 
         $this->assertEquals($route->reveal(), $course->getRoute());
     }
 
     public function testRemoveRoute()
     {
-        $route = $this->prophesize(RouteInterface::class);
+        $localization = $this->prophesize(Localization::class);
+        $translationLocalization = $this->prophesize(Localization::class);
 
-        $course = new Course('123-123-123');
-        $course->setRoute($route->reveal());
+        $translation = $this->prophesize(CourseTranslation::class);
+        $translation->getLocalization()->willReturn($translationLocalization->reveal());
+        $translation->removeRoute()->shouldBeCalled();
 
-        $this->assertEquals($route->reveal(), $course->getRoute());
+        $localization->equals($translationLocalization->reveal())->willReturn(true);
+
+        $course = new Course('123-123-123', [$translation->reveal()]);
+        $course->setCurrentLocalization($localization->reveal());
 
         $course->removeRoute();
-        $this->assertNull($course->getRoute());
     }
 
     public function testGetRoutePathNull()
     {
-        $course = new Course('123-123-123');
+        $localization = $this->prophesize(Localization::class);
+        $translationLocalization = $this->prophesize(Localization::class);
+
+        $translation = $this->prophesize(CourseTranslation::class);
+        $translation->getLocalization()->willReturn($translationLocalization->reveal());
+        $translation->getRoutePath()->willReturn(null);
+
+        $localization->equals($translationLocalization->reveal())->willReturn(true);
+
+        $course = new Course('123-123-123', [$translation->reveal()]);
+        $course->setCurrentLocalization($localization->reveal());
 
         $this->assertNull($course->getRoutePath());
     }
 
     public function testGetRoutePath()
     {
-        $route = $this->prophesize(RouteInterface::class);
-        $route->getPath()->willReturn('/sprungbrett-is-awesome');
+        $localization = $this->prophesize(Localization::class);
+        $translationLocalization = $this->prophesize(Localization::class);
 
-        $course = new Course('123-123-123');
-        $course->setRoute($route->reveal());
+        $translation = $this->prophesize(CourseTranslation::class);
+        $translation->getLocalization()->willReturn($translationLocalization->reveal());
+        $translation->getRoutePath()->willReturn('/sprungbrett-is-awesome');
+
+        $localization->equals($translationLocalization->reveal())->willReturn(true);
+
+        $course = new Course('123-123-123', [$translation->reveal()]);
+        $course->setCurrentLocalization($localization->reveal());
 
         $this->assertEquals('/sprungbrett-is-awesome', $course->getRoutePath());
     }

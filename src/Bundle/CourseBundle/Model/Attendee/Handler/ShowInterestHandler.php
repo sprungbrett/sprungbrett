@@ -34,7 +34,8 @@ class ShowInterestHandler
     {
         $courseAttendee = $this->courseAttendeeRepository->findOrCreateCourseAttendeeById(
             $command->getAttendeeId(),
-            $command->getCourseId()
+            $command->getCourseId(),
+            $command->getLocalization()
         );
 
         $this->transition(

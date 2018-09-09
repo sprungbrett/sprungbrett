@@ -11,10 +11,6 @@ interface CourseTranslationInterface extends TranslationInterface, ContentableIn
 {
     public function __construct(CourseInterface $course, Localization $localization, ContentInterface $content);
 
-    public function getWorkflowStage(): string;
-
-    public function setWorkflowStage(string $workflowStage): self;
-
     public function getName(): ?string;
 
     public function setName(string $name): self;
@@ -22,4 +18,14 @@ interface CourseTranslationInterface extends TranslationInterface, ContentableIn
     public function getDescription(): ?string;
 
     public function setDescription(string $description): self;
+
+    /**
+     * FIXME remove from here (not domain logic).
+     */
+    public function removeRoute(): self;
+
+    /**
+     * FIXME remove from here (not domain logic).
+     */
+    public function getRoutePath(): ?string;
 }

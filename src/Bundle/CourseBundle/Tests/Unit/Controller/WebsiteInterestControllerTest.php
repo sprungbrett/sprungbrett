@@ -14,6 +14,7 @@ use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 use Sulu\Bundle\ContactBundle\Entity\ContactInterface;
 use Sulu\Bundle\SecurityBundle\Entity\User;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -23,6 +24,9 @@ class WebsiteInterestControllerTest extends TestCase
 {
     public function testCreateAction()
     {
+        $request = $this->prophesize(Request::class);
+        $request->getLocale()->willReturn('de');
+
         $commandBus = $this->prophesize(CommandBus::class);
         $engine = $this->prophesize(EngineInterface::class);
         $tokenStorage = $this->prophesize(TokenStorageInterface::class);
@@ -46,13 +50,15 @@ class WebsiteInterestControllerTest extends TestCase
         $commandBus->handle(
             Argument::that(
                 function (ShowInterestCommand $command) {
-                    return 'course-123-123-123' === $command->getCourseId() && 42 === $command->getAttendeeId();
+                    return 'course-123-123-123' === $command->getCourseId()
+                        && 42 === $command->getAttendeeId()
+                        && 'de' === $command->getLocalization()->getLocale();
                 }
             )
         )->shouldBeCalled()->willReturn($courseAttendee->reveal());
 
         /** @var RedirectResponse $response */
-        $response = $controller->createAction('course-123-123-123');
+        $response = $controller->createAction($request->reveal(), 'course-123-123-123');
         $this->assertInstanceOf(RedirectResponse::class, $response);
         $this->assertEquals('/test?success=1', $response->getTargetUrl());
     }

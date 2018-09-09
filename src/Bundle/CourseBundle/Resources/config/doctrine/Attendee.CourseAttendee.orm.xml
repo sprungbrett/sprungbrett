@@ -7,7 +7,7 @@
         <id name="course" type="guid" association-key="true"/>
         <id name="attendee" type="int" association-key="true"/>
 
-        <field name="workflowStage" type="string"/>
+        <field name="workflowStage"/>
 
         <many-to-one
                 field="course"

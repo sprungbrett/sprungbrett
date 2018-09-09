@@ -23,9 +23,9 @@ class ModifyCourseCommand extends MappingCourseCommand implements ModifyCommandI
         return $this->id;
     }
 
-    public function getStructureType(): string
+    public function getStructureType(): ?string
     {
-        return $this->getStringValue('template');
+        return $this->getStringValueWithDefault('template');
     }
 
     public function getContentData(): array
