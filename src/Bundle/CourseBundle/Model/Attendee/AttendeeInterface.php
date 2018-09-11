@@ -20,6 +20,8 @@ interface AttendeeInterface extends TranslatableInterface
 
     public function bookmark(CourseInterface $course): self;
 
+    public function removeBookmark(CourseInterface $course): self;
+
     /**
      * @return CourseInterface[]
      */

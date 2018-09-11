@@ -86,6 +86,17 @@ class Attendee implements AttendeeInterface, AuditableInterface
         return $this;
     }
 
+    public function removeBookmark(CourseInterface $course): AttendeeInterface
+    {
+        if (!$this->bookmarks->contains($course)) {
+            return $this;
+        }
+
+        $this->bookmarks->removeElement($course);
+
+        return $this;
+    }
+
     public function getBookmarks(): array
     {
         return $this->bookmarks->getValues();

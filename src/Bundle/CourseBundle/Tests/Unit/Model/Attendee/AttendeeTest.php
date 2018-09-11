@@ -151,4 +151,31 @@ class AttendeeTest extends TestCase
         $this->assertEquals($attendee, $attendee->bookmark($course->reveal()));
         $this->assertEquals([$course->reveal()], $attendee->getBookmarks());
     }
+
+    public function testRemoveBookmark()
+    {
+        $contact = $this->prophesize(ContactInterface::class);
+        $contact->getId()->willReturn(42);
+        $attendee = new Attendee($contact->reveal());
+
+        $course = $this->prophesize(CourseInterface::class);
+        $this->assertEquals($attendee, $attendee->bookmark($course->reveal()));
+
+        $this->assertEquals($attendee, $attendee->removeBookmark($course->reveal()));
+        $this->assertEquals([], $attendee->getBookmarks());
+    }
+
+    public function testRemoveBookmarkTwice()
+    {
+        $contact = $this->prophesize(ContactInterface::class);
+        $contact->getId()->willReturn(42);
+        $attendee = new Attendee($contact->reveal());
+
+        $course = $this->prophesize(CourseInterface::class);
+        $this->assertEquals($attendee, $attendee->bookmark($course->reveal()));
+
+        $this->assertEquals($attendee, $attendee->removeBookmark($course->reveal()));
+        $this->assertEquals($attendee, $attendee->removeBookmark($course->reveal()));
+        $this->assertEquals([], $attendee->getBookmarks());
+    }
 }

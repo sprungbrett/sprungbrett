@@ -4,6 +4,7 @@ namespace Sprungbrett\Bundle\CourseBundle\Controller;
 
 use League\Tactician\CommandBus;
 use Sprungbrett\Bundle\CourseBundle\Model\Attendee\Command\BookmarkCourseCommand;
+use Sprungbrett\Bundle\CourseBundle\Model\Attendee\Command\RemoveBookmarkCourseCommand;
 use Sprungbrett\Bundle\CourseBundle\Model\Attendee\Query\CountBookmarksQuery;
 use Sprungbrett\Bundle\CourseBundle\Model\Attendee\Query\HasBookmarkQuery;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
@@ -39,6 +40,19 @@ class WebsiteBookmarkController
         $this->commandBus = $commandBus;
         $this->engine = $engine;
         $this->tokenStorage = $tokenStorage;
+    }
+
+    public function removeAction(Request $request, string $courseId): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        /** @var CourseInterface $course */
+        $course = $this->commandBus->handle(
+            new RemoveBookmarkCourseCommand($user->getContact()->getId(), $courseId, $request->getLocale())
+        );
+
+        return $this->makePrivate(new RedirectResponse($course->getRoutePath() . '?success=1'));
     }
 
     public function createAction(Request $request, string $courseId): Response

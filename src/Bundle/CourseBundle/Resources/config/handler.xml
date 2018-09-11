@@ -117,5 +117,13 @@
 
             <tag name="tactician.handler" typehints="true"/>
         </service>
+
+        <service id="Sprungbrett\Bundle\CourseBundle\Model\Attendee\Handler\RemoveBookmarkCourseHandler">
+            <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Attendee\AttendeeRepositoryInterface"/>
+            <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface"/>
+            <argument type="service" id="Sprungbrett\Component\EventCollector\EventCollector"/>
+
+            <tag name="tactician.handler" typehints="true"/>
+        </service>
     </services>
 </container>

@@ -5,4 +5,7 @@
     <route id="sprungbrett_course.bookmark.create" path="/course/{courseId}/bookmark">
         <default key="_controller">Sprungbrett\Bundle\CourseBundle\Controller\WebsiteBookmarkController::createAction</default>
     </route>
+    <route id="sprungbrett_course.bookmark.remove" path="/course/{courseId}/remove-bookmark">
+        <default key="_controller">Sprungbrett\Bundle\CourseBundle\Controller\WebsiteBookmarkController::removeAction</default>
+    </route>
 </routes>
