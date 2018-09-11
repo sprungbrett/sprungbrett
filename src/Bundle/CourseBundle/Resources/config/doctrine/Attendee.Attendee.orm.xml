@@ -19,6 +19,17 @@
             </cascade>
         </one-to-many>
 
+        <many-to-many field="bookmarks" target-entity="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface">
+            <join-table name="sp_attendee_bookmarks">
+                <join-columns>
+                    <join-column name="attendee_id" referenced-column-name="contact_id" on-delete="CASCADE"/>
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="course_id" on-delete="CASCADE"/>
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+
         <one-to-one field="contact" target-entity="Sulu\Bundle\ContactBundle\Entity\ContactInterface">
             <cascade>
                 <cascade-all/>

@@ -3,10 +3,11 @@
 namespace Sprungbrett\Bundle\CourseBundle\Controller;
 
 use League\Tactician\CommandBus;
-use Sprungbrett\Bundle\CourseBundle\Model\Attendee\Command\ShowInterestCommand;
-use Sprungbrett\Bundle\CourseBundle\Model\Attendee\CourseAttendeeInterface;
-use Sprungbrett\Bundle\CourseBundle\Model\Attendee\Query\CountAttendeeQuery;
-use Sprungbrett\Bundle\CourseBundle\Model\Attendee\Query\IsAttendeeQuery;
+use Sprungbrett\Bundle\CourseBundle\Model\Attendee\Command\BookmarkCourseCommand;
+use Sprungbrett\Bundle\CourseBundle\Model\Attendee\Command\RemoveBookmarkCourseCommand;
+use Sprungbrett\Bundle\CourseBundle\Model\Attendee\Query\CountBookmarksQuery;
+use Sprungbrett\Bundle\CourseBundle\Model\Attendee\Query\HasBookmarkQuery;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 use Sulu\Bundle\HttpCacheBundle\Cache\AbstractHttpCache;
 use Sulu\Bundle\SecurityBundle\Entity\User;
 use Sulu\Component\Security\Authentication\UserInterface;
@@ -17,7 +18,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Templating\EngineInterface;
 
-class WebsiteInterestController
+class WebsiteBookmarkController
 {
     /**
      * @var CommandBus
@@ -41,17 +42,30 @@ class WebsiteInterestController
         $this->tokenStorage = $tokenStorage;
     }
 
+    public function removeAction(Request $request, string $courseId): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        /** @var CourseInterface $course */
+        $course = $this->commandBus->handle(
+            new RemoveBookmarkCourseCommand($user->getContact()->getId(), $courseId, $request->getLocale())
+        );
+
+        return $this->makePrivate(new RedirectResponse($course->getRoutePath() . '?success=1'));
+    }
+
     public function createAction(Request $request, string $courseId): Response
     {
         /** @var User $user */
         $user = $this->getUser();
 
-        /** @var CourseAttendeeInterface $courseAttendee */
-        $courseAttendee = $this->commandBus->handle(
-            new ShowInterestCommand($user->getContact()->getId(), $courseId, $request->getLocale())
+        /** @var CourseInterface $course */
+        $course = $this->commandBus->handle(
+            new BookmarkCourseCommand($user->getContact()->getId(), $courseId, $request->getLocale())
         );
 
-        return $this->makePrivate(new RedirectResponse($courseAttendee->getCourse()->getRoutePath() . '?success=1'));
+        return $this->makePrivate(new RedirectResponse($course->getRoutePath() . '?success=1'));
     }
 
     public function renderAction(string $courseId): Response
@@ -59,13 +73,13 @@ class WebsiteInterestController
         /** @var User $user */
         $user = $this->getUser();
 
-        $hasInterest = $this->commandBus->handle(new IsAttendeeQuery($user->getContact()->getId(), $courseId));
-        $count = $this->commandBus->handle(new CountAttendeeQuery($courseId));
+        $hasBookmark = $this->commandBus->handle(new HasBookmarkQuery($user->getContact()->getId(), $courseId));
+        $count = $this->commandBus->handle(new CountBookmarksQuery($courseId));
 
         return $this->makePrivate(
             $this->render(
-                '@SprungbrettCourse/Interest/index.html.twig',
-                ['count' => $count, 'hasInterest' => $hasInterest, 'id' => $courseId]
+                '@SprungbrettCourse/Bookmark/index.html.twig',
+                ['count' => $count, 'hasBookmark' => $hasBookmark, 'id' => $courseId]
             )
         );
     }

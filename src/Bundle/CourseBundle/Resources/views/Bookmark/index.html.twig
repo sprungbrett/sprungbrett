@@ -1,0 +1,8 @@
+{{ 'There are %count% bookmarks'|trans({'%count%': count}) }}
+
+{% if hasBookmark %}
+    {{ 'Already bookmarked'|trans }}
+    <a href="{{ path('sprungbrett_course.bookmark.remove', {courseId: id}) }}">{{ 'Remove bookmark'|trans }}</a>
+{% else %}
+    <a href="{{ path('sprungbrett_course.bookmark.create', {courseId: id}) }}">{{ 'Bookmark'|trans }}</a>
+{% endif %}

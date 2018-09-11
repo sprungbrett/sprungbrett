@@ -2,7 +2,10 @@
 <routes xmlns="http://symfony.com/schema/routing"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
-    <route id="sprungbrett_course.interest.create" path="/course/{courseId}/interest">
-        <default key="_controller">Sprungbrett\Bundle\CourseBundle\Controller\WebsiteInterestController::createAction</default>
+    <route id="sprungbrett_course.bookmark.create" path="/course/{courseId}/bookmark">
+        <default key="_controller">Sprungbrett\Bundle\CourseBundle\Controller\WebsiteBookmarkController::createAction</default>
+    </route>
+    <route id="sprungbrett_course.bookmark.remove" path="/course/{courseId}/remove-bookmark">
+        <default key="_controller">Sprungbrett\Bundle\CourseBundle\Controller\WebsiteBookmarkController::removeAction</default>
     </route>
 </routes>

@@ -1,9 +1,13 @@
 <?php
 
-namespace Sprungbrett\Bundle\CourseBundle\Model\Attendee\Query;
+namespace Sprungbrett\Bundle\CourseBundle\Model\Attendee\Command;
 
-class IsAttendeeQuery
+use Sprungbrett\Component\Translation\Model\Command\LocaleTrait;
+
+class RemoveBookmarkCourseCommand
 {
+    use LocaleTrait;
+
     /**
      * @var int
      */
@@ -14,8 +18,10 @@ class IsAttendeeQuery
      */
     private $courseId;
 
-    public function __construct(int $attendeeId, string $courseId)
+    public function __construct(int $attendeeId, string $courseId, string $locale)
     {
+        $this->initializeLocale($locale);
+
         $this->attendeeId = $attendeeId;
         $this->courseId = $courseId;
     }

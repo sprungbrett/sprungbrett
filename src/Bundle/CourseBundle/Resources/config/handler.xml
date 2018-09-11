@@ -14,10 +14,6 @@
                  alias="sulu.repository.attendee"
                  class="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface"/>
 
-        <service id="Sprungbrett\Bundle\CourseBundle\Model\Attendee\CourseAttendeeRepositoryInterface"
-                 alias="Sprungbrett\Bundle\CourseBundle\Repository\CourseAttendeeRepository"
-                 class="Sprungbrett\Bundle\CourseBundle\Model\Attendee\CourseAttendeeRepositoryInterface"/>
-
         <service id="Sprungbrett\Bundle\CourseBundle\Model\Course\Handler\CreateCourseHandler">
             <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface"/>
             <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Trainer\TrainerRepositoryInterface"/>
@@ -100,21 +96,31 @@
             <tag name="tactician.handler" typehints="true"/>
         </service>
 
-        <service id="Sprungbrett\Bundle\CourseBundle\Model\Attendee\Handler\CountAttendeeQueryHandler">
-            <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Attendee\CourseAttendeeRepositoryInterface"/>
+        <service id="Sprungbrett\Bundle\CourseBundle\Model\Attendee\Handler\CountBookmarkQueryHandler">
+            <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Attendee\AttendeeRepositoryInterface"/>
 
             <tag name="tactician.handler" typehints="true"/>
         </service>
 
-        <service id="Sprungbrett\Bundle\CourseBundle\Model\Attendee\Handler\IsAttendeeQueryHandler">
-            <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Attendee\CourseAttendeeRepositoryInterface"/>
+        <service id="Sprungbrett\Bundle\CourseBundle\Model\Attendee\Handler\HasBookmarkQueryHandler">
+            <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Attendee\AttendeeRepositoryInterface"/>
+            <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface"/>
+            <argument type="service" id="Sprungbrett\Component\EventCollector\EventCollector"/>
 
             <tag name="tactician.handler" typehints="true"/>
         </service>
 
-        <service id="Sprungbrett\Bundle\CourseBundle\Model\Attendee\Handler\ShowInterestHandler">
-            <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Attendee\CourseAttendeeRepositoryInterface"/>
-            <argument type="service" id="workflow.course_attendee"/>
+        <service id="Sprungbrett\Bundle\CourseBundle\Model\Attendee\Handler\BookmarkCourseHandler">
+            <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Attendee\AttendeeRepositoryInterface"/>
+            <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface"/>
+            <argument type="service" id="Sprungbrett\Component\EventCollector\EventCollector"/>
+
+            <tag name="tactician.handler" typehints="true"/>
+        </service>
+
+        <service id="Sprungbrett\Bundle\CourseBundle\Model\Attendee\Handler\RemoveBookmarkCourseHandler">
+            <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Attendee\AttendeeRepositoryInterface"/>
+            <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface"/>
             <argument type="service" id="Sprungbrett\Component\EventCollector\EventCollector"/>
 
             <tag name="tactician.handler" typehints="true"/>
