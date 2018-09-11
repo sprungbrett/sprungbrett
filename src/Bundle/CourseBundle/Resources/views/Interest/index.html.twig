@@ -1,7 +1,0 @@
-{{ 'There are %count% people'|trans({'%count%': count}) }}
-
-{% if hasInterest %}
-    {{ 'Already interested'|trans }}
-{% else %}
-    <a href="{{ path('sprungbrett_course.interest.create', {courseId: id}) }}">{{ 'I am interested'|trans }}</a>
-{% endif %}

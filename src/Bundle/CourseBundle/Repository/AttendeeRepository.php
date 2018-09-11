@@ -29,4 +29,28 @@ class AttendeeRepository extends EntityRepository implements AttendeeRepositoryI
 
         return $attendee;
     }
+
+    public function countBookmarks(string $courseId): int
+    {
+        $queryBuilder = $this->createQueryBuilder('attendee')
+            ->select('COUNT(attendee.id)')
+            ->where('IDENTITY(attendee.course) = :courseId')
+            ->setParameter('courseId', $courseId);
+
+        return (int) $queryBuilder->getQuery()->getSingleScalarResult();
+    }
+
+    public function hasBookmark(int $id, string $courseId): bool
+    {
+        $queryBuilder = $this->createQueryBuilder('attendee')
+            ->select('COUNT(attendee.id)')
+            ->where('attendee.id = :attendeeId')
+            ->andWhere('IDENTITY(attendee.course) = :courseId')
+            ->setParameter('attendeeId', $id)
+            ->setParameter('courseId', $courseId);
+
+        $result = (int) $queryBuilder->getQuery()->getSingleScalarResult();
+
+        return $result > 0;
+    }
 }

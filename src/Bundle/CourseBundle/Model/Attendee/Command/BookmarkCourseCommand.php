@@ -4,7 +4,7 @@ namespace Sprungbrett\Bundle\CourseBundle\Model\Attendee\Command;
 
 use Sprungbrett\Component\Translation\Model\Command\LocaleTrait;
 
-class ShowInterestCommand
+class BookmarkCourseCommand
 {
     use LocaleTrait;
 

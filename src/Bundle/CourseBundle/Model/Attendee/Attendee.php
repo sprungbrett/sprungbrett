@@ -2,6 +2,9 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\Model\Attendee;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 use Sprungbrett\Component\Translation\Model\Exception\MissingLocalizationException;
 use Sprungbrett\Component\Translation\Model\Localization;
 use Sprungbrett\Component\Translation\Model\TranslatableTrait;
@@ -25,12 +28,19 @@ class Attendee implements AttendeeInterface, AuditableInterface
      */
     protected $contactId;
 
+    /**
+     * @var CourseInterface[]|Collection
+     */
+    protected $bookmarks;
+
     public function __construct(ContactInterface $contact, ?array $translations = null)
     {
         $this->initializeTranslations($translations);
 
         $this->contact = $contact;
         $this->contactId = $contact->getId();
+
+        $this->bookmarks = new ArrayCollection();
     }
 
     public function getContact(): ContactInterface
@@ -63,6 +73,22 @@ class Attendee implements AttendeeInterface, AuditableInterface
         $this->getTranslation($localization)->setDescription($description);
 
         return $this;
+    }
+
+    public function bookmark(CourseInterface $course): AttendeeInterface
+    {
+        if ($this->bookmarks->contains($course)) {
+            return $this;
+        }
+
+        $this->bookmarks->add($course);
+
+        return $this;
+    }
+
+    public function getBookmarks(): array
+    {
+        return $this->bookmarks->getValues();
     }
 
     /**

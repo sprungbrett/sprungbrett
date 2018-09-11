@@ -2,7 +2,7 @@
 
 namespace Sprungbrett\Bundle\CourseBundle\Model\Attendee\Query;
 
-class IsAttendeeQuery
+class HasBookmarkQuery
 {
     /**
      * @var int

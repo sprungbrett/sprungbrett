@@ -64,7 +64,7 @@
             <argument>%sulu_http_cache.cache.shared_max_age%</argument>
         </service>
 
-        <service id="Sprungbrett\Bundle\CourseBundle\Controller\WebsiteInterestController">
+        <service id="Sprungbrett\Bundle\CourseBundle\Controller\WebsiteBookmarkController">
             <argument type="service" id="tactician.commandbus.default"/>
             <argument type="service" id="templating"/>
             <argument type="service" id="security.token_storage"/>
@@ -77,12 +77,6 @@
             <argument type="service" id="sulu_http_cache.cache_lifetime.resolver"/>
 
             <tag name="sulu_route.defaults_provider"/>
-        </service>
-
-        <service id="Sprungbrett\Bundle\CourseBundle\Repository\CourseAttendeeRepository">
-            <factory service="doctrine.orm.entity_manager" method="getRepository"/>
-
-            <argument type="string">Sprungbrett\Bundle\CourseBundle\Model\Attendee\CourseAttendee</argument>
         </service>
     </services>
 </container>
