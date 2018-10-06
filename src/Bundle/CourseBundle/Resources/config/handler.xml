@@ -3,16 +3,13 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface"
-                 alias="sulu.repository.course"
-                 class="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface"/>
+                 alias="sulu.repository.course"/>
 
         <service id="Sprungbrett\Bundle\CourseBundle\Model\Trainer\TrainerRepositoryInterface"
-                 alias="sulu.repository.trainer"
-                 class="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface"/>
+                 alias="sulu.repository.trainer"/>
 
         <service id="Sprungbrett\Bundle\CourseBundle\Model\Attendee\AttendeeRepositoryInterface"
-                 alias="sulu.repository.attendee"
-                 class="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface"/>
+                 alias="sulu.repository.attendee"/>
 
         <service id="Sprungbrett\Bundle\CourseBundle\Model\Course\Handler\CreateCourseHandler">
             <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface"/>

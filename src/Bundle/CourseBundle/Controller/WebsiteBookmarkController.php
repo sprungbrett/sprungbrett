@@ -8,7 +8,7 @@ use Sprungbrett\Bundle\CourseBundle\Model\Attendee\Command\RemoveBookmarkCourseC
 use Sprungbrett\Bundle\CourseBundle\Model\Attendee\Query\CountBookmarksQuery;
 use Sprungbrett\Bundle\CourseBundle\Model\Attendee\Query\HasBookmarkQuery;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
-use Sulu\Bundle\HttpCacheBundle\Cache\AbstractHttpCache;
+use Sulu\Bundle\HttpCacheBundle\Cache\SuluHttpCache;
 use Sulu\Bundle\SecurityBundle\Entity\User;
 use Sulu\Component\Security\Authentication\UserInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -119,7 +119,7 @@ class WebsiteBookmarkController
         $response->setSharedMaxAge(0);
         $response->headers->addCacheControlDirective('must-revalidate', true);
         $response->headers->addCacheControlDirective('no-store', true);
-        $response->headers->set(AbstractHttpCache::HEADER_REVERSE_PROXY_TTL, '0');
+        $response->headers->set(SuluHttpCache::HEADER_REVERSE_PROXY_TTL, '0');
 
         return $response;
     }

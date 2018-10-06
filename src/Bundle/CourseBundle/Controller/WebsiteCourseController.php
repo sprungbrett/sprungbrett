@@ -4,7 +4,7 @@ namespace Sprungbrett\Bundle\CourseBundle\Controller;
 
 use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 use Sprungbrett\Component\Content\Resolver\ContentResolverInterface;
-use Sulu\Bundle\HttpCacheBundle\Cache\AbstractHttpCache;
+use Sulu\Bundle\HttpCacheBundle\Cache\SuluHttpCache;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Templating\EngineInterface;
@@ -70,7 +70,7 @@ class WebsiteCourseController
         if ($cacheLifetime) {
             $response->setPublic();
             $response->headers->set(
-                AbstractHttpCache::HEADER_REVERSE_PROXY_TTL,
+                SuluHttpCache::HEADER_REVERSE_PROXY_TTL,
                 $cacheLifetime
             );
             $response->setMaxAge($this->maxAge);

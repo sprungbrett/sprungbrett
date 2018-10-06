@@ -1,23 +1,25 @@
 <?xml version="1.0" ?>
-<properties xmlns="http://schemas.sulu.io/template/template"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/properties-1.0.xsd">
-    <property name="name" type="text_line" colspan="9">
-        <meta>
-            <title lang="de">Name</title>
-            <title lang="en">Name</title>
-        </meta>
-    </property>
-    <property name="trainer" type="single_trainer_selection" colspan="3">
-        <meta>
-            <title lang="de">Trainer</title>
-            <title lang="en">Trainer</title>
-        </meta>
-    </property>
-    <property name="description" type="text_area">
-        <meta>
-            <title lang="de">Beschreibung</title>
-            <title lang="en">Description</title>
-        </meta>
-    </property>
-</properties>
+<form xmlns="http://schemas.sulu.io/template/template"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/form-1.0.xsd">
+    <properties>
+        <property name="name" type="text_line" colspan="9">
+            <meta>
+                <title lang="de">Name</title>
+                <title lang="en">Name</title>
+            </meta>
+        </property>
+        <property name="trainer" type="single_trainer_selection" colspan="3">
+            <meta>
+                <title lang="de">Trainer</title>
+                <title lang="en">Trainer</title>
+            </meta>
+        </property>
+        <property name="description" type="text_area">
+            <meta>
+                <title lang="de">Beschreibung</title>
+                <title lang="en">Description</title>
+            </meta>
+        </property>
+    </properties>
+</form>
