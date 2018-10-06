@@ -5,11 +5,13 @@ parameters:
         - tests
     excludes_analyse:
         - %currentWorkingDirectory%/src/Bundle/*/Configuration.php
+        - %currentWorkingDirectory%/src/Bundle/*/Tests/app*.php
         - %currentWorkingDirectory%/src/*/vendor/*.php
         - %currentWorkingDirectory%/src/*/cache/*.php
         - %currentWorkingDirectory%/src/*/Tests/Functional/*.php
         - %currentWorkingDirectory%/src/*/bin/*.php
         - %currentWorkingDirectory%/tests/app/*.php
+        - %currentWorkingDirectory%/tests/var/*.php
 
 includes:
 	- vendor/jangregor/phpstan-prophecy/src/extension.neon

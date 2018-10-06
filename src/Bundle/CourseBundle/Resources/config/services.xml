@@ -16,7 +16,7 @@
         </service>
 
         <service id="Sprungbrett\Bundle\CourseBundle\Model\Course\Command\CourseCommandFactory"/>
-        <service id="Sprungbrett\Bundle\CourseBundle\Controller\CourseController">
+        <service id="Sprungbrett\Bundle\CourseBundle\Controller\CourseController" public="true">
             <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Course\Command\CourseCommandFactory"/>
             <argument type="service" id="tactician.commandbus.default"/>
             <argument type="service" id="fos_rest.view_handler.default"/>
@@ -27,14 +27,14 @@
             <argument type="service" id="security.token_storage" on-invalid="null"/>
         </service>
 
-        <service id="Sprungbrett\Bundle\CourseBundle\Controller\TrainerController">
+        <service id="Sprungbrett\Bundle\CourseBundle\Controller\TrainerController" public="true">
             <argument type="service" id="tactician.commandbus.default"/>
             <argument type="service" id="fos_rest.view_handler.default"/>
             <argument type="service" id="security.token_storage" on-invalid="null"/>
             <argument type="string">%kernel.default_locale%</argument>
         </service>
 
-        <service id="Sprungbrett\Bundle\CourseBundle\Controller\AttendeeController">
+        <service id="Sprungbrett\Bundle\CourseBundle\Controller\AttendeeController" public="true">
             <argument type="service" id="tactician.commandbus.default"/>
             <argument type="service" id="fos_rest.view_handler.default"/>
             <argument type="service" id="security.token_storage" on-invalid="null"/>
@@ -57,14 +57,14 @@
             <tag name="sulu.context" context="admin"/>
         </service>
 
-        <service id="Sprungbrett\Bundle\CourseBundle\Controller\WebsiteCourseController">
+        <service id="Sprungbrett\Bundle\CourseBundle\Controller\WebsiteCourseController" public="true">
             <argument type="service" id="Sprungbrett\Component\Content\Resolver\ContentResolverInterface"/>
             <argument type="service" id="templating"/>
             <argument>%sulu_http_cache.cache.max_age%</argument>
             <argument>%sulu_http_cache.cache.shared_max_age%</argument>
         </service>
 
-        <service id="Sprungbrett\Bundle\CourseBundle\Controller\WebsiteBookmarkController">
+        <service id="Sprungbrett\Bundle\CourseBundle\Controller\WebsiteBookmarkController" public="true">
             <argument type="service" id="tactician.commandbus.default"/>
             <argument type="service" id="templating"/>
             <argument type="service" id="security.token_storage"/>

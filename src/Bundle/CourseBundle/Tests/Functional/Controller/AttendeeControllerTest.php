@@ -27,7 +27,6 @@ class AttendeeControllerTest extends SuluTestCase
         );
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-
         $result = json_decode($client->getResponse()->getContent(), true);
 
         $this->assertEquals($attendee->getId(), $result['id']);

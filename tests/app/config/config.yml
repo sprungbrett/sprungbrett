@@ -2,7 +2,7 @@
 doctrine:
     dbal:
         host: 127.0.0.1
-        dbname: "sp_course_tests"
+        url: mysql://root:@127.0.0.1:3306/sp_course_tests
     orm:
         mappings:
             gedmo_tree:

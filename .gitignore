@@ -13,6 +13,7 @@ node_modules
 
 tests/app/cache
 tests/app/data
+tests/var
 
 ###> symfony/framework-bundle ###
 /.env

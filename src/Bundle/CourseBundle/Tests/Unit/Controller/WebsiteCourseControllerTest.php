@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Sprungbrett\Bundle\CourseBundle\Controller\WebsiteCourseController;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 use Sprungbrett\Component\Content\Resolver\ContentResolverInterface;
-use Sulu\Bundle\HttpCacheBundle\Cache\AbstractHttpCache;
+use Sulu\Bundle\HttpCacheBundle\Cache\SuluHttpCache;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Templating\EngineInterface;
@@ -43,7 +43,7 @@ class WebsiteCourseControllerTest extends TestCase
         $this->assertInstanceOf(Response::class, $response);
         $this->assertEquals('<h1>Hello world</h1>', $response->getContent());
         $this->assertTrue($response->headers->getCacheControlDirective('public'));
-        $this->assertEquals(7200, $response->headers->get(AbstractHttpCache::HEADER_REVERSE_PROXY_TTL));
+        $this->assertEquals(7200, $response->headers->get(SuluHttpCache::HEADER_REVERSE_PROXY_TTL));
         $this->assertEquals(1800, $response->headers->getCacheControlDirective('max-age'));
         $this->assertEquals(3600, $response->headers->getCacheControlDirective('s-maxage'));
     }
