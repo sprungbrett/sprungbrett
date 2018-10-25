@@ -1,9 +1,9 @@
 {
-    "name": "sprungbrett/event-middleware",
+    "name": "sprungbrett/dependent-message-middleware",
     "type": "library",
-    "description": "Middleware to handle events for messages/handler.",
+    "description": "Middleware to handle dependent-messages for messages/handler.",
     "keywords": [
-        "event",
+        "message",
         "message-bus"
     ],
     "homepage": "http://sprungbrett.io",
@@ -25,8 +25,7 @@
     "require": {
         "php": "^7.1",
 
-        "sprungbrett/event-collector": "^1.0",
-        "symfony/event-dispatcher": "^4.1",
+        "sprungbrett/dependent-message-collector": "^1.0",
         "symfony/messenger": "^4.1"
     },
     "require-dev": {
@@ -40,7 +39,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Sprungbrett\\Component\\EventMiddleware\\": ""
+            "Sprungbrett\\Component\\DependentMessageMiddleware\\": ""
         }
     },
     "scripts": {

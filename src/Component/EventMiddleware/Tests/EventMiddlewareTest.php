@@ -23,12 +23,12 @@ class EventMiddlewareTest extends TestCase
         $eventCollector->release()->willReturn([]);
         $eventDispatcher->dispatch(Argument::cetera())->shouldNotBeCalled();
 
-        $command = new \stdClass();
+        $message = new \stdClass();
 
         $result = $middleware->handle(
-            $command,
-            function ($passed) use ($command) {
-                $this->assertEquals($command, $passed);
+            $message,
+            function ($passed) use ($message) {
+                $this->assertEquals($message, $passed);
 
                 return 'Sprungbrett is awesome';
             }
@@ -56,10 +56,10 @@ class EventMiddlewareTest extends TestCase
         $eventDispatcher->dispatch('sprungbrett.entity.created', $event1)->shouldBeCalled();
         $eventDispatcher->dispatch('sprungbrett.entity.modified', $event2)->shouldBeCalled();
 
-        $command = new \stdClass();
+        $message = new \stdClass();
 
         $middleware->handle(
-            $command,
+            $message,
             function ($passed) {
             }
         );
