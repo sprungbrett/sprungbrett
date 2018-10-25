@@ -4,15 +4,6 @@ jobs:
     build:
         docker:
               - image: circleci/php:7.1-node-browsers
-                environment:
-                    - APP_ENV=test
-                    - APP_SECRET=a448d1dfcaa563fce56c2fd9981f662b
-                    - MAILER_URL=null://localhost
-                    - DATABASE_URL=mysql://root:@127.0.0.1:3306/courses
-                    - SULU_ADMIN_EMAIL=
-              - image: circleci/mysql:5.7
-                environment:
-                    - DATABASE_URL=mysql://root:@127.0.0.1:3306/courses
 
         working_directory: ~/repo
 

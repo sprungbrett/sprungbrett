@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
 /**
@@ -7,5 +9,4 @@ namespace App;
  */
 class Kernel extends \Sprungbrett\Kernel
 {
-
 }
