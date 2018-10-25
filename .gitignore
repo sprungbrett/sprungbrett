@@ -1,0 +1,17 @@
+# Application
+/public/admin
+/var
+
+# DotEnv
+.env
+
+# IntelliJ
+*.iml
+.idea
+
+# Composer
+/vendor
+composer.lock
+
+# Npm
+node_modules

@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+    mysql:
+        image: mysql:5.7
+        ports:
+            - 3306:3306
+        volumes:
+            - ./var/data/mysql:/var/lib/mysql
+        environment:
+            MYSQL_DATABASE: "courses"
+            MYSQL_USER: "courses"
+            MYSQL_PASSWORD: "courses"
+            MYSQL_ROOT_PASSWORD:
+            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+            MYSQL_ROOT_HOST: "%"
+            MYSQL_HOST: "%"
+
+    mailhog:
+        image: mailhog/mailhog:v1.0.0
+        ports:
+            - 1025:1025
+            - 8025:8025
+        volumes:
+            - ./var/data/mailhog:/var/lib/mailhog
+        environment:
+            MH_MAILDIR_PATH: /var/lib/mailhog
+            MH_STORAGE: maildir

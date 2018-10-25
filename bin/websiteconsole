@@ -1,0 +1,10 @@
+#!/usr/bin/env php
+<?php
+
+use Sulu\Component\HttpKernel\SuluKernel;
+
+require __DIR__.'/../vendor/autoload.php';
+
+define('SULU_CONTEXT', SuluKernel::CONTEXT_WEBSITE);
+
+include __DIR__ . DIRECTORY_SEPARATOR. 'console.php';
