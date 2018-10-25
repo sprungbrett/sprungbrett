@@ -1,5 +1,5 @@
 # Event Middleware
 
-[![CircleCI](https://circleci.com/gh/sprungbrett/tactician-events/tree/master.svg?style=svg)](https://circleci.com/gh/sprungbrett/tactician-events/tree/master)
+[![CircleCI](https://circleci.com/gh/sprungbrett/event-middleware/tree/master.svg?style=svg)](https://circleci.com/gh/sprungbrett/event-middleware/tree/master)
 
-Middleware to handle events for commands/handler.
+Middleware to handle events for messages/handler.
