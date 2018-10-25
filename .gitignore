@@ -16,3 +16,6 @@ composer.lock
 
 # Npm
 node_modules
+
+# PHP-CS-Fixer
+.php_cs.cache

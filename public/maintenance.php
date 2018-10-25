@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 // default locale for maintenance translations
 define('DEFAULT_LOCALE', 'en');
 
