@@ -43,6 +43,11 @@
     },
     "scripts": {
         "initialize": [],
+        "test": [
+            "@phpunit",
+            "@phpstan",
+            "@php-cs"
+        ],
         "phpunit": "vendor/bin/phpunit",
         "phpstan": "vendor/bin/phpstan analyze -c ./phpstan.neon . -l max",
         "php-cs": "vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
