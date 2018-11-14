@@ -34,3 +34,5 @@ jobs:
           - run: composer initialize
 
           - run: composer test
+
+          - run: composer lint

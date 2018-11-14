@@ -46,7 +46,9 @@
     "scripts": {
         "initialize": [],
         "test": [
-            "@phpunit",
+            "@phpunit"
+        ],
+        "lint": [
             "@phpstan",
             "@php-cs"
         ],

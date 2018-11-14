@@ -101,7 +101,9 @@
             "@php bin/adminconsole doctrine:schema:update --force"
         ],
         "test": [
-            "@phpunit",
+            "@phpunit"
+        ],
+        "lint": [
             "@phpstan",
             "@php-cs"
         ],
