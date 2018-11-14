@@ -1,0 +1,8 @@
+framework:
+    messenger:
+        buses:
+            command_bus:
+                middleware:
+                  - allow_no_handler
+                  - message_middleware
+                  - doctrine_transaction_middleware

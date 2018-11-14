@@ -49,4 +49,7 @@ return [
     Sulu\Bundle\PreviewBundle\SuluPreviewBundle::class => ['all' => true, 'admin' => true],
     // Website
     Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle::class => ['all' => true, 'website' => true],
+    // Sprungbrett
+    \Sprungbrett\Bundle\CoreBundle\SprungbrettCoreBundle::class => ['all' => true],
+    \Sprungbrett\Bundle\CourseBundle\SprungbrettCourseBundle::class => ['all' => true],
 ];

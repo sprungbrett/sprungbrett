@@ -2,6 +2,8 @@
 /public/bundles
 /public/admin
 /var
+/tests/app/cache
+/tests/var
 
 # DotEnv
 .env
@@ -16,6 +18,7 @@ composer.lock
 
 # Npm
 node_modules
+package-lock.json
 
 # PHP-CS-Fixer
 .php_cs.cache
