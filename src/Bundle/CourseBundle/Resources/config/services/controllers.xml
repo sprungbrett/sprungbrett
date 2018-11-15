@@ -9,5 +9,12 @@
 
             <tag name="controller.service_arguments"/>
         </service>
+
+        <service id="Sprungbrett\Bundle\CourseBundle\Controller\CourseContentController">
+            <argument type="service" id="message_bus"/>
+            <argument type="service" id="fos_rest.view_handler.default"/>
+
+            <tag name="controller.service_arguments"/>
+        </service>
     </services>
 </container>

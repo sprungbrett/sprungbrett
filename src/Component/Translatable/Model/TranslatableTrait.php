@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sprungbrett\Component\Translatable\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;

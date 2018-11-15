@@ -50,6 +50,7 @@ return [
     // Website
     Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle::class => ['all' => true, 'website' => true],
     // Sprungbrett
-    \Sprungbrett\Bundle\CoreBundle\SprungbrettCoreBundle::class => ['all' => true],
-    \Sprungbrett\Bundle\CourseBundle\SprungbrettCourseBundle::class => ['all' => true],
+    Sprungbrett\Bundle\CoreBundle\SprungbrettCoreBundle::class => ['all' => true],
+    Sprungbrett\Bundle\CourseBundle\SprungbrettCourseBundle::class => ['all' => true],
+    Sprungbrett\Bundle\ContentBundle\SprungbrettContentBundle::class => ['all' => true],
 ];

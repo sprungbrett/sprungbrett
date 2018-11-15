@@ -8,3 +8,5 @@ parameters:
     paths:
         - src
         - tests
+    excludes_analyse:
+        - %currentWorkingDirectory%/src/Bundle/CourseBundle/Tests/app/AppKernel.php

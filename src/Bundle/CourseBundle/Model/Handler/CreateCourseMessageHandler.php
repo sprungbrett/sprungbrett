@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sprungbrett\Bundle\CourseBundle\Model\Handler;
 
+use Sprungbrett\Bundle\ContentBundle\Stages;
 use Sprungbrett\Bundle\CourseBundle\Model\CourseRepositoryInterface;
 use Sprungbrett\Bundle\CourseBundle\Model\Event\CourseCreatedEvent;
 use Sprungbrett\Bundle\CourseBundle\Model\Message\CreateCourseMessage;
@@ -27,7 +30,7 @@ class CreateCourseMessageHandler
 
     public function __invoke(CreateCourseMessage $message): void
     {
-        $course = $this->courseRepository->create($message->getUuid(), $message->getLocale());
+        $course = $this->courseRepository->create($message->getUuid(), Stages::DRAFT, $message->getLocale());
         $course->setName($message->getName());
 
         $this->messageCollector->push(new CourseCreatedEvent($course));

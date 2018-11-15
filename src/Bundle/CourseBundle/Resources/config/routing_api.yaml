@@ -1,3 +1,7 @@
 sprungbrett.courses:
     type: rest
     resource: "@SprungbrettCourseBundle/Controller/CourseController.php"
+
+sprungbrett.course_coutents:
+    type: rest
+    resource: "@SprungbrettCourseBundle/Controller/CourseContentController.php"

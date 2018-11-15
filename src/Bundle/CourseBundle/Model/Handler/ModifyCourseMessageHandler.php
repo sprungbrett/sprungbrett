@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sprungbrett\Bundle\CourseBundle\Model\Handler;
 
+use Sprungbrett\Bundle\ContentBundle\Stages;
 use Sprungbrett\Bundle\CourseBundle\Model\CourseRepositoryInterface;
 use Sprungbrett\Bundle\CourseBundle\Model\Event\CourseModifiedEvent;
 use Sprungbrett\Bundle\CourseBundle\Model\Exception\CourseNotFoundException;
@@ -28,13 +31,13 @@ class ModifyCourseMessageHandler
 
     public function __invoke(ModifyCourseMessage $message): void
     {
-        $course = $this->courseRepository->findById($message->getUuid(), $message->getLocale());
+        $course = $this->courseRepository->findById($message->getUuid(), Stages::DRAFT, $message->getLocale());
         if (!$course) {
             throw new CourseNotFoundException($message->getUuid());
         }
 
         $course->setName($message->getName());
 
-        $this->messageCollector->push(new CourseModifiedEvent());
+        $this->messageCollector->push(new CourseModifiedEvent($course));
     }
 }

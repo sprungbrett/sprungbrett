@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sprungbrett\Component\Payload\Model\Message;
 
 use Webmozart\Assert\Assert;

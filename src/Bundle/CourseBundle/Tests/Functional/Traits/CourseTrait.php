@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sprungbrett\Bundle\CourseBundle\Tests\Functional\Traits;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
+use Sprungbrett\Bundle\ContentBundle\Stages;
 use Sprungbrett\Bundle\CourseBundle\Model\Course;
 use Sprungbrett\Bundle\CourseBundle\Model\CourseInterface;
 
@@ -11,7 +14,7 @@ trait CourseTrait
 {
     public function createCourse(string $name = 'Sprungbrett', string $locale = 'en'): CourseInterface
     {
-        $course = new Course(Uuid::uuid4()->toString());
+        $course = new Course(Uuid::uuid4()->toString(), Stages::DRAFT);
         $course->setCurrentLocale($locale);
         $course->setName($name);
 

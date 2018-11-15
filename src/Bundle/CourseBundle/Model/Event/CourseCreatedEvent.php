@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sprungbrett\Bundle\CourseBundle\Model\Event;
 
 use Sprungbrett\Bundle\CourseBundle\Model\CourseInterface;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sprungbrett\Bundle\CourseBundle\Model\Exception;
 
 use Sprungbrett\Bundle\CourseBundle\Model\CourseInterface;
@@ -27,7 +29,6 @@ class CourseNotFoundException extends \Exception
 
     public function getUuid(): string
     {
-        return $this->id;
+        return $this->uuid;
     }
 }
-

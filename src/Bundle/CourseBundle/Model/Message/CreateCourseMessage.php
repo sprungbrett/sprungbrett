@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sprungbrett\Bundle\CourseBundle\Model\Message;
 
 use Ramsey\Uuid\Uuid;
@@ -34,7 +36,7 @@ class CreateCourseMessage
         return $this->uuid;
     }
 
-    public function getLocale():string
+    public function getLocale(): string
     {
         return $this->locale;
     }

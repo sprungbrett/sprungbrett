@@ -1,0 +1,10 @@
+doctrine:
+    orm:
+        mappings:
+            SprungbrettContentBundle:
+                type: xml
+                prefix: 'Sprungbrett\Bundle\ContentBundle\Model'
+                dir: 'Resources/config/doctrine'
+                alias: SprungbrettContentBundle
+                is_bundle: true
+                mapping: true

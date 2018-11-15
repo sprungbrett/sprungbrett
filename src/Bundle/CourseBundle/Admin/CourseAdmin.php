@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sprungbrett\Bundle\CourseBundle\Admin;
 
 use Sulu\Bundle\AdminBundle\Admin\Admin;
@@ -80,11 +82,11 @@ class CourseAdmin extends Admin
                 ->addOption('editRoute', sprintf('sprungbrett.course.%s_edit_form.detail', $resourceKey)),
             (new Route(sprintf('sprungbrett.course.%s_add_form', $resourceKey), $route . '/:locale/add', 'sulu_admin.resource_tabs'))
                 ->addOption('resourceKey', $resourceKey)
+                ->addOption('backRoute', sprintf('sprungbrett.course.%s_datagrid', $resourceKey))
+                ->addOption('editRoute', sprintf('sprungbrett.course.%s_edit_form.detail', $resourceKey))
                 ->addOption('locales', $locales),
             (new Route(sprintf('sprungbrett.course.%s_add_form.detail', $resourceKey), '/details', 'sulu_admin.form'))
                 ->addOption('tabTitle', 'sprungbrett.courses.details')
-                ->addOption('backRoute', sprintf('sprungbrett.course.%s_datagrid', $resourceKey))
-                ->addOption('editRoute', sprintf('sprungbrett.course.%s_edit_form.detail', $resourceKey))
                 ->addOption('locales', $locales)
                 ->addOption('toolbarActions', ['sulu_admin.save'])
                 ->setParent(sprintf('sprungbrett.course.%s_add_form', $resourceKey)),
@@ -93,9 +95,13 @@ class CourseAdmin extends Admin
                 ->addOption('locales', $locales),
             (new Route(sprintf('sprungbrett.course.%s_edit_form.detail', $resourceKey), '/details', 'sulu_admin.form'))
                 ->addOption('tabTitle', 'sprungbrett.courses.details')
-                ->addOption('backRoute', sprintf('sprungbrett.course.%s_datagrid', $resourceKey))
                 ->addOption('locales', $locales)
-                ->addOption('toolbarActions', ['sulu_admin.save', 'sulu_admin.delete'])
+                ->addOption('toolbarActions', ['sulu_admin.save_with_publishing', 'sulu_admin.delete'])
+                ->setParent(sprintf('sprungbrett.course.%s_edit_form', $resourceKey)),
+            (new Route(sprintf('sprungbrett.course.%s_edit_form.content', $resourceKey), '/content', 'sulu_admin.form'))
+                ->addOption('tabTitle', 'sprungbrett.courses.content')
+                ->addOption('resourceKey', 'product_contents')
+                ->addOption('toolbarActions', ['sulu_admin.save_with_publishing', 'sulu_admin.delete', 'sulu_admin.type'])
                 ->setParent(sprintf('sprungbrett.course.%s_edit_form', $resourceKey)),
         ];
     }

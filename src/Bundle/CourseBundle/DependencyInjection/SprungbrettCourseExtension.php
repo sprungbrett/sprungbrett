@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sprungbrett\Bundle\CourseBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
@@ -27,6 +29,13 @@ class SprungbrettCourseExtension extends Extension implements PrependExtensionIn
 
         $config = Yaml::parseFile(__DIR__ . '/../Resources/config/packages/sulu_admin.yaml');
         $container->prependExtensionConfig('sulu_admin', $config['sulu_admin']);
+
+        if (!$container->hasExtension('sulu_core')) {
+            throw new \RuntimeException('Missing SuluCoreBundle');
+        }
+
+        $config = Yaml::parseFile(__DIR__ . '/../Resources/config/packages/sulu_core.yaml');
+        $container->prependExtensionConfig('sulu_core', $config['sulu_core']);
 
         if (!$container->hasExtension('jms_serializer')) {
             throw new \RuntimeException('Missing JmsSerializerBundle');

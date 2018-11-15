@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="./services/repositories.xml"/>
+        <import resource="./services/handlers.xml"/>
+    </imports>
+
+    <services>
+        <service id="Sprungbrett\Bundle\ContentBundle\Serializer\ContentHandler">
+            <argument type="service" id="sulu_content.structure.factory"/>
+
+            <tag name="jms_serializer.subscribing_handler"/>
+        </service>
+    </services>
+</container>

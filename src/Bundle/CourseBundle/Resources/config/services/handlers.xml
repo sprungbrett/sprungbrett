@@ -32,6 +32,15 @@
         </service>
 
         <service id="Sprungbrett\Bundle\CourseBundle\Model\Handler\RemoveCourseMessageHandler">
+            <argument type="service" id="message_bus"/>
+            <argument type="service" id="Sprungbrett\Component\MessageCollector\MessageCollector"/>
+            <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\CourseRepositoryInterface"/>
+
+            <tag name="messenger.message_handler"/>
+        </service>
+
+        <service id="Sprungbrett\Bundle\CourseBundle\Model\Handler\PublishCourseMessageHandler">
+            <argument type="service" id="message_bus"/>
             <argument type="service" id="Sprungbrett\Component\MessageCollector\MessageCollector"/>
             <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\CourseRepositoryInterface"/>
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sprungbrett\Bundle\CourseBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -9,6 +11,7 @@ use FOS\RestBundle\View\ViewHandlerInterface;
 use Sprungbrett\Bundle\CourseBundle\Admin\CourseAdmin;
 use Sprungbrett\Bundle\CourseBundle\Model\Message\CreateCourseMessage;
 use Sprungbrett\Bundle\CourseBundle\Model\Message\ModifyCourseMessage;
+use Sprungbrett\Bundle\CourseBundle\Model\Message\PublishCourseMessage;
 use Sprungbrett\Bundle\CourseBundle\Model\Message\RemoveCourseMessage;
 use Sprungbrett\Bundle\CourseBundle\Model\Query\FindCourseQuery;
 use Sprungbrett\Bundle\CourseBundle\Model\Query\ListCoursesQuery;
@@ -52,6 +55,11 @@ class CourseController implements ClassResourceInterface, SecuredControllerInter
         $message = new CreateCourseMessage($request->get('locale'), $request->request->all());
         $this->messageBus->dispatch($message);
 
+        $action = $request->query->get('action');
+        if ($action) {
+            $this->handleAction($message->getUuid(), $message->getLocale(), $action);
+        }
+
         $course = $this->messageBus->dispatch(new FindCourseQuery($message->getUuid(), $message->getLocale()));
 
         return $this->handleView($this->view($course, 201));
@@ -69,6 +77,11 @@ class CourseController implements ClassResourceInterface, SecuredControllerInter
         $message = new ModifyCourseMessage($uuid, $request->get('locale'), $request->request->all());
         $this->messageBus->dispatch($message);
 
+        $action = $request->query->get('action');
+        if ($action) {
+            $this->handleAction($message->getUuid(), $message->getLocale(), $action);
+        }
+
         $course = $this->messageBus->dispatch(new FindCourseQuery($message->getUuid(), $message->getLocale()));
 
         return $this->handleView($this->view($course));
@@ -80,6 +93,13 @@ class CourseController implements ClassResourceInterface, SecuredControllerInter
         $this->messageBus->dispatch($message);
 
         return $this->handleView($this->view());
+    }
+
+    protected function handleAction(string $uuid, string $locale, string $action): void
+    {
+        if ('publish' === $action) {
+            $this->messageBus->dispatch(new PublishCourseMessage($uuid, $locale));
+        }
     }
 
     public function getSecurityContext()

@@ -16,6 +16,11 @@
             <orm:entity-name>Sprungbrett\Bundle\CourseBundle\Model\Course</orm:entity-name>
         </property>
 
+        <property name="stage" visibility="never">
+            <orm:field-name>stage</orm:field-name>
+            <orm:entity-name>Sprungbrett\Bundle\CourseBundle\Model\Course</orm:entity-name>
+        </property>
+
         <property name="name" visibility="always" list:translation="sprungbrett.name" searchability="yes">
             <orm:field-name>name</orm:field-name>
             <orm:entity-name>Sprungbrett\Bundle\CourseBundle\Model\CourseTranslation</orm:entity-name>

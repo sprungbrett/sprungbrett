@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sprungbrett\Bundle\CourseBundle\Model\Message;
 
 use Sprungbrett\Component\Payload\Model\Message\PayloadTrait;
@@ -33,7 +35,7 @@ class ModifyCourseMessage
         return $this->uuid;
     }
 
-    public function getLocale():string
+    public function getLocale(): string
     {
         return $this->locale;
     }

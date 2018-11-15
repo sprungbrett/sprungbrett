@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sprungbrett\Bundle\CourseBundle\Model;
 
 interface CourseTranslationInterface
@@ -8,5 +10,5 @@ interface CourseTranslationInterface
 
     public function getName(): ?string;
 
-    public function setName(string $name): self;
+    public function setName(?string $name): self;
 }

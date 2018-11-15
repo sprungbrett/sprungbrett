@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sprungbrett\Bundle\CourseBundle\Model;
 
 use Sprungbrett\Component\Translatable\Model\TranslatableInterface;
@@ -23,11 +25,17 @@ class Course implements CourseInterface, TranslatableInterface
     protected $uuid;
 
     /**
+     * @var string
+     */
+    protected $stage;
+
+    /**
      * @param CourseTranslationInterface[] $translations
      */
-    public function __construct(string $uuid, ?array $translations = null)
+    public function __construct(string $uuid, string $stage, ?array $translations = null)
     {
         $this->uuid = $uuid;
+        $this->stage = $stage;
 
         $this->initializeTranslations($translations);
     }
@@ -37,12 +45,17 @@ class Course implements CourseInterface, TranslatableInterface
         return $this->uuid;
     }
 
+    public function getStage(): string
+    {
+        return $this->stage;
+    }
+
     public function getName(?string $locale = null): ?string
     {
         return $this->getTranslation($locale)->getName();
     }
 
-    public function setName(string $name, ?string $locale = null): CourseInterface
+    public function setName(?string $name, ?string $locale = null): CourseInterface
     {
         $this->getTranslation($locale)->setName($name);
 

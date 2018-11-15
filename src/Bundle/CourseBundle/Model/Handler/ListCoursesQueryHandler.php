@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sprungbrett\Bundle\CourseBundle\Model\Handler;
 
+use Sprungbrett\Bundle\ContentBundle\Stages;
 use Sprungbrett\Bundle\CourseBundle\Model\Course;
 use Sprungbrett\Bundle\CourseBundle\Model\Query\ListCoursesQuery;
 use Sulu\Component\Rest\ListBuilder\Doctrine\DoctrineListBuilder;
@@ -46,6 +49,8 @@ class ListCoursesQueryHandler
         $listBuilder = $this->listBuilderFactory->create(Course::class);
         $this->restHelper->initializeListBuilder($listBuilder, $fieldDescriptors);
         $listBuilder->setIdField($fieldDescriptors['id']);
+
+        $listBuilder->where($fieldDescriptors['stage'], Stages::DRAFT);
 
         $listResponse = $listBuilder->execute();
 
