@@ -53,4 +53,5 @@ return [
     Sprungbrett\Bundle\CoreBundle\SprungbrettCoreBundle::class => ['all' => true],
     Sprungbrett\Bundle\CourseBundle\SprungbrettCourseBundle::class => ['all' => true],
     Sprungbrett\Bundle\ContentBundle\SprungbrettContentBundle::class => ['all' => true],
+    Sprungbrett\Bundle\PortalBundle\SprungbrettPortalBundle::class => ['all' => true],
 ];

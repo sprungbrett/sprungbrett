@@ -26,6 +26,7 @@
         "sprungbrett/message-collector": "^1.0.0@dev",
         "sprungbrett/message-middleware": "^1.0.0@dev",
         "sprungbrett/payload": "^1.0.0@dev",
+        "sprungbrett/portal-bundle": "^1.0.0@dev",
         "sprungbrett/translatable": "^1.0.0@dev",
         "sulu/sulu": "^2.0.0@dev",
         "symfony/config": "^4.1",

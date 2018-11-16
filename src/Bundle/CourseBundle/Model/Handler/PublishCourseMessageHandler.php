@@ -56,6 +56,6 @@ class PublishCourseMessageHandler
 
         $this->messageBus->dispatch(new PublishContentMessage('courses', $message->getUuid(), $message->getLocale()));
 
-        $this->messageCollector->push(new CoursePublishedEvent($liveCourse));
+        $this->messageCollector->push(new CoursePublishedEvent($message->getLocale(), $liveCourse));
     }
 }

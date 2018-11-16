@@ -4,6 +4,8 @@
           xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
 
     <key>default</key>
+    <controller>SprungbrettPortalBundle:Course:index</controller>
+    <view>courses/default</view>
 
     <meta>
         <title lang="en">Default</title>

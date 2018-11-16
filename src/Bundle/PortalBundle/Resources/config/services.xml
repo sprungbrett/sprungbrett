@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="./services/repositories.xml"/>
+        <import resource="./services/handlers.xml"/>
+        <import resource="./services/controllers.xml"/>
+    </imports>
+
+    <services>
+        <service id="Sprungbrett\Bundle\PortalBundle\Routing\CourseRouteDefaultsProvider">
+            <argument type="service" id="message_bus"/>
+            <argument type="service" id="sulu_content.structure.factory"/>
+            <argument type="service" id="sulu_http_cache.cache_lifetime.resolver"/>
+
+            <tag name="sulu_route.defaults_provider"/>
+        </service>
+    </services>
+</container>

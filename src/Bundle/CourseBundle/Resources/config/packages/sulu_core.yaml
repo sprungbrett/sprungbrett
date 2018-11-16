@@ -2,7 +2,7 @@ sulu_core:
     content:
         structure:
             type_map:
-                course: "Sulu\\Component\\Content\\Compat\\Structure\\StructureBridge"
+                courses: "Sulu\\Component\\Content\\Compat\\Structure\\StructureBridge"
 
             paths:
                 courses:

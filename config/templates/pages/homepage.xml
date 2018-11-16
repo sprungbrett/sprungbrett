@@ -5,8 +5,8 @@
 
     <key>homepage</key>
 
-    <view>templates/pages/homepage</view>
-    <controller>SuluWebsiteBundle:Default:index</controller>
+    <view>pages/homepage</view>
+    <controller>SprungbrettPortalBundle:CourseList:index</controller>
     <cacheLifetime>86400</cacheLifetime>
 
     <meta>

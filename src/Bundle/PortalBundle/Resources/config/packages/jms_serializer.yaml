@@ -1,0 +1,6 @@
+jms_serializer:
+    metadata:
+        directories:
+            - name: sprungbrett_portal
+              path: "@SprungbrettPortalBundle/Resources/config/serializer"
+              namespace_prefix: "Sprungbrett\\Bundle\\PortalBundle\\Model"

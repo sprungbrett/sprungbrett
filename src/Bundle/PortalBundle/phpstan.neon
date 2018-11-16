@@ -1,0 +1,7 @@
+parameters:
+    level: 7
+    paths:
+        - .
+
+includes:
+	- vendor/jangregor/phpstan-prophecy/src/extension.neon

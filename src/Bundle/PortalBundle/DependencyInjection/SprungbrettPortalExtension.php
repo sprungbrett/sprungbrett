@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sprungbrett\Bundle\CourseBundle\DependencyInjection;
+namespace Sprungbrett\Bundle\PortalBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Yaml\Yaml;
 
-class SprungbrettCourseExtension extends Extension implements PrependExtensionInterface
+class SprungbrettPortalExtension extends Extension implements PrependExtensionInterface
 {
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -23,13 +23,6 @@ class SprungbrettCourseExtension extends Extension implements PrependExtensionIn
 
     public function prepend(ContainerBuilder $container)
     {
-        if (!$container->hasExtension('sulu_core')) {
-            throw new \RuntimeException('Missing SuluCoreBundle');
-        }
-
-        $config = Yaml::parseFile(__DIR__ . '/../Resources/config/packages/sulu_core.yaml');
-        $container->prependExtensionConfig('sulu_core', $config['sulu_core']);
-
         if (!$container->hasExtension('jms_serializer')) {
             throw new \RuntimeException('Missing JmsSerializerBundle');
         }
@@ -43,11 +36,5 @@ class SprungbrettCourseExtension extends Extension implements PrependExtensionIn
 
         $config = Yaml::parseFile(__DIR__ . '/../Resources/config/packages/doctrine.yaml');
         $container->prependExtensionConfig('doctrine', $config['doctrine']);
-
-        // optional sulu_admin
-        if ($container->hasExtension('sulu_admin')) {
-            $config = Yaml::parseFile(__DIR__ . '/../Resources/config/packages/sulu_admin.yaml');
-            $container->prependExtensionConfig('sulu_admin', $config['sulu_admin']);
-        }
     }
 }

@@ -9,17 +9,28 @@ use Sprungbrett\Bundle\CourseBundle\Model\CourseInterface;
 class CoursePublishedEvent
 {
     /**
+     * @var string
+     */
+    protected $locale;
+
+    /**
      * @var CourseInterface
      */
-    private $course;
+    protected $course;
 
-    public function __construct(CourseInterface $course)
+    public function __construct(string $locale, CourseInterface $course)
     {
+        $this->locale = $locale;
         $this->course = $course;
     }
 
-    public function getCourse(): CourseInterface
+    public function getUuid()
     {
-        return $this->course;
+        return $this->course->getUuid();
+    }
+
+    public function getLocale()
+    {
+        return $this->locale;
     }
 }

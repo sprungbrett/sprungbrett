@@ -6,4 +6,10 @@
     <div property="article">
         {{ content.article|raw }}
     </div>
+
+    <ul>
+        {% for item in courses %}
+            <li><a href="{{ sulu_content_path(item.route) }}">{{ item.course.name }}</a></li>
+        {% endfor %}
+    </ul>
 {% endblock %}
