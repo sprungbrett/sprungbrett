@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace Sprungbrett\Bundle\ContentBundle\Model\Content;
 
-/**
- * FIXME extract ContentTranslation.
- */
+use Sprungbrett\Bundle\ContentBundle\Stages;
+use Sprungbrett\Component\Translatable\Model\TranslatableTrait;
+use Sprungbrett\Component\Translatable\Model\TranslationInterface;
+
 class Content implements ContentInterface
 {
+    use TranslatableTrait {
+        __construct as protected initializeTranslations;
+    }
+
     /**
      * @var int
      */
@@ -27,31 +32,19 @@ class Content implements ContentInterface
     /**
      * @var string
      */
-    protected $locale;
-
-    /**
-     * @var string
-     *
-     * TODO move to translation
-     */
     protected $stage;
 
-    /**
-     * @var string|null
-     */
-    protected $type;
-
-    /**
-     * @var array
-     */
-    protected $data;
-
-    public function __construct(string $resourceKey, string $resourceId, string $locale, string $stage)
-    {
+    public function __construct(
+        string $resourceKey,
+        string $resourceId,
+        string $stage = Stages::DRAFT,
+        array $translations = []
+    ) {
         $this->resourceKey = $resourceKey;
         $this->resourceId = $resourceId;
-        $this->locale = $locale;
         $this->stage = $stage;
+
+        $this->initializeTranslations($translations);
     }
 
     public function getResourceKey(): string
@@ -64,31 +57,38 @@ class Content implements ContentInterface
         return $this->resourceId;
     }
 
-    public function getLocale(): string
-    {
-        return $this->locale;
-    }
-
     public function getStage(): string
     {
         return $this->stage;
     }
 
-    public function getType(): ?string
+    public function getType(?string $locale = null): ?string
     {
-        return $this->type;
+        return $this->getTranslation($locale)->getType();
     }
 
-    public function getData(): array
+    public function getData(?string $locale = null): array
     {
-        return $this->data;
+        return $this->getTranslation($locale)->getData();
     }
 
-    public function modifyData(?string $type, array $data): ContentInterface
+    public function modifyData(?string $type, array $data, ?string $locale = null): ContentInterface
     {
-        $this->type = $type;
-        $this->data = $data;
+        $this->getTranslation($locale)->modifyData($type, $data);
 
         return $this;
+    }
+
+    public function getTranslation(?string $locale = null): ContentTranslationInterface
+    {
+        /** @var ContentTranslationInterface $translation */
+        $translation = $this->doGetTranslation($locale);
+
+        return $translation;
+    }
+
+    protected function createTranslation(string $locale): TranslationInterface
+    {
+        return new ContentTranslation($this, $locale);
     }
 }

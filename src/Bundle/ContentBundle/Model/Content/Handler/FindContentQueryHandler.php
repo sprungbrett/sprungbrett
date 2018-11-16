@@ -26,8 +26,8 @@ class FindContentQueryHandler
         $content = $this->contentRepository->findByResource(
             $query->getResourceKey(),
             $query->getResourceId(),
-            $query->getLocale(),
-            $query->getStage()
+            $query->getStage(),
+            $query->getLocale()
         );
 
         if (!$content) {

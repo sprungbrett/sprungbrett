@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sprungbrett\Bundle\PortalBundle\Routing;
 
 use Sprungbrett\Bundle\PortalBundle\Model\CourseView\CourseViewInterface;

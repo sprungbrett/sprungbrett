@@ -19,7 +19,7 @@
         </many-to-one>
 
         <many-to-one field="course" target-entity="Sprungbrett\Bundle\CourseBundle\Model\Course" fetch="EAGER">
-            <join-column on-delete="CASCADE"/>
+            <join-column on-delete="SET NULL"/>
         </many-to-one>
 
         <many-to-one field="route" target-entity="Sulu\Bundle\RouteBundle\Entity\Route">

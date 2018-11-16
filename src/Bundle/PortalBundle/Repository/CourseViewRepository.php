@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sprungbrett\Bundle\PortalBundle\Repository;
 
+use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
 use Sprungbrett\Bundle\PortalBundle\Model\CourseView\CourseView;
 use Sprungbrett\Bundle\PortalBundle\Model\CourseView\CourseViewInterface;
 use Sprungbrett\Bundle\PortalBundle\Model\CourseView\CourseViewRepositoryInterface;
@@ -16,7 +18,7 @@ class CourseViewRepository implements CourseViewRepositoryInterface
     private $entityManager;
 
     /**
-     * @var EntityRepository
+     * @var ObjectRepository
      */
     private $repository;
 
@@ -36,11 +38,24 @@ class CourseViewRepository implements CourseViewRepositoryInterface
 
     public function findById(string $uuid, string $locale): ?CourseViewInterface
     {
-        return $this->repository->find(['uuid' => $uuid, 'locale' => $locale]);
+        /** @var CourseViewInterface|null $courseView */
+        $courseView = $this->repository->find(['uuid' => $uuid, 'locale' => $locale]);
+
+        return $courseView;
+    }
+
+    public function findAllById(string $uuid): array
+    {
+        return $this->repository->findBy(['uuid' => $uuid]);
     }
 
     public function list(int $page, int $pageSize): array
     {
         return $this->repository->findBy([], [], $pageSize, ($page - 1) * $pageSize);
+    }
+
+    public function remove(CourseViewInterface $courseView): void
+    {
+        $this->entityManager->remove($courseView);
     }
 }

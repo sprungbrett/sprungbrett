@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sprungbrett\Bundle\PortalBundle\Controller;
 
 use Sprungbrett\Bundle\PortalBundle\Model\CourseView\CourseViewInterface;
@@ -24,7 +26,6 @@ class CourseController extends Controller
         array $attributes = []
     ): Response {
         $view = $view . '.' . $request->getRequestFormat() . '.twig';
-
 
         return $this->render(
             $view,

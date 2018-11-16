@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Sprungbrett\Bundle\CourseBundle\Repository;
 
+use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
 use Sprungbrett\Bundle\CourseBundle\Model\Course;
 use Sprungbrett\Bundle\CourseBundle\Model\CourseInterface;
 use Sprungbrett\Bundle\CourseBundle\Model\CourseRepositoryInterface;
@@ -18,7 +18,7 @@ class CourseRepository implements CourseRepositoryInterface
     private $entityManager;
 
     /**
-     * @var EntityRepository
+     * @var ObjectRepository
      */
     private $repository;
 

@@ -9,15 +9,15 @@ interface ContentRepositoryInterface
     public function create(
         string $resourceKey,
         string $resourceId,
-        string $locale,
-        string $stage
+        string $stage,
+        ?string $locale = null
     ): ContentInterface;
 
     public function findByResource(
         string $resourceKey,
         string $resourceId,
-        string $locale,
-        string $stage
+        string $stage,
+        ?string $locale = null
     ): ?ContentInterface;
 
     /**

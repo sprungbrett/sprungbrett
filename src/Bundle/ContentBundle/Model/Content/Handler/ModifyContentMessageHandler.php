@@ -34,8 +34,8 @@ class ModifyContentMessageHandler
         $content = $this->contentRepository->findByResource(
             $message->getResourceKey(),
             $message->getResourceId(),
-            $message->getLocale(),
-            Stages::DRAFT
+            Stages::DRAFT,
+            $message->getLocale()
         );
 
         $modified = false;
@@ -44,8 +44,8 @@ class ModifyContentMessageHandler
             $content = $this->contentRepository->create(
                 $message->getResourceKey(),
                 $message->getResourceId(),
-                $message->getLocale(),
-                Stages::DRAFT
+                Stages::DRAFT,
+                $message->getLocale()
             );
         }
 

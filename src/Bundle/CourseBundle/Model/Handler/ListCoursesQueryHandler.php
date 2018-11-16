@@ -51,6 +51,7 @@ class ListCoursesQueryHandler
         $listBuilder->setIdField($fieldDescriptors['id']);
 
         $listBuilder->where($fieldDescriptors['stage'], Stages::DRAFT);
+        $listBuilder->distinct();
 
         $listResponse = $listBuilder->execute();
 

@@ -92,6 +92,8 @@ class CourseAdmin extends Admin
                 ->setParent(sprintf('sprungbrett.course.%s_add_form', $resourceKey)),
             (new Route(sprintf('sprungbrett.course.%s_edit_form', $resourceKey), $route . '/:locale/:id', 'sulu_admin.resource_tabs'))
                 ->addOption('resourceKey', $resourceKey)
+                ->addOption('backRoute', sprintf('sprungbrett.course.%s_datagrid', $resourceKey))
+                ->addOption('editRoute', sprintf('sprungbrett.course.%s_edit_form.detail', $resourceKey))
                 ->addOption('locales', $locales),
             (new Route(sprintf('sprungbrett.course.%s_edit_form.detail', $resourceKey), '/details', 'sulu_admin.form'))
                 ->addOption('tabTitle', 'sprungbrett.courses.details')

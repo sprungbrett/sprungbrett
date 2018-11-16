@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sprungbrett\Bundle\PortalBundle\Controller;
 
 use Sprungbrett\Bundle\ContentBundle\Model\Content\ContentInterface;
 use Sprungbrett\Bundle\PortalBundle\Model\CourseView\CourseViewInterface;
 use Sulu\Component\Content\Compat\StructureInterface;
+use Sulu\Component\Content\Compat\StructureManagerInterface;
+use Sulu\Component\Content\ContentTypeManagerInterface;
 
 trait CourseViewTrait
 {
@@ -20,8 +24,11 @@ trait CourseViewTrait
 
     private function resolveContent(ContentInterface $content): array
     {
-        $contentTypeManager = $this->get('sulu.content.type_manager');
+        $contentTypeManager = $this->getContentTypeManager();
         $structure = $this->getStructure($content);
+        if (!$structure) {
+            return [];
+        }
 
         $data = $content->getData();
 
@@ -46,12 +53,30 @@ trait CourseViewTrait
             return null;
         }
 
-        $structureManager = $this->get('sulu.content.structure_manager');
+        $structureManager = $this->getStructureManager();
         $structure = $structureManager->getStructure($contentType, $content->getResourceKey());
-        $structure->setLanguageCode($content->getLocale());
+
+        $locale = $content->getCurrentLocale();
+        if ($locale) {
+            $structure->setLanguageCode($locale);
+        }
 
         return $structure;
     }
 
-    abstract protected function get(string $id);
+    private function getContentTypeManager(): ContentTypeManagerInterface
+    {
+        /** @var ContentTypeManagerInterface $contentTypeManager */
+        $contentTypeManager = $this->get('sulu.content.type_manager');
+
+        return $contentTypeManager;
+    }
+
+    private function getStructureManager(): StructureManagerInterface
+    {
+        /** @var StructureManagerInterface $structureManager */
+        $structureManager = $this->get('sulu.content.structure_manager');
+
+        return $structureManager;
+    }
 }

@@ -4,6 +4,7 @@ parameters:
         - .
     excludes_analyse:
         - %currentWorkingDirectory%/vendor/*.php
+        - %currentWorkingDirectory%/Tests/app/*.php
 
 includes:
 	- vendor/jangregor/phpstan-prophecy/src/extension.neon

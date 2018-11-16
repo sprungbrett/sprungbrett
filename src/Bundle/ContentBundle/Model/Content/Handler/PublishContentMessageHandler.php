@@ -34,8 +34,8 @@ class PublishContentMessageHandler
         $draftContent = $this->contentRepository->findByResource(
             $message->getResourceKey(),
             $message->getResourceId(),
-            $message->getLocale(),
-            Stages::DRAFT
+            Stages::DRAFT,
+            $message->getLocale()
         );
         if (!$draftContent) {
             throw new ContentNotFoundException($message->getResourceKey(), $message->getResourceId());
@@ -44,15 +44,15 @@ class PublishContentMessageHandler
         $liveContent = $this->contentRepository->findByResource(
             $message->getResourceKey(),
             $message->getResourceId(),
-            $message->getLocale(),
-            Stages::LIVE
+            Stages::LIVE,
+            $message->getLocale()
         );
         if (!$liveContent) {
             $liveContent = $this->contentRepository->create(
                 $message->getResourceKey(),
                 $message->getResourceId(),
-                $message->getLocale(),
-                Stages::LIVE
+                Stages::LIVE,
+                $message->getLocale()
             );
         }
 

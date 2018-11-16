@@ -72,6 +72,8 @@ class CourseView implements CourseViewInterface
 
     public function getContent(): ContentInterface
     {
+        $this->content->setCurrentLocale($this->locale);
+
         return $this->content;
     }
 

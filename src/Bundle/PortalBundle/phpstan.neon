@@ -2,6 +2,11 @@ parameters:
     level: 7
     paths:
         - .
+    excludes_analyse:
+        - %currentWorkingDirectory%/vendor/*.php
+    ignoreErrors:
+        - '#Sulu\\Component\\Content\\ContentTypeManagerInterface#'
+        - '#Sulu\\Component\\Content\\Compat\\StructureManagerInterface#'
 
 includes:
 	- vendor/jangregor/phpstan-prophecy/src/extension.neon

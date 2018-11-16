@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Sprungbrett\Bundle\ContentBundle\Model\Content\ContentTranslation"
+            table="sp_content_translations">
+        <id name="content" type="integer" association-key="true"/>
+        <id name="locale" type="string" length="5">
+            <generator strategy="NONE"/>
+        </id>
+
+        <field name="type" type="string" nullable="false"/>
+        <field name="data" type="json" nullable="false"/>
+
+        <many-to-one
+                field="content"
+                target-entity="Sprungbrett\Bundle\ContentBundle\Model\Content\Content"
+                inversed-by="translations"
+        />
+    </entity>
+</doctrine-mapping>

@@ -5,19 +5,28 @@
     <entity name="Sprungbrett\Bundle\ContentBundle\Model\Content\Content"
             table="sp_contents">
         <unique-constraints>
-            <unique-constraint columns="resource_key,resource_id,locale,stage"/>
+            <unique-constraint columns="resource_key,resource_id,stage"/>
         </unique-constraints>
-        
+
         <id name="id" type="integer">
             <generator strategy="AUTO"/>
         </id>
 
         <field name="resourceKey" type="string" nullable="false" length="20"/>
         <field name="resourceId" type="string" nullable="false"/>
-        <field name="locale" type="string" nullable="false" length="5"/>
         <field name="stage" type="string" nullable="false" length="10"/>
 
-        <field name="type" type="string" nullable="false"/>
-        <field name="data" type="json" nullable="false"/>
+        <one-to-many
+                field="translations"
+                target-entity="Sprungbrett\Bundle\ContentBundle\Model\Content\ContentTranslation"
+                mapped-by="content"
+                orphan-removal="true"
+                index-by="locale"
+        >
+            <cascade>
+                <cascade-persist/>
+                <cascade-remove/>
+            </cascade>
+        </one-to-many>
     </entity>
 </doctrine-mapping>

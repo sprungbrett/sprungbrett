@@ -42,7 +42,7 @@ class ContentHandler implements SubscribingHandlerInterface
             return;
         }
 
-        $data = ['template' => $content->getType()];
+        $data = ['id' => $content->getResourceId(), 'template' => $content->getType()];
         foreach ($metadata->getProperties() as $property) {
             $name = $property->getName();
             $data[$name] = isset($content->getData()[$name]) ? $content->getData()[$name] : null;

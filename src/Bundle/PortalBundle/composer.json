@@ -27,7 +27,10 @@
 
         "doctrine/orm": "^2.6",
         "jms/serializer-bundle": "^2.4",
+        "sprungbrett/core-bundle": "^1.0.0@dev",
+        "sprungbrett/course-bundle": "^1.0.0@dev",
         "sprungbrett/content-bundle": "^1.0.0@dev",
+        "sulu/sulu": "^2.0.0@dev",
         "symfony/dependency-injection": "^4.1",
         "symfony/http-kernel": "^4.1",
         "symfony/messenger": "^4.1",
@@ -35,6 +38,7 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.13",
+        "jackalope/jackalope-doctrine-dbal": "^1.2.5",
         "jangregor/phpstan-prophecy": "^0.2.0",
         "phpstan/phpstan": "^0.10.5",
         "phpunit/phpunit": "^7.4"
@@ -44,7 +48,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Sprungbrett\\Component\\CourseBundle\\": ""
+            "Sprungbrett\\Bundle\\PortalBundle\\": ""
         }
     },
     "scripts": {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sprungbrett\Bundle\PortalBundle\Controller;
 
 use Sprungbrett\Bundle\PortalBundle\Model\CourseView\CourseViewInterface;
@@ -30,7 +32,7 @@ class CourseListController extends WebsiteController
                     return $this->resolveCourse($courseView);
                 },
                 $courses
-            )
+            ),
         ];
 
         return $this->renderStructure($structure, $attributes, $preview, $partial);

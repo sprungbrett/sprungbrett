@@ -12,6 +12,7 @@ use Sprungbrett\Bundle\CourseBundle\Model\Event\CoursePublishedEvent;
 use Sprungbrett\Bundle\CourseBundle\Model\Exception\CourseNotFoundException;
 use Sprungbrett\Bundle\PortalBundle\Model\CourseView\CourseViewRepositoryInterface;
 use Sulu\Bundle\RouteBundle\Manager\RouteManagerInterface;
+use Sulu\Bundle\RouteBundle\Model\RouteInterface;
 
 class CoursePublishedEventHandler
 {
@@ -57,8 +58,8 @@ class CoursePublishedEventHandler
         $content = $this->contentRepository->findByResource(
             'courses',
             $event->getUuid(),
-            $event->getLocale(),
-            Stages::LIVE
+            Stages::LIVE,
+            $event->getLocale()
         );
         if (!$content) {
             throw new ContentNotFoundException('courses', $event->getUuid());
@@ -72,7 +73,9 @@ class CoursePublishedEventHandler
         $courseView->setCourse($course);
         $courseView->setContent($content);
 
-        if (!$courseView->getRoute()) {
+        /** @var RouteInterface|null $route */
+        $route = $courseView->getRoute();
+        if (!$route) {
             $this->routeManager->create($courseView);
 
             return;
