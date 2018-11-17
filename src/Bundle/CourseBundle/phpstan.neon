@@ -1,3 +1,6 @@
+includes:
+    - vendor/jangregor/phpstan-prophecy/src/extension.neon
+
 parameters:
     level: 7
     paths:
@@ -5,6 +8,12 @@ parameters:
     excludes_analyse:
         - %currentWorkingDirectory%/vendor/*.php
         - %currentWorkingDirectory%/Tests/app/*.php
-
-includes:
-	- vendor/jangregor/phpstan-prophecy/src/extension.neon
+        - %currentWorkingDirectory%/Tests/var/*.php
+    ignoreErrors:
+        - '#reveal#'
+        - '#shouldBeCalled#'
+        - '#ObjectProphecy#'
+        - '#willReturn#'
+        - '#\(void\) is used#'
+        - '#shouldNotBeCalled#'
+        - '#Anonymous function has an unused use#'

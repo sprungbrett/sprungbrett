@@ -7,7 +7,6 @@ namespace Sprungbrett\Bundle\ContentBundle\Controller;
 use FOS\RestBundle\Controller\ControllerTrait;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\View\ViewHandlerInterface;
-use Sprungbrett\Bundle\ContentBundle\Model\Content\Exception\ContentNotFoundException;
 use Sprungbrett\Bundle\ContentBundle\Model\Content\Message\ModifyContentMessage;
 use Sprungbrett\Bundle\ContentBundle\Model\Content\Query\FindContentQuery;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,18 +28,9 @@ abstract class ContentController implements ClassResourceInterface
      */
     protected $resourceKey;
 
-    /**
-     * @var string
-     */
-    protected $defaultType;
-
-    public function __construct(
-        MessageBusInterface $messageBus,
-        ViewHandlerInterface $viewHandler,
-        string $defaultType = 'default'
-    ) {
+    public function __construct(MessageBusInterface $messageBus, ViewHandlerInterface $viewHandler)
+    {
         $this->messageBus = $messageBus;
-        $this->defaultType = $defaultType;
 
         $this->setViewHandler($viewHandler);
     }
@@ -52,15 +42,9 @@ abstract class ContentController implements ClassResourceInterface
 
     public function getAction(Request $request, string $resourceId): Response
     {
-        try {
-            $content = $this->messageBus->dispatch(
-                new FindContentQuery($this->getResourceKey(), $resourceId, $request->query->get('locale'))
-            );
-        } catch (ContentNotFoundException $exception) {
-            $content = [
-                'template' => $this->defaultType,
-            ];
-        }
+        $content = $this->messageBus->dispatch(
+            new FindContentQuery($this->getResourceKey(), $resourceId, $request->query->get('locale'))
+        );
 
         return $this->handleView($this->view($content));
     }

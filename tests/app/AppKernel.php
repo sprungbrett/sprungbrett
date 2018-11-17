@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Sprungbrett\Bundle\ContentBundle\SprungbrettContentBundle;
 use Sprungbrett\Bundle\CoreBundle\SprungbrettCoreBundle;
 use Sprungbrett\Bundle\CourseBundle\SprungbrettCourseBundle;
 use Sulu\Bundle\AudienceTargetingBundle\SuluAudienceTargetingBundle;
@@ -26,6 +27,7 @@ class AppKernel extends SuluTestKernel
     {
         $bundles = parent::registerBundles();
         $bundles[] = new SprungbrettCoreBundle();
+        $bundles[] = new SprungbrettContentBundle();
         $bundles[] = new SprungbrettCourseBundle();
 
         return array_filter(

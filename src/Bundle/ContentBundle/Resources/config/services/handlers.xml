@@ -9,6 +9,13 @@
             <tag name="messenger.message_handler"/>
         </service>
 
+        <service id="Sprungbrett\Bundle\ContentBundle\Model\Content\Handler\CreateContentMessageHandler">
+            <argument type="service" id="Sprungbrett\Component\MessageCollector\MessageCollector"/>
+            <argument type="service" id="Sprungbrett\Bundle\ContentBundle\Model\Content\ContentRepositoryInterface"/>
+
+            <tag name="messenger.message_handler"/>
+        </service>
+
         <service id="Sprungbrett\Bundle\ContentBundle\Model\Content\Handler\ModifyContentMessageHandler">
             <argument type="service" id="Sprungbrett\Component\MessageCollector\MessageCollector"/>
             <argument type="service" id="Sprungbrett\Bundle\ContentBundle\Model\Content\ContentRepositoryInterface"/>

@@ -9,7 +9,17 @@ parameters:
         - src
         - tests
     excludes_analyse:
-        - %currentWorkingDirectory%/src/Bundle/CourseBundle/Tests/app/AppKernel.php
+        - %currentWorkingDirectory%/src/*/*/Tests/app/*.php
+        - %currentWorkingDirectory%/src/*/*/vendor/*.php
+        - %currentWorkingDirectory%/*/var/*.php
     ignoreErrors:
         - '#Sulu\\Component\\Content\\ContentTypeManagerInterface#'
         - '#Sulu\\Component\\Content\\Compat\\StructureManagerInterface#'
+        - '#reveal#'
+        - '#shouldBeCalled#'
+        - '#ObjectProphecy#'
+        - '#willReturn#'
+        - '#\(void\) is used#'
+        - '#shouldNotBeCalled#'
+        - '#Anonymous function has an unused use#'
+

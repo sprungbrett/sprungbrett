@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Sprungbrett\Bundle\CourseBundle\Model;
 
-interface CourseTranslationInterface
+use Sprungbrett\Component\Translatable\Model\TranslationInterface;
+
+interface CourseTranslationInterface extends TranslationInterface
 {
     public function __construct(CourseInterface $course, string $locale);
 

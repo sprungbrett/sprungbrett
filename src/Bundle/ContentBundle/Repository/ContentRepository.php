@@ -6,7 +6,6 @@ namespace Sprungbrett\Bundle\ContentBundle\Repository;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
 use Sprungbrett\Bundle\ContentBundle\Model\Content\Content;
 use Sprungbrett\Bundle\ContentBundle\Model\Content\ContentInterface;
 use Sprungbrett\Bundle\ContentBundle\Model\Content\ContentRepositoryInterface;

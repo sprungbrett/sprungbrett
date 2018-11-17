@@ -18,6 +18,7 @@
         </service>
 
         <service id="Sprungbrett\Bundle\CourseBundle\Model\Handler\CreateCourseMessageHandler">
+            <argument type="service" id="message_bus"/>
             <argument type="service" id="Sprungbrett\Component\MessageCollector\MessageCollector"/>
             <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\CourseRepositoryInterface"/>
 

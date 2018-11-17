@@ -10,6 +10,8 @@ interface CourseInterface
 
     public function getUuid(): string;
 
+    public function getStage(): string;
+
     public function getName(?string $locale = null): ?string;
 
     public function setName(?string $name, ?string $locale = null): self;
