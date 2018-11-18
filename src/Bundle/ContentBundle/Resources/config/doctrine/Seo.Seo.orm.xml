@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Sprungbrett\Bundle\ContentBundle\Model\Seo\Seo"
+            table="sp_seos">
+        <unique-constraints>
+            <unique-constraint columns="resource_key,resource_id,stage"/>
+        </unique-constraints>
+
+        <id name="id" type="integer">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <field name="resourceKey" type="string" nullable="false" length="20"/>
+        <field name="resourceId" type="string" nullable="false"/>
+        <field name="stage" type="string" nullable="false" length="10"/>
+
+        <one-to-many
+                field="translations"
+                target-entity="Sprungbrett\Bundle\ContentBundle\Model\Content\ContentTranslation"
+                mapped-by="seo"
+                orphan-removal="true"
+                index-by="locale"
+        >
+            <cascade>
+                <cascade-persist/>
+                <cascade-remove/>
+            </cascade>
+        </one-to-many>
+    </entity>
+</doctrine-mapping>
