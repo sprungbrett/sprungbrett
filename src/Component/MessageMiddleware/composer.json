@@ -1,0 +1,71 @@
+{
+    "name": "sprungbrett/message-middleware",
+    "type": "library",
+    "description": "Middleware to dispatch messages after the transaction-middleware.",
+    "keywords": [
+        "message",
+        "message-bus"
+    ],
+    "homepage": "http://sprungbrett.io",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Johannes Wachter",
+            "homepage": "http://asapo.at"
+        },
+        {
+            "name": "Sprungbrett project",
+            "homepage": "http://sprungbrett.io"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/sprungbrett/sprungbrett/contributors"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+
+        "sprungbrett/message-collector": "^1.0",
+        "symfony/messenger": "^4.1"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.13",
+        "jangregor/phpstan-prophecy": "^0.2.0",
+        "phpstan/phpstan": "^0.10.5",
+        "phpunit/phpunit": "^7.4"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Sprungbrett\\Component\\MessageMiddleware\\": ""
+        }
+    },
+    "scripts": {
+        "initialize": [],
+        "test": [
+            "@phpunit"
+        ],
+        "lint": [
+            "@phpstan",
+            "@php-cs"
+        ],
+        "phpunit": "vendor/bin/phpunit",
+        "phpstan": "vendor/bin/phpstan analyze -c ./phpstan.neon . -l max",
+        "php-cs": "vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}

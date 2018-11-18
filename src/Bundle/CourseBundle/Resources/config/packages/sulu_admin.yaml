@@ -1,0 +1,6 @@
+sulu_admin:
+    resources:
+        courses:
+            form: ["@SprungbrettCourseBundle/Resources/config/forms/Course.xml"]
+            datagrid: "Sprungbrett\\Bundle\\CourseBundle\\Model\\Course"
+            endpoint: "sprungbrett.get_courses"

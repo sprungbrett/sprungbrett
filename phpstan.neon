@@ -8,3 +8,16 @@ parameters:
     paths:
         - src
         - tests
+    excludes_analyse:
+        - %currentWorkingDirectory%/src/*/*/Tests/app/*.php
+        - %currentWorkingDirectory%/src/*/*/vendor/*.php
+        - %currentWorkingDirectory%/*/var/*.php
+    ignoreErrors:
+        - '#reveal#'
+        - '#shouldBeCalled#'
+        - '#ObjectProphecy#'
+        - '#willReturn#'
+        - '#\(void\) is used#'
+        - '#shouldNotBeCalled#'
+        - '#Anonymous function has an unused use#'
+

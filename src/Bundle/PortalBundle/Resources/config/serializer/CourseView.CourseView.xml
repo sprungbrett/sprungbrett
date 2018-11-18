@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="Sprungbrett\Bundle\CourseBundle\Model\Course" exclusion-policy="ALL"/>
+</serializer>

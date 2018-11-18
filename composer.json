@@ -19,12 +19,15 @@
     ],
     "require": {
         "php": "^7.1.3",
-
         "jackalope/jackalope-doctrine-dbal": "^1.2.5",
-        "sprungbrett/dependent-message-collector": "^1.0.0@dev",
-        "sprungbrett/dependent-message-middleware": "^1.0.0@dev",
-        "sprungbrett/event-collector": "^1.0.0@dev",
-        "sprungbrett/event-middleware": "^1.0.0@dev",
+        "sprungbrett/content-bundle": "^1.0.0@dev",
+        "sprungbrett/core-bundle": "^1.0.0@dev",
+        "sprungbrett/course-bundle": "^1.0.0@dev",
+        "sprungbrett/message-collector": "^1.0.0@dev",
+        "sprungbrett/message-middleware": "^1.0.0@dev",
+        "sprungbrett/payload": "^1.0.0@dev",
+        "sprungbrett/portal-bundle": "^1.0.0@dev",
+        "sprungbrett/translatable": "^1.0.0@dev",
         "sulu/sulu": "^2.0.0@dev",
         "symfony/config": "^4.1",
         "symfony/console": "^4.1",
@@ -47,6 +50,8 @@
         "phpstan/phpstan-doctrine": "^0.10.0",
         "phpstan/phpstan-symfony": "^0.10.1",
         "phpunit/phpunit": "^7.4",
+        "symfony/browser-kit": "^4.1",
+        "symfony/monolog-bundle": "^3.3",
         "symfony/phpunit-bridge": "^4.1",
         "symfony/stopwatch": "^4.1"
     },
@@ -98,10 +103,13 @@
         ],
         "initialize": [
             "@php bin/adminconsole doctrine:database:create --if-not-exists",
-            "@php bin/adminconsole doctrine:schema:update --force"
+            "@php bin/adminconsole doctrine:schema:update --force",
+            "@php bin/adminconsole sulu:document:initialize"
         ],
         "test": [
-            "@phpunit",
+            "@phpunit"
+        ],
+        "lint": [
             "@phpstan",
             "@php-cs"
         ],

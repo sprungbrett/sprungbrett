@@ -1,0 +1,21 @@
+massive_search:
+    adapter: test
+
+doctrine:
+    dbal:
+        url: '%env(resolve:DATABASE_URL)%'
+    orm:
+        mappings:
+            gedmo_tree:
+                type: xml
+                prefix: Gedmo\Tree\Entity
+                dir: '%kernel.project_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity'
+                alias: GedmoTree
+                is_bundle: false
+
+sulu_route:
+    mappings:
+        Sprungbrett\Bundle\PortalBundle\Model\CourseView\CourseView:
+            generator: schema
+            options:
+                route_schema: /{translator.trans("courses")}/{object.getCourse().getName()}

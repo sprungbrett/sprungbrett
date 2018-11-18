@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="Sprungbrett\Bundle\ContentBundle\Model\Content\Handler\FindContentQueryHandler">
+            <argument type="service" id="Sprungbrett\Bundle\ContentBundle\Model\Content\ContentRepositoryInterface"/>
+
+            <tag name="messenger.message_handler"/>
+        </service>
+
+        <service id="Sprungbrett\Bundle\ContentBundle\Model\Content\Handler\CreateContentMessageHandler">
+            <argument type="service" id="Sprungbrett\Component\MessageCollector\MessageCollector"/>
+            <argument type="service" id="Sprungbrett\Bundle\ContentBundle\Model\Content\ContentRepositoryInterface"/>
+
+            <tag name="messenger.message_handler"/>
+        </service>
+
+        <service id="Sprungbrett\Bundle\ContentBundle\Model\Content\Handler\ModifyContentMessageHandler">
+            <argument type="service" id="Sprungbrett\Component\MessageCollector\MessageCollector"/>
+            <argument type="service" id="Sprungbrett\Bundle\ContentBundle\Model\Content\ContentRepositoryInterface"/>
+
+            <tag name="messenger.message_handler"/>
+        </service>
+
+        <service id="Sprungbrett\Bundle\ContentBundle\Model\Content\Handler\PublishContentMessageHandler">
+            <argument type="service" id="Sprungbrett\Component\MessageCollector\MessageCollector"/>
+            <argument type="service" id="Sprungbrett\Bundle\ContentBundle\Model\Content\ContentRepositoryInterface"/>
+
+            <tag name="messenger.message_handler"/>
+        </service>
+
+        <service id="Sprungbrett\Bundle\ContentBundle\Model\Content\Handler\RemoveContentMessageHandler">
+            <argument type="service" id="Sprungbrett\Component\MessageCollector\MessageCollector"/>
+            <argument type="service" id="Sprungbrett\Bundle\ContentBundle\Model\Content\ContentRepositoryInterface"/>
+
+            <tag name="messenger.message_handler"/>
+        </service>
+    </services>
+</container>

@@ -1,0 +1,6 @@
+jms_serializer:
+    metadata:
+        directories:
+            - name: sprungbrett_course
+              path: "@SprungbrettCourseBundle/Resources/config/serializer"
+              namespace_prefix: "Sprungbrett\\Bundle\\CourseBundle\\Model"

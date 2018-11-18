@@ -39,5 +39,11 @@ if ($debug) {
 }
 
 $kernel = new Kernel($env, $debug, SULU_CONTEXT);
+if ('test' === $env) {
+    require_once __DIR__ . '/../tests/app/AppKernel.php';
+
+    $kernel = new AppKernel($env, $debug);
+}
+
 $application = new Application($kernel);
 $application->run($input);

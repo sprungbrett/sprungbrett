@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="Sprungbrett\Bundle\PortalBundle\Model\CourseView\Handler\CoursePublishedEventHandler">
+            <argument type="service" id="Sprungbrett\Bundle\PortalBundle\Model\CourseView\CourseViewRepositoryInterface"/>
+            <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\CourseRepositoryInterface"/>
+            <argument type="service" id="Sprungbrett\Bundle\ContentBundle\Model\Content\ContentRepositoryInterface"/>
+            <argument type="service" id="sulu_route.manager.route_manager"/>
+
+            <tag name="messenger.message_handler"/>
+        </service>
+
+        <service id="Sprungbrett\Bundle\PortalBundle\Model\CourseView\Handler\CourseRemovedEventHandler">
+            <argument type="service" id="Sprungbrett\Bundle\PortalBundle\Model\CourseView\CourseViewRepositoryInterface"/>
+
+            <tag name="messenger.message_handler"/>
+        </service>
+
+        <service id="Sprungbrett\Bundle\PortalBundle\Model\CourseView\Handler\FindCourseViewQueryHandler">
+            <argument type="service" id="Sprungbrett\Bundle\PortalBundle\Model\CourseView\CourseViewRepositoryInterface"/>
+
+            <tag name="messenger.message_handler"/>
+        </service>
+
+        <service id="Sprungbrett\Bundle\PortalBundle\Model\CourseView\Handler\ListCourseViewQueryHandler">
+            <argument type="service" id="Sprungbrett\Bundle\PortalBundle\Model\CourseView\CourseViewRepositoryInterface"/>
+
+            <tag name="messenger.message_handler"/>
+        </service>
+    </services>
+</container>

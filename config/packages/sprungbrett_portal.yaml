@@ -1,0 +1,6 @@
+sulu_route:
+    mappings:
+        Sprungbrett\Bundle\PortalBundle\Model\CourseView\CourseView:
+            generator: schema
+            options:
+                route_schema: /{translator.trans("courses")}/{object.getCourse().getName()}

@@ -1,0 +1,4 @@
+sprungbrett_courses_api:
+    resource: "@SprungbrettCourseBundle/Resources/config/routing_api.yaml"
+    type: rest
+    prefix: /api

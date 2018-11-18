@@ -1,0 +1,17 @@
+#!/usr/bin/env php
+<?php
+
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Style\SymfonyStyle;
+
+require __DIR__ . '/../../vendor/autoload.php';
+
+$input = new ArgvInput();
+$output = new ConsoleOutput();
+$io = new SymfonyStyle($input, $output);
+
+$ansi = $input->getParameterOption(['--ansi']);
+
+define('SULU_CONTEXT', \Sulu\Component\HttpKernel\SuluKernel::CONTEXT_ADMIN);
+include __DIR__ . DIRECTORY_SEPARATOR . 'console.php';
