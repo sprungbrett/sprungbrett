@@ -12,7 +12,7 @@ jobs:
               - SULU_ADMIN_EMAIL=
           - image: circleci/mysql:5.7
             environment:
-              - DATABASE_URL=mysql://root:@127.0.0.1:3306/courses
+            - DATABASE_URL=mysql://root:@127.0.0.1:3306/courses
 
         working_directory: ~/repo
 
