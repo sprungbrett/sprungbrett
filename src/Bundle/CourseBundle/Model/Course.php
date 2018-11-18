@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Sprungbrett\Bundle\CourseBundle\Model;
 
-use Sprungbrett\Component\Translatable\Model\TranslatableInterface;
 use Sprungbrett\Component\Translatable\Model\TranslatableTrait;
 use Sprungbrett\Component\Translatable\Model\TranslationInterface;
 
-class Course implements CourseInterface, TranslatableInterface
+class Course implements CourseInterface
 {
     use TranslatableTrait {
         __construct as protected initializeTranslations;

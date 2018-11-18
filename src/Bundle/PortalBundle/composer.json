@@ -41,7 +41,9 @@
         "jackalope/jackalope-doctrine-dbal": "^1.2.5",
         "jangregor/phpstan-prophecy": "^0.2.0",
         "phpstan/phpstan": "^0.10.5",
-        "phpunit/phpunit": "^7.4"
+        "phpunit/phpunit": "^7.4",
+        "symfony/browser-kit": "^4.1",
+        "symfony/monolog-bundle": "^3.3"
     },
     "config": {
         "sort-packages": true
@@ -52,6 +54,18 @@
         }
     },
     "scripts": {
+        "initialize": [
+            "@php Tests/app/console doctrine:database:create --if-not-exists",
+            "@php Tests/app/console doctrine:schema:update --force",
+            "@php Tests/app/console sulu:document:initialize"
+        ],
+        "test": [
+            "@phpunit"
+        ],
+        "lint": [
+            "@phpstan",
+            "@php-cs"
+        ],
         "phpunit": "vendor/bin/phpunit",
         "phpstan": "vendor/bin/phpstan analyze -c ./phpstan.neon . -l max",
         "php-cs": "vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"

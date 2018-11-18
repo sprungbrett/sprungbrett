@@ -18,7 +18,7 @@ interface CourseViewRepositoryInterface
     /**
      * @return CourseViewInterface[]
      */
-    public function list(int $page, int $pageSize): array;
+    public function list(string $locale, int $page, int $pageSize): array;
 
     public function remove(CourseViewInterface $courseView): void;
 }

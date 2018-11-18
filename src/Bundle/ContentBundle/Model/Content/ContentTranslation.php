@@ -24,7 +24,7 @@ class ContentTranslation implements ContentTranslationInterface
     /**
      * @var array
      */
-    protected $data;
+    protected $data = [];
 
     public function __construct(ContentInterface $content, string $locale)
     {

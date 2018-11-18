@@ -4,46 +4,44 @@ declare(strict_types=1);
 
 namespace Sprungbrett\Bundle\CourseBundle\Tests\Functional\Traits;
 
-use Doctrine\ORM\EntityManagerInterface;
-use Ramsey\Uuid\Uuid;
 use Sprungbrett\Bundle\ContentBundle\Stages;
-use Sprungbrett\Bundle\ContentBundle\Tests\Functional\Traits\ContentTrait;
-use Sprungbrett\Bundle\CourseBundle\Model\Course;
 use Sprungbrett\Bundle\CourseBundle\Model\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Exception\CourseNotFoundException;
+use Sprungbrett\Bundle\CourseBundle\Model\Message\CreateCourseMessage;
+use Sprungbrett\Bundle\CourseBundle\Model\Message\PublishCourseMessage;
+use Sprungbrett\Bundle\CourseBundle\Model\Query\FindCourseQuery;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 trait CourseTrait
 {
-    use ContentTrait;
-
     public function createCourse(string $name = 'Sprungbrett', string $locale = 'en'): CourseInterface
     {
-        $course = new Course(Uuid::uuid4()->toString(), Stages::DRAFT);
-        $course->setCurrentLocale($locale);
-        $course->setName($name);
+        $message = new CreateCourseMessage($locale, ['name' => $name]);
+        $this->getMessageBus()->dispatch($message);
 
-        $this->createContent('courses', $course->getUuid());
-
-        $this->getEntityManager()->persist($course);
-        $this->getEntityManager()->flush();
-
-        return $course;
-    }
-
-    public function findCourse(string $uuid, ?string $locale = null, string $stage = Stages::DRAFT): ?CourseInterface
-    {
-        $repository = $this->getEntityManager()->getRepository(Course::class);
-
-        /** @var CourseInterface|null $course */
-        $course = $repository->findOneBy(['uuid' => $uuid, 'stage' => $stage]);
-        if ($course && $locale) {
-            $course->setCurrentLocale($locale);
+        $course = $this->findCourse($message->getUuid(), $message->getLocale());
+        if (!$course) {
+            throw new \RuntimeException();
         }
 
         return $course;
     }
 
-    /**
-     * @return EntityManagerInterface
-     */
-    abstract public function getEntityManager();
+    public function publishCourse(CourseInterface $course): void
+    {
+        $this->getMessageBus()->dispatch(
+            new PublishCourseMessage($course->getUuid(), $course->getCurrentLocale() ?: 'en')
+        );
+    }
+
+    public function findCourse(string $uuid, string $locale = 'en', string $stage = Stages::DRAFT): ?CourseInterface
+    {
+        try {
+            return $this->getMessageBus()->dispatch(new FindCourseQuery($uuid, $locale, $stage));
+        } catch (CourseNotFoundException $exception) {
+            return null;
+        }
+    }
+
+    abstract public function getMessageBus(): MessageBusInterface;
 }

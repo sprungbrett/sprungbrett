@@ -49,9 +49,9 @@ class CourseViewRepository implements CourseViewRepositoryInterface
         return $this->repository->findBy(['uuid' => $uuid]);
     }
 
-    public function list(int $page, int $pageSize): array
+    public function list(string $locale, int $page, int $pageSize): array
     {
-        return $this->repository->findBy([], [], $pageSize, ($page - 1) * $pageSize);
+        return $this->repository->findBy(['locale' => $locale], [], $pageSize, ($page - 1) * $pageSize);
     }
 
     public function remove(CourseViewInterface $courseView): void

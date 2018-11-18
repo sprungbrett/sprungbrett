@@ -5,17 +5,18 @@ declare(strict_types=1);
 namespace Sprungbrett\Bundle\CourseBundle\Tests\Functional\Controller;
 
 use Sprungbrett\Bundle\ContentBundle\Stages;
+use Sprungbrett\Bundle\ContentBundle\Tests\Functional\Traits\ContentTrait;
 use Sprungbrett\Bundle\CourseBundle\Tests\Functional\Traits\CourseTrait;
 use Sulu\Bundle\TestBundle\Testing\SuluTestCase;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class CourseControllerTest extends SuluTestCase
 {
     use CourseTrait;
+    use ContentTrait;
 
-    public function setUp()
+    protected function setUp()
     {
-        parent::setUp();
-
         $this->purgeDatabase();
     }
 
@@ -179,5 +180,13 @@ class CourseControllerTest extends SuluTestCase
 
         $content = $this->findContent('courses', $uuid);
         $this->assertNull($content);
+    }
+
+    public function getMessageBus(): MessageBusInterface
+    {
+        /** @var MessageBusInterface $messageBus */
+        $messageBus = $this->getContainer()->get('message_bus');
+
+        return $messageBus;
     }
 }

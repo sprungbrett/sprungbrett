@@ -24,7 +24,7 @@ class CourseListController extends WebsiteController
     ): Response {
         /** @var MessageBusInterface $messageBus */
         $messageBus = $this->get('message_bus');
-        $courses = $messageBus->dispatch(new ListCourseViewQuery($request->get('p', 1)));
+        $courses = $messageBus->dispatch(new ListCourseViewQuery($structure->getLanguageCode(), $request->get('p', 1)));
 
         $attributes = [
             'courses' => array_map(

@@ -1,9 +1,13 @@
-parameters:
-    level: 7
-    paths:
-        - .
-    excludes_analyse:
-        - %currentWorkingDirectory%/vendor/*.php
-
 includes:
 	- vendor/jangregor/phpstan-prophecy/src/extension.neon
+
+parameters:
+    excludes_analyse:
+        - %currentWorkingDirectory%/vendor/*.php
+    ignoreErrors:
+        - '#reveal#'
+        - '#shouldBeCalled#'
+        - '#ObjectProphecy#'
+        - '#willReturn#'
+        - '#\(void\) is used#'
+        - '#shouldNotBeCalled#'

@@ -101,7 +101,8 @@
         ],
         "initialize": [
             "@php bin/adminconsole doctrine:database:create --if-not-exists",
-            "@php bin/adminconsole doctrine:schema:update --force"
+            "@php bin/adminconsole doctrine:schema:update --force",
+            "@php bin/adminconsole sulu:document:initialize"
         ],
         "test": [
             "@phpunit"

@@ -87,4 +87,11 @@ class CourseTest extends TestCase
         $this->assertInstanceOf(CourseTranslationInterface::class, $translation);
         $this->assertEquals('de', $translation->getLocale());
     }
+
+    public function testGetCurrentLocale(): void
+    {
+        $this->course->setCurrentLocale('en');
+
+        $this->assertEquals('en', $this->course->getCurrentLocale());
+    }
 }

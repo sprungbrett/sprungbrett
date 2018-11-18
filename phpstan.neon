@@ -13,8 +13,6 @@ parameters:
         - %currentWorkingDirectory%/src/*/*/vendor/*.php
         - %currentWorkingDirectory%/*/var/*.php
     ignoreErrors:
-        - '#Sulu\\Component\\Content\\ContentTypeManagerInterface#'
-        - '#Sulu\\Component\\Content\\Compat\\StructureManagerInterface#'
         - '#reveal#'
         - '#shouldBeCalled#'
         - '#ObjectProphecy#'

@@ -8,3 +8,7 @@ phpunit.xml
 
 # php-cs
 .php_cs.cache
+
+# tests
+Tests/app/cache
+Tests/var

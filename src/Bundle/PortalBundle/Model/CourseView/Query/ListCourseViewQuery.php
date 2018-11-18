@@ -18,10 +18,16 @@ class ListCourseViewQuery
      */
     private $pageSize;
 
-    public function __construct(int $page, int $pageSize = self::DEFAULT_PAGE_SIZE)
+    /**
+     * @var string
+     */
+    private $locale;
+
+    public function __construct(string $locale, int $page, int $pageSize = self::DEFAULT_PAGE_SIZE)
     {
         $this->page = $page;
         $this->pageSize = $pageSize;
+        $this->locale = $locale;
     }
 
     public function getPage(): int
@@ -32,5 +38,10 @@ class ListCourseViewQuery
     public function getPageSize(): int
     {
         return $this->pageSize;
+    }
+
+    public function getLocale(): string
+    {
+        return $this->locale;
     }
 }

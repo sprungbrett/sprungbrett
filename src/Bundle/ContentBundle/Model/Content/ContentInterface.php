@@ -20,5 +20,7 @@ interface ContentInterface extends TranslatableInterface
 
     public function getData(?string $locale = null): array;
 
-    public function modifyData(?string $type, array $data): self;
+    public function modifyData(?string $type, array $data, ?string $locale = null): self;
+
+    public function getTranslation(?string $locale = null): ContentTranslationInterface;
 }

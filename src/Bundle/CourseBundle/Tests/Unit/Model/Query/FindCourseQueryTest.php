@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Sprungbrett\Bundle\CourseBundle\Tests\Unit\Model\Query;
 
 use PHPUnit\Framework\TestCase;
+use Sprungbrett\Bundle\ContentBundle\Stages;
 use Sprungbrett\Bundle\CourseBundle\Model\Query\FindCourseQuery;
 
 class FindCourseQueryTest extends TestCase
@@ -16,7 +17,7 @@ class FindCourseQueryTest extends TestCase
 
     protected function setUp()
     {
-        $this->query = new FindCourseQuery('123-123-123', 'en');
+        $this->query = new FindCourseQuery('123-123-123', 'en', Stages::LIVE);
     }
 
     public function testGetUuid(): void
@@ -27,5 +28,10 @@ class FindCourseQueryTest extends TestCase
     public function testGetLocale(): void
     {
         $this->assertEquals('en', $this->query->getLocale());
+    }
+
+    public function testGetStage(): void
+    {
+        $this->assertEquals(Stages::LIVE, $this->query->getStage());
     }
 }

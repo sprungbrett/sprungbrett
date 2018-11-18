@@ -25,6 +25,6 @@ class ListCourseViewQueryHandler
      */
     public function __invoke(ListCourseViewQuery $query): array
     {
-        return $this->repository->list($query->getPage(), $query->getPageSize());
+        return $this->repository->list($query->getLocale(), $query->getPage(), $query->getPageSize());
     }
 }

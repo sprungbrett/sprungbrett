@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Sprungbrett\Bundle\CourseBundle\Model\Query;
 
+use Sprungbrett\Bundle\ContentBundle\Stages;
+
 class FindCourseQuery
 {
     /**
@@ -16,10 +18,16 @@ class FindCourseQuery
      */
     private $locale;
 
-    public function __construct(string $uuid, string $locale)
+    /**
+     * @var string
+     */
+    private $stage;
+
+    public function __construct(string $uuid, string $locale, string $stage = Stages::DRAFT)
     {
         $this->uuid = $uuid;
         $this->locale = $locale;
+        $this->stage = $stage;
     }
 
     public function getUuid(): string
@@ -30,5 +38,10 @@ class FindCourseQuery
     public function getLocale(): string
     {
         return $this->locale;
+    }
+
+    public function getStage(): string
+    {
+        return $this->stage;
     }
 }
