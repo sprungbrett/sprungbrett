@@ -102,7 +102,7 @@ class CourseAdmin extends Admin
                 ->setParent(sprintf('sprungbrett.course.%s_edit_form', $resourceKey)),
             (new Route(sprintf('sprungbrett.course.%s_edit_form.content', $resourceKey), '/content', 'sulu_admin.form'))
                 ->addOption('tabTitle', 'sprungbrett.courses.content')
-                ->addOption('resourceKey', 'product_contents')
+                ->addOption('resourceKey', 'course_contents')
                 ->addOption('toolbarActions', ['sulu_admin.save_with_publishing', 'sulu_admin.delete', 'sulu_admin.type'])
                 ->setParent(sprintf('sprungbrett.course.%s_edit_form', $resourceKey)),
         ];

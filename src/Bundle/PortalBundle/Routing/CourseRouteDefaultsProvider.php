@@ -94,7 +94,7 @@ class CourseRouteDefaultsProvider implements RouteDefaultsProviderInterface
             || !$this->cacheLifetimeResolver->supports($cacheLifetime['type'], $cacheLifetime['value'])
         ) {
             throw new \InvalidArgumentException(
-                sprintf('Invalid cachelifetime in product route default provider: %s', var_export($cacheLifetime, true))
+                sprintf('Invalid cachelifetime in course route default provider: %s', var_export($cacheLifetime, true))
             );
         }
 

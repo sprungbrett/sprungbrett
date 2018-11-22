@@ -10,7 +10,7 @@ sulu_core:
                     type: courses
 
             resources:
-                product_contents:
+                course_contents:
                     datagrid: "Sprungbrett\\Bundle\\CourseBundle\\Model\\Course"
                     types: ["courses"]
                     endpoint: "sprungbrett.get_course-contents"
