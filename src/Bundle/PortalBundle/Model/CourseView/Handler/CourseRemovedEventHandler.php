@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Sprungbrett\Bundle\PortalBundle\Model\CourseView\Handler;
 
-use Sprungbrett\Bundle\CourseBundle\Model\Event\CourseRemovedEvent;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Event\CourseRemovedEvent;
 use Sprungbrett\Bundle\PortalBundle\Model\CourseView\CourseViewRepositoryInterface;
 
 class CourseRemovedEventHandler

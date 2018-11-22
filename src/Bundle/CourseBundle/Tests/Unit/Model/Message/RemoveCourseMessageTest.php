@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Sprungbrett\Bundle\CourseBundle\Tests\Unit\Model\Message;
 
 use PHPUnit\Framework\TestCase;
-use Sprungbrett\Bundle\CourseBundle\Model\Message\RemoveCourseMessage;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Message\RemoveCourseMessage;
 
 class RemoveCourseMessageTest extends TestCase
 {

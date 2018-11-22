@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Sprungbrett\Bundle\CourseBundle\Tests\Unit\Model\Event;
 
 use PHPUnit\Framework\TestCase;
-use Sprungbrett\Bundle\CourseBundle\Model\Event\CourseRemovedEvent;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Event\CourseRemovedEvent;
 
 class CourseRemovedEventTest extends TestCase
 {

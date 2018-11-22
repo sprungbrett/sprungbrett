@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Sprungbrett\Bundle\CourseBundle\Model\Exception;
+namespace Sprungbrett\Bundle\CourseBundle\Model\Course\Exception;
 
-use Sprungbrett\Bundle\CourseBundle\Model\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 
 /**
  * TODO extract ModelNotFoundException.

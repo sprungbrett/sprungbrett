@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Sprungbrett\Bundle\CourseBundle\Tests\Unit\Model\Query;
 
 use PHPUnit\Framework\TestCase;
-use Sprungbrett\Bundle\CourseBundle\Model\Query\ListCoursesQuery;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Query\ListCoursesQuery;
 
 class ListCoursesQueryTest extends TestCase
 {

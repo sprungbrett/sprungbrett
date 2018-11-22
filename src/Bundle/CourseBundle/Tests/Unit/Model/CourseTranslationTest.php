@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Sprungbrett\Bundle\CourseBundle\Tests\Unit\Model;
 
 use PHPUnit\Framework\TestCase;
-use Sprungbrett\Bundle\CourseBundle\Model\CourseInterface;
-use Sprungbrett\Bundle\CourseBundle\Model\CourseTranslation;
-use Sprungbrett\Bundle\CourseBundle\Model\CourseTranslationInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseTranslation;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseTranslationInterface;
 
 class CourseTranslationTest extends TestCase
 {

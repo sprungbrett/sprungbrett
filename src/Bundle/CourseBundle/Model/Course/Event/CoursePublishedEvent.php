@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Sprungbrett\Bundle\CourseBundle\Model\Event;
+namespace Sprungbrett\Bundle\CourseBundle\Model\Course\Event;
 
-use Sprungbrett\Bundle\CourseBundle\Model\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 
 class CoursePublishedEvent
 {
