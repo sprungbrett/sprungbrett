@@ -5,7 +5,7 @@
     <services>
         <service id="Sprungbrett\Bundle\PortalBundle\Model\CourseView\Handler\CoursePublishedEventHandler">
             <argument type="service" id="Sprungbrett\Bundle\PortalBundle\Model\CourseView\CourseViewRepositoryInterface"/>
-            <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\CourseRepositoryInterface"/>
+            <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface"/>
             <argument type="service" id="Sprungbrett\Bundle\ContentBundle\Model\Content\ContentRepositoryInterface"/>
             <argument type="service" id="sulu_route.manager.route_manager"/>
 

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Sprungbrett\Bundle\CourseBundle\Tests\Unit\Model\Message;
 
 use PHPUnit\Framework\TestCase;
-use Sprungbrett\Bundle\CourseBundle\Model\Message\CreateCourseMessage;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Message\CreateCourseMessage;
 
 class CreateCourseMessageTest extends TestCase
 {

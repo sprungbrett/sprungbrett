@@ -7,7 +7,7 @@ namespace Sprungbrett\Bundle\CourseBundle\Controller;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sprungbrett\Bundle\ContentBundle\Controller\ContentController;
 use Sprungbrett\Bundle\CourseBundle\Admin\CourseAdmin;
-use Sprungbrett\Bundle\CourseBundle\Model\Message\PublishCourseMessage;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Message\PublishCourseMessage;
 use Sulu\Component\Security\SecuredControllerInterface;
 use Symfony\Component\HttpFoundation\Request;
 

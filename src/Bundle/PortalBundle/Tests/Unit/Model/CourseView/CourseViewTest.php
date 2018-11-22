@@ -6,7 +6,7 @@ namespace Sprungbrett\Bundle\PortalBundle\Tests\Unit\Model\CourseView;
 
 use PHPUnit\Framework\TestCase;
 use Sprungbrett\Bundle\ContentBundle\Model\Content\ContentInterface;
-use Sprungbrett\Bundle\CourseBundle\Model\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 use Sprungbrett\Bundle\PortalBundle\Model\CourseView\CourseView;
 use Sprungbrett\Bundle\PortalBundle\Model\CourseView\CourseViewInterface;
 use Sulu\Bundle\RouteBundle\Model\RouteInterface;

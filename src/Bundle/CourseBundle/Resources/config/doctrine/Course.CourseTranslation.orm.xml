@@ -2,7 +2,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <entity name="Sprungbrett\Bundle\CourseBundle\Model\CourseTranslation" table="sp_course_translations">
+    <entity name="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseTranslation" table="sp_course_translations">
         <id name="course" type="integer" association-key="true"/>
         <id name="locale" type="string" length="5"/>
 
@@ -10,7 +10,7 @@
 
         <many-to-one
                 field="course"
-                target-entity="Sprungbrett\Bundle\CourseBundle\Model\Course"
+                target-entity="Sprungbrett\Bundle\CourseBundle\Model\Course\Course"
                 inversed-by="translations"
         />
     </entity>

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sprungbrett\Bundle\CourseBundle\Model\Message;
+namespace Sprungbrett\Bundle\CourseBundle\Model\Course\Message;
 
 class PublishCourseMessage
 {

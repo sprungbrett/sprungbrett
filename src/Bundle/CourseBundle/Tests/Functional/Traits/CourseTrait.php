@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Sprungbrett\Bundle\CourseBundle\Tests\Functional\Traits;
 
 use Sprungbrett\Bundle\ContentBundle\Stages;
-use Sprungbrett\Bundle\CourseBundle\Model\CourseInterface;
-use Sprungbrett\Bundle\CourseBundle\Model\Exception\CourseNotFoundException;
-use Sprungbrett\Bundle\CourseBundle\Model\Message\CreateCourseMessage;
-use Sprungbrett\Bundle\CourseBundle\Model\Message\PublishCourseMessage;
-use Sprungbrett\Bundle\CourseBundle\Model\Query\FindCourseQuery;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Exception\CourseNotFoundException;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Message\CreateCourseMessage;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Message\PublishCourseMessage;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Query\FindCourseQuery;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 trait CourseTrait

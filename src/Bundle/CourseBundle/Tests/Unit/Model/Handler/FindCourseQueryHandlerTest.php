@@ -6,11 +6,11 @@ namespace Sprungbrett\Bundle\CourseBundle\Tests\Unit\Model\Handler;
 
 use PHPUnit\Framework\TestCase;
 use Sprungbrett\Bundle\ContentBundle\Stages;
-use Sprungbrett\Bundle\CourseBundle\Model\CourseInterface;
-use Sprungbrett\Bundle\CourseBundle\Model\CourseRepositoryInterface;
-use Sprungbrett\Bundle\CourseBundle\Model\Exception\CourseNotFoundException;
-use Sprungbrett\Bundle\CourseBundle\Model\Handler\FindCourseQueryHandler;
-use Sprungbrett\Bundle\CourseBundle\Model\Query\FindCourseQuery;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Exception\CourseNotFoundException;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Handler\FindCourseQueryHandler;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Query\FindCourseQuery;
 
 class FindCourseQueryHandlerTest extends TestCase
 {

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Sprungbrett\Bundle\CourseBundle\Tests\Unit\Model\Event;
 
 use PHPUnit\Framework\TestCase;
-use Sprungbrett\Bundle\CourseBundle\Model\CourseInterface;
-use Sprungbrett\Bundle\CourseBundle\Model\Event\CourseModifiedEvent;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Event\CourseModifiedEvent;
 
 class CourseModifiedEventTest extends TestCase
 {

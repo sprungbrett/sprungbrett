@@ -6,9 +6,9 @@ namespace Sprungbrett\Bundle\CourseBundle\Repository;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Sprungbrett\Bundle\CourseBundle\Model\Course;
-use Sprungbrett\Bundle\CourseBundle\Model\CourseInterface;
-use Sprungbrett\Bundle\CourseBundle\Model\CourseRepositoryInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Course;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface;
 
 class CourseRepository implements CourseRepositoryInterface
 {

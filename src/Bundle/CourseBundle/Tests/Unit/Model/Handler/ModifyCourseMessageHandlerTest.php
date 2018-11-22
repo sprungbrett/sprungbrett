@@ -7,12 +7,12 @@ namespace Sprungbrett\Bundle\CourseBundle\Tests\Unit\Model\Handler;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Sprungbrett\Bundle\ContentBundle\Stages;
-use Sprungbrett\Bundle\CourseBundle\Model\CourseInterface;
-use Sprungbrett\Bundle\CourseBundle\Model\CourseRepositoryInterface;
-use Sprungbrett\Bundle\CourseBundle\Model\Event\CourseModifiedEvent;
-use Sprungbrett\Bundle\CourseBundle\Model\Exception\CourseNotFoundException;
-use Sprungbrett\Bundle\CourseBundle\Model\Handler\ModifyCourseMessageHandler;
-use Sprungbrett\Bundle\CourseBundle\Model\Message\ModifyCourseMessage;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Event\CourseModifiedEvent;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Exception\CourseNotFoundException;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Handler\ModifyCourseMessageHandler;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Message\ModifyCourseMessage;
 use Sprungbrett\Component\MessageCollector\MessageCollector;
 
 class ModifyCourseMessageHandlerTest extends TestCase

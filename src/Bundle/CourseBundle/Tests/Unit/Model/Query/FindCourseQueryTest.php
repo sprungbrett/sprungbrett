@@ -6,7 +6,7 @@ namespace Sprungbrett\Bundle\CourseBundle\Tests\Unit\Model\Query;
 
 use PHPUnit\Framework\TestCase;
 use Sprungbrett\Bundle\ContentBundle\Stages;
-use Sprungbrett\Bundle\CourseBundle\Model\Query\FindCourseQuery;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Query\FindCourseQuery;
 
 class FindCourseQueryTest extends TestCase
 {

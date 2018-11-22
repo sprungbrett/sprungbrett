@@ -3,27 +3,27 @@
        xmlns:list="http://schemas.sulu.io/class/list">
     <orm:joins name="translation">
         <orm:join>
-            <orm:entity-name>Sprungbrett\Bundle\CourseBundle\Model\CourseTranslation</orm:entity-name>
-            <orm:field-name>Sprungbrett\Bundle\CourseBundle\Model\Course.translations</orm:field-name>
+            <orm:entity-name>Sprungbrett\Bundle\CourseBundle\Model\Course\CourseTranslation</orm:entity-name>
+            <orm:field-name>Sprungbrett\Bundle\CourseBundle\Model\Course\Course.translations</orm:field-name>
             <orm:method>LEFT</orm:method>
-            <orm:condition>Sprungbrett\Bundle\CourseBundle\Model\CourseTranslation.locale = ':locale'</orm:condition>
+            <orm:condition>Sprungbrett\Bundle\CourseBundle\Model\Course\CourseTranslation.locale = ':locale'</orm:condition>
         </orm:join>
     </orm:joins>
 
     <properties>
         <property name="id" list:translation="sprungbrett.uuid">
             <orm:field-name>uuid</orm:field-name>
-            <orm:entity-name>Sprungbrett\Bundle\CourseBundle\Model\Course</orm:entity-name>
+            <orm:entity-name>Sprungbrett\Bundle\CourseBundle\Model\Course\Course</orm:entity-name>
         </property>
 
         <property name="stage" visibility="never">
             <orm:field-name>stage</orm:field-name>
-            <orm:entity-name>Sprungbrett\Bundle\CourseBundle\Model\Course</orm:entity-name>
+            <orm:entity-name>Sprungbrett\Bundle\CourseBundle\Model\Course\Course</orm:entity-name>
         </property>
 
         <property name="name" visibility="always" list:translation="sprungbrett.name" searchability="yes">
             <orm:field-name>name</orm:field-name>
-            <orm:entity-name>Sprungbrett\Bundle\CourseBundle\Model\CourseTranslation</orm:entity-name>
+            <orm:entity-name>Sprungbrett\Bundle\CourseBundle\Model\Course\CourseTranslation</orm:entity-name>
 
             <orm:joins ref="translation"/>
         </property>

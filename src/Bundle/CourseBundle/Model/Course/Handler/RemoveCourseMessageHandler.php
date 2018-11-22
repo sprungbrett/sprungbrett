@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Sprungbrett\Bundle\CourseBundle\Model\Handler;
+namespace Sprungbrett\Bundle\CourseBundle\Model\Course\Handler;
 
 use Sprungbrett\Bundle\ContentBundle\Model\Content\Message\RemoveContentMessage;
-use Sprungbrett\Bundle\CourseBundle\Model\CourseRepositoryInterface;
-use Sprungbrett\Bundle\CourseBundle\Model\Event\CourseRemovedEvent;
-use Sprungbrett\Bundle\CourseBundle\Model\Message\RemoveCourseMessage;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Event\CourseRemovedEvent;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Message\RemoveCourseMessage;
 use Sprungbrett\Component\MessageCollector\MessageCollector;
 use Symfony\Component\Messenger\MessageBusInterface;
 

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Sprungbrett\Bundle\CourseBundle\Model\Handler;
+namespace Sprungbrett\Bundle\CourseBundle\Model\Course\Handler;
 
 use Sprungbrett\Bundle\ContentBundle\Stages;
-use Sprungbrett\Bundle\CourseBundle\Model\CourseRepositoryInterface;
-use Sprungbrett\Bundle\CourseBundle\Model\Event\CourseModifiedEvent;
-use Sprungbrett\Bundle\CourseBundle\Model\Exception\CourseNotFoundException;
-use Sprungbrett\Bundle\CourseBundle\Model\Message\ModifyCourseMessage;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Event\CourseModifiedEvent;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Exception\CourseNotFoundException;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Message\ModifyCourseMessage;
 use Sprungbrett\Component\MessageCollector\MessageCollector;
 
 class ModifyCourseMessageHandler

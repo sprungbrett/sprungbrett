@@ -7,11 +7,11 @@ namespace Sprungbrett\Bundle\CourseBundle\Tests\Unit\Model\Handler;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Sprungbrett\Bundle\ContentBundle\Model\Content\Message\RemoveContentMessage;
-use Sprungbrett\Bundle\CourseBundle\Model\CourseInterface;
-use Sprungbrett\Bundle\CourseBundle\Model\CourseRepositoryInterface;
-use Sprungbrett\Bundle\CourseBundle\Model\Event\CourseRemovedEvent;
-use Sprungbrett\Bundle\CourseBundle\Model\Handler\RemoveCourseMessageHandler;
-use Sprungbrett\Bundle\CourseBundle\Model\Message\RemoveCourseMessage;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Event\CourseRemovedEvent;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Handler\RemoveCourseMessageHandler;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Message\RemoveCourseMessage;
 use Sprungbrett\Component\MessageCollector\MessageCollector;
 use Symfony\Component\Messenger\MessageBusInterface;
 

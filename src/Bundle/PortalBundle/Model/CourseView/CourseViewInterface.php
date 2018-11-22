@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Sprungbrett\Bundle\PortalBundle\Model\CourseView;
 
 use Sprungbrett\Bundle\ContentBundle\Model\Content\ContentInterface;
-use Sprungbrett\Bundle\CourseBundle\Model\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
 use Sulu\Bundle\RouteBundle\Model\RoutableInterface;
 
 interface CourseViewInterface extends RoutableInterface

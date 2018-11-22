@@ -2,7 +2,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <entity name="Sprungbrett\Bundle\CourseBundle\Model\Course" table="sp_courses">
+    <entity name="Sprungbrett\Bundle\CourseBundle\Model\Course\Course" table="sp_courses">
         <unique-constraints>
             <unique-constraint columns="uuid,stage"/>
         </unique-constraints>
@@ -16,7 +16,7 @@
 
         <one-to-many
                 field="translations"
-                target-entity="Sprungbrett\Bundle\CourseBundle\Model\CourseTranslation"
+                target-entity="Sprungbrett\Bundle\CourseBundle\Model\Course\CourseTranslation"
                 mapped-by="course"
                 orphan-removal="true"
                 index-by="locale"

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Sprungbrett\Bundle\CourseBundle\Model\Handler;
+namespace Sprungbrett\Bundle\CourseBundle\Model\Course\Handler;
 
-use Sprungbrett\Bundle\CourseBundle\Model\CourseInterface;
-use Sprungbrett\Bundle\CourseBundle\Model\CourseRepositoryInterface;
-use Sprungbrett\Bundle\CourseBundle\Model\Exception\CourseNotFoundException;
-use Sprungbrett\Bundle\CourseBundle\Model\Query\FindCourseQuery;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Exception\CourseNotFoundException;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Query\FindCourseQuery;
 
 class FindCourseQueryHandler
 {

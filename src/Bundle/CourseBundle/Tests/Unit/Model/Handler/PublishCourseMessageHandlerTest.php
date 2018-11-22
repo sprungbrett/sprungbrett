@@ -8,12 +8,12 @@ use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Sprungbrett\Bundle\ContentBundle\Model\Content\Message\PublishContentMessage;
 use Sprungbrett\Bundle\ContentBundle\Stages;
-use Sprungbrett\Bundle\CourseBundle\Model\CourseInterface;
-use Sprungbrett\Bundle\CourseBundle\Model\CourseRepositoryInterface;
-use Sprungbrett\Bundle\CourseBundle\Model\Event\CoursePublishedEvent;
-use Sprungbrett\Bundle\CourseBundle\Model\Exception\CourseNotFoundException;
-use Sprungbrett\Bundle\CourseBundle\Model\Handler\PublishCourseMessageHandler;
-use Sprungbrett\Bundle\CourseBundle\Model\Message\PublishCourseMessage;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseRepositoryInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Event\CoursePublishedEvent;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Exception\CourseNotFoundException;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Handler\PublishCourseMessageHandler;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Message\PublishCourseMessage;
 use Sprungbrett\Component\MessageCollector\MessageCollector;
 use Symfony\Component\Messenger\MessageBusInterface;
 
