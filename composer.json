@@ -28,7 +28,7 @@
         "sprungbrett/payload": "^1.0.0@dev",
         "sprungbrett/portal-bundle": "^1.0.0@dev",
         "sprungbrett/translatable": "^1.0.0@dev",
-        "sulu/sulu": "^2.0.0@dev",
+        "sulu/sulu": "@dev",
         "symfony/config": "^4.1",
         "symfony/console": "^4.1",
         "symfony/debug": "^4.1",

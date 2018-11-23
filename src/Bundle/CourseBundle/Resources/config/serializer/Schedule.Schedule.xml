@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="Sprungbrett\Bundle\CourseBundle\Model\Schedule\Schedule" exclusion-policy="ALL">
+        <virtual-property method="getUuid" serialized-name="id" expose="true"/>
+        <virtual-property method="getCourseId" serialized-name="course" expose="true"/>
+        <virtual-property method="getName" serialized-name="name" expose="true"/>
+        <virtual-property method="getDescription" serialized-name="description" expose="true"/>
+        <virtual-property method="getMinimumParticipants" serialized-name="minimumParticipants" expose="true"/>
+        <virtual-property method="getMaximumParticipants" serialized-name="maximumParticipants" expose="true"/>
+        <virtual-property method="getPrice" serialized-name="price" expose="true"/>
+    </class>
+</serializer>

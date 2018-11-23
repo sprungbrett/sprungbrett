@@ -30,7 +30,7 @@
         "sprungbrett/core-bundle": "^1.0.0@dev",
         "sprungbrett/course-bundle": "^1.0.0@dev",
         "sprungbrett/content-bundle": "^1.0.0@dev",
-        "sulu/sulu": "^2.0.0@dev",
+        "sulu/sulu": "dev-develop",
         "symfony/dependency-injection": "^4.1",
         "symfony/http-kernel": "^4.1",
         "symfony/messenger": "^4.1",

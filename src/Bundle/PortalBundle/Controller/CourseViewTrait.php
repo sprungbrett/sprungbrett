@@ -17,6 +17,7 @@ trait CourseViewTrait
         $attributes = $this->resolveContent($object->getContent());
         $attributes['id'] = $object->getUuid();
         $attributes['course'] = $object->getCourse();
+        $attributes['schedules'] = $object->getSchedules();
         $attributes['route'] = $object->getRoute()->getPath();
 
         return $attributes;

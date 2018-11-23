@@ -6,6 +6,7 @@ namespace Sprungbrett\Bundle\PortalBundle\Model\CourseView;
 
 use Sprungbrett\Bundle\ContentBundle\Model\Content\ContentInterface;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Schedule\ScheduleInterface;
 use Sulu\Bundle\RouteBundle\Model\RoutableInterface;
 
 interface CourseViewInterface extends RoutableInterface
@@ -23,4 +24,13 @@ interface CourseViewInterface extends RoutableInterface
     public function getContent(): ContentInterface;
 
     public function setContent(ContentInterface $content): self;
+
+    /**
+     * @return ScheduleInterface[]
+     */
+    public function getSchedules(): array;
+
+    public function addSchedule(ScheduleInterface $schedule): self;
+
+    public function removeSchedule(ScheduleInterface $schedule): self;
 }

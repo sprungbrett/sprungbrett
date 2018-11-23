@@ -12,6 +12,13 @@
             <tag name="messenger.message_handler"/>
         </service>
 
+        <service id="Sprungbrett\Bundle\PortalBundle\Model\CourseView\Handler\SchedulePublishedEventHandler">
+            <argument type="service" id="Sprungbrett\Bundle\PortalBundle\Model\CourseView\CourseViewRepositoryInterface"/>
+            <argument type="service" id="Sprungbrett\Bundle\CourseBundle\Model\Schedule\ScheduleRepositoryInterface"/>
+
+            <tag name="messenger.message_handler"/>
+        </service>
+
         <service id="Sprungbrett\Bundle\PortalBundle\Model\CourseView\Handler\CourseRemovedEventHandler">
             <argument type="service" id="Sprungbrett\Bundle\PortalBundle\Model\CourseView\CourseViewRepositoryInterface"/>
 

@@ -8,5 +8,11 @@
         >
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
+
+        <service id="Sprungbrett\Bundle\CourseBundle\Model\Schedule\ScheduleRepositoryInterface"
+                 class="Sprungbrett\Bundle\CourseBundle\Repository\ScheduleRepository"
+        >
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
     </services>
 </container>

@@ -16,5 +16,12 @@
 
             <tag name="sulu.context" context="admin"/>
         </service>
+
+        <service id="Sprungbrett\Bundle\CourseBundle\Controller\ScheduleController" public="true">
+            <argument type="service" id="message_bus"/>
+            <argument type="service" id="fos_rest.view_handler.default"/>
+
+            <tag name="sulu.context" context="admin"/>
+        </service>
     </services>
 </container>
