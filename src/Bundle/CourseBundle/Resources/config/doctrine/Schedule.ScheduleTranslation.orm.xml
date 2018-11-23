@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Sprungbrett\Bundle\CourseBundle\Model\Schedule\ScheduleTranslation" table="sp_course_schedule_translations">
+        <id name="schedule" type="integer" association-key="true"/>
+        <id name="locale" type="string" length="5"/>
+
+        <field name="name"/>
+        <field name="description"/>
+        
+        <many-to-one
+                field="schedule"
+                target-entity="Sprungbrett\Bundle\CourseBundle\Model\Schedule\Schedule"
+                inversed-by="translations"
+        />
+    </entity>
+</doctrine-mapping>

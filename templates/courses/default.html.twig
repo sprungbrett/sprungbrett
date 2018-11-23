@@ -4,4 +4,12 @@
     <h1>{{ course.name }}</h1>
 
     {{ content.description|raw }}
+
+    {% for schedule in schedules %}
+        <div>
+            <h2>{{ schedule.name }} (€ {{ schedule.price }})</h2>
+
+            {{ schedule.description|raw }}
+        </div>
+    {% endfor %}
 {% endblock %}

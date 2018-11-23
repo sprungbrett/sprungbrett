@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Sprungbrett\Bundle\CourseBundle\DependencyInjection;
 
+use Sprungbrett\Bundle\CourseBundle\Model\Course\Course;
+use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseTranslation;
+use Sprungbrett\Bundle\CourseBundle\Model\Schedule\Schedule;
+use Sprungbrett\Bundle\CourseBundle\Model\Schedule\ScheduleTranslation;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -17,6 +21,12 @@ class SprungbrettCourseExtension extends Extension implements PrependExtensionIn
     {
         $locator = new FileLocator(__DIR__ . '/../Resources/config');
         $loader = new XmlFileLoader($container, $locator);
+
+        $container->setParameter('sprungbrett.model.course', Course::class);
+        $container->setParameter('sprungbrett.model.course_translation', CourseTranslation::class);
+
+        $container->setParameter('sprungbrett.model.schedule', Schedule::class);
+        $container->setParameter('sprungbrett.model.schedule_translation', ScheduleTranslation::class);
 
         $loader->load('services.xml');
     }

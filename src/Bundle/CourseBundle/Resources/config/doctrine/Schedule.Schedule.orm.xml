@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Sprungbrett\Bundle\CourseBundle\Model\Schedule\Schedule" table="sp_course_schedules">
+        <unique-constraints>
+            <unique-constraint columns="uuid,stage"/>
+        </unique-constraints>
+
+        <id name="id" type="integer">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <field name="uuid" type="guid"/>
+        <field name="stage" type="string" length="10"/>
+
+        <field name="minimumParticipants" type="integer"/>
+        <field name="maximumParticipants" type="integer"/>
+        <field name="price" type="float"/>
+
+        <many-to-one field="course" target-entity="Sprungbrett\Bundle\CourseBundle\Model\Course\Course" fetch="EAGER">
+            <join-column on-delete="CASCADE"/>
+        </many-to-one>
+
+        <one-to-many
+                field="translations"
+                target-entity="Sprungbrett\Bundle\CourseBundle\Model\Schedule\ScheduleTranslation"
+                mapped-by="schedule"
+                orphan-removal="true"
+                index-by="locale"
+        >
+            <cascade>
+                <cascade-persist/>
+                <cascade-remove/>
+            </cascade>
+        </one-to-many>
+    </entity>
+</doctrine-mapping>

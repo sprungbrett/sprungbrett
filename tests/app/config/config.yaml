@@ -4,7 +4,7 @@ framework:
 
 doctrine:
     dbal:
-        url: '%env(resolve:DATABASE_URL)%_test'
+        url: '%env(resolve:DATABASE_URL)%'
     orm:
         mappings:
             gedmo_tree:

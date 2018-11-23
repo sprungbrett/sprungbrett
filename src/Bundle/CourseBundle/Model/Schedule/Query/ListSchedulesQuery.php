@@ -1,0 +1,45 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Sprungbrett\Bundle\CourseBundle\Model\Schedule\Query;
+
+class ListSchedulesQuery
+{
+    /**
+     * @var string
+     */
+    private $locale;
+
+    /**
+     * @var string
+     */
+    private $route;
+
+    /**
+     * @var array
+     */
+    private $query;
+
+    public function __construct(string $locale, string $route, array $query)
+    {
+        $this->locale = $locale;
+        $this->route = $route;
+        $this->query = $query;
+    }
+
+    public function getLocale(): string
+    {
+        return $this->locale;
+    }
+
+    public function getRoute(): string
+    {
+        return $this->route;
+    }
+
+    public function getQuery(): array
+    {
+        return $this->query;
+    }
+}

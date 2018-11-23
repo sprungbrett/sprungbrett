@@ -7,6 +7,7 @@ namespace Sprungbrett\Bundle\PortalBundle\Tests\Unit\Model\CourseView;
 use PHPUnit\Framework\TestCase;
 use Sprungbrett\Bundle\ContentBundle\Model\Content\ContentInterface;
 use Sprungbrett\Bundle\CourseBundle\Model\Course\CourseInterface;
+use Sprungbrett\Bundle\CourseBundle\Model\Schedule\ScheduleInterface;
 use Sprungbrett\Bundle\PortalBundle\Model\CourseView\CourseView;
 use Sprungbrett\Bundle\PortalBundle\Model\CourseView\CourseViewInterface;
 use Sulu\Bundle\RouteBundle\Model\RouteInterface;
@@ -55,5 +56,21 @@ class CourseViewTest extends TestCase
 
         $this->assertEquals($this->courseView, $this->courseView->setRoute($route->reveal()));
         $this->assertEquals($route->reveal(), $this->courseView->getRoute());
+    }
+
+    public function getSchedules(): void
+    {
+        $this->assertCount(0, $this->courseView->getSchedules());
+    }
+
+    public function getSchedule(): void
+    {
+        $schedule = $this->prophesize(ScheduleInterface::class);
+
+        $this->assertEquals($this->courseView, $this->courseView->addSchedule($schedule->reveal()));
+        $this->assertCount(1, $this->courseView->getSchedules());
+
+        $this->assertEquals($this->courseView, $this->courseView->removeSchedule($schedule->reveal()));
+        $this->assertCount(0, $this->courseView->getSchedules());
     }
 }

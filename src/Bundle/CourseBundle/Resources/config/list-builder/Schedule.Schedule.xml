@@ -1,0 +1,51 @@
+<class xmlns="http://schemas.sulu.io/class/general"
+       xmlns:orm="http://schemas.sulu.io/class/doctrine"
+       xmlns:list="http://schemas.sulu.io/class/list">
+    <orm:joins name="course_translation">
+        <orm:join>
+            <orm:entity-name>%sprungbrett.model.course%</orm:entity-name>
+            <orm:field-name>%sprungbrett.model.schedule%.course</orm:field-name>
+        </orm:join>
+        <orm:join>
+            <orm:entity-name>%sprungbrett.model.course_translation%</orm:entity-name>
+            <orm:field-name>%sprungbrett.model.course%.translations</orm:field-name>
+            <orm:method>LEFT</orm:method>
+            <orm:condition>%sprungbrett.model.schedule_translation%.locale = ':locale'</orm:condition>
+        </orm:join>
+    </orm:joins>
+
+    <orm:joins name="translation">
+        <orm:join>
+            <orm:entity-name>%sprungbrett.model.schedule_translation%</orm:entity-name>
+            <orm:field-name>%sprungbrett.model.schedule%.translations</orm:field-name>
+            <orm:method>LEFT</orm:method>
+            <orm:condition>%sprungbrett.model.schedule_translation%.locale = ':locale'</orm:condition>
+        </orm:join>
+    </orm:joins>
+
+    <properties>
+        <property name="id" list:translation="sprungbrett.uuid">
+            <orm:field-name>uuid</orm:field-name>
+            <orm:entity-name>%sprungbrett.model.schedule%</orm:entity-name>
+        </property>
+
+        <property name="stage" visibility="never">
+            <orm:field-name>stage</orm:field-name>
+            <orm:entity-name>%sprungbrett.model.schedule%</orm:entity-name>
+        </property>
+
+        <property name="name" visibility="always" list:translation="sprungbrett.name" searchability="yes">
+            <orm:field-name>name</orm:field-name>
+            <orm:entity-name>%sprungbrett.model.schedule_translation%</orm:entity-name>
+
+            <orm:joins ref="translation"/>
+        </property>
+
+        <property name="course" visibility="always" list:translation="sprungbrett.course" searchability="yes">
+            <orm:field-name>name</orm:field-name>
+            <orm:entity-name>%sprungbrett.model.course_translation%</orm:entity-name>
+
+            <orm:joins ref="course_translation"/>
+        </property>
+    </properties>
+</class>

@@ -4,3 +4,21 @@ sulu_admin:
             form: ["@SprungbrettCourseBundle/Resources/config/forms/Course.Course.xml"]
             datagrid: "Sprungbrett\\Bundle\\CourseBundle\\Model\\Course\\Course"
             endpoint: "sprungbrett.get_courses"
+
+        schedules:
+            form: ["@SprungbrettCourseBundle/Resources/config/forms/Schedule.Schedule.xml"]
+            datagrid: "Sprungbrett\\Bundle\\CourseBundle\\Model\\Schedule\\Schedule"
+            endpoint: "sprungbrett.get_schedules"
+
+    field_type_options:
+        single_selection:
+            single_course_selection:
+                resource_key: 'courses'
+                default_type: 'datagrid_overlay'
+                types:
+                    datagrid_overlay:
+                        adapter: 'table'
+                        display_properties: ['name']
+                        empty_text: 'app.no_courses_selected'
+                        overlay_title: 'app.courses_select'
+                        icon: 'su-plus'
