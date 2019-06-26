@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="Sprungbrett\Bundle\ContentBundle\Model\Seo\Handler\FindSeoQueryHandler">
+            <argument type="service" id="Sprungbrett\Bundle\ContentBundle\Model\Seo\SeoRepositoryInterface"/>
+
+            <tag name="messenger.message_handler"/>
+        </service>
+
+        <service id="Sprungbrett\Bundle\ContentBundle\Model\Seo\Handler\CreateSeoMessageHandler">
+            <argument type="service" id="Sprungbrett\Component\MessageCollector\MessageCollector"/>
+            <argument type="service" id="Sprungbrett\Bundle\ContentBundle\Model\Seo\SeoRepositoryInterface"/>
+
+            <tag name="messenger.message_handler"/>
+        </service>
+
+        <service id="Sprungbrett\Bundle\ContentBundle\Model\Seo\Handler\ModifySeoMessageHandler">
+            <argument type="service" id="Sprungbrett\Component\MessageCollector\MessageCollector"/>
+            <argument type="service" id="Sprungbrett\Bundle\ContentBundle\Model\Seo\SeoRepositoryInterface"/>
+
+            <tag name="messenger.message_handler"/>
+        </service>
+
+        <service id="Sprungbrett\Bundle\ContentBundle\Model\Seo\Handler\PublishSeoMessageHandler">
+            <argument type="service" id="Sprungbrett\Component\MessageCollector\MessageCollector"/>
+            <argument type="service" id="Sprungbrett\Bundle\ContentBundle\Model\Seo\SeoRepositoryInterface"/>
+
+            <tag name="messenger.message_handler"/>
+        </service>
+
+        <service id="Sprungbrett\Bundle\ContentBundle\Model\Seo\Handler\RemoveSeoMessageHandler">
+            <argument type="service" id="Sprungbrett\Component\MessageCollector\MessageCollector"/>
+            <argument type="service" id="Sprungbrett\Bundle\ContentBundle\Model\Seo\SeoRepositoryInterface"/>
+
+            <tag name="messenger.message_handler"/>
+        </service>
+    </services>
+</container>

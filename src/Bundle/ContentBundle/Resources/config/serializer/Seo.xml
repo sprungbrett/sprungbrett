@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="Sprungbrett\Bundle\CourseBundle\Model\Course" exclusion-policy="ALL">
+        <virtual-property method="getUuid" serialized-name="id" expose="true"/>
+        <virtual-property method="getTitle" serialized-name="title" expose="true"/>
+        <!-- TODO other fields -->
+    </class>
+</serializer>

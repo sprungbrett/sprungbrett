@@ -8,5 +8,11 @@
         >
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
+
+        <service id="Sprungbrett\Bundle\ContentBundle\Model\Seo\SeoRepositoryInterface"
+                 class="Sprungbrett\Bundle\ContentBundle\Repository\SeoRepository"
+        >
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
     </services>
 </container>

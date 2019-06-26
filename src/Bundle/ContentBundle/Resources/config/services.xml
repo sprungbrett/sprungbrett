@@ -4,7 +4,8 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
         <import resource="./services/repositories.xml"/>
-        <import resource="./services/handlers.xml"/>
+        <import resource="./services/content_handlers.xml"/>
+        <import resource="./services/seo_handlers.xml"/>
     </imports>
 
     <services>
